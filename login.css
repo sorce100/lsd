@@ -1,0 +1,138 @@
+*{
+  margin:0px !important;
+  /*padding:0;*/
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+body{
+  margin:0;
+  padding: 0px;
+  font-family: Arial, "Helvetica Neue",Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.2;
+}
+.glyphicon{
+   overflow-y: hidden !important;
+}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+}
+
+#showcase{
+  background-image: url('plugins/images/background.jpg');
+  background-size:cover;
+  background-position: center;
+  height: 100vh;
+  /*flex box*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+#showcase h1{
+  font-size: 50px;
+
+}
+#showcase p{
+ font-weight: lighter;
+ color: black;
+}
+
+#showcase .button{
+  font-size: 20px;
+  text-decoration: none;
+  background:rgba(255,69,0,0.9);
+  color: #fff;
+  border: black 1px solid;
+  padding: 12px 50px;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+#showcase .button:hover{
+  background: #006400;
+  color: #fff;
+}
+#section_a{
+  padding: 20px;
+  background: #926239;
+  color: #000;
+  text-align: center;
+}
+#section_a{
+  padding: 20px;
+  background: #f4f4f4;
+  text-align: center;
+}
+
+.showcase_form{
+  background:rgba(255,255,255,0.8);
+  padding: 40px;
+  border-radius: 2px;
+}
+.comname{
+  font-size: 25px;
+ font-weight: bold;
+}
+
+.btn:hover{
+  background: #2F4F4F;
+  color: #fff;
+}
+.left{
+  border-right: 1px solid #660033;
+}
+.btnstyle{
+  padding: 20px 70px;font-weight: bold;border-radius: 7px;font-size: 20px;
+}
+.modalbtn{
+  padding: 10px 70px;font-weight: bold;border-radius: 7px;font-size: 20px;
+}
+.top_row{
+      /*padding-top: 4px 4px;*/
+      border-bottom: 5px solid #6497b1;
+    }
+    .top_row #headerTitle{
+    padding-top: 30px;
+    color: #6497b1;
+    font-weight:bold;
+    font-size:2vw;
+
+    }
+    .page-header{
+      color: #6497b1;
+    }
+    .logSignBtn{
+      padding-top: 30px;
+    }
+    #signUpModal {
+        position: absolute;
+        top: 10%;
+        left: 20%
+      }
+#signInModal,#viewMeetingModal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+
+  #signInModal,#viewMeetingModal {
+    text-align: center;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
