@@ -3,11 +3,25 @@ include("header.php");
 require_once("Classes/LiveStream.php");
 require_once("Classes/Division.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">LIVE STREAM DASHBOARD</h3>
-        <div class="white-box">
-            <div class="table-responsive"><br>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">LIVE STREAM DASHBOARD</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -84,10 +98,13 @@ require_once("Classes/Division.php");
                          ?>
                     </tbody>
                 </table>
+               </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
+
 <!-- /.row -->
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

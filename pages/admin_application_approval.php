@@ -4,24 +4,25 @@
       require_once("Classes/EmailSend.php");
       require_once("Classes/Division.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">NEW MEMBER APPLICATIONS APPROVAL PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-12">
-                <form action="usersearch.php" method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">NEW APPLICANT APPROVAL PAGE </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
             </div>
-            
-            <div class="table-responsive"><br>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -51,19 +52,27 @@
                                         <td>".$application["application_startDate"]."</td>";
 
                                   if (empty($application["app_accept_date"])) {
-                                    echo "<td><input type='button' data-toggle='modal' data-target='#myModal' value='CONFIRM APPLICATION' id='".trim($application["new_application_id"])."'class='btn btn-danger btn-xs confirmApp' /></td></tr>";
+                                    echo "<td>
+                                    <button type='button' data-toggle='modal' data-target='#myModal' id='".trim($application["new_application_id"])."' class='btn btn-info btn-xs confirmApp'>CONFIRM APPLICATION <i class='fa fa-edit'></i></button>
+                                    </td></tr>";
                                   }
                                   elseif (!empty($application["app_accept_date"])) {
-                                    echo "<td><input type='button' name='view' value='COMPLETED' id='".trim($application["new_application_id"])."' class='btn btn-success btn-xs viewCompleted' /></td></tr>";
+                                    echo "<td>
+                                    <button type='button' id='".trim($application["new_application_id"])."' class='btn btn-success btn-xs viewCompleted'>COMPLETED <i class='fa fa-trash'></i></button>
+                                    </td></tr>";
                                   }
                           }
                          ?>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
+
 </div>
+
 <!-- /.row -->
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

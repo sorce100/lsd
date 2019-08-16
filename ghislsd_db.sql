@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2019 at 10:44 PM
+-- Generation Time: Aug 16, 2019 at 02:38 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -96,7 +96,27 @@ INSERT INTO `api_request` (`api_request_id`, `http_method`, `request_type`, `dip
 (70, 'POST', 'DEBIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.0\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"126f3982-12ea-4974-a94c-da91c0c4c1ef\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"145\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910957232w98', '', '500', '27-June-2019 03:17:43 PM', '{\r\n\"amount\":\"500\",\r\n\"transaction_id\":\"TT355500910957232w981\",\r\n\"credit_transaction_id\":\"TT35550I400910951\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '27-June-2019 03:17:43 PM', '', '', '2019-06-27 13:17:43'),
 (71, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.0\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"90dd1c90-cbba-49f3-82a4-38e7e71c0d7e\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"148\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT3555009109547232w5', '1000', '', '27-June-2019 03:19:53 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109547232w5981\",\r\n\"credit_transaction_id\":\"TT35550I400910951\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '27-June-2019 03:19:53 PM', 'YES', '27-June-2019 03:21:53 PM', '2019-06-27 13:19:53'),
 (72, 'POST', 'DEBIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.0\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"248a47a2-7046-4ae7-8535-193311f5a553\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"147\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT35550091095472321', '', '1000', '27-June-2019 03:21:53 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091095472321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '27-June-2019 03:21:53 PM', '', '', '2019-06-27 13:21:53'),
-(73, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.0\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"669bf77b-5bb4-4f1b-9726-e9b9b6df14cf\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910954437232', '1000', '', '27-June-2019 03:22:22 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '27-June-2019 03:22:22 PM', 'NO', '', '2019-06-27 13:22:22');
+(73, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.0\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"669bf77b-5bb4-4f1b-9726-e9b9b6df14cf\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910954437232', '1000', '', '27-June-2019 03:22:22 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '27-June-2019 03:22:22 PM', 'NO', '', '2019-06-27 13:22:22'),
+(74, 'GET', 'SEARCH', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"44e6ac92-8dc1-4440-98d7-faf7f5530ee7\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', '', '', '', '30-July-2019 06:52:22 PM', 'HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"message\":\"Successful\",\"diplomaNumber\":\"11\",\"code\":\"200\"}', '30-July-2019 06:52:22 PM', '', '', '2019-07-30 18:52:22'),
+(75, 'GET', 'SEARCH', '11', '{\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"c1b7e903-8c3b-48fc-a7ce-2d4a9e912430\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', '', '', '', '30-July-2019 06:54:04 PM', 'HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"message\":\"Successful\",\"diplomaNumber\":\"11\",\"code\":\"200\"}', '30-July-2019 06:54:04 PM', '', '', '2019-07-30 18:54:04'),
+(76, 'GET', 'SEARCH', '119', '{\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"a2e77532-bfff-4d75-85b3-2208abb27a3a\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', '', '', '', '30-July-2019 06:54:11 PM', 'HTTP/1.1 400 Bad Request\r\nContent-Type: application/json\r\n\r\n{\"message\":\"Bad Request\",\"code\":\"400\"}', '30-July-2019 06:54:11 PM', '', '', '2019-07-30 18:54:11'),
+(77, 'GET', 'SEARCH', '119', '{\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"57cdccb6-360a-47bd-b474-ea0165120402\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', '', '', '', '30-July-2019 06:55:33 PM', 'HTTP/1.1 400 Bad Request\r\nContent-Type: application/json\r\n\r\n{\"message\":\"Bad Request\",\"code\":\"400\"}', '30-July-2019 06:55:33 PM', '', '', '2019-07-30 18:55:33'),
+(78, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"581c1fb8-18db-47cc-828f-cc5b04036049\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910954437232', '1000', '', '30-July-2019 08:56:17 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 08:56:17 PM', 'NO', '', '2019-07-30 18:56:17'),
+(79, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"d5097172-5374-43b9-819f-7e5a684d9ebf\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910954437232', '1000', '', '30-July-2019 08:58:05 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 08:58:05 PM', 'NO', '', '2019-07-30 18:58:05'),
+(80, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"81f55223-6f0c-41dd-9e59-59120ed81a2c\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910954437232', '1000', '', '30-July-2019 08:58:09 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 08:58:09 PM', 'NO', '', '2019-07-30 18:58:09'),
+(81, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"81cc4c07-7abc-4f04-9ffb-b79d8bdf3001\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910954437232', '1000', '', '30-July-2019 08:59:20 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 08:59:20 PM', 'NO', '', '2019-07-30 18:59:20'),
+(82, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"a7cd50c8-54af-45ab-879e-5a0c945c1813\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"149\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500910954437232', '1000', '', '30-July-2019 09:02:04 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT3555009109544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:04 PM', 'NO', '', '2019-07-30 19:02:04'),
+(83, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"146a0892-c49c-45d1-bc20-3fb6893c2bec\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"150\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:37 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:37 PM', 'NO', '', '2019-07-30 19:02:37'),
+(84, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"0d90964a-555e-4c1a-9791-ddaff7a64220\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"150\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:38 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:38 PM', 'NO', '', '2019-07-30 19:02:38'),
+(85, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"7ed56d0b-a7b5-4328-8818-768b2538073e\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"150\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:39 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:39 PM', 'NO', '', '2019-07-30 19:02:39'),
+(86, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"c9353458-8dc8-4cf4-83f7-320822832dc0\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"150\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:40 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:40 PM', 'NO', '', '2019-07-30 19:02:40'),
+(87, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"f80982e2-450f-4122-ba7e-bd8bc7489f9b\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"103\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:55 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:55 PM', 'NO', '', '2019-07-30 19:02:55'),
+(88, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"75867a98-a60f-48d7-a721-f0126b706cc7\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"103\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:56 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:56 PM', 'NO', '', '2019-07-30 19:02:56'),
+(89, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"60f5710f-da24-4ed4-ac84-b37a740633c3\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"103\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:57 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:57 PM', 'NO', '', '2019-07-30 19:02:57'),
+(90, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"982572c5-b5bd-4e87-8b7e-2088e98d107c\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"103\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:02:58 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:02:58 PM', 'NO', '', '2019-07-30 19:02:58'),
+(91, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"fc1556d1-0469-466c-9a67-7463ce9594e6\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"150\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:10:33 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:10:33 PM', 'NO', '', '2019-07-30 19:10:33'),
+(92, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"52c00687-c564-4bba-a613-b9fe34af5e83\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"150\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"NIB\"],\"PHP_AUTH_PW\":[\"#-BU&q6nI\"],\"HTTP_AUTHORIZATION\":[\"Basic TklCOiMtQlUmcTZuSQ==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:10:35 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:10:35 PM', 'NO', '', '2019-07-30 19:10:35'),
+(93, 'POST', 'CREDIT', '11', '{\"CONTENT_TYPE\":[\"text\\/plain\"],\"HTTP_USER_AGENT\":[\"PostmanRuntime\\/7.15.2\"],\"HTTP_ACCEPT\":[\"*\\/*\"],\"HTTP_CACHE_CONTROL\":[\"no-cache\"],\"HTTP_POSTMAN_TOKEN\":[\"6cc492b9-51de-482b-b9e7-2ffdecd238fe\"],\"HTTP_HOST\":[\"localhost\"],\"HTTP_ACCEPT_ENCODING\":[\"gzip, deflate\"],\"CONTENT_LENGTH\":[\"150\"],\"HTTP_CONNECTION\":[\"keep-alive\"],\"PHP_AUTH_USER\":[\"UMB\"],\"PHP_AUTH_PW\":[\"#-M&q6UIB\"],\"HTTP_AUTHORIZATION\":[\"Basic VU1COiMtTSZxNlVJQg==\"]}', 'TT355500913095443723', '1000', '', '30-July-2019 09:15:23 PM', '{\r\n\"amount\":\"1000\",\r\n\"transaction_id\":\"TT35550091309544372321\",\r\n\"credit_transaction_id\":\"TT3555009109547232w5\",\r\n\"timestamp\":\"2019-06-18 18:18:20\"\r\n}', '30-July-2019 09:15:23 PM', 'NO', '', '2019-07-30 19:15:23');
 
 -- --------------------------------------------------------
 
@@ -107,6 +127,7 @@ INSERT INTO `api_request` (`api_request_id`, `http_method`, `request_type`, `dip
 CREATE TABLE `committee_library` (
   `committee_library_id` int(11) NOT NULL,
   `committee_library_subject` varchar(200) NOT NULL,
+  `committee_library_task` int(11) NOT NULL,
   `committee_library_folderName` varchar(100) NOT NULL,
   `committee_library_files` text NOT NULL,
   `committee_id` int(11) NOT NULL,
@@ -119,10 +140,13 @@ CREATE TABLE `committee_library` (
 -- Dumping data for table `committee_library`
 --
 
-INSERT INTO `committee_library` (`committee_library_id`, `committee_library_subject`, `committee_library_folderName`, `committee_library_files`, `committee_id`, `user_id`, `division`, `date_done`) VALUES
-(1, 'Testing', '221mEiI', '[\"mtn-fibre-broadband-packages.pdf\",\"asdfsf.docx\",\"Koala.jpg\"]', 1, 6, 1, '2019-06-05 21:17:11'),
-(2, 'Committee Research', '221mEiI', '[\"Penguins.jpg\",\"bavarian-calculator.pdf\"]', 1, 6, 1, '2019-06-05 21:18:22'),
-(3, 'For testing', '221mEiI', '[\"GhISLSD_api.pdf\"]', 1, 73, 1, '2019-06-29 21:42:44');
+INSERT INTO `committee_library` (`committee_library_id`, `committee_library_subject`, `committee_library_task`, `committee_library_folderName`, `committee_library_files`, `committee_id`, `user_id`, `division`, `date_done`) VALUES
+(1, 'Testing', 0, '221mEiI', '[\"mtn-fibre-broadband-packages.pdf\",\"asdfsf.docx\",\"Koala.jpg\"]', 1, 6, 1, '2019-06-05 21:17:11'),
+(2, 'Committee Research', 0, '221mEiI', '[\"Penguins.jpg\",\"bavarian-calculator.pdf\"]', 1, 6, 1, '2019-06-05 21:18:22'),
+(3, 'For testing', 0, '221mEiI', '[\"GhISLSD_api.pdf\"]', 1, 73, 1, '2019-06-29 21:42:44'),
+(4, 'test', 0, '251eXiy', '[\"0321832183.pdf\"]', 2, 73, 1, '2019-08-09 14:24:29'),
+(5, 'test upload', 0, '221mEiI', '[\"doc.pdf\",\"home-marathon-challenge.pdf\"]', 1, 73, 1, '2019-08-15 15:11:21'),
+(6, 'For approval', 2, 'v1srFX8', '[\"Assignment_1.pdf\"]', 4, 73, 1, '2019-08-15 17:11:23');
 
 -- --------------------------------------------------------
 
@@ -151,7 +175,8 @@ INSERT INTO `committee_notes` (`committee_note_id`, `committee_note_title`, `com
 (4, 'New Test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 73, 'NO', '2019-06-05 15:21:51'),
 (6, '', '', 1, 6, 'NO', '2019-06-05 18:09:57'),
 (7, 'fresh', 'Testing fresh note', 2, 6, 'NO', '2019-06-05 18:28:08'),
-(8, 'Sample', 'If your buttons are not to submit form data to a server, be sure to set their type attribute to button. Otherwise they will try to submit form data and to load the (nonexistent) response, possibly destroying the current state of the document.', 1, 6, 'NO', '2019-06-05 21:55:31');
+(8, 'Sample', 'If your buttons are not to submit form data to a server, be sure to set their type attribute to button. Otherwise they will try to submit form data and to load the (nonexistent) response, possibly destroying the current state of the document.', 1, 6, 'NO', '2019-06-05 21:55:31'),
+(9, 'new one', 'lipsum', 1, 73, 'NO', '2019-08-15 14:45:51');
 
 -- --------------------------------------------------------
 
@@ -164,6 +189,7 @@ CREATE TABLE `committee_setup` (
   `committee_name` varchar(100) NOT NULL,
   `committee_members` text NOT NULL,
   `committee_folder` varchar(10) NOT NULL,
+  `committee_admins` text NOT NULL,
   `committee_pages` text NOT NULL,
   `division` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -175,11 +201,35 @@ CREATE TABLE `committee_setup` (
 -- Dumping data for table `committee_setup`
 --
 
-INSERT INTO `committee_setup` (`committee_id`, `committee_name`, `committee_members`, `committee_folder`, `committee_pages`, `division`, `user_id`, `record_hide`, `date_done`) VALUES
-(1, 'Finance', '[\"19\",\"11\"]', '221mEiI', '', 1, 64, 'NO', '2019-06-04 22:56:38'),
-(2, 'education', '[\"19\",\"11\"]', '251eXiy', '', 1, 64, 'NO', '2019-06-04 22:59:15'),
-(3, 'Welfare', '[\"11\"]', '', '', 1, 64, 'NO', '2019-06-04 23:06:41'),
-(4, 'PagesTest', '[\"19\"]', 'v1srFX8', '[\"28\",\"26\"]', 1, 64, 'NO', '2019-06-29 22:53:31');
+INSERT INTO `committee_setup` (`committee_id`, `committee_name`, `committee_members`, `committee_folder`, `committee_admins`, `committee_pages`, `division`, `user_id`, `record_hide`, `date_done`) VALUES
+(1, 'Finance', '[\"19\",\"11\"]', '221mEiI', '', '', 1, 64, 'NO', '2019-06-04 22:56:38'),
+(2, 'education', '[\"19\",\"11\"]', '251eXiy', '', '', 1, 64, 'NO', '2019-06-04 22:59:15'),
+(3, 'Welfare', '[\"11\"]', '', '', '', 1, 64, 'NO', '2019-06-04 23:06:41'),
+(4, 'PagesTest', '[\"19\"]', 'v1srFX8', '[\"19\"]', '[\"9\",\"28\",\"26\"]', 1, 64, 'NO', '2019-06-29 22:53:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `committee_task`
+--
+
+CREATE TABLE `committee_task` (
+  `committee_task_id` int(11) NOT NULL,
+  `committee_task_name` varchar(500) NOT NULL,
+  `committee_task_complete_date` varchar(50) NOT NULL,
+  `committee_task_description` text NOT NULL,
+  `committee_id` int(11) NOT NULL,
+  `record_hide` varchar(5) NOT NULL,
+  `date_done` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `committee_task`
+--
+
+INSERT INTO `committee_task` (`committee_task_id`, `committee_task_name`, `committee_task_complete_date`, `committee_task_description`, `committee_id`, `record_hide`, `date_done`) VALUES
+(1, 'asdf', '16-08-2019', 'asdfasdf090', 1, 'NO', '2019-08-15 13:30:24'),
+(2, 'Pages test name 1', '30-08-2019', 'Pages test task description', 4, 'NO', '2019-08-15 13:31:57');
 
 -- --------------------------------------------------------
 
@@ -226,7 +276,7 @@ CREATE TABLE `contribution` (
 INSERT INTO `contribution` (`contribution_id`, `contribution_name`, `due_date`, `division`, `date_done`) VALUES
 (2, 'FUNERAL OF MR', '30-11-2018', '', '2018-11-21 14:03:56'),
 (3, 'NAMING CEREMONY OF MRS AMOAKO', '21-11-2018', '', '2018-11-26 23:16:47'),
-(5, 'MONEY FOR SORCE', '01-01-2019', '', '2018-12-02 15:34:25');
+(5, 'MONEY FOR SORCE', '12-08-2019', '', '2019-08-11 21:21:35');
 
 -- --------------------------------------------------------
 
@@ -252,7 +302,8 @@ INSERT INTO `contribution_register` (`contributions_reg_id`, `contribution_id`, 
 (2, 4, 102, '100', '', '2018-12-02 15:07:16'),
 (3, 2, 102, '600', '', '2018-12-02 15:20:09'),
 (4, 2, 102, '600', '', '2018-12-02 15:20:21'),
-(5, 3, 102, '500', '', '2018-12-02 15:20:27');
+(5, 3, 102, '500', '', '2018-12-02 15:20:27'),
+(6, 2, 11, '500', '', '2019-08-15 10:09:32');
 
 -- --------------------------------------------------------
 
@@ -363,7 +414,7 @@ INSERT INTO `events` (`events_id`, `event_type`, `events_theme`, `event_venue`, 
 (2, 'Event', 'Annual Seminar', 'koforidua', '200', '08-12-2018', '21-12-2018', '', '', '[\"Adenta finest\",\"Adenta guest house\",\"Adenta 5 star\"]', '[\"50\",\"50\",\"50\"]', '1', 73, 'NO', '2018-11-27 23:58:32'),
 (4, 'Event', 'Annual seminar123', 'koforidua', '50', '30-11-2018', '08-12-2018', '', '', '[\"Madina finest\",\"Madina guest house\",\"Madina 5 star\"]', '[\"100\",\"100\",\"100\"]', '1', 73, 'NO', '2018-11-28 00:13:11'),
 (5, 'Event', 'LAND SURVEYING AND MAPPING: THE CRITICAL FOUNDATION TO NATIONAL INFRASTRUCTURAL DEVELOPMENT IN GHANA', 'SKY PLUS HOTEL (HO) VOLTA REGION', '500', '01-12-2018', '08-12-2018', '09:00', '10:00', '[\"Adenta finest\",\"Adenta guest house\",\"Adenta 5 star\"]', '[\"100\",\"100\",\"100\"]', '1', 73, 'NO', '2018-11-28 00:14:44'),
-(6, 'Meeting', 'Meeting first meeting 123', 'at adenta 123', '', '', '18-07-2019', '08:00', '14:00', '', '', '1', 73, 'NO', '2019-07-10 18:18:02');
+(6, 'Meeting', 'Meeting first meeting 123', 'at adenta 123', '', '', '12-08-2019', '08:00', '14:00', '', '', '1', 73, 'NO', '2019-07-10 18:18:02');
 
 -- --------------------------------------------------------
 
@@ -425,7 +476,8 @@ INSERT INTO `exam_center_setup` (`exam_center_id`, `exam_center_name`, `exam_cen
 
 CREATE TABLE `exam_center_subjects` (
   `subject_id` int(11) NOT NULL,
-  `subject_name` varchar(200) NOT NULL,
+  `center_exam_part` varchar(200) NOT NULL,
+  `subject_name` text NOT NULL,
   `center_id` int(11) NOT NULL,
   `record_hide` varchar(5) NOT NULL,
   `date_done` timestamp NOT NULL DEFAULT current_timestamp()
@@ -435,10 +487,10 @@ CREATE TABLE `exam_center_subjects` (
 -- Dumping data for table `exam_center_subjects`
 --
 
-INSERT INTO `exam_center_subjects` (`subject_id`, `subject_name`, `center_id`, `record_hide`, `date_done`) VALUES
-(1, '[\"Merlin Exams\",\"Merlin 101\"]', 3, 'NO', '2019-07-15 11:40:13'),
-(2, '[\"First Exams\",\"Resit Exams\"]', 4, 'NO', '2019-07-15 13:06:08'),
-(3, '[\"First Exams 123\",\"Resit Exams nerlin\"]', 5, 'NO', '2019-07-15 13:06:44');
+INSERT INTO `exam_center_subjects` (`subject_id`, `center_exam_part`, `subject_name`, `center_id`, `record_hide`, `date_done`) VALUES
+(1, 'Part A', '[\"Merlin Exams\",\"Merlin 101\"]', 3, 'NO', '2019-07-15 11:40:13'),
+(2, 'Part C', '[\"First Exams\",\"Resit Exams\"]', 4, 'NO', '2019-07-15 13:06:08'),
+(3, 'Part C', '[\"First Exams 123\",\"Resit Exams nerlin\",\"hello\"]', 5, 'NO', '2019-07-15 13:06:44');
 
 -- --------------------------------------------------------
 
@@ -465,7 +517,7 @@ CREATE TABLE `exam_register` (
 --
 
 INSERT INTO `exam_register` (`exam_register_id`, `exam_center_id`, `exam_name`, `student_id`, `date_registered`, `status`, `exam_score`, `exam_score_name`, `user_id`, `record_hide`, `date_done`) VALUES
-(5, 3, '[\"Merlin Exams\",\"Merlin 101\"]', 8, '15-07-2019', 'OLD', '[\"50\",\"80\"]', '[\"Merlin Exams\",\"Merlin 101\"]', 64, 'NO', '2019-07-16 12:21:19');
+(5, 3, '[\"Merlin Exams\",\"Merlin 101\"]', 8, '15-07-2019', 'OLD', '[\"50\",\"98765\"]', '[\"Merlin Exams\",\"Merlin 101\"]', 64, 'NO', '2019-08-11 20:39:01');
 
 -- --------------------------------------------------------
 
@@ -486,10 +538,10 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`group_id`, `group_name`, `group_pages`, `division`, `date_done`) VALUES
-(9, 'Admin', '[\"9\",\"39\",\"17\",\"34\",\"22\",\"7\",\"40\",\"12\",\"28\",\"33\",\"32\",\"8\",\"31\",\"38\",\"5\",\"11\",\"20\",\"36\",\"24\",\"13\"]', '1', '2018-11-26 19:55:24'),
+(9, 'Admin', '[\"9\",\"28\",\"39\",\"17\",\"34\",\"22\",\"7\",\"40\",\"12\",\"33\",\"32\",\"41\",\"8\",\"31\",\"38\",\"5\",\"11\",\"20\",\"36\",\"24\",\"13\"]', '1', '2018-11-26 19:55:24'),
 (11, 'sample', '[\"26\"]', '', '2018-11-26 21:11:46'),
-(13, 'members', '[\"7\",\"33\",\"35\",\"31\",\"19\",\"6\",\"37\",\"21\",\"10\"]', '1', '2019-02-24 13:20:48'),
-(14, 'students', '[\"7\",\"33\",\"35\",\"31\",\"19\",\"37\",\"27\",\"26\",\"21\",\"10\"]', '1', '2019-02-25 22:28:28');
+(13, 'members', '[\"7\",\"33\",\"41\",\"35\",\"31\",\"19\",\"6\",\"37\",\"21\",\"10\"]', '1', '2019-02-24 13:20:48'),
+(14, 'students', '[\"7\",\"12\",\"33\",\"35\",\"31\",\"19\",\"37\",\"27\",\"26\",\"21\",\"10\"]', '1', '2019-02-25 22:28:28');
 
 -- --------------------------------------------------------
 
@@ -574,7 +626,7 @@ INSERT INTO `members` (`members_id`, `first_name`, `last_name`, `other_name`, `d
 (16, 'CULBERT', 'ABAGULUM', 'KWAME', '11/08/1976', '244735842', '', 'SUNYANI BRONG AHAFO', '', 'BOX 830 SUNYANI', '0', 0, 'STUDENT', '', 'LANDS COMMISSION(SURVEY AND MAPPING DIVISION)', '', '', 'ABAGULUMCULBERTKWAME@YMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
 (17, 'ALEX', 'FUGOR', 'KWABENA', '10/18/0001', '243049832', '', 'LAPAZ', '', 'BOX 71 NSAWAM', '10', 0, 'TECHNICIAN', '', 'GHANA SCHOOL OF SURVEYING AND MAPPING', '', '', 'ALEXFUGOR@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '67'),
 (18, 'EMMANUEL', 'ARYEETEY', 'NII AYI', '14/08/1988', '0249920224/ 02649369', '', 'NUNGUA', '', 'P.O. BOX CO 2728 TEMA', '0', 0, 'PROFESSIONAL', '', 'BASELINE SOLUTIONS', '', '', 'EMMANUELARYEETEY442@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(19, 'ISAAC', 'AGYEI', 'NII OKAI KWEKU', '20/07/2018', '243049925', '', 'PANTANG EAST 483', '', 'BOX ABK83 ABOKOBI- ACCRA', '11', 0, 'OTHER', 'FGhIS', '', '', '', 'ISAACADJEI83@GMAIL.COM', '', '', '', '-1350', '[\"1\",\"2\",\"4\"]', '2019-03-23 23:09:39', '1', '98'),
+(19, 'ISAAC', 'AGYEI', 'NII OKAI KWEKU', '20/07/2018', '243049925', '', 'PANTANG EAST 483', '', 'BOX ABK83 ABOKOBI- ACCRA', '11', 0, 'OTHER', 'FGhIS', '', '', '', 'ISAACADJEI83@GMAIL.COM', '', '', '', '11095', '[\"1\",\"2\",\"4\"]', '2019-03-23 23:09:39', '1', '98'),
 (20, 'AARON', 'FREMPAH', 'ADOM', '07/07/1989', '0241273751/055626866', '', 'ABRUKUTUASO,MAMPONG ASHANTI', '', 'COCOA HEALTH AND EXTENSION DIVISION&#13;&#10;P.O. BOX 32&#13;&#10;MAMPONG DISTRICT', '19', 0, 'PROFESSIONAL', 'FGhIS', '', '', '', 'ADOMAARONFREMPAH55@YAHOO.COM', '', '', '', '500', '', '2019-03-23 23:09:39', '1', '92'),
 (21, 'RICHARD', 'OTCHERE', 'K', '12/04/1977', '244667171', '', 'OYARIFA', '', 'P.O.BOX. CO 1955 TEMA', '1051', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'OSOKITI@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
 (22, 'FELIX', 'BOTE-KWAME', 'B', '11/07/1977', '244607913', '', 'KPONE', '', 'P O BOX CE 11507, TEMA', '1322', 0, 'PROFESSIONAL', '', 'WILLIX CONSULT', '', '', 'FELIXXBK@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
@@ -821,8 +873,11 @@ CREATE TABLE `news` (
 
 INSERT INTO `news` (`news_id`, `news_title`, `news_category`, `news_content`, `folder_name`, `file_name`, `made_by`, `division`, `date_done`) VALUES
 (13, 'Unlicensed Group Deceives California Property Owners', 'general', '<p><em>This article is being reprinted by permission of the original author, Ric Moore, and theBoard for Professional Engineers,</em><em>Land Surveyors, and Geologists (BPELSG).</em></p>\r\n\r\n<p><a href=\"http://www.bpelsg.ca.gov/\" target=\"_blank\">BPELSG</a>, with the help of several licensees, has investigated and monitored the activities associated with a small group of unlicensed individuals in the Southern California region who have deceived multiple property owners by representing themselves as legitimately authorized to perform land surveying services and providing those services in a manner that directly fails to meet the standards which the public can rely upon. While initially successful with disciplining the couple of licensees that were formally aiding and abetting the unlicensed practice, BPELSG has spent considerable effort and expense over the last several years towards investigating these unlicensed individuals.</p>\r\n\r\n<p>This group has changed company names several times while maintaining a core group of individuals that are not authorized to practice in this manner. BPELSG has multiple investigations in progress on these individuals and continue to try and work with the Attorney General&rsquo;s office on these matters. BPELSG has traveled and met with local law enforcement agencies and local offices of state investigation services seeking assistance only to be turned away with limited or no support due to various reasons.</p>\r\n\r\n<p>Recently, we began receiving reports that these individuals have changed their tactics and are now allegedly representing themselves, falsely and without authorization, as legitimately licensed practitioners and the firms that these practitioners are employed by. These reports are more alarming due to the increased nature of deception being employed towards harming the health, safety, and welfare of the public not to mention the reputation of the legitimate licensed practitioners and firms that strive to serve the citizens of California.</p>\r\n\r\n<p>BPELSG strongly recommends that each licensee and engineering or land surveying firm immediately confirm the security of your license and how your firm is currently portrayed to the public. This may come in the form of receiving calls from individuals that state that you or your firm has performed work for them recently and these individuals or the properties are unknown to you. There are even reports of monuments being tagged with the license number of a legitimate licensee without their knowledge and not under their responsible supervision.</p>\r\n\r\n<p>If you or your firm believes your name, license, or firm name has been compromised and falsely represented as performing land surveying services, BPELSG recommends that you immediately contact your local law enforcement for support and advice. In addition, the more incidents that BPELSG is made aware of, the more likely it is for BPELSG to convince local law enforcement and state investigations that this is a real problem that needs attention. BPELSG is here to assist the public, the licensee, and local enforcement in any way we can in this matter. If you have any questions or wish to alert BPELSG of an incident that you are aware of, please send a quick email with contact information to&nbsp;<a href=\"mailto:BPELSG.Enforcement.Information@dca.ca.gov\">BPELSG.Enforcement.Information@dca.ca.gov</a></p>\r\n\r\n<p>Thank you</p>\r\n', '12-10-20184103', '[\"unlicended1.jpg\",\"unlicended2.jpg\",\"unlicended3.png\"]', '41', '', '2018-12-10 11:41:03'),
-(14, 'ALLOCATE LANDS TO FULANI HERDSMEN &#38;ndash; GHANA SURVEYORS', 'general', '<p>The Ghana Institute of Surveyors is advocating for nomadic Fulani herdsmen to be given their own land as a solution to tensions between them and and local farmers.<br />\r\nThe activities of Fulani herdsmen have led to clashes between them and some local communities, where&nbsp; they operate, leading to the loss of lives and destruction of property.</p>\r\n\r\n<p><br />\r\n<br />\r\nSpeaking at the 11th Surveyors week and 47th annual General meeting, the President of the Ghana Institute of Surveyors, Ekow Budu-Anugah, suggested that herdsmen must be given a separate land in the areas they operate.<br />\r\n<br />\r\n&ldquo;We are saying that the Fulani issue is worrying to Ghanaians and that we don&rsquo;t have to lose the crops that they need, and we don&rsquo;t have to lose the meat that they bring, so we don&rsquo;t have to kill the cows or hurt them. We should find an amicable solution to this problem. That is why we are saying that, they must try to give them land for grazing and land for farming,&rdquo; he added.<br />\r\nMr. Budu-Anugah also recommended that the Districts consider registering the Fulani herdsmen to better regulate their activities.<br />\r\nGive Fulani herdsmen ranches &ndash; Hannah Bissiw<br />\r\nThe suggestion by the Ghana Institute of Surveyors, is similar to a proposal by the Deputy Minister for Food and Agriculture, Dr. Hannah Bissiw.<br />\r\nDr. Hannah Bissiw, a veterinary doctor, has already proposed the establishment of a permanent cattle ranch as the solution to the problem.<br />\r\nThe Deputy Minister&rsquo;s comments are also in line with that of Security analyst, Dr. Kwesi Anning, pointed out that in 1986, Ghana was a member of an ECOWAS team which agreed that there should be regulations on trans-human movement that characterizes the Fulani nomadic lifestyle.<br />\r\nThe Ghana National Association of Cattle Farmers also proposed the enactment of specific bye-laws to regulate the activities of Fulani herdsmen, which will by extension address various conflicts between them and locals around the country.<br />\r\n&ndash;<br />\r\nBy Delali Adogla-Bessa/citifmonline.com/Ghana</p>\r\n', '12-10-20184142', '[\"fulani1.jpg\",\"fulani2.jpg\",\"fulani3.jpg\"]', '41', '', '2018-12-10 11:41:42'),
-(15, 'test', 'general', '<p>testing</p>\r\n', '12-11-20181459', '[\"Desert.jpg\",\"Jellyfish.jpg\"]', '41', '', '2018-12-11 21:14:59');
+(14, 'ALLOCATE LANDS TO FULANI HERDSMEN &#38;amp;#38;ndash; GHANA SURVEYORS', 'general', '<p>The Ghana Institute of Surveyors is advocating for nomadic Fulani herdsmen to be given their own land as a solution to tensions between them and and local farmers.<br />\r\nThe activities of Fulani herdsmen have led to clashes between them and some local communities, where&nbsp; they operate, leading to the loss of lives and destruction of property.</p>\r\n\r\n<p><br />\r\n<br />\r\nSpeaking at the 11th Surveyors week and 47th annual General meeting, the President of the Ghana Institute of Surveyors, Ekow Budu-Anugah, suggested that herdsmen must be given a separate land in the areas they operate.<br />\r\n<br />\r\n&ldquo;We are saying that the Fulani issue is worrying to Ghanaians and that we don&rsquo;t have to lose the crops that they need, and we don&rsquo;t have to lose the meat that they bring, so we don&rsquo;t have to kill the cows or hurt them. We should find an amicable solution to this problem. That is why we are saying that, they must try to give them land for grazing and land for farming,&rdquo; he added.<br />\r\nMr. Budu-Anugah also recommended that the Districts consider registering the Fulani herdsmen to better regulate their activities.<br />\r\nGive Fulani herdsmen ranches &ndash; Hannah Bissiw<br />\r\nThe suggestion by the Ghana Institute of Surveyors, is similar to a proposal by the Deputy Minister for Food and Agriculture, Dr. Hannah Bissiw.<br />\r\nDr. Hannah Bissiw, a veterinary doctor, has already proposed the establishment of a permanent cattle ranch as the solution to the problem.<br />\r\nThe Deputy Minister&rsquo;s comments are also in line with that of Security analyst, Dr. Kwesi Anning, pointed out that in 1986, Ghana was a member of an ECOWAS team which agreed that there should be regulations on trans-human movement that characterizes the Fulani nomadic lifestyle.<br />\r\nThe Ghana National Association of Cattle Farmers also proposed the enactment of specific bye-laws to regulate the activities of Fulani herdsmen, which will by extension address various conflicts between them and locals around the country.<br />\r\n&ndash;<br />\r\nBy Delali Adogla-Bessa/citifmonline.com/Ghana</p>\r\n', '12-10-20184142', '[\"fulani1.jpg\",\"fulani2.jpg\",\"fulani3.jpg\",\"IMG-20140514-WA0001.jpg\"]', '41', '', '2018-12-10 11:41:42'),
+(15, 'test', 'general', '<p>testing</p>\r\n', '12-11-20181459', '[\"Desert.jpg\",\"Jellyfish.jpg\"]', '41', '', '2018-12-11 21:14:59'),
+(16, 'News From Around the World', 'general', '<h2>What is Lorem Ipsum?</h2>\r\n\r\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n\r\n<h2>Why do we use it?</h2>\r\n\r\n<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Where does it come from?</h2>\r\n\r\n<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\r\n\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n\r\n<h2>Where can I get some?</h2>\r\n\r\n<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>\r\n', '08-14-20195901', '[\"561480_383146661762492_1136315275_n.jpg\",\"IMG-20130322-WA0001.jpg\"]', '64', '', '2019-08-14 10:59:01'),
+(18, 'This is te progess bar testirng', 'general', '<h2>What is Lorem Ipsum?</h2>\r\n\r\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n\r\n<h2>Why do we use it?</h2>\r\n\r\n<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Where does it come from?</h2>\r\n\r\n<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\r\n\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n\r\n<h2>Where can I get some?</h2>\r\n\r\n<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>\r\n', '08-14-20193440', '[\"18149.jpg\",\"1398423101531.jpg\"]', '64', '', '2019-08-14 13:34:40'),
+(20, 'sdfghjkl', 'general', '<p><strong>aafsafasdfsasdsd</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">\r\n	<tbody>\r\n		<tr>\r\n			<td>sfdghjk</td>\r\n			<td>1</td>\r\n		</tr>\r\n		<tr>\r\n			<td>hjbnm</td>\r\n			<td>2</td>\r\n		</tr>\r\n		<tr>\r\n			<td>ghjkl</td>\r\n			<td>3</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', '08-14-20191819', '[\"WIN_20190624_15_45_33_Pro.jpg\",\"302669_437437119648133_768500914_n.jpg\",\"Da-Vinci-Great-Works_Mona-Lisa.jpg\",\"1398369255150.jpg\"]', '64', '1', '2019-08-14 14:18:19');
 
 -- --------------------------------------------------------
 
@@ -880,6 +935,7 @@ CREATE TABLE `pages` (
   `pages_id` int(11) NOT NULL,
   `pages_name` varchar(100) NOT NULL,
   `pages_url` text NOT NULL,
+  `page_file_name` varchar(200) NOT NULL,
   `division` varchar(20) NOT NULL,
   `date_done` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -888,37 +944,37 @@ CREATE TABLE `pages` (
 -- Dumping data for table `pages`
 --
 
-INSERT INTO `pages` (`pages_id`, `pages_name`, `pages_url`, `division`, `date_done`) VALUES
-(5, 'News Setup', '<li><a href=\"admin_news.php\" class=\"waves-effect\"><i class=\"fa fa-newspaper-o fa-fw\" aria-hidden=\"true\"></i>News Setup</a></li>', '', '0000-00-00 00:00:00'),
-(6, 'Profile', '<li><a href=\"profile.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Profile</a></li>', '1', '0000-00-00 00:00:00'),
-(7, 'Events Register', '<li><a href=\"event_register.php\" class=\"waves-effect\"><i class=\"fa fa-calendar fa-fw\" aria-hidden=\"true\"></i>Events Register</a></li>', '', '0000-00-00 00:00:00'),
-(8, 'Members Setup', '<li><a href=\"admin_members.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Members Setup</a></li>', '1', '0000-00-00 00:00:00'),
-(9, 'Actors Setup', '<li><a href=\"admin_users.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Actors Setup</a></li>', '1', '0000-00-00 00:00:00'),
-(10, 'Wallet', '<li><a href=\"wallet.php\" class=\"waves-effect\"><i class=\"fa fa-credit-card fa-fw\" aria-hidden=\"true\"></i>Wallet</a></li>', '3', '0000-00-00 00:00:00'),
-(11, 'Pages Setup', '<li><a href=\"super_pages.php\" class=\"waves-effect\"><i class=\"fa fa-file-text fa-fw\" aria-hidden=\"true\"></i>Pages Setup</a></li>', '3', '0000-00-00 00:00:00'),
-(12, 'Groups Setup', '<li><a href=\"admin_groups.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Groups Setup</a></li>', '', '0000-00-00 00:00:00'),
-(13, 'Surveyor type Setup', '<li><a href=\"admin_surveyor_type.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Surveyor type Setup</a></li>', '', '0000-00-00 00:00:00'),
-(17, 'Contributions Setup', '<li><a href=\"admin_contributions.php\" class=\"waves-effect\"><i class=\"fa fa-money fa-fw\" aria-hidden=\"true\"></i>Contributions Setup</a></li>', '1', '2018-11-21 14:05:32'),
-(19, 'News', '<li><a href=\"news.php\" class=\"waves-effect\"><i class=\"fa fa-newspaper-o fa-fw\" aria-hidden=\"true\"></i>News</a></li>', '', '2018-11-22 14:18:33'),
-(20, 'Payment Setup', '<li><a href=\"admin_user_payment.php\" class=\"waves-effect\"><i class=\"fa fa-money fa-fw\" aria-hidden=\"true\"></i>Payment Setup</a></li>', '1', '2018-11-22 15:55:28'),
-(21, 'Users Payments', '<li><a href=\"payments.php\" class=\"waves-effect\"><i class=\"fa fa-money fa-fw\" aria-hidden=\"true\"></i>Payments</a></li>', '1', '2018-11-27 09:01:56'),
-(22, 'Event Setup', '<li><a href=\"admin_events.php\" class=\"waves-effect\"><i class=\"fa fa-calendar fa-fw\" aria-hidden=\"true\"></i>Event Setup</a></li>', '1', '2018-11-28 00:16:01'),
-(24, 'Sms Broadcast', '<li><a href=\"admin_broadcast_sms.php\" class=\"waves-effect\"><i class=\"fa fa-comment fa-fw\" aria-hidden=\"true\"></i>Broadcast Sms</a></li>', '3', '2018-12-10 20:11:44'),
-(25, 'New Registration', '<li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', '3', '2019-02-04 19:24:55'),
-(26, 'Students Setup', '<li><a href=\"students_setup.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Student Setup</a></li>', '3', '2019-02-24 12:58:57'),
-(27, 'Student Pages', '<li><a href=\"student_profile.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Profile </a></li>                     <li><a href=\"student_register.php\" class=\"waves-effect\"><i class=\"fa fa-list fa-fw\" aria-hidden=\"true\"></i>Register </a></li>                    <li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', '1', '2019-02-24 21:22:59'),
-(28, 'Center Register', '<li><a href=\"examcenter_register.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Registered Students</a></li>', '1', '2019-03-03 10:42:55'),
-(31, 'Messages', '<li><a href=\"messages.php\" class=\"waves-effect\"><i class=\"fa fa-comments fa-fw\" aria-hidden=\"true\"></i>Messages</a></li>', '3', '2019-03-23 23:50:52'),
-(32, 'Live Stream Setup', '<li><a href=\"admin_live_stream.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Live Stream Setup </a></li>', '3', '2019-03-23 23:53:12'),
-(33, 'Live Stream Dashboard', '<li><a href=\"videoStream_dashboard.php\" class=\"waves-effect\"><i class=\"fa fa-eye fa-fw\" aria-hidden=\"true\"></i>Live Stream</a></li>', '3', '2019-03-23 23:53:34'),
-(34, 'Divisional Library Setup', '<li><a href=\"admin_library.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Library SetUp </a></li>', '3', '2019-03-30 03:07:42'),
-(35, 'Members Library View', '<li><a href=\"library_archive.php\" class=\"waves-effect\"><i class=\"fa fa-book fa-fw\" aria-hidden=\"true\"></i>Library Archive</a></li>', '3', '2019-03-30 03:08:18'),
-(36, 'Session Logs', '<li><a href=\"admin_session_logs.php\" class=\"waves-effect\"><i class=\"fa fa-cogs fa-fw\" aria-hidden=\"true\"></i>SESSION LOGS</a></li>', '3', '2019-04-04 12:40:14'),
-(37, 'Proposer Declaration', '<li><a href=\"applicant_registrationd.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Proposer Declaration </a></li>', '3', '2019-04-10 12:27:08'),
-(38, 'New Applicants Administration', '<li><a href=\"admin_application_approval.php\" class=\"waves-effect\"><i class=\"fa fa-file fa-fw\" aria-hidden=\"true\"></i>New Applications</a></li>', '1', '2019-04-12 00:50:39'),
-(39, 'Committee Setup', '<li><a href=\"admin_committiee.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Committee Setup </a></li>', '3', '2019-06-04 23:08:17'),
-(40, 'Exams Setup', '<li><a href=\"examcenter_setup.php\" class=\"waves-effect\"><i class=\"fa fa-globe fa-fw\" aria-hidden=\"true\"></i>Exam Center Setup</a></li>', '1', '2019-07-11 23:14:30'),
-(41, 'Member Committee', '<li><a href=\"committee.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Committee</a></li>', '1', '2019-07-11 23:15:02');
+INSERT INTO `pages` (`pages_id`, `pages_name`, `pages_url`, `page_file_name`, `division`, `date_done`) VALUES
+(5, 'News Setup', '<li><a href=\"admin_news.php\" class=\"waves-effect\"><i class=\"fa fa-newspaper-o fa-fw\" aria-hidden=\"true\"></i>News Setup</a></li>', 'admin_news.php', '1', '0000-00-00 00:00:00'),
+(6, 'Member Profile', '<li><a href=\"profile.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Profile</a></li>', 'profile.php', '1', '0000-00-00 00:00:00'),
+(7, 'Events Register', '<li><a href=\"event_register.php\" class=\"waves-effect\"><i class=\"fa fa-calendar fa-fw\" aria-hidden=\"true\"></i>Events Register</a></li>', 'event_register.php', '1', '0000-00-00 00:00:00'),
+(8, 'Members Setup', '<li><a href=\"admin_members.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Members Setup</a></li>', 'admin_members.php', '1', '0000-00-00 00:00:00'),
+(9, 'Actors Setup', '<li><a href=\"admin_users.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Actors Setup</a></li>', 'admin_users.php', '1', '0000-00-00 00:00:00'),
+(10, 'Wallet', '<li><a href=\"wallet.php\" class=\"waves-effect\"><i class=\"fa fa-credit-card fa-fw\" aria-hidden=\"true\"></i>Wallet</a></li>', 'wallet.php', '1', '0000-00-00 00:00:00'),
+(11, 'Pages Setup', '<li><a href=\"super_pages.php\" class=\"waves-effect\"><i class=\"fa fa-file-text fa-fw\" aria-hidden=\"true\"></i>Pages Setup</a></li>', 'super_pages.php', '3', '0000-00-00 00:00:00'),
+(12, 'Groups Setup', '<li><a href=\"admin_groups.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Groups Setup</a></li>', 'admin_groups.php', '1', '0000-00-00 00:00:00'),
+(13, 'Surveyor type Setup', '<li><a href=\"admin_surveyor_type.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Surveyor type Setup</a></li>', 'admin_surveyor_type.php', '1', '0000-00-00 00:00:00'),
+(17, 'Contributions Setup', '<li><a href=\"admin_contributions.php\" class=\"waves-effect\"><i class=\"fa fa-money fa-fw\" aria-hidden=\"true\"></i>Contributions Setup</a></li>', 'admin_contributions.php', '1', '2018-11-21 14:05:32'),
+(19, 'News', '<li><a href=\"news.php\" class=\"waves-effect\"><i class=\"fa fa-newspaper-o fa-fw\" aria-hidden=\"true\"></i>News</a></li>', 'news.php', '1', '2018-11-22 14:18:33'),
+(20, 'Annual Subscription Setup', '<li><a href=\"admin_user_dues.php\" class=\"waves-effect\"><i class=\"fa fa-money fa-fw\" aria-hidden=\"true\"></i>Subscription Setup</a></li>', 'admin_user_dues.php', '1', '2018-11-22 15:55:28'),
+(21, 'Users Payments', '<li><a href=\"payments.php\" class=\"waves-effect\"><i class=\"fa fa-money fa-fw\" aria-hidden=\"true\"></i>Payments</a></li>', 'payments.php', '1', '2018-11-27 09:01:56'),
+(22, 'Event Setup', '<li><a href=\"admin_events.php\" class=\"waves-effect\"><i class=\"fa fa-calendar fa-fw\" aria-hidden=\"true\"></i>Event Setup</a></li>', 'admin_events.php', '1', '2018-11-28 00:16:01'),
+(24, 'Sms Broadcast', '<li><a href=\"admin_broadcast_sms.php\" class=\"waves-effect\"><i class=\"fa fa-comment fa-fw\" aria-hidden=\"true\"></i>Broadcast Sms</a></li>', 'admin_broadcast_sms.php', '3', '2018-12-10 20:11:44'),
+(25, 'New Registration', '<li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', 'applicant_registrationa.php', '3', '2019-02-04 19:24:55'),
+(26, 'Students Setup', '<li><a href=\"students_setup.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Student Setup</a></li>', 'students_setup.php', '3', '2019-02-24 12:58:57'),
+(27, 'Student Pages', '<li><a href=\"student_profile.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Applicant Profile </a></li>                     <li><a href=\"student_register.php\" class=\"waves-effect\"><i class=\"fa fa-list fa-fw\" aria-hidden=\"true\"></i>Register </a></li>                    <li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', 'applicant_registrationa.php', '1', '2019-02-24 21:22:59'),
+(28, 'Center Register', '<li><a href=\"examcenter_register.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Registered Students</a></li>', 'examcenter_register.php', '1', '2019-03-03 10:42:55'),
+(31, 'Messages', '<li><a href=\"messages.php\" class=\"waves-effect\"><i class=\"fa fa-comments fa-fw\" aria-hidden=\"true\"></i>Messages</a></li>', 'messages.php', '3', '2019-03-23 23:50:52'),
+(32, 'Live Stream Setup', '<li><a href=\"admin_live_stream.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Live Stream Setup </a></li>', 'admin_live_stream.php', '3', '2019-03-23 23:53:12'),
+(33, 'Live Stream Dashboard', '<li><a href=\"videoStream_dashboard.php\" class=\"waves-effect\"><i class=\"fa fa-eye fa-fw\" aria-hidden=\"true\"></i>Live Stream</a></li>', 'videoStream_dashboard.php', '3', '2019-03-23 23:53:34'),
+(34, 'Divisional Library Setup', '<li><a href=\"admin_library.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Library SetUp </a></li>', 'admin_library.php', '3', '2019-03-30 03:07:42'),
+(35, 'Members Library View', '<li><a href=\"library_archive.php\" class=\"waves-effect\"><i class=\"fa fa-book fa-fw\" aria-hidden=\"true\"></i>Library Archive</a></li>', 'library_archive.php', '3', '2019-03-30 03:08:18'),
+(36, 'Session Logs', '<li><a href=\"admin_session_logs.php\" class=\"waves-effect\"><i class=\"fa fa-cogs fa-fw\" aria-hidden=\"true\"></i>Session Logs</a></li>', 'admin_session_logs.php', '3', '2019-04-04 12:40:14'),
+(37, 'Proposer Declaration', '<li><a href=\"applicant_registrationd.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Proposer Declaration </a></li>', 'applicant_registrationd.php', '3', '2019-04-10 12:27:08'),
+(38, 'New Applicants Administration', '<li><a href=\"admin_application_approval.php\" class=\"waves-effect\"><i class=\"fa fa-file fa-fw\" aria-hidden=\"true\"></i>New Applications</a></li>', 'admin_application_approval.php', '1', '2019-04-12 00:50:39'),
+(39, 'Committee Setup', '<li><a href=\"admin_committiee.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Committee Setup </a></li>', 'admin_committiee.php', '3', '2019-06-04 23:08:17'),
+(40, 'Exams Setup', '<li><a href=\"examcenter_setup.php\" class=\"waves-effect\"><i class=\"fa fa-globe fa-fw\" aria-hidden=\"true\"></i>Exam Center Setup</a></li>', 'examcenter_setup.php', '1', '2019-07-11 23:14:30'),
+(41, 'Member Committee', '<li><a href=\"committee.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Committee</a></li>', 'committee.php', '1', '2019-07-11 23:15:02');
 
 -- --------------------------------------------------------
 
@@ -1105,7 +1161,7 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (15, 73, 'Friday 5th of April 2019 / 11:14:19 AM', 'Friday 5th of April 2019 / 11:15:58 AM', 1),
 (16, 56, 'Friday 5th of April 2019 / 11:16:05 AM', 'Friday 5th of April 2019 / 11:53:50 AM', 1),
 (17, 56, 'Friday 5th of April 2019 / 11:54:02 AM', 'Friday 5th of April 2019 / 12:46:31 PM', 1),
-(18, 56, 'Friday 5th of April 2019 / 12:46:48 PM', 'Friday 5th of April 2019 / 01:06:45 PM', 1),
+(18, 56, 'Friday 5th of April 2019 / 12:46:48 PM', 'Sunday 11th of August 2019 / 04:07:23 PM', 1),
 (19, 73, 'Friday 5th of April 2019 / 01:06:58 PM', 'Friday 5th of April 2019 / 01:31:55 PM', 1),
 (20, 73, 'Friday 5th of April 2019 / 01:32:10 PM', 'Friday 5th of April 2019 / 01:32:28 PM', 1),
 (21, 56, 'Friday 5th of April 2019 / 01:32:37 PM', 'Friday 5th of April 2019 / 02:43:32 PM', 1),
@@ -1245,7 +1301,7 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (155, 73, 'Tuesday 11th of June 2019 / 05:20:56 PM', '', 1),
 (156, 73, 'Tuesday 11th of June 2019 / 11:37:08 PM', '', 1),
 (157, 73, 'Thursday 13th of June 2019 / 04:52:07 PM', '', 1),
-(158, 64, 'Thursday 13th of June 2019 / 05:07:56 PM', '', 1),
+(158, 64, 'Thursday 13th of June 2019 / 05:07:56 PM', 'Saturday 10th of August 2019 / 04:59:00 PM', 1),
 (159, 64, 'Thursday 20th of June 2019 / 04:48:39 PM', '', 1),
 (160, 64, 'Friday 21st of June 2019 / 09:42:31 AM', 'Friday 21st of June 2019 / 09:43:11 AM', 1),
 (161, 73, 'Friday 21st of June 2019 / 09:43:18 AM', '', 1),
@@ -1327,7 +1383,52 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (237, 64, 'Monday 15th of July 2019 / 06:38:09 PM', '', 1),
 (238, 64, 'Tuesday 16th of July 2019 / 02:05:15 AM', 'Tuesday 16th of July 2019 / 10:57:28 AM', 1),
 (239, 64, 'Tuesday 16th of July 2019 / 10:57:34 AM', 'Tuesday 16th of July 2019 / 12:26:17 PM', 1),
-(240, 56, 'Tuesday 16th of July 2019 / 10:43:47 PM', '', 1);
+(240, 56, 'Tuesday 16th of July 2019 / 10:43:47 PM', '', 1),
+(241, 73, 'Friday 2nd of August 2019 / 08:22:13 PM', 'Friday 2nd of August 2019 / 08:22:13 PM', 1),
+(242, 73, 'Friday 2nd of August 2019 / 08:22:21 PM', '', 1),
+(243, 73, 'Saturday 3rd of August 2019 / 08:32:58 AM', 'Saturday 3rd of August 2019 / 08:32:58 AM', 1),
+(244, 73, 'Saturday 3rd of August 2019 / 08:33:04 AM', '', 1),
+(245, 73, 'Thursday 8th of August 2019 / 12:11:26 PM', '', 1),
+(246, 73, 'Friday 9th of August 2019 / 02:14:56 PM', 'Friday 9th of August 2019 / 02:15:06 PM', 1),
+(247, 64, 'Friday 9th of August 2019 / 02:15:11 PM', 'Friday 9th of August 2019 / 02:16:19 PM', 1),
+(248, 73, 'Friday 9th of August 2019 / 02:16:25 PM', 'Friday 9th of August 2019 / 02:16:31 PM', 1),
+(249, 73, 'Friday 9th of August 2019 / 02:17:01 PM', 'Friday 9th of August 2019 / 02:17:50 PM', 1),
+(250, 64, 'Friday 9th of August 2019 / 02:17:58 PM', 'Friday 9th of August 2019 / 02:18:27 PM', 1),
+(251, 73, 'Friday 9th of August 2019 / 02:18:33 PM', 'Friday 9th of August 2019 / 02:33:22 PM', 1),
+(252, 56, 'Friday 9th of August 2019 / 02:34:49 PM', 'Wednesday 14th of August 2019 / 09:40:38 AM', 1),
+(253, 56, 'Friday 9th of August 2019 / 02:44:05 PM', 'Friday 9th of August 2019 / 02:45:25 PM', 1),
+(254, 56, 'Friday 9th of August 2019 / 02:46:31 PM', 'Friday 9th of August 2019 / 02:54:22 PM', 1),
+(255, 73, 'Friday 9th of August 2019 / 02:54:29 PM', 'Friday 9th of August 2019 / 03:03:23 PM', 1),
+(256, 64, 'Friday 9th of August 2019 / 03:05:31 PM', 'Friday 9th of August 2019 / 03:29:05 PM', 1),
+(257, 73, 'Saturday 10th of August 2019 / 05:44:25 PM', 'Saturday 10th of August 2019 / 06:25:04 PM', 1),
+(258, 73, 'Saturday 10th of August 2019 / 09:51:26 PM', '', 1),
+(259, 73, 'Sunday 11th of August 2019 / 12:08:57 AM', 'Sunday 11th of August 2019 / 12:29:45 AM', 1),
+(260, 73, 'Sunday 11th of August 2019 / 12:30:02 AM', '', 1),
+(261, 64, 'Sunday 11th of August 2019 / 03:34:36 PM', '', 1),
+(262, 64, 'Sunday 11th of August 2019 / 04:07:28 PM', '', 1),
+(263, 73, 'Sunday 11th of August 2019 / 05:42:56 PM', 'Sunday 11th of August 2019 / 05:59:24 PM', 1),
+(264, 64, 'Sunday 11th of August 2019 / 05:59:31 PM', '', 1),
+(265, 64, 'Sunday 11th of August 2019 / 06:56:20 PM', 'Monday 12th of August 2019 / 01:26:26 AM', 1),
+(266, 64, 'Monday 12th of August 2019 / 11:15:31 AM', 'Monday 12th of August 2019 / 11:50:41 AM', 1),
+(267, 73, 'Monday 12th of August 2019 / 11:50:48 AM', 'Monday 12th of August 2019 / 04:23:08 PM', 1),
+(268, 73, 'Monday 12th of August 2019 / 04:23:15 PM', 'Monday 12th of August 2019 / 10:53:32 PM', 1),
+(269, 73, 'Monday 12th of August 2019 / 10:53:38 PM', 'Monday 12th of August 2019 / 11:12:46 PM', 1),
+(270, 56, 'Monday 12th of August 2019 / 11:12:56 PM', 'Tuesday 13th of August 2019 / 12:48:29 AM', 1),
+(271, 64, 'Tuesday 13th of August 2019 / 12:54:40 AM', '', 1),
+(272, 64, 'Tuesday 13th of August 2019 / 07:17:31 AM', 'Tuesday 13th of August 2019 / 09:26:46 PM', 1),
+(273, 73, 'Tuesday 13th of August 2019 / 09:26:52 PM', 'Tuesday 13th of August 2019 / 09:28:19 PM', 1),
+(274, 64, 'Tuesday 13th of August 2019 / 09:28:27 PM', 'Wednesday 14th of August 2019 / 09:32:41 AM', 1),
+(275, 64, 'Wednesday 14th of August 2019 / 09:32:46 AM', '', 1),
+(276, 64, 'Wednesday 14th of August 2019 / 09:40:43 AM', 'Wednesday 14th of August 2019 / 03:40:40 PM', 1),
+(277, 73, 'Wednesday 14th of August 2019 / 09:52:31 AM', '', 1),
+(278, 73, 'Wednesday 14th of August 2019 / 03:40:50 PM', 'Wednesday 14th of August 2019 / 03:41:00 PM', 1),
+(279, 64, 'Wednesday 14th of August 2019 / 03:52:58 PM', 'Wednesday 14th of August 2019 / 04:47:56 PM', 1),
+(280, 73, 'Wednesday 14th of August 2019 / 04:48:05 PM', 'Thursday 15th of August 2019 / 09:21:49 AM', 1),
+(281, 73, 'Thursday 15th of August 2019 / 09:26:18 AM', 'Thursday 15th of August 2019 / 10:12:55 AM', 1),
+(282, 64, 'Thursday 15th of August 2019 / 10:13:55 AM', 'Thursday 15th of August 2019 / 10:15:11 AM', 1),
+(283, 73, 'Thursday 15th of August 2019 / 10:15:21 AM', 'Thursday 15th of August 2019 / 06:56:21 PM', 1),
+(284, 64, 'Thursday 15th of August 2019 / 06:56:28 PM', 'Friday 16th of August 2019 / 12:32:06 AM', 1),
+(285, 56, 'Friday 16th of August 2019 / 12:32:16 AM', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1354,7 +1455,7 @@ INSERT INTO `user_payment` (`user_payment_id`, `surveyor_type`, `payment_purpose
 (2, 'PROFESSIONAL', 'WELFARE', '200', 36, '1', 'YES', '2018-11-22 15:49:41'),
 (3, 'TRAINEE', 'MONTHLY DUES', '100', 36, '1', 'NO', '2018-11-22 15:53:56'),
 (4, 'OTHER', 'WELFARE', '50', 73, '1', 'NO', '2019-04-03 23:11:29'),
-(5, 'OTHER', 'SORCE MONEY', '300', 73, '1', 'NO', '2019-04-04 13:02:42');
+(5, 'OTHER', 'SORCE MONEY', '3005', 73, '1', 'NO', '2019-04-04 13:02:42');
 
 -- --------------------------------------------------------
 
@@ -1416,7 +1517,26 @@ INSERT INTO `wallet_history` (`wallet_history_id`, `member_id`, `type`, `purpose
 (35, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-2350', '', '2019-06-27 13:17:43'),
 (36, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-1350', '', '2019-06-27 13:19:53'),
 (37, 11, 'DEBIT', 'DEBIT', 'DEBIT', '1000', '-2350', '', '2019-06-27 13:21:53'),
-(38, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-1350', '', '2019-06-27 13:22:22');
+(38, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-1350', '', '2019-06-27 13:22:22'),
+(39, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-350', '', '2019-07-30 18:56:17'),
+(40, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '650', '', '2019-07-30 18:58:05'),
+(41, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '1650', '', '2019-07-30 18:58:09'),
+(42, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '2650', '', '2019-07-30 18:59:20'),
+(43, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '3650', '', '2019-07-30 19:02:04'),
+(44, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '4650', '', '2019-07-30 19:02:37'),
+(45, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '5650', '', '2019-07-30 19:02:38'),
+(46, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '6650', '', '2019-07-30 19:02:39'),
+(47, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '7650', '', '2019-07-30 19:02:40'),
+(48, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '8650', '', '2019-07-30 19:02:55'),
+(49, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '9650', '', '2019-07-30 19:02:56'),
+(50, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '10650', '', '2019-07-30 19:02:57'),
+(51, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '11650', '', '2019-07-30 19:02:58'),
+(52, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '12650', '', '2019-07-30 19:10:33'),
+(53, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '13650', '', '2019-07-30 19:10:35'),
+(54, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '14650', '', '2019-07-30 19:15:23'),
+(55, 11, 'DEBIT', 'DUES', 'SORCE MONEY', '3005', '11645', '1', '2019-08-12 18:21:20'),
+(56, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '11595', '1', '2019-08-12 18:21:31'),
+(57, 11, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '500', '11095', '1', '2019-08-15 10:09:32');
 
 -- --------------------------------------------------------
 
@@ -1512,6 +1632,12 @@ ALTER TABLE `committee_notes`
 --
 ALTER TABLE `committee_setup`
   ADD PRIMARY KEY (`committee_id`);
+
+--
+-- Indexes for table `committee_task`
+--
+ALTER TABLE `committee_task`
+  ADD PRIMARY KEY (`committee_task_id`);
 
 --
 -- Indexes for table `company`
@@ -1689,25 +1815,31 @@ ALTER TABLE `advert_company`
 -- AUTO_INCREMENT for table `api_request`
 --
 ALTER TABLE `api_request`
-  MODIFY `api_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `api_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `committee_library`
 --
 ALTER TABLE `committee_library`
-  MODIFY `committee_library_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `committee_library_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `committee_notes`
 --
 ALTER TABLE `committee_notes`
-  MODIFY `committee_note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `committee_note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `committee_setup`
 --
 ALTER TABLE `committee_setup`
   MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `committee_task`
+--
+ALTER TABLE `committee_task`
+  MODIFY `committee_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `company`
@@ -1725,7 +1857,7 @@ ALTER TABLE `contribution`
 -- AUTO_INCREMENT for table `contribution_register`
 --
 ALTER TABLE `contribution_register`
-  MODIFY `contributions_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `contributions_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -1803,7 +1935,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `new_application`
@@ -1845,7 +1977,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_session_log`
 --
 ALTER TABLE `users_session_log`
-  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
 
 --
 -- AUTO_INCREMENT for table `user_payment`
@@ -1857,7 +1989,7 @@ ALTER TABLE `user_payment`
 -- AUTO_INCREMENT for table `wallet_history`
 --
 ALTER TABLE `wallet_history`
-  MODIFY `wallet_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `wallet_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `youtube_stream`

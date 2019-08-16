@@ -32,6 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../plugins/bower_components\parsley\parsley.css">
     <!-- datatables -->
     <link rel="stylesheet" type="text/css" href="css/datatables.css">
+    <!-- fot button toggle -->
+    <link rel="stylesheet" type="text/css" href="../plugins/bower_components\bootstrap-toggle\bootstrap-toggle.min.css">
+    
     <!-- javascript -->
     <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../plugins/bower_components/ckeditor/ckeditor.js"></script>
@@ -103,7 +106,7 @@
                             <!-- not added to pages -->
                             <!-- <li><a href="admin_advertisement.php" class="waves-effect"><i class="fa fa-bullhorn fa-fw" aria-hidden="true"></i>Advert Company </a></li>
                             <li><a href="advert_setup.php" class="waves-effect"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>Advert SetUp </a></li>  -->
-                            
+                            <li><a href="committee_admin.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Committee Admin</a></li>
                             <!-- end of not added to pages -->
                             <?php 
                             // getting the group id from session then getting the pages id from the database

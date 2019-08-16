@@ -1,23 +1,20 @@
 <?php include("header.php");
       require_once("Classes/News.php")
 ?>
-<style>
-  @media (min-width: 768px) {
-  .modal-xl {
-    width: 95%;
-   max-width:1200px;
-  }
-}
-</style>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">NEWS AND ADVERTISEMENT PAGE</h3>
-        
-            <!-- button for search and add new members button -->
-           <div class="row">
-              <div class="col-md-8">
-                <div class="white-box">
-                  <?php 
+  <!-- first part -->
+  <div class="col-sm-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">NEWS SUMMARY </div>
+             <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <!-- content -->
+            <div class="col-md-12">
+                <?php 
                     $objNews = new News;
                     $allNews = $objNews->get_news_limit();
 
@@ -31,22 +28,33 @@
 
                          echo ' <div class="col-md-10"> <h3><b id="'.$newsId.'" class="news_view">'. $newsTitle .'</b></h3>
                                 <span>'.$dateDone.'</span><br/>
-                                <span class="label label-primary newscategory pull-right">'.$newsCategory.'</span>
+                                <span class="label label-danger newscategory pull-right">'.$newsCategory.'</span>
 
-                                <div><button id="'.$newsId.'" class="btn btn-primary btn-sm news_view">Read More >>></button></div>
+                                <div><button id="'.$newsId.'" class="btn btn-info btn-sm news_view">Read More <i class="fa fa-eye"></i></button></div>
                                 </div></div><hr /><br />';
                       }
                    ?>
-                  </div>
-              </div>
-              <div class="col-md-1"></div>
-              <div class="col-md-3">
-               <div class="white-box">
-                 <h5><center><U><b>ADVERTISEMENT</b></U></center></h5>
-               </div>
             </div>
+            <!-- end of content -->
         </div>
-    </div>
+      </div>
+  </div>
+  <!-- second part -->
+  <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">ADVERTISEMENT FEED</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- content -->
+            <div class="col-md-12">
+
+            </div>
+            <!-- end of content -->
+        </div>
+     </div>
+  </div>
 </div>
 <!-- /.row -->
 <!-- displaying news items -->
@@ -54,14 +62,13 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header" id="bg">
-         <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">NEWS DETAILS</b></u></center></h4>
+         <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" class="btn-default btnClose">&times; CLOSE</span></button>
       </div>
-      <div class="modal-body" >
+      <div class="modal-body">
         
       </div>
        <div class="well modal-footer" id="bg">
-        <button data-dismiss="modal"  aria-label="Close"  class="btn btn-danger btn-block">CLOSE NEWS DETAILS</button>
+        <button data-dismiss="modal"  aria-label="Close"  class="btn btn-danger ">CLOSE <i class="fa fa-close"></i></button>
         </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -94,7 +101,7 @@
             var data_id = $(this).attr("id");
             // load the structure of the page and hold on to it
             $('.modal-body').html(
-              '<div id="newsPic_carousel" class="carousel slide" data-ride="carousel"><ol class="carousel-indicators"></ol><div class="carousel-inner"></div><a class="left carousel-control" href="#newsPic_carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a><a class="right carousel-control" href="#newsPic_carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span> </a></div><hr><div><h2><b id="news_title"></b></h2></div><hr><div id="news_content"></div>'
+              '<div><h2><b id="news_title"></b></h2></div><hr><div id="newsPic_carousel" class="carousel slide" data-ride="carousel"><ol class="carousel-indicators"></ol><div class="carousel-inner"></div><a class="left carousel-control" href="#newsPic_carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a><a class="right carousel-control" href="#newsPic_carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span> </a></div><hr><div id="news_content"></div>'
               );
             $.ajax({  
                 url:"Script/news.php",  

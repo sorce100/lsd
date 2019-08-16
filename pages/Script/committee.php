@@ -13,6 +13,7 @@
 							$objCommittee->set_committeeFolder(substr(str_shuffle('abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'),0,7));
 							$objCommittee->set_committeeMembers(json_encode($_POST["committeeMembers"]));
 							$objCommittee->set_committeePages(json_encode($_POST["committeePages"]));
+							$objCommittee->set_committeeAdmins(json_encode($_POST["committeeAdmins"]));
 							$committeeId = $objCommittee->insert();
 							if (!empty($committeeId)) {
 								foreach ($_POST["committeeMembers"] as $memberId) {
@@ -31,7 +32,7 @@
 							$objCommittee->set_committeeName($objCommittee->CleanData($_POST["committeeName"]));
 							$objCommittee->set_committeeMembers(json_encode($_POST["committeeMembers"]));
 							$objCommittee->set_committeePages(json_encode($_POST["committeePages"]));
-							
+							$objCommittee->set_committeeAdmins(json_encode($_POST["committeeAdmins"]));
 							if ($objCommittee->update()) {
 									foreach ($_POST["committeeMembers"] as $memberId) {
 										$objCommittee->update_member_committee($memberId,trim($_POST["data_id"]));

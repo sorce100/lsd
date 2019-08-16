@@ -3,37 +3,28 @@
       require_once("Classes/Library.php");
 ?>
 
-<style type="text/css">
-  #insert_form fieldset:not(:first-of-type) {
-    display: none;
-    }
-  textarea{
-    resize: none;
-        }
-  </style>
-
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">DIVISION LIBRARY SETUP PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-                <form action="usersearch.php" method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-              <div class="col-md-2">
-                 <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> NEW UPLOAD</button>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">DIVISION LIBRARY SETUP PAGE</div>
+            <div class="panel-title pull-right">
+               <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> NEW UPLOAD</button>
             </div>
-            
-            <div class="table-responsive"><br>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -53,10 +44,10 @@
                                         <td>".$Library_detail["library_subject"]."</td>
                                         <td>".$Library_detail["date_done"]."</td>
                                         <td>
-                                          <input type='button' name='view' value='Update' id='".trim($Library_detail["library_id"])."' class='btn btn-info btn-xs update_data' />
+                                          <button type='button' id='".trim($Library_detail["library_id"])."' class='btn btn-info btn-xs update_data'>Update <i class='fa fa-edit'></i></button>
                                         </td>
                                         <td>
-                                          <input type='button' name='".trim($Library_detail["folder_name"])."' value='Delete' id='".trim($Library_detail["library_id"])."' class='btn btn-danger btn-xs del_data' />
+                                        <button type='button' id='".trim($Library_detail["library_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
                                         </td>
                                       </tr>
                                     ";
@@ -64,23 +55,24 @@
                          ?>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
-</div>
-<!-- /.row -->
+
+
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
        <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title" ><center><b><u id="subject">UPLOAD DIGITAL LIBRARY</u></b></center></h4>
+        <h4 class="modal-title" ><b id="subject">UPLOAD DIGITAL LIBRARY</b></h4>
       </div>
       <div class="modal-body">
       <form id="insert_form" method="POST" enctype="multipart/form-data"> 
         <!-- for first person -->
-          <fieldset>
             
             <div class="row">
               <div class="col-md-2">
@@ -118,13 +110,11 @@
               </div>
               <div class="col-md-10">
                 <div class="form-group">
-                  <textarea class="form-control" id="libraryDescription" placeholder="Enter any additional information about the subject &hellip;" name="libraryDescription" autocomplete="off" rows="10"></textarea>
+                  <textarea class="form-control" id="libraryDescription" placeholder="Enter any additional information about the subject &hellip;" name="libraryDescription" autocomplete="off" rows="5"></textarea>
                 </div>
               </div>
             </div><br>
-           <button type="button" class="next btn-info btn-block" id="uploadPage_btn" style="padding: 15px;font-size: 18px;">UPLOAD DOCUMENTS >>></button> 
-          </fieldset>
-          <fieldset>
+          
             <div class="input_fields_wrap">
                 <button class="add_field_button btn-block btn-info" style="padding: 10px;"><span class="glyphicon glyphicon-plus"> </span> CLICK TO ADD MORE FILES <span class="glyphicon glyphicon-plus"></span> </button><br><br>
             </div>
@@ -136,17 +126,11 @@
               <input type="hidden" name="data_id" id="data_id" value="">
               <!-- for foldername -->
               <input type="hidden" name="folderName" id="folderName" value="">
-
-             <button type="button" name="previous" class="previous btn-danger btn-block" id="back_btn" style="padding: 20px;font-size: 18px;margin-bottom: 14px;"><<< BACK</button>
-             <button type="submit"  name="next" class="next btn-success btn-block" id="save_btn" style="padding: 20px;font-size: 18px;">UPLOAD CONTENT</button>
-          </fieldset>
-        </form>
-         <div style="text-align:center;margin-top:40px;">
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step"></span>
+            <div class="well modal-footer" id="bg">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+              <button type="submit" class="btn btn-info" id="save_btn">Upload Library <i class="fa fa-save"></i></button>
             </div>
+        </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -181,7 +165,7 @@
                 processData:false,  
                 beforeSend:function(){  
                       $('#back_btn').hide();
-                      $('#save_btn').val("Please wait ...");  
+                      $('#save_btn').text("Please wait ...");  
                      },
                 success:function(data){  
                   alert(data);
@@ -214,7 +198,7 @@
                     $("#libraryDescription").val(jsonObj["library_description"]);
                     $("#data_id").val(jsonObj["library_id"]);
                     $("#folderName").val(jsonObj["folder_name"]);
-                    $("#save_btn").text("UPDATE UPLOADS");
+                    $("#save_btn").text("Update Library Upload");
                     $("#mode").val("update");
 
                     // if there is document folder then get files names and display
@@ -271,26 +255,26 @@
 
       
 // for delete
-        $('.del_data').click(function(){
-           if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
-               
-                 var mode= "delete"; 
-                 var data_id = $(this).attr("id");
-                 var folderName = $(this).attr("name");  
-                 $.ajax({  
-                      url:"Script/library.php",  
-                      method:"POST",  
-                      data:{data_id:data_id,mode:mode,folderName:folderName},  
-                      success:function(data){
-                        // alert(data);
-                          window.location.replace("admin_library.php");
-                      }  
-                     }); 
+  $('.del_data').click(function(){
+     if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
+         
+           var mode= "delete"; 
+           var data_id = $(this).attr("id");
+           var folderName = $(this).attr("name");  
+           $.ajax({  
+                url:"Script/library.php",  
+                method:"POST",  
+                data:{data_id:data_id,mode:mode,folderName:folderName},  
+                success:function(data){
+                  // alert(data);
+                    window.location.replace("admin_library.php");
+                }  
+               }); 
 
-               }else{
-                return false;
-              }  
-          });
+         }else{
+          return false;
+        }  
+    });
 
 // click to upload more files
     var max_fields      = 15; //maximum input boxes allowed

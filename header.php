@@ -21,14 +21,14 @@
   <body >
     <div class="row top_row">
         <div class="col-md-1 col-sm-3 col-xs-3">
-          <a href="index.php"><img src="plugins/images/logo.jpg" class="img-responsive img-circle" width="100" height="100"></a>
+          <a href="index.php"><img src="plugins/images/logo.jpg" class="img-responsive img-circle" width="100%" height="100%"></a>
         </div>
         <div class="col-md-9 col-sm-6 col-xs-6">
-            <div id="headerTitle"><a href="index.php">Ghana Institution Of Surveyors ( LSD )</a></div>
+            <div id="headerTitle">Ghana Institution Of Surveyors ( LSD )</div>
         </div>
         <div class="col-md-2 col-sm-3 col-xs-3 logSignBtn">
-          <span><a data-toggle="modal" data-target="#signInModal" class="btn btn-primary"><b>Login <i class="glyphicon glyphicon-user"></i></b></a></span>
-          <span><a style="border: 1px solid red;" data-toggle="modal" data-target="#signUpModal" class="btn btn-default"><b>Register <i class="glyphicon glyphicon-hourglass"></i></b></a></span>
+          <button data-toggle="modal" data-target="#signInModal" class="btn btn-primary"><b>Login <i class="glyphicon glyphicon-user"></i></b></button>
+          <button style="border: 1px solid red;" data-toggle="modal" data-target="#signUpModal" class="btn btn-default"><b>Register <i class="glyphicon glyphicon-hourglass"></i></b></button>
         </div>
     </div><br>
     <!-- signup page -->
@@ -36,57 +36,75 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header" id="bg">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-            <h4 class="modal-title">TRAINEE SIGN UP</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="btn-default btnClose">&times; CLOSE</span></button>
+            <h4 class="modal-title">APPLICANT SIGN UP</h4>
           </div>
           <div class="modal-body" id="bg">
-          <form id="signUp_form"> 
-              <div class="row">
+          <form id="signUp_form">
+            <!--  -->
+            <div class="row">
                 <div class="col-md-2">
-                  <div class="form-group">
-                    <label for="studentTitle">TITLE</label>
-                    <select class="form-control" name="studentTitle" id="studentTitle" required>
-                      <option  disabled selected>Select title</option>
-                      <option value="Mr">Mr</option>
-                      <option value="Mrs">Mrs</option>
-                      <option value="Miss">Miss</option>
-                      <option value="Dr">Dr</option>
-                      <option value="Prof">Prof</option>
-                    </select>
-                  </div>
+                    <label for="title" class="col-form-label">Name <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-2">
+                    <div class="form-group">
+                       <select class="form-control" name="studentTitle" id="studentTitle" required>
+                          <option  disabled selected>Select title</option>
+                          <option value="Mr">Mr</option>
+                          <option value="Mrs">Mrs</option>
+                          <option value="Miss">Miss</option>
+                          <option value="Dr">Dr</option>
+                          <option value="Prof">Prof</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for="studentFirstName">FIRST NAME</label>
-                    <input type="text" class="form-control" id="studentFirstName" placeholder="Enter first name &hellip;" name="studentFirstName" autocomplete="off" required>
-                  </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="studentFirstName" minlength="3" placeholder="Enter first name &hellip;" name="studentFirstName" autocomplete="off" required>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for="studentLastName">LAST NAME</label>
-                    <input type="text" class="form-control" id="studentLastName" placeholder="Enter last name &hellip;" name="studentLastName" autocomplete="off" required>
-                  </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="studentLastName" minlength="3" placeholder="Enter last name &hellip;" name="studentLastName" autocomplete="off" required>
+                    </div>
                 </div>
-              </div><br><br>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="studentEmail">EMAIL ADDRESS</label>
-                    <input type="email" class="form-control" id="studentEmail" placeholder="Enter email address eg: abc@domain.com &hellip;" name="studentEmail" autocomplete="off" required>
-                  </div>
+            </div>
+
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="title" class="col-form-label">Email <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-10">
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="studentEmail" placeholder="Enter email address eg: abc@domain.com &hellip;" name="studentEmail" autocomplete="off" required>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="studentTel">TEL NUMBER</label>
-                    <input type="number" class="form-control" id="studentTel" placeholder="Enter phone number eg: 020 xxxx xxx &hellip;" name="studentTel" autocomplete="off" required>
-                  </div>
+            </div>
+
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="title" class="col-form-label">Tel No <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-10">
+                    <div class="form-group">
+                      <input type="number" class="form-control" minlength="10" id="studentTel" placeholder="Enter phone number eg: 020 xxxx xxx &hellip;" name="studentTel" autocomplete="off" required>
+                    </div>
                 </div>
-              </div><br><br>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="schoolId">SELECT DIVISON</label>
-                    <select class="form-control" name="division" id="division" required>
+            </div>
+
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="title" class="col-form-label">Division <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-10">
+                    <div class="form-group">
+                      <select class="form-control" name="division" id="division" required>
                       <option  disabled selected>Select Division</option>
                       <?php 
                           $objDivision = new Division;
@@ -96,34 +114,26 @@
                           }
                        ?>
                     </select>
-                  </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="examCenter">SELECT EXAM CENTER</label>
-                    <select class="form-control" name="examCenter" id="examCenter" required>
-                      <option  disabled selected>Select</option>
-                       <?php 
-                          $objExamCenterSetup = new ExamCenterSetup;
-                          $centers = $objExamCenterSetup->get_centers();
-                          foreach ($centers as $center) {
-                            echo '<option value="'.$center["exam_center_id"].'">'.$center["exam_center_name"].'</option>';
-                          }
-                       ?>
-                    </select>
-                  </div>
-                </div>
-              </div><br> <br> 
-              <div class="row">
-                <div class="col-md-6">
-                  <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-block btn-danger" id="cancel" name="cancel" > Close <i class="glyphicon glyphicon-remove"></i></button>
-                </div>
-                 <!-- for insert query -->
-                <input type="hidden" name="mode" id="signUpmode" value="insert">
-                <div class="col-md-6">
-                  <button type="submit" class="btn btn-block btn-primary" id="signUp" name="signUp">Save <i class="glyphicon glyphicon-floppy-disk"></i></button>
-                </div>
-              </div><br>
+            </div> 
+
+            <br>
+            <br>
+             <!-- ////////////////////////  --> 
+            <div class="row">
+              <div class="col-md-6">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-block btn-danger" id="cancel" name="cancel" > Close <i class="glyphicon glyphicon-remove"></i></button>
+              </div>
+               <!-- for insert query -->
+              <input type="hidden" name="mode" id="signUpmode" value="insert">
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-block btn-primary" id="signUp" name="signUp">Submit <i class="glyphicon glyphicon-floppy-disk"></i></button>
+              </div>
+            </div>
+
+            <br>
+
           </form>
         </div>
       </div><!-- /.modal-content -->
@@ -135,8 +145,8 @@
   <div class="modal-dialog modal">
     <div class="modal-content">
       <div class="modal-header" id="bg">
-         <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><b id="subject">User Sign In</b></h4>
+         <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" class="btn-default btnClose">&times; CLOSE</span></button>
+        <h4 class="modal-title"><b id="subject">Sign In</b></h4>
       </div>
       <div class="modal-body" id="bg">
         <form id="sigin_Form" method="POST"> 
@@ -147,17 +157,17 @@
                         <div class="form-group input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                           <label for="signin-username" class="control-label sr-only">Username</label>
-                          <input type="text" class="form-control" id="professional_number" name="professional_number" placeholder="Enter Username &hellip;" autofocus required autocomplete="off">
+                          <input type="text" class="form-control" id="professional_number" name="professional_number" minlength="2" placeholder="Enter Username &hellip;" autofocus required autocomplete="off">
                         </div>
                         <br>
                         <div class="form-group input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                           <label for="signin-password" class="control-label sr-only">Password</label>
-                          <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Enter Password &hellip;" required data-parsley-length="[4,10]">
+                          <input type="password" class="form-control" id="userPassword" name="userPassword" minlength="3" placeholder="Enter Password &hellip;" required data-parsley-length="[4,10]">
                         </div>
                         <br>
                         <input type="hidden" name="mode" id="signInmode" value="login">
-                        <button type="submit" name="submit" id="login" class="btn btn-lg btn-primary btn-block waves-effect waves-light">LOGIN <i class="glyphicon glyphicon-remove"></i></button> 
+                        <button type="submit" name="submit" id="login" class="btn btn-primary btn-block waves-effect waves-light">LOGIN <i class="glyphicon glyphicon-log-in"></i></button> 
                         <br>
                   </form>
                 </div>

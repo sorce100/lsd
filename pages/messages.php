@@ -2,27 +2,35 @@
   include("header.php");
   require_once("Classes/Messages.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">INTRA MESSAGES</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-                <!-- for add button -->
-                <div class="col-md-2">
-                   <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> COMPOSE NEW</button>
-                </div><br><br>
-                <div class="col-md-12">
-                  <!-- tab for inbox and sent messages -->
-                  <ul class="nav nav-tabs nav-justified">
-                    <li class="active"><a data-toggle="tab" href="#inbox"><b>INBOX</b></a></li>
-                    <li><a data-toggle="tab" href="#sent"><b>SENT</b></a></li>
-                  </ul>
-                  <!-- tabs content for inbox-->
-                  <div class="tab-content">
+  <!-- first part of div -->
+  <div class="col-md-12 ">
+    <div class="panel panelTabs" >
+      <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#inbox">INBOX <i class="fa fa-inbox"></i></a></li>
+        <li><a data-toggle="tab" href="#sent">SENT <i class="fa fa-send"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">MESSAGES</div>
+            <div class="panel-title pull-right">
+               <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> COMPOSE NEW</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- content -->
+            <div class="col-md-12">
+                <div class="tab-content">
                     <div id="inbox" class="tab-pane fade in active">
-                          <h3>RECEIVED MESSAGES</h3>
-                          <br>
                             <!-- for search -->
                             <div class="col-md-12">
                               
@@ -41,6 +49,7 @@
                                             <th>SUBJECT</th>
                                             <th>DATETIME RECEIVED</th>
                                             <th>STATUS</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody id="memberresultsDisplay">
@@ -79,8 +88,6 @@
                      </div>
                       <!-- tabs content for sent messages -->
                       <div id="sent" class="tab-pane fade">
-                          <h3>SENT MESSAGES</h3>
-                          <br>
                           <!-- for search -->
                             <div class="col-md-12">
                                 <div class="input-group">
@@ -97,6 +104,7 @@
                                             <th></th>
                                             <th>SUBJECT</th>
                                             <th>DATETIME SENT</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody id="schoolresultsDisplay">
@@ -121,18 +129,22 @@
                           </div>
                         </div>
                     </div>  
-                </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
+
 </div>
+
+
+
 <!-- modal  -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-xl">
   <div class="modal-content">
     <div class="modal-header" id="bg">
        <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-      <h4 class="modal-title"><center><u><b id="subject">COMPOSE MESSAGES</b></u></center></h4>
+      <h4 class="modal-title"><b id="subject">COMPOSE MESSAGES</b></h4>
     </div>
     <div class="modal-body" id="bg">
       <form id="insert_form" method="POST">
@@ -190,7 +202,8 @@
          </div>
          <input type="hidden" name="mode" id="mode" value="insert">
           <div class="well modal-footer" id="bg">
-              <input type="submit" id="save_btn" class="btn btn-danger btn-block" name="submit" value="SEND MESSAGE" />
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+              <button type="submit" class="btn btn-info" id="save_btn">Send Message <i class="fa fa-save"></i></button>
           </div>
         </form>
      <!-- for inputing the messages and the message title -->
@@ -276,7 +289,7 @@ $("#insert_form").on("submit",function(e){
           method:"POST",
           data:$("#insert_form").serialize(),
           beforeSend:function(){  
-                    $('#save_btn').val("Please wait ...");  
+                    $('#save_btn').text("Please wait ...");  
                },
           success:function(data){  
                $("#myModal").modal("hide");

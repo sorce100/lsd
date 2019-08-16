@@ -2,46 +2,14 @@
 include("header.php");
 require_once("Classes/Division.php");
 ?>
-<style>
-.top_bar{
-  background: #333;
-  color: #fff;
-  padding: 1rem;
-}
-
-.btnReader{
-  background: coral;
-  color: #fff;
-  border: none;
-  outline: none;
-  cursor:pointer;
-  padding: 0.7rem 2rem;
-}
-
-.btnReader:hover{
-  opacity: 0.9;
-}
-
-.page_info{
-  margin-left: 1rem;
-}
-
-.error{
-  background: orange;
-  color:#fff;
-  padding: 1rem;
-}
-</style>
+<br>
+<!--  -->
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">LIBRARY ARCHIVE PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                    <label for="title">SELECT DIVISION LIBRARY</label>
-                    <select class="form-control" name="divisonSelect" id="divisonSelect" required>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">
+                    <select class="form-control" name="divisonSelect" id="divisonSelect" required style="border: 1px solid red;">
                       <option  disabled selected>SELECT DIVISION</option>
                       <?php 
                           $objDivision = new Division;
@@ -51,172 +19,183 @@ require_once("Classes/Division.php");
                           }
                        ?>
                     </select>
-                </div>
+
+             </div>
+            <div class="panel-title pull-right">LIBRARY ARCHIVES </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+
+          <!-- tabs for nvaigation -->
+            <div class="col-md-12 ">
+              <div class="panel panelTabs" >
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active"><a data-toggle="tab" href="#cpd">CPD <i class="fa fa-file"></i></a></li>
+                  <li><a data-toggle="tab" href="#monthmeeting">Monthly Meetings<i class="fa fa-file"></i></a></li>
+                  <li><a data-toggle="tab" href="#seminar">Seminar <i class="fa fa-file"></i></a></li>
+                  <li><a data-toggle="tab" href="#ysn">Young Surveyors  <i class="fa fa-file"></i></a></li>
+                  <li><a data-toggle="tab" href="#library">Library <i class="fa fa-file"></i></a></li>
+                  <li><a data-toggle="tab" href="#publication">Publications <i class="fa fa-file"></i></a></li>
+                  <li><a data-toggle="tab" href="#conference">Conference <i class="fa fa-file"></i></a></li>
+                  <li><a data-toggle="tab" href="#committee">Committee <i class="fa fa-file"></i></a></li>
+                </ul>
               </div>
-              <!-- for search -->
-              <div class="col-md-8">
-                <form action="usersearch.php" method="POST">
-                  <label for="title"></label>
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+            </div>
+
+            <hr>
+          <!-- tabs for nvaigation -->
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-md-12">
+                <div class="tab-content">
+                  <div id="cpd" class="tab-pane fade in active">
+                    <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cpdDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
                   </div>
-                 </form>
-              </div>
+                  <div id="monthmeeting" class="tab-pane fade">
+                    <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthmeetingDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <div id="seminar" class="tab-pane fade">
+                    <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="seminarDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <div id="ysn" class="tab-pane fade">
+                   <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="ysnDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <div id="library" class="tab-pane fade">
+                   <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="libraryDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <div id="publication" class="tab-pane fade">
+                    <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="publicationDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <div id="conference" class="tab-pane fade">
+                    <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="conferenceDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <div id="committee" class="tab-pane fade">
+                    <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>ARCHIVE SUBJECT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="committeeDisplay">
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
             </div>
-            <ul class="nav nav-tabs" style="font-weight: bold;">
-              <li class="active"><a data-toggle="tab" href="#cpd">CPD</a></li>
-              <li><a data-toggle="tab" href="#monthmeeting">Monthly Meetings</a></li>
-              <li><a data-toggle="tab" href="#seminar">Seminar</a></li>
-              <li><a data-toggle="tab" href="#ysn">Young Surveyors Network</a></li>
-              <li><a data-toggle="tab" href="#library">Library</a></li>
-              <li><a data-toggle="tab" href="#publication">Publications</a></li>
-              <li><a data-toggle="tab" href="#conference">Conference</a></li>
-              <li><a data-toggle="tab" href="#committee">Committee</a></li>
-
-            </ul>
-
-            <div class="tab-content">
-              <div id="cpd" class="tab-pane fade in active">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="cpdDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="monthmeeting" class="tab-pane fade">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="monthmeetingDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="seminar" class="tab-pane fade">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="seminarDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="ysn" class="tab-pane fade">
-               <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="ysnDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="library" class="tab-pane fade">
-               <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="libraryDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="publication" class="tab-pane fade">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="publicationDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="conference" class="tab-pane fade">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="conferenceDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="committee" class="tab-pane fade">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>ARCHIVE SUBJECT</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="committeeDisplay">
-                              
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-            </div>
-            
+            <!-- end of content -->
         </div>
     </div>
 </div>
+<!--  -->
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">LIBRARY CONTENT</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">LIBRARY CONTENT</b></h4>
       </div>
       <div class="modal-body" id="bg">
         <div id="doc_display"></div>

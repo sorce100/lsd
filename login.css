@@ -96,24 +96,24 @@ body{
       /*padding-top: 4px 4px;*/
       border-bottom: 5px solid #6497b1;
     }
-    .top_row #headerTitle{
-    padding-top: 30px;
-    color: #6497b1;
-    font-weight:bold;
-    font-size:2vw;
+#headerTitle{
+  padding-top: 40px;
+  color: #6497B1 !important;
+  font-weight:bold;
+  font-size:2.4rem;
 
-    }
-    .page-header{
-      color: #6497b1;
-    }
-    .logSignBtn{
-      padding-top: 30px;
-    }
-    #signUpModal {
-        position: absolute;
-        top: 10%;
-        left: 20%
-      }
+}
+.page-header{
+  color: #6497b1;
+}
+.logSignBtn{
+  padding-top: 30px;
+}
+#signUpModal {
+    position: absolute;
+    top: 10%;
+    left: 20%
+  }
 #signInModal,#viewMeetingModal {
   text-align: center;
 }
@@ -135,4 +135,22 @@ body{
   display: inline-block;
   text-align: left;
   vertical-align: middle;
+}
+
+.btnClose{
+  color: red;font-size: 20px;
+}
+.asterick{
+  color: red;
+}
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 95%;
+   max-width:1200px;
+  }
+}
+#viewModal {
+  position: absolute;
+  top: 10%;
+  left: 15%
 }

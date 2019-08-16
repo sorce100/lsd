@@ -13,11 +13,6 @@
 							$objExamCenterSetup->set_centerRegion($objExamCenterSetup->CleanData($_POST["centerRegion"]));
 							$returnedCenterId = $objExamCenterSetup->insert();
 							if (!empty($returnedCenterId)) {
-								// if center is inserted successfully, then save subjects with the center id
-								$objExamCenterSetup->set_centerExamSubject(json_encode($_POST["centerExamSubject"]));
-								$objExamCenterSetup->set_id($returnedCenterId);
-								$objExamCenterSetup->subject_insert();
-
 								echo "success";
 							}
 							else{
@@ -31,10 +26,6 @@
 							$objExamCenterSetup->set_centerRegion($objExamCenterSetup->CleanData($_POST["centerRegion"]));
 							$objExamCenterSetup->set_id($objExamCenterSetup->CleanData($_POST["data_id"]));
 							if ($objExamCenterSetup->update()) {
-								// update subject table with any changes to the subject
-								$objExamCenterSetup->set_centerExamSubject(json_encode($_POST["centerExamSubject"]));
-								$objExamCenterSetup->set_id($objExamCenterSetup->CleanData($_POST["data_id"]));
-								$objExamCenterSetup->subject_update();
 								
 								echo "success";
 							}

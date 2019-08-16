@@ -11,116 +11,164 @@
         }
   </style>
 
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">EVENT & MEETING SETUP PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-              </div>
-              <!-- for add button -->
-              <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span> Add New <span class="caret"></span></button>
-                      <ul class="dropdown-menu">
-                      <li><a data-toggle="modal" data-target="#eventModal"><b>Add Event</b></a></li>
-                      <li><a data-toggle="modal" data-target="#mettingModal"><b>Add Meeting</b></a></li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-            
-            <ul class="nav nav-tabs nav-justified">
-              <li class="active"><a data-toggle="tab" href="#eventsTab"><b>Events</b></a></li>
-              <li><a data-toggle="tab" href="#meetingTab"><b>Meetings</b></a></li>
-            </ul>
-            <div class="tab-content">
-              <div id="eventsTab" class="tab-pane fade in active">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                
-                                <th>ID</th>
-                                <th>THEME</th>
-                                <th>START DATE</th>
-                                <th>END DATE</th>
-                                <th>FEE (₵)</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                       <tbody id="resultsDisplay">
-                             <?php
-                              $objEvents = new Events;
-                              $events = $objEvents->get_events(); 
-                              foreach ($events as $event) {
-                                      echo "
-                                          <tr>
-                                            <td>".$event["events_id"]."</td>
-                                            <td>".substr($event["events_theme"], 0, 30)."</td>
-                                            <td>".$event["event_date_start"]."</td>
-                                            <td>".$event["event_date_end"]."</td>
-                                            <td>".$event["event_fee"]."</td>
-                                           
-                                            <td>
-                                              <input type='button' name='view' value='Update' id='".trim($event["events_id"])."' class='btn btn-info btn-xs update_data' />
-                                          
-                                              <input type='button' name='view' value='Delete' id='".trim($event["events_id"])."' class='btn btn-danger btn-xs del_data' />
-                                            
-                                              <input type='button' name='view' value='View Participants' id='".trim($event["events_id"])."' class='btn btn-success btn-xs view_participants' />
-                                            </td>
-                                          </tr>
-                                        ";
-                                  }
-                             ?>
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-              <div id="meetingTab" class="tab-pane fade">
-                <div class="table-responsive"><br>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Meeting Title</th>
-                                <th>Location</th>
-                                <th>Date<th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                       <tbody id="resultsDisplay">
-                             <?php
-                              $objEvents = new Events;
-                              $events = $objEvents->get_meetings(); 
-                              foreach ($events as $event) {
-                                      echo "
-                                          <tr>
-                                            <td>".$event["events_theme"]."</td>
-                                            <td>".$event["event_venue"]."</td>
-                                            <td>".$event["event_date_end"]."</td>
-                                           
-                                            <td>
-                                              <input type='button' name='view' value='Update' id='".trim($event["events_id"])."' class='btn btn-info btn-xs meeting_update' />
-                                          
-                                              <input type='button' name='view' value='Delete' id='".trim($event["events_id"])."' class='btn btn-danger btn-xs del_data' />
-                                            
-                                              <input type='button' name='view' value='View Participants' id='".trim($event["events_id"])."' class='btn btn-success btn-xs view_participants' />
-                                            </td>
-                                          </tr>
-                                        ";
-                                  }
-                             ?>
-                        </tbody>
-                    </table>
-                </div>
-              </div>
-            </div>
-            
-        </div>
+  <!-- first part of div -->
+  <div class="col-md-12 ">
+    <div class="panel panelTabs" >
+      <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#eventsTab">Events <i class="fa fa-calendar"></i></a></li>
+        <li><a data-toggle="tab" href="#meetingTab">Meetings <i class="fa fa-users"></i></a></li>
+      </ul>
     </div>
+  </div>
 </div>
+
+<div class="tab-content">
+  <!-- firsttab -->
+  <div id="eventsTab" class="tab-pane fade in active">
+      <div class="row">
+          <!-- <div class="col-sm-12"> -->
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                   <div class="panel-title pull-left">EVENT SETUP PAGE </div>
+                   <div class="panel-title pull-right">
+                    <button data-toggle="modal" data-target="#eventModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Add Event</button>
+                    </div>
+                  <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                  <!-- for search -->
+                  <div class="col-md-12">
+                      <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="eventsearchInput" autocomplete="off">
+                        <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                      </div>
+                  </div>
+                  <!-- content -->
+                  <div class="col-md-12">
+                    <!--  -->
+                      <div class="table-responsive"><br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>ID</th>
+                                    <th>THEME</th>
+                                    <th>START DATE</th>
+                                    <th>END DATE</th>
+                                    <th>FEE (₵)</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventResultsDisplay">
+                                 <?php
+                                  $objEvents = new Events;
+                                  $events = $objEvents->get_events(); 
+                                  foreach ($events as $event) {
+                                          echo "
+                                              <tr>
+                                                <td>".$event["events_id"]."</td>
+                                                <td>".substr($event["events_theme"], 0, 30)."</td>
+                                                <td>".$event["event_date_start"]."</td>
+                                                <td>".$event["event_date_end"]."</td>
+                                                <td>".$event["event_fee"]."</td>
+                                                <td>
+                                                    <button type='button' id='".trim($event["events_id"])."' class='btn btn-info btn-xs meeting_update'>Update <i class='fa fa-edit'></i></button>
+                                                </td>
+                                                <td>
+                                                    <button type='button' id='".trim($event["events_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
+                                                </td>
+                                                <td>
+                                                    <button type='button' id='".trim($event["events_id"])."' class='btn btn-success btn-xs view_participants'>View Participants <i class='fa fa-list'></i></button>
+                                                </td>
+                                              </tr>
+                                            ";
+                                      }
+                                 ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--  -->
+                  </div>
+                  <!-- end of content -->
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- second tab -->
+  <div id="meetingTab" class="tab-pane fade">
+      <div class="row">
+          <!-- <div class="col-sm-12"> -->
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                   <div class="panel-title pull-left">MEETING SETUP PAGE </div>
+                   <div class="panel-title pull-right">
+                    <button data-toggle="modal" data-target="#mettingModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Add Meeting</button>
+                    </div>
+                  <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                  <!-- for search -->
+                  <div class="col-md-12">
+                      <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="meetingsearchInput" autocomplete="off">
+                        <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                      </div>
+                  </div>
+                  <!-- content -->
+                  <div class="col-md-12">
+                    <!--  -->
+                        <div class="table-responsive"><br>
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <th>Meeting Title</th>
+                                      <th>Location</th>
+                                      <th>Date<th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody id="meetingresultsDisplay">
+                                   <?php
+                                    $objEvents = new Events;
+                                    $events = $objEvents->get_meetings(); 
+                                    foreach ($events as $event) {
+                                            echo "
+                                                <tr>
+                                                  <td>".$event["events_theme"]."</td>
+                                                  <td>".$event["event_venue"]."</td>
+                                                  <td>".$event["event_date_end"]."</td>
+                                                  <td>
+                                                    <button type='button' id='".trim($event["events_id"])."' class='btn btn-info btn-xs meeting_update'>Update <i class='fa fa-edit'></i></button>
+                                                  </td>
+                                                  <td>
+                                                    <button type='button' id='".trim($event["events_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
+                                                  </td>
+                                                  <td>
+                                                    <button type='button' id='".trim($event["events_id"])."' class='btn btn-success btn-xs view_participants'>View Participants <i class='fa fa-list'></i></button>
+                                                  </td>
+                                                </tr>
+                                              ";
+                                        }
+                                   ?>
+                              </tbody>
+                          </table>
+                      </div>
+                    <!--  -->
+                  </div>
+                  <!-- end of content -->
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
 <!-- /.row -->
 
  <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
@@ -128,98 +176,91 @@
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">ADD NEW EVENT</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">ADD NEW EVENT</b></h4>
       </div>
       <div class="modal-body" id="bg">
      <form id="event_form" method="POST">
-          <fieldset> 
-              <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="title">EVENT THEME</label>
-                        <textarea rows="2" class="form-control" id="eventTheme" name="eventTheme" autocomplete="off" placeholder="Enter theme for the event eg: Annual Seminar"></textarea>
-                    </div>
-                  </div>
-             </div>
-             <div class="row">
-                  <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="title">EVENT VENUE</label>
-                        <input type="text" class="form-control" id="eventVenue" name="eventVenue" placeholder="Enter event venue" autocomplete="off">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="title">EVENT FEE (₵)</label>
-                        <input type="number" class="form-control" id="eventFee" name="eventFee" placeholder="Enter event fee" autocomplete="off" >
-                    </div>
-                  </div>
-             </div>
-             <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="title">EVENT START DATE</label>
-                        <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" data-toggle="datepicker" placeholder="Click to select start date" autocomplete="off" readonly>
-                    </div>
-                  </div>
-                   <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="title">EVENT END DATE</label>
-                        <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" data-toggle="datepicker" placeholder="Click to select end date" autocomplete="off" readonly>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="title">START TIME</label>
-                        <select class="form-control" id="startTime" name="startTime" >
-                          <option  disabled selected>Select Time</option>
-                          <?php echo get_times(); ?>
-                        </select>
-                        
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="title">END TIME</label>
-                        <select class="form-control" id="endTime" name="endTime" >
-                          <option  disabled selected>Select Time</option>
-                          <?php echo get_times(); ?>
-                        </select>
-                        
-                    </div>
-                  </div>
-             </div><br>
-                <input type="button" class="next btn-info btn-block" value="ENTER HOTELS" />
-            </fieldset>
-            <fieldset>
-              <!-- FOR CLICK TO ADD NEW INPUT FORM FOR CLICK TO ADD HOTEL NAME AND PRICES -->
-              <div class="table-responsive">  
-                   <table class="table" id="dynamic_field">  
-                        <tr>  
-                           <td><button type="button" name="add" id="add" class="btn btn-danger">Add New Hotel</button></td>
-                             <td><input type="text" name="hotelNames[]" placeholder="Enter name of hotel" class="form-control hotelNames" /></td>
-                             <td><input type="number" name="hotelPrices[]" placeholder="Enter price" class="form-control hotelPrices" /></td>  
-                        </tr>  
-                   </table>  
-              </div>  
+          <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                    <label for="title">EVENT THEME</label>
+                    <textarea rows="2" class="form-control" id="eventTheme" name="eventTheme" autocomplete="off" placeholder="Enter theme for the event eg: Annual Seminar"></textarea>
+                </div>
+              </div>
+         </div>
+         <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                    <label for="title">EVENT VENUE</label>
+                    <input type="text" class="form-control" id="eventVenue" name="eventVenue" placeholder="Enter event venue" autocomplete="off">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label for="title">EVENT FEE (₵)</label>
+                    <input type="number" class="form-control" id="eventFee" name="eventFee" placeholder="Enter event fee" autocomplete="off" >
+                </div>
+              </div>
+         </div>
+         <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                    <label for="title">EVENT START DATE</label>
+                    <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" data-toggle="datepicker" placeholder="Click to select start date" autocomplete="off" readonly>
+                </div>
+              </div>
+               <div class="col-md-3">
+                <div class="form-group">
+                    <label for="title">EVENT END DATE</label>
+                    <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" data-toggle="datepicker" placeholder="Click to select end date" autocomplete="off" readonly>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <label for="title">START TIME</label>
+                    <select class="form-control" id="startTime" name="startTime" >
+                      <option  disabled selected>Select Time</option>
+                      <?php echo get_times(); ?>
+                    </select>
+                    
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <label for="title">END TIME</label>
+                    <select class="form-control" id="endTime" name="endTime" >
+                      <option  disabled selected>Select Time</option>
+                      <?php echo get_times(); ?>
+                    </select>
+                    
+                </div>
+              </div>
+         </div>
 
-               <!-- for inserting the page id -->
-                <input type="hidden" name="data_id" id="data_id" value="">
-               <!-- for insert query -->
-                <input type="hidden" name="mode" id="mode" value="insert">
+       <hr>
 
-                <input type="button" name="previous" class="previous btn-info btn-block" value="EVENT SETUP" /><br>
-                <input type="submit" id="save_btn" class="btn btn-success btn-block" name="submit" value="ADD NEW EVENT" />
+            <!-- FOR CLICK TO ADD NEW INPUT FORM FOR CLICK TO ADD HOTEL NAME AND PRICES -->
+            <div class="table-responsive">  
+                 <table class="table" id="dynamic_field">  
+                      <tr>  
+                         <td><button type="button" name="add" id="add" class="btn btn-danger">Add New Hotel</button></td>
+                           <td><input type="text" name="hotelNames[]" placeholder="Enter name of hotel" class="form-control hotelNames" /></td>
+                           <td><input type="number" name="hotelPrices[]" placeholder="Enter price" class="form-control hotelPrices" /></td>  
+                      </tr>  
+                 </table>  
+            </div>  
 
-            </fieldset>        
-        </form>
-         <!-- Circles which indicates the steps of the form: -->
-          <div style="text-align:center;margin-top:40px;">
-            <span class="step active"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
+             <!-- for inserting the page id -->
+              <input type="hidden" name="data_id" id="data_id" value="">
+             <!-- for insert query -->
+              <input type="hidden" name="mode" id="mode" value="insert">
+
+           <div class="well modal-footer" id="bg">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+              <button type="submit" class="btn btn-info" id="save_btn">Add Event <i class="fa fa-save"></i></button>
           </div>
+      
+        </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -286,7 +327,8 @@
             <input type="hidden" name="mode" id="meetingMode" value="meeting_insert">
           </div>
           <div class="well modal-footer" id="bg">
-              <button type="submit" id="meetingBtn" class="btn btn-info btn-block"> SAVE <i class="fa fa-save"></i></button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+            <button type="submit" class="btn btn-info" id="meetingBtn">Add Meeting <i class="fa fa-save"></i></button>
           </div>
       </form>
     </div><!-- /.modal-content -->
@@ -299,14 +341,13 @@
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">REGISTERED PARTICIPANTS </b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">REGISTERED PARTICIPANTS </b></h4>
       </div>
       <div class="modal-body" >
           <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                          <th></th>
                             <th>MEMBERS</th>
                             <th>AMOUNT (₵)</th>
                             <th>TICKET NUMBER</th>
@@ -320,7 +361,7 @@
             </div>
       </div>
       <div class="well modal-footer" id="bg">
-          <input type="button" id="participants_downloadBtn" class="btn btn-success btn-block" name="submit" value="DOWNLOAD PARTICIPANTS EXCEL" />
+          <button type="submit" class="btn btn-info" id="participants_downloadBtn">DOWNLOAD PARTICIPANTS EXCEL <i class="fa fa-download"></i></button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -348,13 +389,18 @@
           })
 
         // for search
-        $("#searchInput").on("keyup", function() {
+        $("#eventsearchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#resultsDisplay tr").filter(function() {
+            $("#eventResultsDisplay tr").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
-
+        $("#meetingsearchInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#meetingresultsDisplay tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
 
 
         //for events inserting 
@@ -407,7 +453,7 @@
                 });  
             });
         // for update
-        $(document).on('click', '.update_data', function(){
+        $(document).on('click', '.event_data', function(){
            var mode= "updateModal"; 
            var data_id = $(this).attr("id");  
            $.ajax({  
@@ -434,7 +480,7 @@
                       $('#dynamic_field').prepend('<tr><td></td><td><input type="text" name="hotelNames[]" value="'+jsonObjHotelName[i]+'" class="form-control hotelNames" /></td><td><input type="number" name="hotelPrices[]" value="'+jsonObjHotelPrice[i]+'" class="form-control hotelPrices" /></td></tr>');
                     }
 
-                    $("#save_btn").val("UPDATE PAGE");
+                    $("#save_btn").val("Update Event Details");
                     $("#mode").val("update");
                     $("#eventModal").modal("show");
                 }  
@@ -494,7 +540,7 @@
                             success:function(data){
                               // alert(data);
                               if (data == "empty") {
-                                    $("#participantsBody").html('<tr><td></td><td><b>Sorry, No registered participants for this event</b></td></tr>');
+                                    $("#participantsBody").html('<tr><td><b>Sorry, No registered participants for this event</b></td></tr>');
                                     $("#participants_downloadBtn").hide();
                                     $("#viewParticipantsModal").modal("show");
                               }else{

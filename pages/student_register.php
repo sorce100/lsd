@@ -1,27 +1,27 @@
 <?php 
-include("header.php");
+// include("header.php");
 require_once("Classes/studentRegister.php");
 $objstudentRegister = new studentRegister;
 require_once("Classes/ExamCenterSetup.php");
-
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">STUDENT REGISTRATION PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-             <!-- click to register for semester -->
-             <div class="col-md-11">
-              <br>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">APPLICANT REGISTRATION PAGE </div>
+            <div class="panel-title pull-right">
               <?php if ($objstudentRegister->check_member_register()): ?>
                 <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger pull-right">Register Exam <i class="fa fa-pencil"></i></button>
               <?php endif ?>
-               
-             </div>
             </div>
-            
-            <div class="table-responsive"><br>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -50,14 +50,17 @@ require_once("Classes/ExamCenterSetup.php");
                          ?>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
+<!--  -->
 <!-- /.row -->
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
@@ -73,19 +76,23 @@ require_once("Classes/ExamCenterSetup.php");
                 $centerSubjects  = json_decode($center["exam_subjects"]);
                ?> 
               <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-3">
                     <div class="form-group">
                         <label for="title">Exam Center</label>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
                         <input type="text" class="form-control" id="examCenterName" name="examCenterName" readonly value="<?php if(isset($centerName)){echo $centerName;} ?>">
                     </div>
                   </div>
                   <!-- for center id -->
                   <input type="hidden" name="centerId" value="<?php echo $exam_center_id;?>">
-                  <br>
+              </div>
+              <hr>
+              <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                        <label for="title">SELECT EXAMS TO REGISTER</label>
-                        <br>
                           <div class="table-responsive">
                            <table class="table table-hover">
                              <thead>
@@ -112,7 +119,8 @@ require_once("Classes/ExamCenterSetup.php");
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="insert">
             <div class="well modal-footer" id="bg">
-              <button type="submit" id="save_btn" class="btn btn-info btn-block">Register Exams <i class="fa fa-save"></i></button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+              <button type="submit" class="btn btn-info" id="save_btn">Register Exams <i class="fa fa-save"></i></button>
             </div>        
         </form>
       </div>
@@ -146,7 +154,7 @@ require_once("Classes/ExamCenterSetup.php");
                   method:"POST",
                   data:$("#insert_form").serialize(),
                   beforeSend:function(){  
-                            $('#save_btn').val("Please wait ...").attr('disabled',true);  
+                            $('#save_btn').text("Please wait ...").attr('disabled',true);  
                        },
                   success:function(data){  
                     alert("Exams registered successfully!!!");
@@ -185,7 +193,7 @@ require_once("Classes/ExamCenterSetup.php");
                     $("#courseSemester").val(jsonObj[0].course_semester);
                     $("#courseDetails").val(jsonObj[0].course_details);
                     $("#data_id").val(jsonObj[0].course_id);
-                    $("#save_btn").val("UPDATE PAGE");
+                    $("#save_btn").text("Update Register");
                     $("#mode").val("update");
                     $("#myModal").modal("show");
                 }  

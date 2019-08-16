@@ -2,27 +2,28 @@
       require_once("Classes/Groups.php");
       require_once("Classes/Pages.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">GROUPS SETUP PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-                <form action="usersearch.php" method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-              <div class="col-md-2">
-                 <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD GROUP</button>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">GROUPS SETUP PAGE</div>
+            <div class="panel-title pull-right">
+               <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD GROUP</button>
             </div>
-            <div class="table-responsive"><br>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -40,12 +41,11 @@
                                       echo "
                                           <tr>
                                             <td>".$group["group_name"]."</td>
-                                           
                                             <td>
-                                              <input type='button' name='view' value='Update' id='".trim($group["group_id"])."' class='btn btn-info btn-xs update_data' />
+                                              <button type='button' id='".trim($group["group_id"])."' class='btn btn-info btn-xs update_data'>Update <i class='fa fa-edit'></i></button>
                                             </td>
                                             <td>
-                                              <input type='button' name='view' value='Delete' id='".trim($group["group_id"])."' class='btn btn-danger btn-xs del_data' />
+                                              <button type='button' id='".trim($group["group_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
                                             </td>
                                           </tr>
                                         ";
@@ -53,32 +53,36 @@
                               }
                          ?>
                     </tbody>
-                    </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
-</div>
-<!-- /.row -->
+
+
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">ADD NEW GROUP</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">ADD NEW GROUP</b></h4>
       </div>
       <div class="modal-body" id="bg">
-     <form id="insert_form" method="POST"> 
+      <form id="insert_form" method="POST"> 
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="form-group">
                         <label for="title">GROUP NAME</label>
                         <input type="text" class="form-control" id="groupName" name="groupName" placeholder="Enter group name" autocomplete="off" required>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                     <center><b><u>ADD PAGES</u></b></center>
+              </div>
+              <hr>
+              <div class="row">
+                  <div class="col-md-12">
+                     
                      <div class="table-responsive">
                        <table class="table table-hover">
                          <thead>
@@ -110,7 +114,9 @@
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="insert">
             <div class="well modal-footer" id="bg">
-                <input type="submit" id="save_btn" class="btn btn-danger btn-block" name="submit" value="ADD GROUP" />
+                <!-- <input type="submit" id="save_btn" class="btn btn-danger btn-block" name="submit" value="ADD GROUP" /> -->
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                <button type="submit" class="btn btn-info" id="save_btn">Add Group <i class="fa fa-save"></i></button>
             </div>        
         </form>
       </div>
@@ -145,7 +151,7 @@
                 method:"POST",
                 data:$("#insert_form").serialize(),
                 beforeSend:function(){  
-                          $('#save_btn').val("Please wait ...");  
+                          $('#save_btn').text("Please wait ...");  
                      },
                 success:function(data){
                     $('.table').dataTable({ordering: false,});  
@@ -198,7 +204,7 @@
                         $("#subject").html("UPDATE GROUP DETAILS");
                         $("#data_id").val(jsonObj[0].group_id);
                         $("#groupName").val(jsonObj[0].group_name);
-                        $("#save_btn").val("UPDATE PAGE");
+                        $("#save_btn").text("update Group");
                         $("#mode").val("update");
                         $("#myModal").modal("show");
                   }  

@@ -1,87 +1,100 @@
 <?php include("header.php");
       require_once("Classes/Contribution.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">CONTRIBUTIONS SETUP PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-                <form action="usersearch.php" method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-              <div class="col-md-2">
-                 <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW</button>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">CONTRIBUTIONS SETUP PAGE</div>
+            <div class="panel-title pull-right">
+               <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW</button>
             </div>
-            
-            <div class="table-responsive"><br>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>CONTRIBUTION NAME</th>
-                            <th>DUE DATE</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultsDisplay">
-                        <?php
-                          $objContribution = new Contribution;
-                          $contributions = $objContribution->get_contributions(); 
-                          foreach ($contributions as $contribution) {
-                                  echo "
-                                      <tr>
-                                        <td>".$contribution["contribution_name"]."</td>
-                                        <td>".$contribution["due_date"]."</td>
-                                        <td>
-                                          <input type='button' name='view' value='Update' id='".trim($contribution["contribution_id"])."' class='btn btn-info btn-xs update_data' />
-                                        </td>
-                                        <td>
-                                          <input type='button' name='view' value='Delete' id='".trim($contribution["contribution_id"])."' class='btn btn-danger btn-xs del_data' />
-                                        </td>
-                                        <td>
-                                          <input type='button' name='view' value='View Contributions' id='".trim($contribution["contribution_id"])."' class='btn btn-success btn-xs view_contributions' />
-                                        </td>
-                                      </tr>
-                                    ";
-                              }
-                         ?>
-                    </tbody>
-                </table>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
             </div>
+            <!-- content -->
+            <div class="col-md-12">
+                <div class="table-responsive"><br>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>CONTRIBUTION NAME</th>
+                                <th>DUE DATE</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsDisplay">
+                            <?php
+                              $objContribution = new Contribution;
+                              $contributions = $objContribution->get_contributions(); 
+                              foreach ($contributions as $contribution) {
+                                      echo "
+                                          <tr>
+                                            <td>".$contribution["contribution_name"]."</td>
+                                            <td>".$contribution["due_date"]."</td>
+                                            <td>
+                                              <button type='button' id='".trim($contribution["contribution_id"])."' class='btn btn-info btn-xs update_data'>Update <i class='fa fa-edit'></i></button>
+                                            </td>
+                                            <td>
+                                              <button type='button' id='".trim($contribution["contribution_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
+                                            </td>
+                                            <td>
+
+                                              <button type='button' id='".trim($contribution["contribution_id"])."' class='btn btn-success btn-xs view_contributions'>View Contributions <i class='fa fa-history'></i></button>
+                                            </td>
+                                          </tr>
+                                        ";
+                                  }
+                             ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end of content -->
         </div>
     </div>
-</div>
+
 <!-- /.row -->
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close" onclick="myFunction()"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">ADD NEW CONTRIBUTION</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">ADD NEW CONTRIBUTION</b></h4>
       </div>
       <div class="modal-body" id="bg">
-     <form id="insert_form" method="POST"> 
+      <form id="insert_form" method="POST"> 
               <div class="row">
-                  <div class="col-md-6">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label for="title">CONTRIBUTION NAME</label>
+                        <label for="title">Purpose<span class="asterick"> *</span></label>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
                         <input type="text" class="form-control" id="contributionName" name="contributionName" placeholder="Enter contribution name" autocomplete="off" required>
                     </div>
                   </div>
-                  <div class="col-md-6">
+              </div>
+              <div class="row">
+                  <div class="col-md-3">
                     <div class="form-group">
-                        <label for="title">DUE DATE</label>
+                        <label for="title">Due Date<span class="asterick"> *</span></label>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
                         <input type="text" class="form-control" id="contributionDue" name="contributionDue" data-toggle="datepicker" required autocomplete="off" readonly>
                     </div>
                   </div>
@@ -91,7 +104,8 @@
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="insert">
             <div class="well modal-footer" id="bg">
-                <input type="submit" id="save_btn" class="btn btn-danger btn-block" name="submit" value="ADD CONTRIBUTION" />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                <button type="submit" class="btn btn-info" id="save_btn">Add Contribution <i class="fa fa-save"></i></button>
             </div>        
         </form>
       </div>
@@ -106,7 +120,7 @@
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">MEMBER CONTRIBUTIONS</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">MEMBER CONTRIBUTIONS</b></h4>
       </div>
       <div class="modal-body" >
         <div class="well">
@@ -128,10 +142,9 @@
                 </table>
             </div>
       </div>
-      <!-- <div class="well modal-footer" id="bg">
-
-          <input type="#" id="participants_downloadBtn" class="btn btn-success btn-block" name="submit" value="DOWNLOAD PARTICIPANTS EXCEL" />
-      </div> -->
+      <div class="well modal-footer" id="bg">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+      </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -174,7 +187,7 @@
                 method:"POST",
                 data:$("#insert_form").serialize(),
                 beforeSend:function(){  
-                          $('#save_btn').val("Please wait ...");  
+                          $('#save_btn').text("Please wait ...");  
                      },
                 success:function(data){  
                      $("#myModal").modal("hide");
@@ -207,7 +220,7 @@
                     $("#contributionName").val(jsonObj[0].contribution_name);
                     $("#contributionDue").val(jsonObj[0].due_date);
                     $("#data_id").val(jsonObj[0].contribution_id);
-                    $("#save_btn").val("UPDATE PAGE");
+                    $("#save_btn").text("Update Contribution");
                     $("#mode").val("update");
                     $("#myModal").modal("show");
                 }  

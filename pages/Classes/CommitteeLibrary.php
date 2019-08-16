@@ -3,6 +3,7 @@
 		// setting and getting variables
 		private $id;
 		private $commLibrarySubject;
+		private $commLibraryTask;
 		private $commLibraryFolderName;
 		private $commLibraryFiles;
 		private $commId;
@@ -12,6 +13,7 @@
 
 		function set_id($id) { $this->id = $id; }
 		function set_commLibrarySubject($commLibrarySubject) { $this->commLibrarySubject = $commLibrarySubject; }
+		function set_commLibraryTask($commLibraryTask) { $this->commLibraryTask = $commLibraryTask; }
 		function set_commLibraryFolderName($commLibraryFolderName) { $this->commLibraryFolderName = $commLibraryFolderName; }
 		function set_commLibraryFiles($commLibraryFiles) { $this->commLibraryFiles = $commLibraryFiles; }
 		function set_commId($commId) { $this->commId = $commId; }
@@ -33,9 +35,10 @@
 
 		// insert pages
 			function insert(){
-				$sql = "INSERT INTO $this->table (committee_library_subject,committee_library_folderName,committee_library_files,committee_id,user_id,division) VALUES (:commLibrarySubject,:commLibraryFolderName,:commLibraryFiles,:commId,:userid,:division)";
+				$sql = "INSERT INTO $this->table (committee_library_subject,committee_library_task,committee_library_folderName,committee_library_files,committee_id,user_id,division) VALUES (:commLibrarySubject,:commLibraryTask,:commLibraryFolderName,:commLibraryFiles,:commId,:userid,:division)";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":commLibrarySubject",$this->commLibrarySubject);
+				$stmt->bindParam(":commLibraryTask",$this->commLibraryTask);
 				$stmt->bindParam(":commLibraryFolderName",$this->commLibraryFolderName);
 				$stmt->bindParam(":commLibraryFiles",$this->commLibraryFiles);
 				$stmt->bindParam(":commId",$this->commId);

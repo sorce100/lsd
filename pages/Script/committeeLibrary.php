@@ -64,6 +64,7 @@
 									if ($fileup) {
 										$objCommitteeLibrary = new CommitteeLibrary;
 										$objCommitteeLibrary->set_commLibrarySubject($objCommitteeLibrary->CleanData($_POST["commLibrarySubject"]));
+										$objCommitteeLibrary->set_commLibraryTask($objCommitteeLibrary->CleanData($_POST["commLibraryTask"]));
 										$objCommitteeLibrary->set_commLibraryFolderName($objCommitteeLibrary->CleanData($_POST["comm_folderName"]));
 										$objCommitteeLibrary->set_commLibraryFiles(json_encode($filesUploaded));
 										$objCommitteeLibrary->set_commId($objCommitteeLibrary->CleanData($_POST["data_id"]));

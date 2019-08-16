@@ -2,79 +2,78 @@
       require_once("Classes/UserBalance.php");
       require_once("Classes/WalletHistory.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">BALANCE AND WALLET HISTORY</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-                <!-- jumbotron for displaying wallet balance and uploading balance -->
-                <div class="col-lg-12 col-md-12 col-sm-12" >
-                    <div class="jumbotron">
-                         <?php 
-                            $objUserBalance = new UserBalance;
-                            $getBalance = $objUserBalance->get_balance();
-                            echo "<h2><b>CURRENT BALANCE:</b><span> ₵".trim($getBalance["current_balance"])."</span></h2>";
-                          ?>
-                    </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">BALANCE AND WALLET HISTORY</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- content -->
+            <div class="col-md-12">
+                <div class="jumbotron">
+                     <?php 
+                        $objUserBalance = new UserBalance;
+                        $getBalance = $objUserBalance->get_balance();
+                        echo "<h2><b>CURRENT BALANCE:</b><span> ₵".trim($getBalance["current_balance"])."</span></h2>";
+                      ?>
                 </div>
-                <!-- <div class="col-lg-6 col-md-6 col-sm-6" >
-                     <center><h3><b><u>LOAD WALLET</u></b></h3></center>
-                      <a href="#" class="btn btn-info btn-block">CLICK TO LOAD WALLET</a>
-                </div> -->
-            </div><hr>
-            <div class="row">
-              <!-- for search -->
+            </div>
+            <!-- search -->
               <div class="col-md-12">
-                <form action="usersearch.php" method="POST">
+                <form >
                   <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
                     <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
                   </div>
                  </form>
               </div>
-            </div>
+            <!-- part 2 -->
+            <div class="col-md-12">
+                <div class="table-responsive"><br>
+                    <table class="table table-hover tableList">
+                        <thead>
+                            <tr>
+                           
+                                <th>TYPE</th>
+                                <th>PURPOSE</th>
+                                <th>REASON</th>
+                                <th>AMOUNT (₵)</th>
+                                <th>BALANCE (₵)</th>
+                                <th>DATE</th>
             
-            <div class="table-responsive"><br>
-                <table class="table table-hover tableList">
-                    <thead>
-                        <tr>
-                       
-                            <th>TYPE</th>
-                            <th>PURPOSE</th>
-                            <th>REASON</th>
-                            <th>AMOUNT (₵)</th>
-                            <th>BALANCE (₵)</th>
-                            <th>DATE</th>
-        
-                        </tr>
-                    </thead>
-                    <tbody id="resultsDisplay">
-                      <?php
-                          $objWalletHistory = new WalletHistory;
-                          $historys = $objWalletHistory->get_member_walletHistory($_SESSION['member_id']); 
-                          foreach ($historys as $history) {
-                                  echo "
-                                      <tr >
-                                        <td>".$history["type"]."</td>
-                                        <td>".$history["purpose"]."</td>
-                                        <td>".$history["reason"]."</td>
-                                        <td>".$history["amount_payed"]."</td>
-                                        <td>".$history["balance"]."</td>
-                                        <td>".$history["date_done"]."</td>
-                                        
-                                      </tr>
-                                    ";
-                              }
-                         ?>
-                    </tbody>
-                    </tbody>
-                </table>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsDisplay">
+                          <?php
+                              $objWalletHistory = new WalletHistory;
+                              $historys = $objWalletHistory->get_member_walletHistory($_SESSION['member_id']); 
+                              foreach ($historys as $history) {
+                                      echo "
+                                          <tr >
+                                            <td>".$history["type"]."</td>
+                                            <td>".$history["purpose"]."</td>
+                                            <td>".$history["reason"]."</td>
+                                            <td>".$history["amount_payed"]."</td>
+                                            <td>".$history["balance"]."</td>
+                                            <td>".$history["date_done"]."</td>
+                                            
+                                          </tr>
+                                        ";
+                                  }
+                             ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
-<!-- /.row -->
+<!--  -->
+
 
 <?php include("footer.php");?>
 

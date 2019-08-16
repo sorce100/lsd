@@ -9,6 +9,134 @@ require_once("Classes/Division.php");
 require_once("Classes/NewApplication.php");
 require_once("Classes/Members.php");
 ?>
+<br>
+<div class="row">
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">NEW MEMBER REGISTRATION</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+              <!-- content -->
+              <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                <li style="background-color: #f4f4f3;border-right: 1px solid black;">
+                  <a href="#sectionA">
+                    <h4 class="list-group-item-heading"><b>SECTION A</b></h4><br>
+                    <p class="list-group-item-text">Start application processing</p>
+                  </a>
+                </li>
+                <li style="background-color: #f4f4f3;border-right: 1px solid black;">
+                  <a href="#sectionB">
+                    <h4 class="list-group-item-heading"><b>SECTION B</b></h4><br>
+                    <p class="list-group-item-text">College Principal Declaration</p>
+                  </a>
+                </li>
+                <li style="background-color: #f4f4f4;border-right: 1px solid black;">
+                  <a href="#sectionC">
+                    <h4 class="list-group-item-heading"><b>SECTION C</b></h4><br>
+                    <p class="list-group-item-text">Trainer / Employer Declaration</p>
+                  </a>
+                </li>
+                <li style="background-color: #f4f4f5;border-right: 1px solid black;">
+                  <a href="#sectionD">
+                    <h4 class="list-group-item-heading"><b>SECTION D</b></h4><br>
+                    <p class="list-group-item-text">Proposers Declaration (Fellows Only)</p>
+                  </a>
+                </li>
+                <li style="background-color: #f4f4f6;">
+                  <a href="#sectionE">
+                    <h4 class="list-group-item-heading"><b>SECTION E</b></h4><br>
+                    <p class="list-group-item-text">Submit For Approval</p>
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+
+            <div class="col-xs-12">
+                <div class="col-md-12 well text-center">
+                    <h2><b>SECTION A STATUS</b></h2>
+                    <!-- check if application has started nor not -->
+                    <?php 
+                      $objNewApplication = new NewApplication;
+                      $startStatus = $objNewApplication->check_application_start();
+                      if (empty($startStatus)) {
+                          echo '<button id="startBtn" class="btn btn-danger btn-lg">Start Application</button>';
+                      }
+                      else if(!empty($startStatus)){
+                          echo '<h3>APPLICATION STARTED, PENDING DECLARATIONS <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
+                      }
+                     ?>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-md-12 well">
+                    <h2 class="text-center"><b> SECTION B STATUS </b></h2>
+                    <?php 
+                      $objNewApplication = new NewApplication;
+                      $startStatus = $objNewApplication->check_declarations("col_declare_date");
+                      if (empty($startStatus)) {
+                          echo '<h3 class="text-center">NO DECLARATIONS <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
+                      }
+                      else if(!empty($startStatus)){
+                          echo '<h3 class="text-center">APPROVED, DECLARATION SUCCESSFUL <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
+                      }
+                     ?>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-md-12 well">
+                    <h2 class="text-center"><b> SECTION C STATUS </b></h2>
+                    <?php 
+                      $objNewApplication = new NewApplication;
+                      $startStatus = $objNewApplication->check_declarations("emp_declare_date");
+                      if (empty($startStatus)) {
+                          echo '<h3 class="text-center">NO DECLARATIONS <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
+                      }
+                      else if(!empty($startStatus)){
+                          echo '<h3 class="text-center">APPROVED, DECLARATION SUCCESSFUL <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
+                      }
+                     ?>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-md-12 well">
+                    <h2 class="text-center"><b> SECTION D STATUS </b></h2>
+                    <?php 
+                      $objNewApplication = new NewApplication;
+                      $startStatus = $objNewApplication->check_declarations("member_declare_date");
+                      if (empty($startStatus)) {
+                          echo '<h3 class="text-center">NO DECLARATIONS <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
+                      }
+                      else if(!empty($startStatus)){
+                          echo '<h3 class="text-center">APPROVED, DECLARATION SUCCESSFUL <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
+                      }
+                     ?>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-md-12 well">
+                    <h2 class="text-center"><b> SECTION E STATUS </b></h2>
+                    <?php 
+                      $objNewApplication = new NewApplication;
+                      $completionStatus = $objNewApplication->check_declarations_completion();
+                      if ($completionStatus == "COMPLETE") {
+                          echo '<button id="completeReviewBtn" class="btn btn-danger btn-md" style="margin-left:41%;">SUBMIT FOR APPROVAL</button>';
+                      }
+                      elseif ($completionStatus == "INCOMPLETE") {
+                          echo '<h3 class="text-center">APPLICATION PENDING <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
+                      }
+                     ?>
+                </div>
+
+            <!-- end of content -->
+        </div>
+    </div>
+</div>
+<!--  -->
 
 <!-- Modal to show when page loads up -->
   <div class="modal fade" id="onloadModal" role="dialog">
@@ -20,7 +148,7 @@ require_once("Classes/Members.php");
        </div>
        <div class="modal-body">
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
+            <div class="col-md-12 col-sm-12 col-xs-12 ">
              <ol>
                <li>
                  In the event of having to sit for any of the Examinations/Test of Professional/Technical Competence of the Institution, I desire to present myself in due course for scollegeEmailame.
@@ -39,247 +167,132 @@ require_once("Classes/Members.php");
           </div>
        </div>
        <div class="modal-footer">
-         <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
        </div>
      </div>
    </div>
  </div> 
- <div class="row">
-    <div class="col-md-12">
-        <h3 class="box-title">NEW MEMBER REGISTRATION PAGE</h3>
-        <div class="white-box">
 
-          <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-              <li style="background-color: #f4f4f3;border-right: 1px solid black;">
-                <a href="#sectionA">
-                  <h4 class="list-group-item-heading"><b>SECTION A</b></h4><br>
-                  <p class="list-group-item-text">Start application processing</p>
-                </a>
-              </li>
-              <li style="background-color: #f4f4f3;border-right: 1px solid black;">
-                <a href="#sectionB">
-                  <h4 class="list-group-item-heading"><b>SECTION B</b></h4><br>
-                  <p class="list-group-item-text">College Principal Declaration</p>
-                </a>
-              </li>
-              <li style="background-color: #f4f4f4;border-right: 1px solid black;">
-                <a href="#sectionC">
-                  <h4 class="list-group-item-heading"><b>SECTION C</b></h4><br>
-                  <p class="list-group-item-text">Trainer / Employer Declaration</p>
-                </a>
-              </li>
-              <li style="background-color: #f4f4f5;border-right: 1px solid black;">
-                <a href="#sectionD">
-                  <h4 class="list-group-item-heading"><b>SECTION D</b></h4><br>
-                  <p class="list-group-item-text">Proposers Declaration (Fellows Only)</p>
-                </a>
-              </li>
-              <li style="background-color: #f4f4f6;">
-                <a href="#sectionE">
-                  <h4 class="list-group-item-heading"><b>SECTION E</b></h4><br>
-                  <p class="list-group-item-text">Submit For Approval</p>
-                </a>
-              </li>
-          </ul>
 
-          <div class="row">
-                  <div class="col-xs-12">
-                      <div class="col-md-12 well text-center">
-                          <h2><b>SECTION A STATUS</b></h2>
-                          <!-- check if application has started nor not -->
-                          <?php 
-                            $objNewApplication = new NewApplication;
-                            $startStatus = $objNewApplication->check_application_start();
-                            if (empty($startStatus)) {
-                                echo '<button id="startBtn" class="btn btn-danger btn-lg">Start Application</button>';
-                            }
-                            else if(!empty($startStatus)){
-                                echo '<h3>APPLICATION STARTED, PENDING DECLARATIONS <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
-                            }
-                           ?>
-                      </div>
-                  </div>
-                  <div class="col-xs-12">
-                      <div class="col-md-12 well">
-                          <h2 class="text-center"><b> SECTION B STATUS </b></h2>
-                          <?php 
-                            $objNewApplication = new NewApplication;
-                            $startStatus = $objNewApplication->check_declarations("col_declare_date");
-                            if (empty($startStatus)) {
-                                echo '<h3 class="text-center">NO DECLARATIONS <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
-                            }
-                            else if(!empty($startStatus)){
-                                echo '<h3 class="text-center">APPROVED, DECLARATION SUCCESSFUL <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
-                            }
-                           ?>
-                      </div>
-                  </div>
-                  <div class="col-xs-12">
-                      <div class="col-md-12 well">
-                          <h2 class="text-center"><b> SECTION C STATUS </b></h2>
-                          <?php 
-                            $objNewApplication = new NewApplication;
-                            $startStatus = $objNewApplication->check_declarations("emp_declare_date");
-                            if (empty($startStatus)) {
-                                echo '<h3 class="text-center">NO DECLARATIONS <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
-                            }
-                            else if(!empty($startStatus)){
-                                echo '<h3 class="text-center">APPROVED, DECLARATION SUCCESSFUL <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
-                            }
-                           ?>
-                      </div>
-                  </div>
-                  <div class="col-xs-12">
-                      <div class="col-md-12 well">
-                          <h2 class="text-center"><b> SECTION D STATUS </b></h2>
-                          <?php 
-                            $objNewApplication = new NewApplication;
-                            $startStatus = $objNewApplication->check_declarations("member_declare_date");
-                            if (empty($startStatus)) {
-                                echo '<h3 class="text-center">NO DECLARATIONS <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
-                            }
-                            else if(!empty($startStatus)){
-                                echo '<h3 class="text-center">APPROVED, DECLARATION SUCCESSFUL <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
-                            }
-                           ?>
-                      </div>
-                  </div>
-                  <div class="col-xs-12">
-                      <div class="col-md-12 well">
-                          <h2 class="text-center"><b> SECTION E STATUS </b></h2>
-                          <?php 
-                            $objNewApplication = new NewApplication;
-                            $completionStatus = $objNewApplication->check_declarations_completion();
-                            if ($completionStatus == "COMPLETE") {
-                                echo '<button id="completeReviewBtn" class="btn btn-danger btn-md" style="margin-left:41%;">SUBMIT FOR APPROVAL</button>';
-                            }
-                            elseif ($completionStatus == "INCOMPLETE") {
-                                echo '<h3 class="text-center">APPLICATION PENDING <span class="glyphicon glyphicon-remove" style="color:red;"></span></h3>';
-                            }
-                           ?>
-                      </div>
-                  </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header" id="bg">
+             <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
+            <h4 class="modal-title"><b id="subject">NEW MEMBER REGISTRATION APPLICATION</b></h4>
           </div>
-
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-              <div class="modal-content">
-                <div class="modal-header" id="bg">
-                   <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-                  <h4 class="modal-title"><center><u><b id="subject">NEW MEMBER REGISTRATION APPLICATION</b></u></center></h4>
-                </div>
-                <div class="modal-body" id="bg">
-                  <form id="insert_form"  method="POST" enctype="multipart/form-data">
-                        <fieldset>
-                          <center><h2><u>SECTION A</u></h2></center>
-                          <div class="row">
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label><span style="color: red;">*</span> SELECT DIVISION TO APPLY TO</label>
-                                    <select class="form-control" name="applicationDiv" id="applicationDiv">
-                                      <option></option>
-                                      <!-- grab the divisions fullname -->
-                                      <?php 
-                                          $objDivision = new Division;
-                                          $divisions = $objDivision->get_divisions(); 
-                                          foreach ($divisions as $division) {
-                                                  echo "<option value=".$division["division_id"].">".$division["division_alias"]."</option>";
-                                                }
-                                        ?>
-                                    </select>
-                                </div>
-                              </div>
+          <div class="modal-body" id="bg">
+            <form id="insert_form"  method="POST" enctype="multipart/form-data">
+                  <fieldset>
+                    <center><h2><u>SECTION A</u></h2></center>
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label><span style="color: red;">*</span> SELECT DIVISION TO APPLY TO</label>
+                              <select class="form-control" name="applicationDiv" id="applicationDiv">
+                                <option></option>
+                                <!-- grab the divisions fullname -->
+                                <?php 
+                                    $objDivision = new Division;
+                                    $divisions = $objDivision->get_divisions(); 
+                                    foreach ($divisions as $division) {
+                                            echo "<option value=".$division["division_id"].">".$division["division_alias"]."</option>";
+                                          }
+                                  ?>
+                              </select>
                           </div>
-                          <br>
-                            <!-- buttons -->
-                           <input type="button" class="next btn-info btn-block" value="UPLOAD DOCUMENTS" />
-                        </fieldset>
-
-                          <fieldset>
-                          <center><h2><u>SECTION A</u></h2></center>
-                            <div class="row">
-                              <div class="col-md-12">
-                                <p><span style="color: red;">*</span> Upload Certified True Copies of relevant Certificates. <u><b>Without the said Certified copies, your application will not be considered</b> <span style="color: red;">(PDF and doc only)</span></u></p>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12">
-                                <div class="table-responsive">  
-                                     <table class="table" id="dynamic_field">  
-                                          <tr>  
-                                             <td width="10%"><button type="button" name="add" id="add" class="btn btn-danger">ADD NEW DOCUMENT</button></td>
-                                               <td width="60%"><input type="text" name="certIssuer[]" autocomplete="off" placeholder="Enter name of Cert issuer" class="form-control certIssuer" /></td>
-                                               <td width="30%"><input type="file" name="certFiles[]"  class="form-control certFiles" /></td>  
-                                          </tr>  
-                                     </table>  
-                                </div>
-                              </div>
-                            </div>  
-                            <br>
-                            <!-- buttons -->
-                            <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br>
-                            <input type="button" name="previous" class="next btn-info btn-block" value="NEXT" /><br>
-                          </fieldset>
-
-                          <fieldset>
-                            <center><h2><u>SECTION A (DECLARATIONS REQUESTS)</u></h2></center>
-                            <div class="row">
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                   <label for="trainerEmail"><span style="color: red;">*</span> ENTER COLLEGE EMAIL ADRESS</label>
-                                  <input type="email" class="form-control" id="collegeEmail" placeholder="eg: schoolemail@gmail.com &hellip;" name="collegeEmail" autocomplete="off">
-                                     
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                   <label for="employerEmail"><span style="color: red;">*</span> ENTER EMPLOYER/TRAINER EMAIL ADRESS</label>
-                                  <input type="email" class="form-control" id="employerEmail" placeholder="eg: employeremail@gmail.com &hellip;" name="employerEmail" autocomplete="off">
-                                     
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <label><span style="color: red;">*</span> SELECT PROPOSER (FELLOW)</label>
-                                  <select class="form-control selectFellowSelect2" style="width: 100%;" name="memberDeclare_id" id="memberDeclare_id">
-                                     
-                                    <option></option>
-                                    <?php 
-                                      $objMembers = new Members();
-                                      foreach ($objMembers->get_fghis_members() as $member) {
-                                        // $fullname = trim($member["first_name"])." ".trim($member["other_name"])." ".trim($member["last_name"]);
-                                        echo "<option value=".trim($member["professional_number"]).">".trim($member["first_name"])." ".trim($member["last_name"])."   (".trim($member["professional_number"]).")</option>";
-                                      }
-                                     ?>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <label for="Add_note">ADD NOTE FOR PROPOSER</label>
-                                  <textarea rows="5" class="form-control" name="memberDeclare_note" id="memberDeclare_note" placeholder="Add any note to FELLOW"></textarea>
-                                </div>
-                              </div>
-                            </div>
-                            <input type="hidden" name="mode" value="insertA">
-                            <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br>
-                            <input type="submit" name="submit" id="save_btn" class="submit btn-success btn-block" value="START APPLICATION" />
-                          </fieldset>
-                        </form>
-
-                         <!-- Circles which indicates the steps of the form: -->
-                        <div style="text-align:center;margin-top:40px;">
-                          <span class="step active"></span>
-                          <span class="step"></span>
-                          <span class="step"></span>
-                          <span class="step"></span>
                         </div>
                     </div>
-                  </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-              </div><!-- /.modal -->
-        </div>
+                    <br>
+                      <!-- buttons -->
+                     <input type="button" class="next btn-info btn-block" value="UPLOAD DOCUMENTS" />
+                  </fieldset>
+
+                    <fieldset>
+                    <center><h2><u>SECTION A</u></h2></center>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><span style="color: red;">*</span> Upload Certified True Copies of relevant Certificates. <u><b>Without the said Certified copies, your application will not be considered</b> <span style="color: red;">(PDF and doc only)</span></u></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="table-responsive">  
+                               <table class="table" id="dynamic_field">  
+                                    <tr>  
+                                       <td width="10%"><button type="button" name="add" id="add" class="btn btn-danger">ADD NEW DOCUMENT</button></td>
+                                         <td width="60%"><input type="text" name="certIssuer[]" autocomplete="off" placeholder="Enter name of Cert issuer" class="form-control certIssuer" /></td>
+                                         <td width="30%"><input type="file" name="certFiles[]"  class="form-control certFiles" /></td>  
+                                    </tr>  
+                               </table>  
+                          </div>
+                        </div>
+                      </div>  
+                      <br>
+                      <!-- buttons -->
+                      <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br>
+                      <input type="button" name="previous" class="next btn-info btn-block" value="NEXT" /><br>
+                    </fieldset>
+
+                    <fieldset>
+                      <center><h2><u>SECTION A (DECLARATIONS REQUESTS)</u></h2></center>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                             <label for="trainerEmail"><span style="color: red;">*</span> ENTER COLLEGE EMAIL ADRESS</label>
+                            <input type="email" class="form-control" id="collegeEmail" placeholder="eg: schoolemail@gmail.com &hellip;" name="collegeEmail" autocomplete="off">
+                               
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                             <label for="employerEmail"><span style="color: red;">*</span> ENTER EMPLOYER/TRAINER EMAIL ADRESS</label>
+                            <input type="email" class="form-control" id="employerEmail" placeholder="eg: employeremail@gmail.com &hellip;" name="employerEmail" autocomplete="off">
+                               
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label><span style="color: red;">*</span> SELECT PROPOSER (FELLOW)</label>
+                            <select class="form-control selectFellowSelect2" style="width: 100%;" name="memberDeclare_id" id="memberDeclare_id">
+                               
+                              <option></option>
+                              <?php 
+                                $objMembers = new Members();
+                                foreach ($objMembers->get_fghis_members() as $member) {
+                                  // $fullname = trim($member["first_name"])." ".trim($member["other_name"])." ".trim($member["last_name"]);
+                                  echo "<option value=".trim($member["professional_number"]).">".trim($member["first_name"])." ".trim($member["last_name"])."   (".trim($member["professional_number"]).")</option>";
+                                }
+                               ?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="Add_note">ADD NOTE FOR PROPOSER</label>
+                            <textarea rows="5" class="form-control" name="memberDeclare_note" id="memberDeclare_note" placeholder="Add any note to FELLOW"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <input type="hidden" name="mode" value="insertA">
+                      <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br>
+                      <input type="submit" name="submit" id="save_btn" class="submit btn-success btn-block" value="START APPLICATION" />
+                    </fieldset>
+                  </form>
+
+                   <!-- Circles which indicates the steps of the form: -->
+                  <div style="text-align:center;margin-top:40px;">
+                    <span class="step active"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                  </div>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
+  </div>
 </div>
 
 <!-- /.row -->
@@ -296,7 +309,7 @@ require_once("Classes/Members.php");
                 <div class="col-md-12">
                   <div class="table-responsive">
                     <table class="table table-hover">
-                      <tbody>
+                      
                         <tr>
                           <td width="30%"><b>APPLICANT START DATE</b></td>
                           <td width="30%" id="startDate"></td>
@@ -313,7 +326,6 @@ require_once("Classes/Members.php");
                           <td><b>PROPOSER DECLARATION DATE</b></td>
                           <td id="proposerDeclareDate"></td>
                         </tr>
-                      </tbody>
                     </table>
                   </div>
                 </div>
@@ -334,7 +346,8 @@ require_once("Classes/Members.php");
 <?php include("footer.php");?>
  <script>  
       $(document).ready(function(){
-        
+        // $('.table').DataTable().destroy();
+
         $('#onloadModal').modal('show');
         
         $('#startBtn').click(function(){

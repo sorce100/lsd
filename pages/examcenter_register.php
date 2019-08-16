@@ -3,69 +3,69 @@
   require_once("Classes/StudentRegister.php");
   $displayArray="";
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">REGISTERED STUDENTS PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-12">
-                <form method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">REGISTERED APPLICANTS PAGE </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
             </div>
-            
-            <div class="table-responsive"><br>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Exam Center</th>
-                            <th>Student</th>
-                            <th>Exam Score</th>
-                            <th>Lat Updated</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultsDisplay">
-                      <?php
-                          $objStudentRegister = new StudentRegister;
-                          $students = $objStudentRegister->get_all(); 
-                          foreach ($students as $student) {
-                                  echo "
-                                      <tr >
-                                        <td>".$student["exam_center_id"]."</td>
-                                        <td>".$student["student_id"]."</td>";
-                                        $jsonDecodeScore = json_decode($student["exam_score"]);
-                                        $jsonDecodeName = json_decode($student["exam_score_name"]);
-                                        if (!empty($jsonDecodeName)) {
-                                          for ($i=0; $i < sizeof($jsonDecodeName); $i++) { 
-                                            $displayArray .="<b>".$jsonDecodeName[$i] ." => ". $jsonDecodeScore[$i]." % </b><br>";
-                                          }
-                                        }
-                                        echo "<td>".$displayArray."</td>
-                                        <td>".$student["date_done"]."</td>
-                                        <td>
-                                          <button type='button' id='".trim($student["exam_name"]).'|'.trim($student["exam_register_id"])."' class='btn btn-info btn-xs input_score' alt='".trim($student["exam_name"])."'>Input Results <i class='fa fa-pencil'></i> </button> 
-                                        </td>
-                                      </tr>
-                                    ";
-                              }
-                         ?>
-                    </tbody> 
-                </table>
-            </div> 
+            <!-- content -->
+            <div class="col-md-12">
+                <div class="table-responsive"><br>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Exam Center</th>
+                                <th>Student</th>
+                                <th>Exam Score</th>
+                                <th>Lat Updated</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsDisplay">
+                          <?php
+                              $objStudentRegister = new StudentRegister;
+                              $students = $objStudentRegister->get_all(); 
+                              foreach ($students as $student) {
+                                      echo "
+                                          <tr >
+                                            <td>".$student["exam_center_id"]."</td>
+                                            <td>".$student["student_id"]."</td>";
+                                            $jsonDecodeScore = json_decode($student["exam_score"]);
+                                            $jsonDecodeName = json_decode($student["exam_score_name"]);
+                                            if (!empty($jsonDecodeName)) {
+                                              for ($i=0; $i < sizeof($jsonDecodeName); $i++) { 
+                                                $displayArray .="<b>".$jsonDecodeName[$i] ." => ". $jsonDecodeScore[$i]." % </b><br>";
+                                              }
+                                            }
+                                            echo "<td>".$displayArray."</td>
+                                            <td>".$student["date_done"]."</td>
+                                            <td>
+                                              <button type='button' id='".trim($student["exam_name"]).'|'.trim($student["exam_register_id"])."' class='btn btn-info btn-xs input_score' alt='".trim($student["exam_name"])."'>Input Results <i class='fa fa-pencil'></i> </button> 
+                                            </td>
+                                          </tr>
+                                        ";
+                                  }
+                             ?>
+                        </tbody> 
+                    </table>
+                </div> 
+            </div>
+            <!-- end of content -->
         </div>
     </div>
-</div>
-<!-- /.row -->
-<!-- /.row -->
+
+
 <!-- registed_students -->
  <div class="modal fade" id="examNamesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">

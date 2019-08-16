@@ -3,24 +3,25 @@
       require_once("Classes/NewApplication.php");
       require_once("Classes/EmailSend.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">NEW APPLICANTS DECLARATION</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-12">
-                <form >
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">NEW APPLICANTS DECLARATION </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
             </div>
-            
-            <div class="table-responsive"><br>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -47,17 +48,21 @@
                         </tr>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
+<!--  -->
+
 <!-- /.row -->
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">NEW MEMBER APPLICATION DETAILS</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">NEW MEMBER APPLICATION DETAILS</b></h4>
       </div>
       <div class="modal-body" id="bg">
         <form id="insert_form"> 

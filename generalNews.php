@@ -2,58 +2,56 @@
       require_once("pages/Classes/News.php");
       require_once("header.php");
 ?>
-<style>
-  @media (min-width: 768px) {
-  .modal-xl {
-    width: 95%;
-   max-width:1200px;
-  }
-}
-#viewModal {
-        position: absolute;
-        top: 10%;
-        left: 15%
-      }
-</style>
+<br>
 <div class="row">
-    <div class="col-md-12">
-            <!-- button for search and add new members button -->
-           <div class="row">
-              <div class="col-md-8 ">
-                 <h3 class="page-header">NEWS AND ADVERTISEMENT PAGE</h3>
-                <div class="white-box">
-                  <?php 
-                    $objNews = new News;
-                    $allNews = $objNews->get_news_limit();
+  <div class="col-md-7">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title pull-left">GENERAL NEWS</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- content -->
+            <?php 
+              $objNews = new News;
+              $allNews = $objNews->get_news_limit();
 
-                    foreach ($allNews as $news) {
-                          $newsId=trim($news['news_id']);
-                          $newsTitle=trim($news['news_title']);
-                          $newsCategory=trim($news['news_category']);
-                          $dateDone=trim($news['date_done']);
-                          echo '<div class="row well">
-                                <div class="col-md-2"><img src="plugins/images/news-icon.jpg" height="90" width="120" class="img img-circle"></div>';
-                            
+              foreach ($allNews as $news) {
+                    $newsId=trim($news['news_id']);
+                    $newsTitle=trim($news['news_title']);
+                    $newsCategory=trim($news['news_category']);
+                    $dateDone=trim($news['date_done']);
+                    echo '<div class="row well">
+                          <div class="col-md-2"><img src="plugins/images/news-icon.jpg" height="90" width="120" class="img img-circle"></div>';
+                      
 
-                         echo ' <div class="col-md-10"> <h3><b>'. $newsTitle .'</b></h3>
-                                <span>'.$dateDone.'</span><br/>
-                                <span class="label label-primary newscategory pull-right">'.$newsCategory.'</span><br/>
+                   echo ' <div class="col-md-10"> <h3><b>'. $newsTitle .'</b></h3>
+                          <span>'.$dateDone.'</span><br/>
+                          <span class="label label-danger newscategory pull-right">'.$newsCategory.'</span><br/>
 
-                          <div><button id="'.$newsId.'" class="btn btn-info btn-sm news_view">Read More >>></button></div><br />
-                           </div></div><br />';
-                      }
-                   ?>
-                  </div>
-              </div>
-              <div class="col-md-1"></div>
-              <div class="col-md-3">
-               <div class="white-box">
-                  <h3 class="page-header">ADVERTISEMENT</h3>
-               </div>
-            </div>
+                    <div><button id="'.$newsId.'" class="btn btn-info btn-sm news_view">Read More </button></div><br />
+                     </div></div><br />';
+                }
+             ?>
+            <!-- end of content -->
+        </div>
+      </div>
+  </div>
+  <div class="col-md-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">ADVERTISEMENT</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- content -->
+
+            <!-- end of content -->
         </div>
     </div>
+  </div>
 </div>
+
 <!-- /.row -->
 <!-- displaying news items -->
  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -81,7 +79,7 @@
        <div id="news_content"></div>
       </div>
        <div class="well modal-footer" id="bg">
-        <button data-dismiss="modal"  aria-label="Close"  class="btn btn-danger btn-block">CLOSE NEWS DETAILS</button>
+        <button data-dismiss="modal"  aria-label="Close"  class="btn btn-danger btn-block">CLOSE </button>
         </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -64,15 +64,10 @@
 									$results = $objUsers->CleanData($_POST["memberId"]);
 									$username_accId = explode('|', $results);
 									
-									if (isset($_POST["passwordReset"])) {
-										$objUsers->set_passwordReset($objUsers->CleanData($_POST["passwordReset"]));
-									}
-									else{
-										$objUsers->set_passwordReset($objUsers->CleanData("NO"));
-									}
 									$this->userpassword = $objUsers->CleanData($_POST["userPassword"]);
 									$objUsers->set_userPassword($objUsers->CleanData(password_hash($this->userpassword, PASSWORD_DEFAULT)));
-									$objUsers->set_status($objUsers->CleanData($_POST["status"]));
+									$objUsers->set_passwordReset($objUsers->CleanData($_POST["accPasswdReset_log"]));
+									$objUsers->set_status($objUsers->CleanData($_POST["accStatus_log"]));
 									$objUsers->set_division($objUsers->CleanData($_SESSION['division']));
 									$objUsers->set_accountType($objUsers->CleanData($_POST["accountType"]));
 									$objUsers->set_memberId($objUsers->CleanData($username_accId[0]));
@@ -99,13 +94,6 @@
 									$objUsers = new Users();
 									$objUsers->set_id($objUsers->CleanData($_POST["data_id"]));
 
-									if (isset($_POST["passwordReset"])) {
-										$objUsers->set_passwordReset($objUsers->CleanData($_POST["passwordReset"]));
-									}
-									else{
-										$objUsers->set_passwordReset("NO");
-									}
-
 									if (!empty($_POST["userPassword"])) {
 										$this->userpassword = $objUsers->CleanData($_POST["userPassword"]);
 										$objUsers->set_userPassword($objUsers->CleanData(password_hash($this->userpassword, PASSWORD_DEFAULT)));
@@ -114,7 +102,8 @@
 										$objUsers->set_userPassword($objUsers->get_password());
 									}
 									
-									$objUsers->set_status($objUsers->CleanData($_POST["status"]));;
+									$objUsers->set_status($objUsers->CleanData($_POST["accStatus_log"]));
+									$objUsers->set_passwordReset($objUsers->CleanData($_POST["accPasswdReset_log"]));
 									$objUsers->set_groupId($objUsers->CleanData($_POST["groupId"]));
 									if ($objUsers->update()) {
 											echo "success";

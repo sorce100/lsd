@@ -16,12 +16,19 @@ include("header.php");
         $StudentHouseLoc = trim($studentData["student_house_location"]);
       }
 ?>
- <div class="row">
-    <div class="col-md-12">
-        <h3 class="box-title">STUDENT PROFILE PAGE</h3>
-        <div class="white-box">
-                <form id="insert_form" action="scripts/admin_members_save.php"  method="POST">
-                        <center><h2><u>Student Personal Details</u></h2></center>
+<br>
+<div class="row">
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">APPLICANT PROFILE PAGE </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- content -->
+            <div class="col-md-12">
+              <form id="insert_form" action="scripts/admin_members_save.php"  method="POST">
+                        <center><h2><u>Applicant Personal Details</u></h2></center>
                           <div class="row">
                             <!-- student title -->
                             <div class="col-md-2">
@@ -104,11 +111,15 @@ include("header.php");
                           </div><br>
                               <input type="hidden" name="mode" id="mode" value="profileUpdate">
                             <!-- buttons -->
-                             <input type="submit" name="submit" id="save_btn" class="submit btn-success btn-block" value="UPDATE RECORDS" />
+                             <button type="submit" class="btn btn-block btn-info" id="save_btn">UPDATE RECORDS <i class="fa fa-save"></i></button>
                       </form>
+            </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
+<!--  -->
+
     <!-- /.row -->
 <?php include("footer.php");?>
  <script>  
@@ -132,7 +143,7 @@ include("header.php");
                 method:"POST",
                 data:$("#insert_form").serialize(),
                 beforeSend:function(){  
-                  $('#save_btn').val("Updating records ...");  
+                  $('#save_btn').text("Updating records ...");  
                 },
                 success:function(data){  
                   // alert(data);

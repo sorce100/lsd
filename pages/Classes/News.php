@@ -44,9 +44,9 @@
 			}
 
 		// news images path
-			public function newImagePath(){
-				return "../../uploads/news/";
-			}
+		public function newImagePath(){
+			return "../../uploads/news/";
+		}
 
 		// members count
 		function news_count(){
@@ -66,14 +66,15 @@
 			
 		// saving members details into database
 		function insert(){
-			$sql="INSERT INTO $this->table (news_title,news_category,news_content,folder_name,file_name,made_by) VALUES (:news_title,:news_category,:news_content,:folderName,:fileName,:made_by)";
+			$sql="INSERT INTO $this->table (news_title,news_category,news_content,folder_name,file_name,made_by,division) VALUES (:newsTitle,:newscategory,:newsContent,:folderName,:fileName,:made_by,:division)";
 			$stmt = $this->dbConn->prepare($sql);
-			$stmt->bindParam(":news_title",$this->newsTitle);
-			$stmt->bindParam(":news_category",$this->newscategory);
-			$stmt->bindParam(":news_content",$this->newsContent);
+			$stmt->bindParam(":newsTitle",$this->newsTitle);
+			$stmt->bindParam(":newscategory",$this->newscategory);
+			$stmt->bindParam(":newsContent",$this->newsContent);
 			$stmt->bindParam(":folderName",$this->folderName);
 			$stmt->bindParam(":fileName",$this->fileName);
 			$stmt->bindParam(":made_by",$this->madeBy);
+			$stmt->bindParam(":division",$_SESSION['division']);
 			if ($stmt->execute()) {
 				return true;
 			}
@@ -85,12 +86,12 @@
 
 		// for update
 			function update(){
-				$sql="UPDATE $this->table SET news_title=:news_title,news_category=:news_category,news_content=:news_content WHERE news_id=:newsId";
+				$sql="UPDATE $this->table SET news_title=:newsTitle,news_category=:newscategory,news_content=:newsContent,file_name=:fileName WHERE news_id=:newsId";
 					$stmt = $this->dbConn->prepare($sql);
-					$stmt->bindParam(":news_title",$this->newsTitle);
-					$stmt->bindParam(":news_category",$this->newscategory);
-					$stmt->bindParam(":news_content",$this->newsContent);
-					// $stmt->bindParam(":file_name",NULL);
+					$stmt->bindParam(":newsTitle",$this->newsTitle);
+					$stmt->bindParam(":newscategory",$this->newscategory);
+					$stmt->bindParam(":newsContent",$this->newsContent);
+					$stmt->bindParam(":fileName",$this->fileName);
 					$stmt->bindParam(":newsId",$this->id);
 
 					if ($stmt->execute()) {
@@ -116,8 +117,9 @@
 			}
 			// get all news for admin news page
 			function get_news_all(){
-				$sql="SELECT * FROM $this->table ORDER BY news_id DESC";
+				$sql="SELECT * FROM $this->table WHERE made_by=:madeBy ORDER BY news_id DESC";
 				$stmt = $this->dbConn->prepare($sql);
+				$stmt->bindParam(":madeBy",$_SESSION['user_id']);
 				if ($stmt->execute()) {
 					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
 					return $results;

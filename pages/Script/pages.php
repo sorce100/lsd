@@ -11,6 +11,7 @@
 							$objPages = new Pages;
 							$objPages->set_pageName($objPages->CleanData($_POST["pageName"]));
 							$objPages->set_pageUrl(trim($_POST["pageUrl"]));
+							$objPages->set_pageFileName($objPages->CleanData($_POST["pageFileName"]));
 							$objPages->set_division(trim($_POST["pageDivision"]));
 							if ($objPages->insert()) {
 									echo "success";
@@ -24,6 +25,7 @@
 							$objPages = new Pages;
 							$objPages->set_pageName($objPages->CleanData($_POST["pageName"]));
 							$objPages->set_pageUrl(trim($_POST["pageUrl"]));
+							$objPages->set_pageFileName($objPages->CleanData($_POST["pageFileName"]));
 							$objPages->set_division(trim($_POST["pageDivision"]));
 							$objPages->set_id($objPages->CleanData($_POST["data_id"]));
 							if ($objPages->update()) {

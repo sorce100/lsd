@@ -2,28 +2,28 @@
       include("header.php");
       require_once("Classes/LiveStream.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">DIVISION LIVE STREAM SETUP PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-                <form >
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-              <div class="col-md-2">
-                 <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW EVENT</button>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">LIVE STREAM SETUP PAGE</div>
+            <div class="panel-title pull-right">
+               <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW</button>
             </div>
-            
-            <div class="table-responsive"><br>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -50,13 +50,13 @@
                                         <td>".$liveStream["youtube_endTime"]."</td>
                                        
                                         <td>
-                                          <input type='button' name='view' value='Update' id='".trim($liveStream["youtube_stream_id"])."' class='btn btn-info btn-xs update_data' />
+                                          <button type='button' id='".trim($liveStream["youtube_stream_id"])."' class='btn btn-info btn-xs update_data'>Update <i class='fa fa-edit'></i></button>
                                         </td>
                                         <td>
-                                          <input type='button' name='view' value='Delete' id='".trim($liveStream["youtube_stream_id"])."' class='btn btn-danger btn-xs del_data' />
+                                          <button type='button' id='".trim($liveStream["youtube_stream_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
                                         </td>
                                         <td>
-                                          <input type='button' name='view' value='Viewers' id='".trim($liveStream["youtube_stream_id"])."' class='btn btn-success btn-xs check_viewers' />
+                                          <button type='button' id='".trim($liveStream["youtube_stream_id"])."' class='btn btn-success btn-xs check_viewers'>Viewers <i class='fa fa-eye'></i></button>
                                         </td>
                                       </tr>
                                     ";
@@ -64,18 +64,20 @@
                          ?>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
-<!-- /.row -->
+
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">ADD NEW LIVE STREAM</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">ADD NEW LIVE STREAM</b></h4>
       </div>
       <div class="modal-body" id="bg">
      <form id="insert_form" method="POST"> 
@@ -134,7 +136,8 @@
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="insert">
             <div class="well modal-footer" id="bg">
-                <input type="submit" id="save_btn" class="btn btn-danger btn-block" name="submit" value="ADD LIVE STREAM" />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                <button type="submit" class="btn btn-info" id="save_btn">Add Live Stream <i class="fa fa-save"></i></button>
             </div>        
         </form>
       </div>
@@ -148,7 +151,7 @@
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">REGISTERED YOUTUBE EVENT STREAMERS</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">REGISTERED YOUTUBE EVENT STREAMERS</b></h4>
       </div>
       <div class="modal-body" >
         <div class="well">
@@ -233,7 +236,7 @@
                 method:"POST",
                 data:$("#insert_form").serialize(),
                 beforeSend:function(){  
-                          $('#save_btn').val("Please wait ...");  
+                          $('#save_btn').text("Please wait ...");  
                      },
                 success:function(data){  
                   // alert(data);
@@ -271,7 +274,7 @@
                     $("#eventRate").val(jsonObj[0].youtube_rate);
                     $("#enterAmount").val(jsonObj[0].youtube_amount);
                     $("#data_id").val(jsonObj[0].youtube_stream_id);
-                    $("#save_btn").val("UPDATE DETAILS");
+                    $("#save_btn").text("Update Details");
                     $("#mode").val("update");
                     $("#myModal").modal("show");
                 }  

@@ -6,33 +6,33 @@
 
 ?>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">Student Setup</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-                <form action="usersearch.php" method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-              <div class="col-md-2">
-                 <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW</button>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">REGISTERED APPLICANTS </div>
+            <div class="panel-title pull-right">
+              <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW</button>
             </div>
-            
-            <div class="table-responsive"><br>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>STUDENT NAME</th>
                             <th>DATE/TIME</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                    <tbody id="resultsDisplay">
@@ -45,9 +45,10 @@
                                         <td>".$student["student_first_name"]." ".$student["student_last_name"]."</td>
                                         <td>".$student["date_done"]."</td>
                                         <td>
-                                          <input type='button' name='view' value='Update' id='".trim($student["student_id"])."' class='btn btn-info btn-xs update_data' />
-                                        
-                                          <input type='button' name='view' value='Delete' id='".trim($student["student_id"])."' class='btn btn-danger btn-xs del_data' />
+                                          <button type='button' id='".trim($student["student_id"])."' class='btn btn-info btn-xs update_data'>Update <i class='fa fa-edit'></i></button>
+                                        </td>
+                                        <td>
+                                          <button type='button' id='".trim($student["student_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
                                         </td>
                                       </tr>
                                     ";
@@ -56,10 +57,13 @@
                          ?>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
+<!--  -->
 <!-- /.row -->
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -67,56 +71,75 @@
         <div class="modal-content">
           <div class="modal-header" id="bg">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-            <h4 class="modal-title"><b id="subject">SIGN UP STUDENT</b></h4>
+            <h4 class="modal-title"><b id="subject">NEW APPLICANT</b></h4>
           </div>
           <div class="modal-body" id="bg">
           <form id="insert_form"> 
-              <div class="row">
+              <!--  -->
+            <div class="row">
                 <div class="col-md-2">
-                  <div class="form-group">
-                    <label for="studentTitle">TITLE</label>
-                    <select class="form-control" name="studentTitle" id="studentTitle" required>
-                      <option  disabled selected>Select title</option>
-                      <option value="Mr">Mr</option>
-                      <option value="Mrs">Mrs</option>
-                      <option value="Miss">Miss</option>
-                      <option value="Dr">Dr</option>
-                      <option value="Prof">Prof</option>
-                    </select>
-                  </div>
+                    <label for="title" class="col-form-label">Name <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-2">
+                    <div class="form-group">
+                       <select class="form-control" name="studentTitle" id="studentTitle" required>
+                          <option  disabled selected>Select title</option>
+                          <option value="Mr">Mr</option>
+                          <option value="Mrs">Mrs</option>
+                          <option value="Miss">Miss</option>
+                          <option value="Dr">Dr</option>
+                          <option value="Prof">Prof</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for="studentFirstName">FIRST NAME</label>
-                    <input type="text" class="form-control" id="studentFirstName" placeholder="Enter first name &hellip;" name="studentFirstName" autocomplete="off" required>
-                  </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="studentFirstName" placeholder="Enter first name &hellip;" name="studentFirstName" autocomplete="off" required>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for="studentLastName">LAST NAME</label>
-                    <input type="text" class="form-control" id="studentLastName" placeholder="Enter last name &hellip;" name="studentLastName" autocomplete="off" required>
-                  </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="studentLastName" placeholder="Enter last name &hellip;" name="studentLastName" autocomplete="off" required>
+                    </div>
                 </div>
-              </div><br>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="studentEmail">EMAIL ADDRESS</label>
-                    <input type="email" class="form-control" id="studentEmail" placeholder="Enter email address eg: abc@domain.com &hellip;" name="studentEmail" autocomplete="off" required>
-                  </div>
+            </div>
+
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="title" class="col-form-label">Email <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-10">
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="studentEmail" placeholder="Enter email address eg: abc@domain.com &hellip;" name="studentEmail" autocomplete="off" required>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="studentTel">TEL NUMBER</label>
-                    <input type="number" class="form-control" id="studentTel" placeholder="Enter phone number eg: 020 xxxx xxx &hellip;" name="studentTel" autocomplete="off" required>
-                  </div>
+            </div>
+
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="title" class="col-form-label">Tel No <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-10">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="studentTel" placeholder="Enter phone number eg: 020 xxxx xxx &hellip;" name="studentTel" autocomplete="off" required>
+                    </div>
                 </div>
-              </div><br>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="division">SELECT DIVISON</label>
-                    <select class="form-control" name="division" id="division" required>
+            </div>
+
+            <br>
+            <!--  -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="title" class="col-form-label">Division <span class="asterick">*</span></label>
+                </div> 
+                <div class="col-md-10">
+                    <div class="form-group">
+                      <select class="form-control" name="division" id="division" required>
+                      <option  disabled selected>Select Division</option>
                       <?php 
                           $objDivision = new Division;
                           $divisions = $objDivision->get_divison_alias();
@@ -125,33 +148,26 @@
                           }
                        ?>
                     </select>
-                  </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="centerId">SELECT EXAM CENTER</label>
-                    <select class="form-control" name="examCenter" id="examCenter" required>
-                      <option  disabled selected>Select School</option>
-                      <?php 
-                          $objExamCenterSetup = new ExamCenterSetup;
-                          $centers = $objExamCenterSetup->get_centers();
-                          foreach ($centers as $center) {
-                            echo '<option value="'.$center["exam_center_id"].'">'.$center["exam_center_name"].'</option>';
-                          }
-                       ?>
-                    </select>
-                  </div>
-                </div>
-              </div><br>  
-              <div class="row">
-                 <!-- for insert query -->
-                <input type="hidden" name="mode" id="mode" value="insert">
-                <!-- for inserting the page id -->
-                <input type="hidden" name="data_id" id="data_id" value="">
-                <div class="col-md-12">
-                  <input type="submit" class="btn btn-block btn-info" id="save_btn" name="save_btn" value="Add Student" />
-                </div>
-              </div><br>
+            </div> 
+
+            <br>
+            <br>
+             <!-- ////////////////////////  --> 
+            <div class="row">
+              <div class="col-md-6">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-block btn-danger" id="cancel" name="cancel" > Close <i class="glyphicon glyphicon-remove"></i></button>
+              </div>
+               <!-- for insert query -->
+              <input type="hidden" name="mode" id="signUpmode" value="insert">
+              <input type="hidden" name="data_id" id="data_id" value="">
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-block btn-info" id="signUp" name="signUp">Submit <i class="glyphicon glyphicon-floppy-disk"></i></button>
+              </div>
+            </div>
+
+            <br>
           </form>
         </div>
       </div><!-- /.modal-content -->

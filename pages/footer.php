@@ -8,7 +8,7 @@
 <script>
 $(document).ready(function(){
   // adding datatable class to all
-  $('.table').dataTable({destroy: true,ordering:false});
+  $('.table').dataTable({destroy: true,ordering:false,searching: false,info: false});
   // checkboxes select all
   $('#select_all').change(function() {
       var checkboxes = $(this).closest('form').find(':checkbox');
@@ -76,6 +76,9 @@ $(document).ready(function(){
 
     <!-- <script type="text/javascript" src="js/dataTables.jqueryui.js"></script> -->
     <script type="text/javascript" src="js/datatables.js"></script>
+    <!-- button  toggle -->
+    <script src="../plugins/bower_components\bootstrap-toggle\bootstrap2-toggle.min.js"></script>
+
 
 </body>
 

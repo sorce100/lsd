@@ -2,36 +2,25 @@
       require_once("Classes/Events.php");
       require_once("Classes/EventsRegister.php");
 ?>
-
-<style type="text/css">
-  #insert_form fieldset:not(:first-of-type) {
-    display: none;
-    }
-  textarea{
-    resize: none;
-        }
-  </style>
-
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">EVENTS PAGE</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-                <form action="usersearch.php" method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">EVENTS REGISTRATION PAGE</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
             </div>
-            
-            <div class="table-responsive"><br>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -57,21 +46,26 @@
                                         $eventsTicket = $objEventsRegister->get_event_ticket(trim($event["events_id"]),$_SESSION['member_id']);
                                          if (!empty($eventsTicket)) {
                                               echo "<td>
-                                                      <input type='button' name='view' value='VIEW EVENT TICKET' id='".trim($event["events_id"])."' class='btn btn-success btn-xs event_ticket' />
+                                                      <button type='button' id='".trim($event["events_id"])."' class='btn btn-success btn-xs event_ticket'>VIEW EVENT TICKET <i class='fa fa-check-square-o'></i></button>
                                                     </td></tr>"; 
                                          }elseif (empty($eventsTicket)) {
                                             echo "<td>
-                                                  <input type='button' name='view' value='REGISTER FOR EVENT' id ='".trim($event["events_id"])."' class='btn btn-danger btn-xs update_data' />
+                                                  <button type='button' id='".trim($event["events_id"])."' class='btn btn-info btn-xs update_data'>REGISTER FOR EVENT <i class='fa fa-shopping-cart'></i></button>
                                                 </td></tr>";
                                         }
+
                               }
                          ?>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
+
 </div>
+
 <!-- /.row -->
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -79,7 +73,7 @@
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">ADD NEW EVENT</b></u></center></h4>
+        <h4 class="modal-title"><b id="subject">ADD NEW EVENT</b></h4>
       </div>
       <div class="modal-body" id="bg">
      <form id="insert_form" method="POST">
@@ -158,7 +152,8 @@
                <!-- for insert query -->
               <input type="hidden" name="mode" id="mode" value="insert">
               <div class="well modal-footer" id="bg">
-                  <input type="submit" id="save_btn" class="btn btn-success btn-block" name="submit" value="REGISTER FOR EVENT" />
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                  <button type="submit" class="btn btn-info" id="save_btn">Register Event<i class="fa fa-save"></i></button>
               </div>       
         </form>
       </div>
@@ -196,7 +191,7 @@
                   method:"POST",
                   data:$("#insert_form").serialize(),
                   beforeSend:function(){  
-                            $('#save_btn').val("Please wait ...");  
+                            $('#save_btn').text("Please wait ...");  
                        },
                   success:function(data){  
                     // alert(data);
@@ -235,7 +230,7 @@
                     $("#eventStartDate").val(jsonObj[0].event_date_start);
                     $("#eventEndDate").val(jsonObj[0].event_date_end);
                     $("#data_id").val(jsonObj[0].events_id);
-                    $("#save_btn").val("REGISTER FOR EVENT");
+                    $("#text").val("REGISTER FOR EVENT");
                     // $("#mode").val("update");
                     // getting the hotel names and price ranges
                       if (jQuery.isEmptyObject(jsonObj[0].hotel_names)) {
@@ -272,21 +267,6 @@
 
               });
     });
-
- //  // calculating the days difference between now and the end date set
-                   //  var dateObj = new Date();
-                   //  var month = dateObj.getUTCMonth() + 1; //months from 1-12
-                   //  var day = dateObj.getUTCDate();
-                   //  var year = dateObj.getUTCFullYear();
-                   //  var todayDate = day + "-" + month + "-" + year;
-                   //  // calculate the difference between the two dates
-                   //  var today = new Date(28-11-2018);
-                   //  var endDate = new Date(jsonObj[0].event_date_end);
-                   //  var timeDiff = Math.abs(endDate.getTime() - today.getTime());
-                   //  var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-
-                   // $("#daysCount").val(diffDays); 
-
  </script>
 
 

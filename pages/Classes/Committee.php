@@ -6,6 +6,7 @@
 		private $committeeMembers;
 		private $committeeFolder;
 		private $committeePages;
+		private $committeeAdmins;
 		private $dbConn;
 		private $recordHide = "NO";
 		private $table= "committee_setup";
@@ -15,6 +16,7 @@
 		function set_committeeMembers($committeeMembers) { $this->committeeMembers = $committeeMembers; }
 		function set_committeeFolder($committeeFolder) { $this->committeeFolder = $committeeFolder; }
 		function set_committeePages($committeePages) { $this->committeePages = $committeePages; }
+		function set_committeeAdmins($committeeAdmins) { $this->committeeAdmins = $committeeAdmins; }
 		function set_recordHide($recordHide) { $this->recordHide = $recordHide; }
 
 		public function __construct(){
@@ -33,7 +35,7 @@
 
 		// insert pages
 			function insert(){
-				$sql = "INSERT INTO $this->table (committee_name,committee_members,committee_folder,committee_pages,division,user_id,record_hide) VALUES (:committeeName,:committeeMembers,:committeeFolder,:committeePages,:division,:userId,:recordHide)";
+				$sql = "INSERT INTO $this->table (committee_name,committee_members,committee_folder,committee_pages,division,user_id,record_hide,committee_admins) VALUES (:committeeName,:committeeMembers,:committeeFolder,:committeePages,:division,:userId,:recordHide,:committeeAdmins)";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":committeeName",$this->committeeName);
 				$stmt->bindParam(":committeeMembers",$this->committeeMembers);
@@ -42,6 +44,7 @@
 				$stmt->bindParam(":division",$_SESSION["division"]);
 				$stmt->bindParam(":userId",$_SESSION["user_id"]);
 				$stmt->bindParam(":recordHide",$this->recordHide);
+				$stmt->bindParam(":committeeAdmins",$this->committeeAdmins);
 				if ($stmt->execute()) {
 					return trim($this->dbConn->lastInsertId());
 				}
@@ -51,11 +54,12 @@
 			}
 			// for update
 			function update(){
-				$sql="UPDATE $this->table SET committee_name=:committeeName,committee_members=:committeeMembers,committee_pages=:committeePages WHERE committee_id=:Id";
+				$sql="UPDATE $this->table SET committee_name=:committeeName,committee_members=:committeeMembers,committee_pages=:committeePages,committee_admins=:committeeAdmins WHERE committee_id=:Id";
 					$stmt = $this->dbConn->prepare($sql);
 					$stmt->bindParam(":committeeName",$this->committeeName);
 					$stmt->bindParam(":committeeMembers",$this->committeeMembers);
 					$stmt->bindParam(":committeePages",$this->committeePages);
+					$stmt->bindParam(":committeeAdmins",$this->committeeAdmins);
 					$stmt->bindParam(":Id",$this->id);
 					if ($stmt->execute()) {
 						
@@ -97,9 +101,9 @@
 			}
 		// get members committes
 			function get_member_committees($data){
-				$sql="SELECT * FROM $this->table WHERE committee_id=:companyId AND record_hide=:recordHide";
+				$sql="SELECT * FROM $this->table WHERE committee_id=:commId AND record_hide=:recordHide";
 				$stmt = $this->dbConn->prepare($sql);
-				$stmt->bindParam(":companyId",$data);
+				$stmt->bindParam(":commId",$data);
 				$stmt->bindParam(":recordHide",$this->recordHide);
 				if ($stmt->execute()) {
 					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -112,9 +116,9 @@
 
 		// get user
 			function get_committee_by_id(){
-				$sql="SELECT * FROM $this->table WHERE committee_id=:companyId";
+				$sql="SELECT * FROM $this->table WHERE committee_id=:commId";
 				$stmt = $this->dbConn->prepare($sql);
-				$stmt->bindParam(":companyId",$this->id);
+				$stmt->bindParam(":commId",$this->id);
 				if ($stmt->execute()) {
 					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
 					return json_encode($results);
@@ -123,6 +127,7 @@
 					die();
 					}
 				}
+		
 
 
 			// update member committees using their member id

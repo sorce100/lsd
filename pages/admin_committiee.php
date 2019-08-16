@@ -4,33 +4,34 @@
       require_once("Classes/Members.php");
       require_once("Classes/Pages.php");
 ?>
+<br>
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="box-title">COMMITTEE SETUP</h3>
-        <div class="white-box">
-            <!-- button for search and add new members button -->
-            <div class="row">
-              <!-- for search -->
-              <div class="col-md-10">
-                <form action="usersearch.php" method="POST">
-                  <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
-                    <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
-                  </div>
-                 </form>
-              </div>
-              <!-- for add button -->
-              <div class="col-md-2">
-                 <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW</button>
-              </div>
+    <!-- <div class="col-sm-12"> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <div class="panel-title pull-left">COMMITTEE SETUP</div>
+            <div class="panel-title pull-right">
+               <button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> ADD NEW</button>
             </div>
-            
-            <div class="table-responsive"><br>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <!-- for search -->
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search &hellip;" id="searchInput" autocomplete="off">
+                  <span class="input-group-btn"><button type="button" class="btn btn-info">Go</button></span>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-md-12">
+              <div class="table-responsive"><br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>COMMITTEE NAME</th>
                             <th>TOTAL MEMBERS</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -42,17 +43,21 @@
                               echo "
                                   <tr>
                                     <td>".$committe["committee_name"]."</td>
-                                    <td>".count(json_decode($committe["committee_members"]))."</td>
+                                    <td>".sizeof(json_decode($committe["committee_members"]))."</td>
                                     <td>
-                                      <input type='button' name='view' value='Update' id='".trim($committe["committee_id"])."' class='btn btn-info btn-xs update_data' />
-                                      <input type='button' name='view' value='Delete' id='".trim($committe["committee_id"])."' class='btn btn-danger btn-xs del_data' />
+                                      <button type='button' id='".trim($committe["committee_id"])."' class='btn btn-info btn-xs update_data'>Update <i class='fa fa-edit'></i></button>
+                                    </td>
+                                    <td>
+                                      <button type='button' id='".trim($committe["committee_id"])."' class='btn btn-danger btn-xs del_data'>Delete <i class='fa fa-trash'></i></button>
                                     </td>
                                   </tr>";
                               }
                          ?>
                     </tbody>
                 </table>
+              </div>
             </div>
+            <!-- end of content -->
         </div>
     </div>
 </div>
@@ -62,25 +67,31 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" id="bg">
-         <button type="button" class="close" data-dismiss="modal"  aria-label="Close" onclick="myFunction()"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
-        <h4 class="modal-title"><center><u><b id="subject">ADD NEW COMMITTEE</b></u></center></h4>
+         <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
+        <h4 class="modal-title"><b id="subject">ADD NEW COMMITTEE</b></h4>
       </div>
       <div class="modal-body" id="bg">
       <form id="insert_form" method="POST"> 
               <div class="row">
-                  <div class="col-md-12">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label for="title">COMMITTEE NAME</label>
+                        <label for="title">COMMITTEE NAME <span class="asterick">*</span></label>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
                         <input type="text" class="form-control" id="committeeName" name="committeeName" placeholder="Enter committee name" autocomplete="off" required>
                     </div>
                   </div>
+              </div>
 
-                  <br>
+              <hr>
 
+              <div class="row">
                   <div class="col-md-12">
-                    <ul class="nav nav-tabs nav-justified" style="background-color: #f4f4f4;">
-                      <li class="active"><a data-toggle="tab" href="#addMembers"><b>Add Members</b></a></li>
-                      <li><a data-toggle="tab" href="#addPages"><b>Add Pages</b></a></li>
+                    <ul class="nav nav-tabs nav-justified panelTabs" >
+                      <li class="active"><a data-toggle="tab" href="#addMembers"><b>Add Members <i class="fa fa-users"></i></b></a></li>
+                      <li><a data-toggle="tab" href="#addPages"><b>Add Pages <i class="fa fa-file"></i></b></a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="addMembers" class="tab-pane fade in active">
@@ -88,9 +99,10 @@
                            <div class="table-responsive">
                              <table class="table table-hover">
                                <thead>
-                                  <th width="10%"></th>
+                                  <th width="5%">Select Members</th>
                                   <th width="20%">Diploma No</th>
                                   <th width="40%">Member Name</th>
+                                  <th width="5%">Select Admin</th>
                                   
                                </thead>
                                <tbody id="comMemList">
@@ -100,10 +112,14 @@
                                     foreach ($members as $member) {
                                         // if (trim($page["division"]) == $_SESSION['division']) {
                                           echo '<tr>
-                                                   <td><input type="checkbox" class="input-md" name="committeeMembers[]" id="committeeMembers" value="'.trim($member["members_id"]).'"></td>
+                                                   <td>
+                                                      <input type="checkbox" class="input-md" name="committeeMembers[]" id="committeeMembers" value="'.trim($member["members_id"]).'">
+                                                   </td>
                                                    <td>'.$member["professional_number"].'</td>
                                                    <td>'.$member["first_name"]." ".$member["other_name"]." ".$member["last_name"].'</td>
-                                                
+                                                   <td>
+                                                      <input type="checkbox" class="input-md" name="committeeAdmins[]" id="committeeAdmins" value="'.trim($member["members_id"]).'">
+                                                   </td>
                                                  </tr>';
                                           // }
                                         }
@@ -145,7 +161,8 @@
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="insert">
             <div class="well modal-footer" id="bg">
-                <input type="submit" id="save_btn" class="btn btn-danger btn-block" name="submit" value="ADD COMMITTEE" />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                <button type="submit" class="btn btn-info" id="save_btn">Add Committee <i class="fa fa-save"></i></button>
             </div>        
         </form>
       </div>
@@ -197,7 +214,7 @@
                 method:"POST",
                 data:$("#insert_form").serialize(),
                 beforeSend:function(){  
-                          $('#save_btn').val("Please wait ...");  
+                          $('#save_btn').text("Please wait ...");  
                      },
                 success:function(data){  
                   console.log(data);
@@ -228,7 +245,7 @@
                        // destroy data table to represent the data then enable
                           $('.table').DataTable().destroy();
                        // passing the group pages array stored in database
-                       if ($.isArray(JSON.parse(jsonObj[0].committee_members))) {
+                       if (jsonObj[0].committee_members!="") {
                           // select the checkboxes
                           let membersArray = JSON.parse(jsonObj[0].committee_members);
                           // console.log(membersArray);
@@ -238,8 +255,19 @@
                             });
                           }
                        }
+                       // admins of the page
+                        if (jsonObj[0].committee_admins!="") {
+                          // select the checkboxes
+                          let adminsArray = JSON.parse(jsonObj[0].committee_admins);
+                          // console.log(membersArray);
+                          for (let i = 0; i < adminsArray.length; ++i) {
+                            $('#committeeAdmins[value="'+adminsArray[i]+'"]').each(function() {
+                                $(this).prop('checked',true);
+                            });
+                          }
+                       }
                        // for committee pages select
-                       if ($.isArray(JSON.parse(jsonObj[0].committee_pages))) {
+                       if (jsonObj[0].committee_pages!="") {
                           // select the checkboxes
                           let pagesArray = JSON.parse(jsonObj[0].committee_pages);
                           // console.log(pagesArray);
@@ -254,7 +282,7 @@
                         $("#subject").html("UPDATE COMMITTEE DETAILS");
                         $("#data_id").val(jsonObj[0].committee_id);
                         $("#committeeName").val(jsonObj[0].committee_name);
-                        $("#save_btn").val("UPDATE PAGE");
+                        $("#save_btn").text("Update Committee");
                         $("#mode").val("update");
                         $("#myModal").modal("show");
                         }  
