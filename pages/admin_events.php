@@ -453,7 +453,7 @@
                 });  
             });
         // for update
-        $(document).on('click', '.event_data', function(){
+        $('table').on('click', '.event_data', function(){
            var mode= "updateModal"; 
            var data_id = $(this).attr("id");  
            $.ajax({  
@@ -487,7 +487,7 @@
                });  
           });
 // update for meeting
-        $(document).on('click', '.meeting_update', function(){
+        $('table').on('click', '.meeting_update', function(){
            var mode= "updateModal"; 
            var data_id = $(this).attr("id");  
            $.ajax({  
@@ -511,7 +511,7 @@
                });  
           });
 // for delete
-        $('.del_data').click(function(){
+        $('table').on('click', '.del_data', function(){
            if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
                
                  var mode= "delete"; 
@@ -530,7 +530,7 @@
               }  
           });
     // click to view all members who have registered for the event and enable download in excel
-              $(".view_participants").click(function(){
+              $('table').on('click', '.view_participants', function(){
                   var mode= "view_participants";
                   var data_id = $(this).attr("id");
                   $.ajax({  

@@ -30,7 +30,7 @@
                                 <span>'.$dateDone.'</span><br/>
                                 <span class="label label-danger newscategory pull-right">'.$newsCategory.'</span>
 
-                                <div><button id="'.$newsId.'" class="btn btn-info btn-sm news_view">Read More <i class="fa fa-eye"></i></button></div>
+                                <div><button id="'.$newsId.'" class="btn btn-info btn-sm news_view">Read News <i class="fa fa-eye"></i></button></div>
                                 </div></div><hr /><br />';
                       }
                    ?>

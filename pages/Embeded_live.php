@@ -9,7 +9,7 @@ include("header.php");
               	<?php
 require_once('EmbedYoutubeLiveStreaming.php');
 
-$channelId = "UCPEwhErPHxWUZ-35mHLl2Jg";
+$channelId = "UC7qDCZkylQKD_V-H6DGR-RA";
 $api_key = "AIzaSyAjr7gFLyovmmS4rpE9R_IZ4GAOlRDknfU";
 
 $YouTubeLive = new EmbedYoutubeLiveStreaming($channelId,$api_key);

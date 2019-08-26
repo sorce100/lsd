@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2019 at 02:38 AM
+-- Generation Time: Aug 26, 2019 at 01:40 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -303,7 +303,8 @@ INSERT INTO `contribution_register` (`contributions_reg_id`, `contribution_id`, 
 (3, 2, 102, '600', '', '2018-12-02 15:20:09'),
 (4, 2, 102, '600', '', '2018-12-02 15:20:21'),
 (5, 3, 102, '500', '', '2018-12-02 15:20:27'),
-(6, 2, 11, '500', '', '2019-08-15 10:09:32');
+(6, 2, 11, '500', '', '2019-08-15 10:09:32'),
+(7, 5, 11, '20', '', '2019-08-23 10:05:41');
 
 -- --------------------------------------------------------
 
@@ -334,6 +335,80 @@ INSERT INTO `courses` (`course_id`, `course_code`, `course_name`, `course_level`
 (6, 'OM201', 'Introduction to computing', 300, '2nd Semester', 'This introduces the student to Computing in survery', '6', 'NO', '1', '2019-02-20 20:45:07'),
 (7, 'PR1', 'Equipment Handling', 300, '1st Semester', 'This is for equipment handling', '6', 'NO', '1', '2019-02-20 20:45:48'),
 (8, 'the101', 'testing', 300, '3rd semester', 'testing', '6', 'NO', '1', '2019-02-24 15:28:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cpd_records`
+--
+
+CREATE TABLE `cpd_records` (
+  `cpd_record_id` int(11) NOT NULL,
+  `cpd_id` text NOT NULL,
+  `cpd_register_id` text NOT NULL,
+  `member_id` text NOT NULL,
+  `cpd_record_title` text NOT NULL,
+  `cpd_record_date` text NOT NULL,
+  `cpd_record_authors` text NOT NULL,
+  `cpd_record_marks` text NOT NULL,
+  `record_hide` varchar(5) NOT NULL,
+  `division` int(11) NOT NULL,
+  `date_done` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cpd_records`
+--
+
+INSERT INTO `cpd_records` (`cpd_record_id`, `cpd_id`, `cpd_register_id`, `member_id`, `cpd_record_title`, `cpd_record_date`, `cpd_record_authors`, `cpd_record_marks`, `record_hide`, `division`, `date_done`) VALUES
+(15, '1', '1', '11', '[\" Second title\"]', '[\"2019-08-24\"]', '[\" second\"]', '[\"12\"]', '', 1, '2019-08-23 09:28:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cpd_register`
+--
+
+CREATE TABLE `cpd_register` (
+  `cpd_register_id` int(11) NOT NULL,
+  `cpd_id` int(11) NOT NULL,
+  `cpd_amount` int(11) NOT NULL,
+  `cpd_payed` varchar(5) NOT NULL,
+  `cpd_amount_payed_date` varchar(20) NOT NULL,
+  `record_hide` varchar(5) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `date_done` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cpd_register`
+--
+
+INSERT INTO `cpd_register` (`cpd_register_id`, `cpd_id`, `cpd_amount`, `cpd_payed`, `cpd_amount_payed_date`, `record_hide`, `member_id`, `date_done`) VALUES
+(1, 1, 51, 'YES', '20-08-2019', 'NO', 11, '2019-08-20 13:15:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cpd_setup`
+--
+
+CREATE TABLE `cpd_setup` (
+  `cpd_id` int(11) NOT NULL,
+  `cpd_name` varchar(200) NOT NULL,
+  `cpd_amount` varchar(7) NOT NULL,
+  `division` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `record_hide` varchar(5) NOT NULL,
+  `date_done` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cpd_setup`
+--
+
+INSERT INTO `cpd_setup` (`cpd_id`, `cpd_name`, `cpd_amount`, `division`, `user_id`, `record_hide`, `date_done`) VALUES
+(1, 'first cpdf', '51', 1, 64, 'NO', '2019-08-19 21:34:55');
 
 -- --------------------------------------------------------
 
@@ -440,7 +515,8 @@ INSERT INTO `events_register` (`events_reg_id`, `event_id`, `member_id`, `event_
 (1, 5, '102', '500', 'GhIS5102', '', '2018-11-29 10:46:13'),
 (2, 6, '11', '0', 'Meeting6', 'sorce kwarteng', '2019-07-11 16:33:25'),
 (3, 6, '11', '0', 'Meeting6', 'merling kwarteng', '2019-07-11 16:34:26'),
-(4, 6, '', '0', 'Meeting6', '', '2019-07-13 20:57:08');
+(4, 6, '', '0', 'Meeting6', '', '2019-07-13 20:57:08'),
+(5, 5, '11', '500', 'GhIS511', '', '2019-08-23 09:35:13');
 
 -- --------------------------------------------------------
 
@@ -452,7 +528,6 @@ CREATE TABLE `exam_center_setup` (
   `exam_center_id` int(11) NOT NULL,
   `exam_center_name` varchar(200) NOT NULL,
   `exam_center_region` varchar(100) NOT NULL,
-  `exam_subjects` text NOT NULL,
   `division` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `record_hide` varchar(5) NOT NULL,
@@ -463,10 +538,10 @@ CREATE TABLE `exam_center_setup` (
 -- Dumping data for table `exam_center_setup`
 --
 
-INSERT INTO `exam_center_setup` (`exam_center_id`, `exam_center_name`, `exam_center_region`, `exam_subjects`, `division`, `user_id`, `record_hide`, `date_done`) VALUES
-(3, 'New Subject', 'Greater Accra', '', 1, 64, 'NO', '2019-07-15 11:40:13'),
-(4, 'South Exam Center', 'Greater Accra', '', 1, 64, 'NO', '2019-07-15 13:06:08'),
-(5, 'North Exams Center', 'Northern', '', 1, 64, 'NO', '2019-07-15 13:06:44');
+INSERT INTO `exam_center_setup` (`exam_center_id`, `exam_center_name`, `exam_center_region`, `division`, `user_id`, `record_hide`, `date_done`) VALUES
+(3, 'New Subject', 'Greater Accra', 1, 64, 'NO', '2019-07-15 11:40:13'),
+(4, 'South Exam Center', 'Greater Accra', 1, 64, 'NO', '2019-07-15 13:06:08'),
+(5, 'North Exams Center', 'Northern', 1, 64, 'NO', '2019-07-15 13:06:44');
 
 -- --------------------------------------------------------
 
@@ -490,7 +565,8 @@ CREATE TABLE `exam_center_subjects` (
 INSERT INTO `exam_center_subjects` (`subject_id`, `center_exam_part`, `subject_name`, `center_id`, `record_hide`, `date_done`) VALUES
 (1, 'Part A', '[\"Merlin Exams\",\"Merlin 101\"]', 3, 'NO', '2019-07-15 11:40:13'),
 (2, 'Part C', '[\"First Exams\",\"Resit Exams\"]', 4, 'NO', '2019-07-15 13:06:08'),
-(3, 'Part C', '[\"First Exams 123\",\"Resit Exams nerlin\",\"hello\"]', 5, 'NO', '2019-07-15 13:06:44');
+(3, 'Part C', '[\"First Exams 123\",\"Resit Exams nerlin\",\"hello\"]', 5, 'NO', '2019-07-15 13:06:44'),
+(4, 'Part A', '[\"Survey 101\",\"ENG 101\",\"GEO 201\"]', 5, 'NO', '2019-08-18 14:06:01');
 
 -- --------------------------------------------------------
 
@@ -501,7 +577,7 @@ INSERT INTO `exam_center_subjects` (`subject_id`, `center_exam_part`, `subject_n
 CREATE TABLE `exam_register` (
   `exam_register_id` int(11) NOT NULL,
   `exam_center_id` int(11) NOT NULL,
-  `exam_name` text NOT NULL,
+  `exam_center_module_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `date_registered` varchar(50) NOT NULL,
   `status` varchar(20) NOT NULL,
@@ -511,13 +587,6 @@ CREATE TABLE `exam_register` (
   `record_hide` varchar(5) NOT NULL,
   `date_done` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `exam_register`
---
-
-INSERT INTO `exam_register` (`exam_register_id`, `exam_center_id`, `exam_name`, `student_id`, `date_registered`, `status`, `exam_score`, `exam_score_name`, `user_id`, `record_hide`, `date_done`) VALUES
-(5, 3, '[\"Merlin Exams\",\"Merlin 101\"]', 8, '15-07-2019', 'OLD', '[\"50\",\"98765\"]', '[\"Merlin Exams\",\"Merlin 101\"]', 64, 'NO', '2019-08-11 20:39:01');
 
 -- --------------------------------------------------------
 
@@ -538,7 +607,7 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`group_id`, `group_name`, `group_pages`, `division`, `date_done`) VALUES
-(9, 'Admin', '[\"9\",\"28\",\"39\",\"17\",\"34\",\"22\",\"7\",\"40\",\"12\",\"33\",\"32\",\"41\",\"8\",\"31\",\"38\",\"5\",\"11\",\"20\",\"36\",\"24\",\"13\"]', '1', '2018-11-26 19:55:24'),
+(9, 'Admin', '[\"9\",\"28\",\"20\",\"42\",\"39\",\"17\",\"43\",\"34\",\"22\",\"7\",\"40\",\"12\",\"33\",\"32\",\"41\",\"44\",\"6\",\"35\",\"8\",\"31\",\"38\",\"25\",\"19\",\"5\",\"11\",\"37\",\"26\",\"36\",\"24\",\"27\",\"13\",\"21\",\"10\"]', '1', '2018-11-26 19:55:24'),
 (11, 'sample', '[\"26\"]', '', '2018-11-26 21:11:46'),
 (13, 'members', '[\"7\",\"33\",\"41\",\"35\",\"31\",\"19\",\"6\",\"37\",\"21\",\"10\"]', '1', '2019-02-24 13:20:48'),
 (14, 'students', '[\"7\",\"12\",\"33\",\"35\",\"31\",\"19\",\"37\",\"27\",\"26\",\"21\",\"10\"]', '1', '2019-02-25 22:28:28');
@@ -609,214 +678,214 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`members_id`, `first_name`, `last_name`, `other_name`, `dob`, `personal_contact`, `emergency_contact`, `house_number`, `house_location`, `postal_address`, `professional_number`, `year_elected`, `surveyor_type`, `designation`, `company_name`, `company_type`, `company_contact`, `corporate_email`, `region`, `office_location`, `company_address`, `current_balance`, `committes`, `date_done`, `division`, `user_id`) VALUES
-(1, 'GUSTAV', 'ASAMOAH', 'KPLOM KOMLA', '04/04/1978', '244589339', '', 'BAATSONA SPINTEX ROAD- ACCRA', '', 'P. O. BOX ST517 KANESHIE ACCRA', '1147', 0, 'LICENSED', '', 'GEOSTATE SURVEY', '', '', 'GUSMOAH@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(2, 'ANGELA', 'BRIANDT', 'CHELSEA', '26/05/1986', '249953963', '', 'COMMUNITY 25, TEMA', '', 'P. O. BOX 46 TEMA', '1228', 0, 'PROFESSIONAL', '', 'TDC DEVELOPMENT COMPANY LIMITED', '', '', 'CHELSY265@YAHOO.CO.UK', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(3, 'JOSEPH', 'MENSAH-DEBRAH', 'N/A', '04/06/1990', '246345627', '', 'PATASI ESTATE - KUMASI', '', 'P.O. BOX 372, F.N.T. - KUMASI', '1633', 0, 'PROFESSIONAL', '', 'EMO GEOMATICS CONSULT', '', '', 'JOE2MENS08@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(4, 'FRANCIS', 'DONKOR', 'NONE', '09/03/1988', '207560840', '', 'KUMASI', '', 'C/O KWAME OBENG KNUST DEPT OF GEOMATIC ENGINEERING', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'FADDONKOR', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(5, 'WATSON', 'BEDZRAH', 'KOFI', '26/04/1991', '203155672', '', 'ADENTA, ACCRA', '', 'P. O. BOX AF 763, ADENTA FLATS, ACCRA', '0', 0, 'PROBATIONER', '', 'BASELINE SOLUTIONS', '', '', 'KOFIWATSON@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(6, 'ISAAC', 'ANAMAN', 'EKOW', '', '507766693', '', 'BUNGALOW 34A', '', 'BOX 2, NSUTA-WASSA', '1328', 0, 'PROFESSIONAL', '', 'GHANA MANGANESE COMPANY LIMITED', '', '', 'EKOWANAMAN2002@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(7, 'EDMUND', 'AMOAKO', 'AMANING', '06/02/1990', '+233 243 757 888 / +', '', 'Z1/G014, ASHAIMAN LEBANON.', '', 'BOX GP 2982, ACCRA.', '0', 0, 'PROBATIONER', '', 'A-M SURVEYS LIMITED', '', '', 'KOFIIAMOAKO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(9, 'NUTEPE', 'TUDZI', 'FUI KOFI', '19/06/1981', '244972260', '', 'LASHIBI, TEMA COMMUNITY 17,VIVIAN FARM. PLOT 108A', '', 'C/O ASSOCIATED CONSULTANTS LTD \r\nP. O.  BOX MB 259,  ACCRA', '1550', 0, 'PROFESSIONAL', '', 'ASSOCIATED CONSULTANTS LTD', '', '', 'KENTUDZI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(10, 'RHODEN', 'DOGBE', 'DZIFA', '10/02/1973', '244801926', '', 'TEMA', '', 'BOX CS 8544', '934', 0, 'LICENSED', '', 'TDC', '', '', 'RHODKING@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', '64'),
-(11, 'MICHAEL', 'NYOAGBE', 'WORLANYO', '16/04/1982', '244971602', '', 'C2/C8 REDCO FLATS MADINA', '', 'GP18306 ACCRA', '1030', 0, 'LICENSED', '', 'GWCL', '', '', 'MICHAEL.NYOAGBE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '[\"1\",\"1\",\"2\",\"3\"]', '2019-03-23 23:09:38', '1', '64'),
-(12, 'GLADYS', 'APPIAH', 'IVY', '03/07/1993', '264716045', '', 'AMASAMAN', '', '', '0', 0, 'STUDENT', '', 'BIGDATA GHANA LTD', '', '', 'IVY.WARTEMBERG@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(13, 'BISMARK', 'TENKORANG', 'KWASI', '12/11/1989', '248664955', '', 'NO 38, AMLI STREET, ADENTA', '', 'BOX AP450, AKROPONG-AKUAPEM', '0', 0, 'OTHER', '', 'BEACON SURVEY LIMITED', '', '', 'TENBIS2008@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(14, 'DIANA', 'AHIAKU', 'MAWUENA', '06/08/2018', '0248142593/027446503', '', 'KANDA,  ADJASCENT NADMO', '', 'P.O.BOX 901 ACCRA -CANTONMENTS', '0', 0, 'TECHNICIAN', '', 'CSS PRECISE SYSTEMS LTD.', '', '', 'DYANGREATER@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(15, 'ISAAC', 'BLEBOO', 'ISAAC', '25/02/1974', '244745334', '', 'PR A1 030. ABIA - PRAMPRAM', '', 'BOX TN 1428 TECHIE NUNGUA ESTATE', '805', 0, 'LICENSED', '', 'BLEBS GEO-CONSULT', '', '', 'ISAACBLEBOO@YAHOO.CO.UK', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(16, 'CULBERT', 'ABAGULUM', 'KWAME', '11/08/1976', '244735842', '', 'SUNYANI BRONG AHAFO', '', 'BOX 830 SUNYANI', '0', 0, 'STUDENT', '', 'LANDS COMMISSION(SURVEY AND MAPPING DIVISION)', '', '', 'ABAGULUMCULBERTKWAME@YMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(17, 'ALEX', 'FUGOR', 'KWABENA', '10/18/0001', '243049832', '', 'LAPAZ', '', 'BOX 71 NSAWAM', '10', 0, 'TECHNICIAN', '', 'GHANA SCHOOL OF SURVEYING AND MAPPING', '', '', 'ALEXFUGOR@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '67'),
-(18, 'EMMANUEL', 'ARYEETEY', 'NII AYI', '14/08/1988', '0249920224/ 02649369', '', 'NUNGUA', '', 'P.O. BOX CO 2728 TEMA', '0', 0, 'PROFESSIONAL', '', 'BASELINE SOLUTIONS', '', '', 'EMMANUELARYEETEY442@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(19, 'ISAAC', 'AGYEI', 'NII OKAI KWEKU', '20/07/2018', '243049925', '', 'PANTANG EAST 483', '', 'BOX ABK83 ABOKOBI- ACCRA', '11', 0, 'OTHER', 'FGhIS', '', '', '', 'ISAACADJEI83@GMAIL.COM', '', '', '', '11095', '[\"1\",\"2\",\"4\"]', '2019-03-23 23:09:39', '1', '98'),
-(20, 'AARON', 'FREMPAH', 'ADOM', '07/07/1989', '0241273751/055626866', '', 'ABRUKUTUASO,MAMPONG ASHANTI', '', 'COCOA HEALTH AND EXTENSION DIVISION&#13;&#10;P.O. BOX 32&#13;&#10;MAMPONG DISTRICT', '19', 0, 'PROFESSIONAL', 'FGhIS', '', '', '', 'ADOMAARONFREMPAH55@YAHOO.COM', '', '', '', '500', '', '2019-03-23 23:09:39', '1', '92'),
-(21, 'RICHARD', 'OTCHERE', 'K', '12/04/1977', '244667171', '', 'OYARIFA', '', 'P.O.BOX. CO 1955 TEMA', '1051', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'OSOKITI@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(22, 'FELIX', 'BOTE-KWAME', 'B', '11/07/1977', '244607913', '', 'KPONE', '', 'P O BOX CE 11507, TEMA', '1322', 0, 'PROFESSIONAL', '', 'WILLIX CONSULT', '', '', 'FELIXXBK@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(23, 'KINGSLEY', 'SAM', 'YAW', '01/12/1988', '245989572', '', 'SEPE DOTE KUMASI', '', 'P. O. BOX 4083', '1635', 0, 'PROFESSIONAL', '', 'ASANTEHENE?S LANDS SECRETARIAT', '', '', 'SHIZUMEBACHI@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(24, 'TERAH', 'ANTWI', '', '24/02/1993', '240655554', '', 'P.O.BOX AK 109', '', '', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'SURVEYOR153@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(25, 'JOSEPH', 'ANTWI', '', '27/10/1981', '+233266775177', '', 'PLOT 19 BLOCK D KWAASOWA, KUMASI', '', 'P. O. BOX SN 272, KUMASI', '1641', 0, 'PROFESSIONAL', '', 'ASANTEHENES\' LAND SECRETARIAT', '', '', 'GOSPOJOEY@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(26, 'BENEDICTA', 'REINARH', 'DEDE BARKEY', '12/03/2018', '244972184', '', 'ASHIYIE', '', 'P. O. BOX CT 228, CANTONMENT,  ACCRA', '1029', 0, 'PROFESSIONAL', '', 'PETROLEUM COMMISSION', '', '', 'BENDEBAR1@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(27, 'ISAAC', 'ANSAH', '', '18/10/1975', '244768757', '', '63/13F ABOOM WELLS CAPE COAST', '', 'P O BOX CC 42 CAPE COAST', '1732', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'ANSTECHCONSULT@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(28, 'GODWIN', 'BOATENG', 'AKWASI', '25/06/1989', '0267857468/054891018', '', 'E 17 SOUTH SUNTRESO', '', 'SN 679 SANTASI - KUMASI', '0', 0, 'OTHER', '', 'GEOMATRIX ENGINEERING SERVICES', '', '', 'GAKWASIBOATENG@GMAIL', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(29, 'GILBERT', 'DJANETEY', 'ETIAKO', '25/03/2018', '244173313', '', 'AMASAMAN, ACCRA', '', 'P. O. BOX CT608, CANTONMENTS-ACCRA', '0', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'ETIAKOGILBERT@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(30, 'SAMUEL', 'LAMPTEY', '', '04/01/1992', '501370862', '', 'A662/4 LARTEBIOKORSHIE- NEAR RADIO GOLD', '', 'P. O. BOX MP 205', '0', 0, 'PROBATIONER', '', 'PRISMOIDAL COMPANY LIMITED', '', '', 'LAMPTEYSAMUEL92@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(31, 'DANIEL', 'AGBEMORDZIE', 'LIGHT', '26/12/1991', '244663093', '', 'MADINA', '', 'PMB CT489, CANTONMENTS. ACCRA', '0', 0, 'STUDENT', '', 'GHANA SCHOOL OF SURVEYING AND MAPPING', '', '', 'AGBEMORDZIEYAO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(32, 'FLORENCE', 'LAMPTEY', '', '03/10/1977', '244225980', '', 'GRADE ONE, BOGOSO', '', 'BOX AN 18629, ACCRA - NORTH', '1134', 0, 'LICENSED', '', 'ROCKSURE INTERNATIONAL', '', '', 'NINALAMPTEY@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(33, 'ASAA', 'ABUNKUDUGU', 'AKUNAI PETER', '15/04/1976', '+233202423079/246170', '', 'PLOT NUMBER 47 BLOCK B BEHIND YIKENE CHIEF PALACE', '', 'BOX 767', '1232', 0, 'PROFESSIONAL', '', 'BOLGATANGA POLYTECHNIC', '', '', 'NKUDUGAA@HOTMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(34, 'MERCY', 'ACHEAMPONG', 'OBENEWAH', '17/04/1971', '277482996', '', 'HO.NO. A41 BULEMI ,GBAWE , MALLAM', '', 'BOX  OD 435 ODORKOR ACCRA', '238', 0, 'LICENSED', '', 'C.T.K NETWORK AVIATION AND ROKMER', '', '', 'MERCYDECKER@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(35, 'GEORGE', 'FRIMPONG', 'OKWABI', '08/02/1958', '208135831', '', 'ACCRA', '', 'P.O. BOX CT 4697, CANTONMENTS -ACCRA', '555', 0, 'LICENSED', '', 'PRIVATE PRACTICE', '', '', 'OKWABIGFM@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(36, 'EVANS', 'MGBORLA', 'ACKAH', '27/06/1992', '247986671', '', 'TAKORADI', '', '0208, TAKORADI', '0', 0, 'PROFESSIONAL', '', 'DEPARTMENT OF URBAN ROADS', '', '', 'EVMGBOLA@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(37, 'EDEM', 'BEKOR', 'ERIC', '31/07/1982', '244419056', '', 'TESHIE', '', 'POST OFFICE BOX OS 834, OSU - ACCRA', '0', 0, 'OTHER', '', 'PRIVATE', '', '', 'EDEMBEKOR@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', '64'),
-(38, 'PRINCE', 'ACQUAH', 'CHARLES', '23/11/1977', '0244971688 / 0260787', '', 'PLT 14 BLOCK K, KOTEI TWUMDUASE, KUMASI', '', 'CIVIL ENGINEERING DEPARTMENT, FACULTY OF ENGINEERING AND TECHNOLOGY, P.O.BOX 854, KUMASI', '1148', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'ACQUAHPRINCE@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(39, 'GILBERT', 'QUASHIE', 'KOBLA', '30/05/1972', '244266835', '', 'HNO. 1, MANGO LANE ASHONGMAN', '', 'POST OFFICE BOX GP3707, ACCRA', '1143', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SMD)', '', '', 'GILBERTKOBLAQUASHIE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(40, 'EDWARD', 'OSEI JNR', 'MATTHEW', '10/07/1960', '244487620', '', 'N. 26 NORTH SUNTRESO', '', 'P. O. BOX OS 84, OSU-ACCRA', '314', 0, 'LICENSED', '', 'KNUST', '', '', 'CHIEF_OSEI@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(41, 'SETH', 'OPOKU AKOMEAH', '', '23/03/1993', '501372732', '', 'GYINYASE - KUMASI', '', 'P. O. BOX KS 10780, ADUM - KUMASI', '0', 0, 'OTHER', '', 'FREELANCE', '', '', 'SOPOKUAKOMEAH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(42, 'DELALI', 'AHEDOR', '_', '28/09/1984', '249422575', '', 'HOHOE-BLAVE', '', 'BOX 181 HOHOE, CHED COCOBOD', '0', 0, 'OTHER', '', 'COCOBOD', '', '', 'DELAHEDOR@GMAIL.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(43, 'GHH', 'SAM', '', '01/01/2018', '5677', '', 'GHHJ', '', 'HHJJJ', '1234', 0, 'PROBATIONER', '', 'GHHHH', '', '', 'TYIJHH', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(44, 'SELIKEM', 'ABURU', 'KOFI', '30/12/2018', '246675252', '', 'ADENTA', '', 'BOX MD 2046, MADINA', '1722', 0, 'PROFESSIONAL', '', 'IMPACT HOMES LTD', '', '', 'SELIABURU@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(45, 'SELIKEM', 'ABURU', 'KOFI', '30/12/2018', '246675252', '', 'ADENTA', '', 'BOX MD 2046, MADINA', '1722', 0, 'PROFESSIONAL', '', 'IMPACT HOMES LTD', '', '', 'SELIABURU@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(46, 'MAWUENYEGA', 'FIAXE', 'DZIGBORDI KOFI', '20/05/1966', '0244093136/055367056', '', '#12 DODI ROAD, COMMUNITY ONE, AKOSOMBO.', '', 'P. O. BOX AK. 312, AKOSOMBO.', '1548', 0, 'PROFESSIONAL', '', 'VOLTA RIVER AUTHORITY', '', '', 'MEGAFIXE@YAHOO.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(47, 'KWAME', 'TENADU', '', '', '243241121', '', 'NEAR JUBILEE SCHOOL, NSADWIR, DUTCH KOMENDA', '', 'BOX CC 564', '815', 0, 'LICENSED', '', 'UDANET LIMITED', '', '', 'KWAMETENADU@GMAIL.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(48, 'KWESI', 'ADDEY- BLANKSON', '', '14/02/1960', '208118129', '', 'TAKORADI', '', 'BOX  MC 1330 TAKORADI', '1456', 0, 'PROFESSIONAL', '', 'SMD-LANDS COMMISSION', '', '', 'KADBLANKSON@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(49, 'KWASI', 'ASAMOAH-TWUM', '', '20/03/1983', '244634373', '', 'GYENYASE-RAMSEYER', '', '', '1743', 0, 'PROFESSIONAL', '', 'EUROGET DE-INVEST', '', '', 'KASAMOAHTWUM@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(50, 'ISAAC', 'SELBY', 'YAW ABIRI', '12/10/1963', '244255189', '', 'ASHIYIE', '', 'P.O.BOX 1912 MAMPROBI', '370', 0, 'TECHNICIAN', '', 'SURVEY DEPARTMENT', '', '', 'GYADAMCITY @HOTMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(51, 'ANTHONY', 'ARKO-ADJEI', '', '21/07/1970', '244232447', '', 'BLOCK E PLOT 18 AYIGYA, KUMASI', '', 'DEPARTMENT OF GEOMATIC ENGINEERING, KNUST, KUMASI', '837', 0, 'PROFESSIONAL', '', 'KWAME NKRUMAH UNIVERSITY OF SCIENCE AND TECH', '', '', 'ARKOADJEI@HOTMAIL.COM.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(52, 'VIVIAN', 'LUTTERODT', '', '21/06/2018', '272186581', '', 'ADENTA', '', '', '0', 0, 'OTHER', '', 'GEOMATRIX ENGINEERING SERVICES', '', '', 'LUTTERODTVIV.VL@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(53, 'CHRISCENCIA', 'NAAH', '', '28/11/1993', '247291679', '', 'KANDA NEAR NADMO HEADQUARTERS', '', 'P.O BOX 998,DARKUMAN, ACCRA WEST.', '0', 0, 'TECHNICIAN', '', 'GHANA WATER COMPANY LIMITED', '', '', 'CHRISTYNAAH20@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(54, 'CHRISCENCIA', 'NAAH', '', '28/11/1993', '247291679', '', 'KANDA NEAR NADMO HEADQUARTERS', '', 'P.O BOX 998,DARKUMAN, ACCRA WEST.', '0', 0, 'TECHNICIAN', '', 'GHANA WATER COMPANY LIMITED', '', '', 'CHRISTYNAAH20@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(55, 'JACK', 'NTI ASAMOAH', '', '14/10/1986', '242681607', '', 'PLOT 137 BLOCK EE DABAN NEW SITE KUMASI', '', 'P. O. BOX 854', '1429', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'JACCEPHAS@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(56, 'DANIEL', 'AMOAKO', 'ODURO', '10/05/2018', '275577965', '', 'RM7, BLOCK 59, ADENTA SSNIT FLATS.', '', 'LG 657, LEGON', '0', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT LTD.', '', '', 'DANNYKODURO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(57, 'WINIFRED', 'ACQUAH', '', '18/07/1992', '248025165', '', 'KANDAH(NADMO)', '', 'P.O.BOX 903 ACCRA(CANTOMENT)', '0', 0, 'STUDENT', '', 'INSTITUTION', '', '', 'ACQUAHWINIFRED92@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(58, 'WINIFRED', 'ACQUAH', '', '18/07/1992', '248025165', '', 'KANDAH(NADMO)', '', 'P.O.BOX 903 ACCRA(CANTOMENT)', '0', 0, 'STUDENT', '', 'INSTITUTION', '', '', 'ACQUAHWINIFRED92@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(59, 'FRED', 'ABOAGYE-LARBI', '', '01/01/1966', '244067365', '', 'PLOT C1/10 NAA AFII AVE.ATOMIC  HILLS ESTATE ASHON', '', 'P.O. BOX 1367 DANSOMAN ACCRA', '972', 0, 'LICENSED', '', 'BEACON SURVEY LIMITED', '', '', 'FABOAGYELARBI1966@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(60, 'DESMOND', 'APEDU', 'PRINCE', '05/07/1987', '244903249', '', 'BOGOSO', '', 'P.O. BOX 30. PRESTEA', '1638', 0, 'PROFESSIONAL', '', 'GOLDEN STAR RESOURCES LTD', '', '', 'APEDU2003@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(61, 'FELIX', 'TANOEH', '', '02/03/1988', '241789308', '', 'ADENTA', '', '', '0', 0, 'PROFESSIONAL', '', 'MICHELETTI AND CO GH. LTD', '', '', 'TANOEH.FELIX@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(62, 'ADWOA', 'AMOAH', 'SARPONG', '05/05/2018', '244842650', '', 'EE 44, KWADASO ESTATE, KUMASI', '', 'BOX 7603', '1227', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'LAWRENA80@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(63, 'PHILIP', 'OSEI BANAHENE', 'YAW', '24/05/1984', '0204441642, 02649752', '', '1948 MILITARY STREET, ALOGBOSHIE -ACHIMOTA', '', 'BOX R.Y 361', '1625', 0, 'PROFESSIONAL', '', 'SKEPIC SERVICES LIMITED', '', '', 'OKATAKYIEYAWBEE@GMAIL.COM BANAKING2000@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', '64'),
-(64, 'PATRICK', 'ANSU-GYEABOUR', '', '17/05/1992', '+233207707914', '', 'DOME PILLAR TWO', '', 'BOX 1059, SUNYANI-BA', '0', 0, 'OTHER', '', 'JOHN MURPHY CONSTRUCTION', '', '', 'PAGSNET@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(65, 'EMMANUEL', 'SEFA', '', '20/12/1986', '0276202049/024094431', '', 'TAIFA BURKINA, ACCRA', '', 'P. O. BOX GO 935, ACCRA', '1438', 0, 'PROFESSIONAL', '', 'DAOVTECH DESIGN GROUP LIMITED', '', '', 'SEFASES2005@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(66, 'GIDEON', 'VUNASE', '', '04/03/1989', '0243930806/050632085', '', 'JERUSALEM -TARKWA', '', 'C/O DR ISSAKA YAKUBU, UMAT, BOX 237, TARKWA', '0', 0, 'PROFESSIONAL', '', 'UNIVERSITY OF MINES AND TECHNOLOGY', '', '', 'VUNASEG@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(67, 'MICHAEL', 'DORKENU', 'MENSAH', '03/02/1986', '246231306', '', 'HOUSE NUMBER 21 NORTH LEGON', '', 'P. 0 BOX 257 HAATSO', '0', 0, 'STUDENT', '', 'GSSM', '', '', 'DORKENUMICHAEL@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(68, 'EMMANUEL', 'ADU-AFARI', '', '16/07/1993', '2247622803', '', 'GRADUATE STUDENTS HOSTEL', '', 'P.O.BOX AN 11685 ACCRA-NORTH', '12', 0, 'PROBATIONER', '', 'KWAME NKRUMAH UNIVERSITY OF SCIENCE AND TECHNOLOGY', '', '', 'SPYCHI99.EAA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(69, 'BEATRICE', 'KOM', 'AKPENE AHIAFOR', '15/08/1974', '244261001', '', 'H/NO CP 16 NEW GBAWE', '', 'BOX CT 5633 CANTOMENTS- ACCRA', '1445', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION/GSSM', '', '', 'BEAKOM@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(70, 'EMMANUEL', 'ACQUAH', '', '16/03/1968', '0244214071, 02058532', '', 'AFIAMAN, POKUASE', '', 'P.O. BOX M154 MINISTRIES-ACCRA', '1248', 0, 'PROFESSIONAL', '', 'GHANA IRRIGATION DEVELOPMENT AUTHORITY', '', '', 'EKACQUA@YAHOO.CO.UK,  EACQUAH68@GMAIL', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(71, 'OKYERE', 'ADUBOFUOR', '', '09/09/1989', '207130460', '', 'PLOT 4 BLOCK 4 SARFO STREET - KOTEI EXTENSION', '', 'P.O. BOX 17 BONWIRE-ASHANTI', '0', 0, 'OTHER', '', 'GEOMATRIX ENGINEERING SERVICES', '', '', 'OKSBERG89@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(72, 'GIDEON', 'OPOKU', '', '08/10/1988', '542630831', '', 'ACCRA', '', 'BOX LATER 12278,KUMASI', '0', 0, 'PROFESSIONAL', '', 'LOSAMILLS CONSULT', '', '', 'GID32132@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(73, 'ALEXANDER', 'AYETTEY', '', '17/10/2018', '245176148', '', 'ACCRA', '', '', '0', 0, 'PROBATIONER', '', 'LANDS COMMISSION', '', '', 'STLEXISAAA@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(74, 'REDUWAN', 'KASSIM', '', '', '0508956050/024804360', '', 'WA, MALLAM ISSA STREET, HSE NO. DL3', '', 'BOX 272, WA, UPPER WEST REGION', '1718', 0, 'PROFESSIONAL', '', 'P&W GHANEM MESSRS', '', '', 'KASSIMREDUWAN@GMAIL.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(75, 'DAVID', 'AMEKU', '', '22/07/1993', '507757781', '', 'DANSOMAN CONTROL', '', 'P. O BOX 45 , MADINA', '0', 0, 'PROBATIONER', '', 'GEOSTATE SURVEY', '', '', 'SELASIAMEKU09@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(76, 'PRINCE', 'ODEI', 'CHARLES', '12/06/1993', '248166944', '', 'ACCRA & TAKORADI', '', 'C/O MOTIVATE THE WORLD, P.O. BOX KN 4828, KANESHIE.', '0', 0, 'PROFESSIONAL', '', 'SELF EMPLOYED', '', '', 'ODEIKWAME5@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(77, 'CHRISTIAN', 'MENSAH', 'LOUIS', '10/11/1991', '240064659', '', 'PLT 61 BLK D', '', '2343 ASHTOWN', '0', 0, 'OTHER', '', 'PENT GEOCONSULT', '', '', 'CRYSTALGECS@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(78, 'CYRIL', 'GADEGBEKU', '', '09/05/1987', '240800901', '', 'NORTH LEGPN', '', 'P.O.BOX GP. 3707 ACCRA', '1142', 0, 'PROFESSIONAL', '', 'DECK ENGINEERING LIMITED', '', '', 'CYRILGADEGBEKU@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(79, 'GEORGE', 'KOOMSON', '', '04/04/1976', '244747484', '', 'HNO. A3 KWAMO FLAT', '', 'P. O. BOX 854 KUMASI', '0', 0, 'OTHER', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'POCOINI@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(80, 'AUGUSTINE', 'TETTEH', 'OPLEM', '15/08/2018', '246482405', '', 'H/25 HAATSO-ECOMOG', '', 'ABUSCO, PMB, KIBI-E/R', '0', 0, 'OTHER', '', 'FORTRESS GHANA', '', '', 'AUGUSTINETETTEH477@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(81, 'JACOB', 'BOATENG', 'KWAME', '22/08/1982', '207914472', '', 'AWOSHIE-NIC. OFF ABLEKUMA-POKUASI ROAD', '', '', '1236', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATIC CONSULT', '', '', 'KWAABOAT@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(82, 'EBENEZER', 'DOKU', 'TETTEH', '07/10/1990', '275440804', '', 'AMASAMAN-ACCRA', '', '', '32094', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'BYGONEDOKU90@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(83, 'KWEKU', 'BAFFOE', '', '30/08/1989', '208603458', '', 'SYCAMORE MEDICAL CENTER, TAKORADI', '', 'P.O.BOX 1330, TAKORADI', '1708', 0, 'PROFESSIONAL', '', 'FREELANDS', '', '', 'KWEKUB4@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(84, 'GABRIEL', 'OWIREDU', 'KOFI', '03/06/1981', '0209532776/054305092', '', 'SQ 56 AHINSAN ESTATE KUMASI', '', 'P.O.BOX 3280 ADUM KUMASI', '1745', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'OWUGAB@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(85, 'KENNETH', 'COFFIE', '', '12/11/1989', '242635051', '', 'TEMA', '', '', '1713', 0, 'PROFESSIONAL', '', 'TDC DEVELOPMENT COMPANY LTD.', '', '', 'KENNETHCOFFIE2@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(86, 'MAXWELL', 'APPIAH', '', '13/08/1986', '541296746', '', 'PLT28,ASARE BREMPONG STREET.AMOABEN', '', 'P O BOX KY2415,KWABENYA ACCRA', '1747', 0, 'PROFESSIONAL', '', 'EMO GEOMATIC CONSULT', '', '', 'MAXASEM@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(87, 'ISAAC', 'ADJEI', 'KOFI', '26/05/1989', '246893018', '', 'NY 38 D, NEW NYAMSO, OBUASI', '', 'BOX 118, OBUASI', '0', 0, 'PROBATIONER', '', 'BGP-BAY', '', '', 'QUOPHYADJEI@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(88, 'EUGENE', 'ANIPAH', 'KODZO', '09/09/1985', '246740929', '', 'POST CODE GM-251-5429', '', 'POST CODE GM-251-5429', '0', 0, 'PROBATIONER', '', 'LANDS COMMISSION-SMD', '', '', 'EKANIPAH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', '64'),
-(89, 'NANA', 'DUAH', 'KYERE', '28/07/1993', '546801696', '', 'KWADASO ESTATE', '', 'P. O. BOX 763, OBUASI', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'NANADUAHSA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(90, 'BERNARD', 'BOATENG', 'KOFI', '24/11/1983', '243866176', '', 'ANAJI_TAKORADI, SAVOY_CAPE COAST', '', 'BOX CC 42 CAPE COAST', '1737', 0, 'PROFESSIONAL', '', 'LANDS COMMIISSION - SMD', '', '', 'BENBOAT2G6@YAHOO.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(91, 'KINGSLEY', 'WIAFE-KWAKYE', 'KOJO', '', '201460744', '', 'J22 COMMUNITY 9 TEMA', '', 'P.O. BOX CT 175 CANTONMENTS', '1700', 0, 'PROFESSIONAL', '', 'GHANA PORTS AND HARBOURS AUTHORITY', '', '', 'KWAJIKWAKYE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(92, 'EMMANUEL', 'MOHENU', 'ADJEI', '11/05/1950', '242868201', '', 'ABLORADJEI NEAR OLD ASHONGMAN', '', 'C/O P.O.BOX CT903 CANTONMENTS ACCRA', '224', 0, 'LICENSED', '', 'NIL', '', '', 'EAM1950@HOTMAIL.CO.UK', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(93, 'RABIU', 'ABDUL SALAM TOURE', '', '03/07/1984', '262380830', '', 'SAWABA KINTAMPO', '', '', '1703', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'CAPTAINRABAH05@YAHOO.CO.UK', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(94, 'CHRISTIAN', 'GAISEY - OTOO', '', '22/08/2018', '207130898', '', 'MADINA, LIBYA QUARTERS', '', '', '1715', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SMD)', '', '', 'CGAISEYOTOO@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(95, 'FELIX', 'DARKWAH', 'MUSTAPHA', '06/10/2018', '208210928', '', 'PLT 19 BLK E, FANKYENEBRA - KUMASI', '', 'SN 927, SANTASI - KUMASI', '0', 0, 'OTHER', '', 'YOPAC LINK SOLUTIONS', '', '', 'FELIXDARKWAH5@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(96, 'BEATRICE', 'ACHEAMPONG', '', '19/01/2018', '273457384', '', 'BOADI', '', 'GEOMATIC ENGINEERING DEPARTMENT, KNUST.  PMB KUMASI', '1634', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'BEAYAACH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(97, 'PRISCILLA', 'ABASI', 'MBAMA', '13/04/1993', '205302691', '', 'NMAI DZORN', '', '', '2', 0, 'PROFESSIONAL', '', 'WALULEL LIMITED', '', '', 'TALAPRISY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '84'),
-(98, 'JEFFREY', 'AMLALO', 'DORNU', '30/08/1991', '265405972', '', 'WESTLANDS BLVD HN112 PAPAO LEGON', '', 'OS 3445', '0', 0, 'PROBATIONER', '', 'METRISYS GHANA LTD', '', '', 'JEFFREYAMLALO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(99, 'CYRIL', 'OWIAFE', 'SETUSA', '24/09/1992', '247680879', '', 'TESHIE', '', '', '0', 0, 'PROBATIONER', '', 'LOSAMILLS COMSULT LIMITED', '', '', 'SETUS249@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(100, 'ATO', 'ARHIN', 'KWAMENA', '18/07/1992', '209392184', '', 'TAKORADI', '', 'EF 45, EFFIA, TAKORADI', '0', 0, 'STUDENT', '', 'PRIVATE', '', '', 'ATOARHIN11@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(101, 'ESTHER', 'ANKAMU', 'SERWAA', '23/09/1991', '207063890', '', 'DANSOMAN-EBENEZER DOWN', '', '', '0', 0, 'PROBATIONER', '', 'AFCONS INFRASTRUCTURE LIMITED', '', '', 'ANKYSTAR2009@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(102, 'JOHN', 'OPPONG-TWUM', 'EAKIN', '29/06/1985', '0549074579 / 0263986', '', 'TEBIBIANO, NEAR THE MOSQUE', '', 'BOX AH 8157 AHINSAN KUMASI', '1742', 0, 'PROFESSIONAL', '', 'EAKJOP GEOINFO CONSULT', '', '', 'OPPONGTWUM@YAHOO.COM; EAKJOP@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(103, 'ERNEST', 'ASONGO', '', '12/01/1990', '246157909', '', 'NORTH KANESHIE', '', 'BOX 136,BOLGA.', '0', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'ERNESTASONGO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(104, 'SAMPSON', 'ACKAH', 'JNR', '02/04/1990', '266771611', '', 'KUMASI', '', '', '0', 0, 'PROFESSIONAL', '', 'PW MINING -GHANA', '', '', 'ACKAH79@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(105, 'JEFF', 'OSEI', 'DACOSTA', '24/02/1994', '240345610', '', 'AB 34/C OBUASI', '', 'SDA CHURCH BOX88', '0', 0, 'STUDENT', '', 'KNUST', '', '', '2230414@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(106, 'EPHRAIM', 'OWUSU', 'ATTA', '19/11/1990', '207040066', '', 'KOTEI.  P & G EXECUTIVE HOSTEL', '', 'P. O. BOX 407. \r\nAKIM ODA\r\nEASTERN REGION \r\nGHANA', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'EPHRAIMOWUSU273@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(107, 'YAKUBU', 'ALHASSAN', '', '04/08/1993', '248321130', '', 'HOUSE NUMBER 37 BLK K, ABOASO-ASHANTI', '', 'P.O.BOX KJ 29, KEJETIA-KUMASI', '130467', 0, 'PROBATIONER', '', 'LANDS COMMISSION-ACCRA', '', '', 'YALHASSANPRO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(108, 'DANIEL', 'SASU', 'EFFAH', '28/10/1981', '264828895', '', 'B 292 / 25', '', 'BOX AN 7369, ACCRA- NORTH', '1698', 0, 'PROFESSIONAL', '', 'COMPTRAN ENGINEERS & PLANNERS ASSOCIATION', '', '', 'ZAGA_BOTHA@HOTMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(109, 'ABDUL BASIR', 'ISSAH', '', '27/08/1988', '202808623', '', 'SSNIT FLAT BLOCK 27A,WA', '', 'GHANA HIGHWAY AUTHORITY, BOX 1641,HEAD OFFICE, ACCRA', '1725', 0, 'PROFESSIONAL', '', 'GHANA HIGHWAY AUTHORITY', '', '', 'ISSAHABDULBASIR@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(110, 'KAFUI', 'DADZOE', 'NOEL', '17/01/1960', '208195041', '', 'DANFA/MADINA', '', 'BOX  CO 315 , TEMA', '1240', 0, 'PROFESSIONAL', '', 'JGC', '', '', 'KAFUIDADZOE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(111, 'ROOSELER', 'GYIMAH', 'AKOSUA', '29/03/1998', '265732605', '', 'ATAFOA-TIKESE', '', '', '0', 0, 'STUDENT', '', 'STUDENT', '', '', 'CHICAGOTYCOON.CT@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(112, 'AUGUSTINE', 'OBENG-FORI', '', '27/11/1965', '242088468', '', 'ASOFAN, OFANKOR', '', 'P.O.BOX AJ 13, ALAJO ACCRA', '1644', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT LTD', '', '', 'AOBENGF@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(113, 'BABA ZAKARIA', 'SALIFU', '', '13/06/1971', '244375560', '', 'BOLGA', '', 'P.O..BOX CT 5937, CANTONMENTS-ACCRA', '1137', 0, 'PROFESSIONAL', '', 'SMD-LANDS COMMISSION', '', '', 'SBZAKARIA@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:42', '1', '64'),
-(114, 'NESTA', 'KOMLADZEI', 'MAWUNYO', '23/10/1990', '201460236', '', 'ADENTA FRAFRAHA', '', '', '0', 0, 'PROFESSIONAL', '', 'DE SIMONE LTD', '', '', 'MARVESTA1@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(115, 'ISAAC', 'YIRENKYI', 'KORANTENG', '06/11/1971', '545761735', '', 'LC 15 DEVTRAVO ESTATE COMM 25 TEMA', '', 'P.0.BOX  CO \r\n3860', '1032', 0, 'LICENSED', '', 'GHANA PORTS  AND HABOURS AUTHORITY', '', '', 'IKEYIRENKYI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(116, 'JOHN', 'ANNAN', 'VICTOR', '10/10/1956', '0244276619/020295739', '', 'H/N:10A ROOM4,SITE B,C3 TEMA', '', 'P.O.BOXCO2401,TEMA.', '809', 0, 'LICENSED', '', 'JOVIAN SURVEY CONSULT', '', '', 'JOVIAN119@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(117, 'RANSFORD', 'TETTEH', '', '21/09/2018', '249086200', '', 'SSNIT FLAT KOFORIDUA', '', 'BOX KF 139 , KOFORIDUA', '19460', 0, 'PROFESSIONAL', '', 'HAMAXYS', '', '', 'RANSFORD.TTTH@GMAIL.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(118, 'NANA', 'KUSI-APPIAH', 'ADWOA', '02/10/2018', '242984264', '', 'DOME', '', 'AH78', '1552', 0, 'PROFESSIONAL', '', 'SELF EMPLOYED', '', '', 'MZNANADJ@GMAIL COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(119, 'BENONY', 'FIAH', 'AGBEWONU', '19/10/1937', '3244279235', '', 'ABLENKPE NO 11 TOTRO STREET', '', 'BOX AN 10227, ACCRA-NORTH', '171', 0, 'PROFESSIONAL', '', 'GEO ENGINEERING SERVICES', '', '', 'GEOENGINEERING@YAHOO.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(120, 'ABIGAIL', 'OPOKU AFRIYIE', '', '21/02/1985', '244676073', '', 'PLOT NO. 11, BLK A, NYANKYERENIASE', '', '7310, ADUM, KUMASI', '0', 0, 'PROFESSIONAL', '', 'PVLMD', '', '', 'OPOKUAFRIYIEA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(121, 'ERNEST', 'EKUBAN', '', '30/04/2018', '243983924', '', '30 TESANO STREET', '', 'P.O.BOX AF 3238', '1723', 0, 'PROFESSIONAL', '', 'GHANA HIGHWAY AUTHORITY', '', '', 'ERNEKUBAN@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(122, 'BENNET', 'AKPALU', '', '04/01/1993', '0203396392/054145926', '', 'HSE NO KS 257A/4 WINNEBA', '', 'BOX 227 KPANDO', '0', 0, 'TECHNICIAN', '', 'PAABADU CONSTRUCTIONS LIMITED', '', '', 'BENNETKAFUI@GMAIL.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(123, 'VICTOR', 'DODODZA', '', '26/11/1986', '244381106', '', 'C669 PROF. AKP KLUDZE ST. KOTOBABI NORTH', '', 'BOX GP3172, ACCRA - CENTRAL', '0', 0, 'OTHER', '', 'KNUST', '', '', 'VICHUG266@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(124, 'RICHARD', 'KPEKPENA', 'GAMELI', '28/03/1981', '244677905', '', 'MEDIE', '', 'BOX 1993 MADINA', '84212', 0, 'PROBATIONER', '', 'SELF EMPLOYED', '', '', 'RICHSTONNY@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(125, 'STEPHEN', 'KPALEGA', 'ONTOANEYIN', '16/08/2018', '246019638', '', 'CHOGGU YAPALSI HSE NO. 358 BLK C', '', 'C/O VRA/NEDCO BOX 77 TAMALE', '0', 0, 'PROFESSIONAL', '', 'VRA/NEDCO', '', '', 'KPALEGASTEPHEN@YAHOO.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(126, 'PROSPER', 'AKORTSU', 'MAWUSI', '23/03/1988', '207296295', '', 'NAVY WARDROOM TEMA', '', 'GHANA NAVY, PMB TEMA-ACCRA', '0', 0, 'OTHER', '', 'GHANA NAVY', '', '', 'M.AKORTSU@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(127, 'NICHOLAS', 'GBLORKPOR', 'KOMLA', '06/09/1988', '248759172', '', 'ADW/G93A', '', 'P.O.BOX KF 1427, KOFORIDUA', '0', 0, 'STUDENT', '', 'TOTAL LAND SOLUTION COMPANY LIMITED, KOFORIDUA', '', '', 'NICHOLASKOMLA@GMAIL.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(128, 'GEORGE', 'ETO', 'MUMUNI', '14/11/1952', '208140954', '', 'HOUSE NO. 19A BLK W. A?EDUASE  KUMASI. NEAR KNUST', '', 'P.?. B?X AK69.ANLOGA KUMASI.', '256', 0, 'LICENSED', '', 'GMT SURVEYS LIMITED', '', '', 'GMTSURVEYS60@GMA?L.COMGMT', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:43', '1', '64'),
-(129, 'BRIGHT', 'ASIO', '', '28/07/1982', '507314828', '', 'TEMA', '', '', '6253002', 0, 'OTHER', '', 'PROMAPPERS ENGINEERING LTD', '', '', 'BRYTEASIO@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(130, 'LILY LISA', 'YEVUGAH', '', '30/12/1988', '201810116', '', 'ODUOM PLOT 11 BLKA', '', 'P. O. BOX UP1516 KNUST, KUMASI.', '1735', 0, 'PROFESSIONAL', '', 'GEOMATIC ENGINEERING DEPART.', '', '', 'LLYEVUGAH@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(131, 'AKUFFO', 'ADDO-GYAN', 'KWAO', '21/09/1984', '0242009651/ 02350096', '', 'AWUTU BREKU, CENTRAL REGION', '', 'BOX 19 AWUTU BREKU', '1734', 0, 'PROFESSIONAL', '', 'LANDS (SMD)', '', '', 'UNCLERICH1900@YAHOO.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(132, 'JOSHUA', 'AZORLIADE', 'KWASI', '19/07/1987', '244994859', '', 'B343/7 AWUDOME ESTATE', '', 'P. O. BOX KN5651 KANESHIE ACCRA', '0', 0, 'PROBATIONER', '', 'QUEST CONSOLIDATED LIMITED', '', '', 'JOSHAZOR@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(133, 'PAA_KWESI', 'AKUFFO OWUSU-ENSAW', 'EZANETOR', '17/07/1994', '501372166', '', 'HSE 20, DUNKONAH SSNIT FLATS, WEIJA', '', 'C/O DR EDWARD OSEI, DEPARTMENT OF GEOMATIC ENGINEERING, PMB KNUST.', '0', 0, 'PROBATIONER', '', 'KNUST', '', '', 'KWESIKUFFA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(134, 'PADRAIC', 'FREEMAN', 'BIRCH', '15/10/2018', '244587015', '', '17 BATHUR STREET, SHIASHIE, EAST LEGON', '', 'P.O.BOX MP74, MAMPROBI, ACCRA', '1139', 0, 'LICENSED', '', 'ELECTRICITY COMPANY OF GHANA', '', '', 'SPADDYX@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(135, 'JERRY', 'ASAANA', 'ANAMZUI-YA', '11/06/1981', '206297736', '', 'BOLGATANGA', '', 'BOX 767, BOLGATANGA POLYTECHNIC', '1231', 0, 'PROFESSIONAL', '', 'BOLGATANGA POLYTECHNIC', '', '', 'NAMZUIYA@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(136, 'YAW', 'AMOAH', 'ACHEAMPONG', '24/07/1973', '244653386', '', 'HSE NO 5 RESIDENCY AREA NEAR ATEKYEM KOFORIDUA', '', 'P.O.BOX KF 983 KOFORIDUA', '916', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SURVEY & MAPPING  DIVISION)', '', '', 'AYAAKAY@YAHOO.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:44', '1', '87'),
-(137, 'JOHN', 'AYER', '', '17/02/1958', '208533925', '', 'H7B AHENSAN ESTATES', '', 'PMB', '580', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'JOHNNYAYER@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(138, 'ISAAC-MARCEL', 'AZORLIADE', '', '16/01/1990', '200154757', '', 'BLOCK 12, SANGO, 1ST JUNCTION, TESHIE-NUNGUA, ACCR', '', 'BOX CT 1311 CANTONMENTS, ACCRA', '0', 0, 'PROBATIONER', '', 'QUEST CONSOLIDATED LIMITED, GHANA', '', '', 'ISAACAZORLIADE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(139, 'EDWARD', 'ASANTE AWUAH', '', '12/04/1964', '243329372', '', 'BOX SC 502 TEMA', '', 'BOX 191 ACCRA', '1548', 0, 'PROFESSIONAL', '', 'SMD', '', '', 'ASANTEAWUAH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(140, 'PATRICIA', 'GRANAHAM', '', '', '243419443', '', 'H. NO. 35 HAATSO-ECOMOC ROAD, CLINIC ROAD ROAD', '', 'PIWC-ATOMIC, P. O. BOX WY 456, KWABENYA, ACCRA', '1730', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'PGRANAHAM@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(141, 'RICHARD', 'AGBANYO', 'MAWULI', '07/06/1965', '244625497', '', 'EAST OYARIFA', '', 'BOXC5633 CANTONMENT', '1720', 0, 'PROFESSIONAL', '', 'SURVEY AND MAPPING DIV.', '', '', 'RICHARDAGBANYO@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(142, 'BENJAMIN', 'ACQUAH', 'BENYI', '05/06/1966', '0262325005 / 0244325', '', '22 FRIMPOMAA REVENUE. BATSONAA', '', 'BX CT 4568. CANTS-ACCRA', '0', 0, 'LICENSED', '', 'NARPACK CONSULT', '', '', 'BBKIKO7@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(143, 'ILIASU', 'EWUNTOMAH', '', '25/11/1981', '208246012', '', 'PLOT 84 DABAN KUMASI', '', 'P.O.BOX KS16403', '1150', 0, 'PROFESSIONAL', '', 'DEPARTMENT OF URBAN ROADS', '', '', 'EILFAT@YAHOO.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(144, 'ILIASU', 'EWUNTOMAH', '', '25/11/1981', '208246012', '', 'PLOT 84 DABAN KUMASI', '', 'P.O.BOX K.S16403 ADUM KUMASI', '1153', 0, 'PROFESSIONAL', '', 'DEPARTMENT OF URBAN ROADS', '', '', 'EILFAT@YAHOO.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(145, 'KAFUI', 'DADZOE', 'NOEL', '17/01/1960', '208195041', '', 'DANFA/MADINA', '', 'BOX CO 315, TEMA', '1240', 0, 'PROFESSIONAL', '', 'JGC', '', '', 'KAFUIDADZOE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(146, 'SENKYIRE', 'ACQUAH', 'THOMAS', '19/06/1954', '0277770300/026340195', '', 'NO. 15A TOP KINGS ESTATE FETTEH NKWANTANAN', '', 'BOX CT4183 ACCRA', '614', 0, 'PROFESSIONAL', '', 'PRIVATE LICENSED SURVEYOR', '', '', 'SENKYIRE@GMAIL.COM0', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(147, 'FRANK', 'ANYAH', 'KWASI', '08/06/1986', '246498825', '', 'SRAHA ASHALEY BOTWE', '', 'DT 2530, ADENTA', '0', 0, 'PROBATIONER', '', 'XQUISITE ENGINEERING SERVICES LIMITED', '', '', 'FRANKANYAH@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(148, 'HERBERT', 'DJABA', 'KOMESOUR', '11/05/1972', '548717820', '', 'MARKET STREET, OKPOI GONNO, TESHIE', '', 'P . O . BOX TN 466, TESHIE NUNGUA ESTATES, ACCRA', '834', 0, 'PROFESSIONAL', '', 'HD CONSULT', '', '', 'HERBERT.DJABA@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(149, 'NUTEPE', 'TUDZI', 'FUI KOFI', '19/06/1981', '244972260', '', 'LASHIBI, VIVIAN FARM, TEMA COMMUNITY 17', '', 'C/O ASSOCIATED CONSULTANTS LIMITED, P. O. BOX M259 ACCRA', '1550', 0, 'PROFESSIONAL', '', 'ASSOCIATED CONSULTANTS LTD', '', '', 'KENTUDZI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(150, 'SAMUEL', 'OPPONG-ANTWI', '', '30/05/1958', '0209977876,  0244211', '', 'ASHALE BOTWE, ACCRA', '', 'P. O. BOX CT 4385, CANTONMENTS-ACCRA', '415', 0, 'PROFESSIONAL', '', 'SURVEY & MAPPING DIVISION, LANDS COMMISSION', '', '', 'SAMOPANT@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(151, 'ERIC', 'AMAKYI-BOATENG', '', '23/07/1980', '0208447283/027435877', '', 'NO. 14 KWASHIBU OPPOSITE PRINCE OF PEACE ROMAN CAT', '', 'P. O. BOX ML 121 MALLAM-ACCRA', '1710', 0, 'PROFESSIONAL', '', 'LAKESIDE ESTATE LTD', '', '', 'EAMAKYI@YAOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(152, 'SALIHU', 'MADAH', 'ISMAIL', '10/03/1982', '208909204', '', 'WA', '', 'BOX 329  WA UWR', '1312', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'MSISALIHU@YAHOO.COM', 'UPPER WEST', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(153, 'ERIC', 'MENSAH-OKANTEY', 'NII OKANTEY', '27/05/1967', '244637005', '', 'WEST END', '', 'BOX CT 7288 CANTONMENT', '842', 0, 'PROFESSIONAL', '', 'SURVEY & MAPPIND', '', '', 'EROKANTEY@GMAIL.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(154, 'IAN', 'AKOTO', 'CECIL MAWULI', '08/12/1993', '0501426384/054993119', '', 'PARADISE LODGE, KOTIE-KUMASI', '', 'P.O.BOX 186, OBUASI MUNICIPAL', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'IANCECILAKOTO@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(155, 'KOFI', 'ADJEI', 'ABABIO', '12/01/1988', '207057257', '', '210 UCOMS ROAD, NEW APLAKU, ACCRA', '', 'P. O. BOX 1809, KUMASI', '0', 0, 'PROFESSIONAL', '', 'BASELINE SOLUTIONS LIMITED', '', '', 'ABABIOK@YMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(156, 'DA-COSTA', 'ASARE', 'BOAKYE MENSAH', '19/07/1992', '543569211', '', 'PLT 11/E NKETIA, ATWIMA NWABIAGYA', '', 'DEPT. OF GEOMATIC ENG. PMB KNUST', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'DACOSTAASARE73@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(157, 'IVY', 'SOSA', 'ASEYE', '', '208857449', '', 'ABEKA', '', 'P.O.  BOX 137, MADINA', '1613', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT', '', '', 'ASTRABABE30@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(158, 'CLEMENCE', 'ANYAH', 'RICHARD KOFI', '16/03/2018', '246969142', '', 'EAST LEGON ADJIRINGANOR', '', 'P.O.BOX DT 2530 ADENTA', '31', 0, 'LICENSED', '', 'PURE SURVEYING SERVICES', '', '', 'CRKANYAH@GMAIL.CON', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(159, 'MERCY', 'ACHEAMPONG', 'OBENEWAH', '17/04/1971', '283', '', 'MALLAM-GBAWE-BULEMIN', '', 'BOX OD 435 ODORKOR ACCRA', '705', 0, 'LICENSED', '', 'C.T.K NETWORK & ROKMER', '', '', 'MERCYDECKER@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', '64'),
-(160, 'BENEDICTA', 'REINARH', 'DEDE BARKEY', '', '244972184', '', 'ASHIYIE', '', 'P.  O. BOX CT 228, CANTONMENTS - ACCRA', '1029', 0, 'PROFESSIONAL', '', 'PETROLEUM COMMISSION', '', '', 'BTAMATEY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(161, 'SAMUEL', 'DARKO', 'LARBI', '20/05/1959', '202110138', '', '13 YASMINE PLACE TRASSACO', '', 'CT 262 CANTONMENTS ACCRA', '288', 0, 'LICENSED', '', 'LOSAMILLS CONSULT LTD', '', '', 'SLDARKO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(162, 'JANET', 'BAFFOUR-AWUAH', '', '26/06/1985', '243855699', '', '#B156/14 OUTER RING ROAD', '', 'P O BOX KN5651, KANESHIE-ACCRA', '17', 0, 'PROFESSIONAL', '', 'QUEST CONSOLIDATED LIMITED', '', '', 'JANEBAWUAH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '83'),
-(163, 'WILLIE', 'AMADI', 'YEBOAH', '02/01/1987', '243154147', '', 'ABURI', '', 'BOX 15466 ACCRA NORTH', '1709', 0, 'PROFESSIONAL', '', 'DE-MAPPERS LTD', '', '', 'AMADIWILLY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(164, 'KWAME', 'ASANTE', 'NKANSAH', '01/02/2018', '241397217', '', 'ASHALEY BOTWE NO 6 SLATER ROAD', '', 'GP 17641, ACCRA', '0', 0, 'PROFESSIONAL', '', 'COMPTRAN ENGINEERING AND PLANNING ASSOCIATE', '', '', 'KANKWAME@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(165, 'EDNA', 'KURUGU', 'ANTHOINETTE AKIWELEI', '02/01/1993', '545580806', '', 'BOLGATANGA', '', '', '0', 0, 'PROFESSIONAL', '', 'MYTURN', '', '', 'EKURUGU@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(166, 'JEAN', 'DOTSE', '', '16/03/2018', '0244657987/020149257', '', 'HOUSE NO. 141HALLELUJA JUN?TION WEST ADENTA', '', 'BOX 10227,ACCRA NORTH', '172', 0, 'LICENSED', '', 'PENSIONER', '', '', 'JEANDOTSE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(167, 'AIDEN', 'BAYOR', '', '30/11/1989', '241728344', '', 'BAGABAGA LOWCOST, 30B, TAMALE.', '', 'P. O. BOX 4, TAMALE.', '0', 0, 'PROFESSIONAL', '', 'LOGISTICS SUPPORT SERVICES', '', '', 'JAITHEO7@GMAIL.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(168, 'CYRIL', 'OPPONG-YEBOAH', '', '29/06/1988', '208337363', '', 'V1/8 BERLIN-TOP, FIAPRE SUNYANI', '', 'BOX 1508, SUNYANI', '1699', 0, 'PROFESSIONAL', '', 'DESIMONE GHANA LTD.', '', '', 'COY.GOAL@GMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(169, 'FRANCIS', 'OPPONG', '', '19/08/1967', '244170300', '', 'PRESTEA', '', 'POST OFFICE BOX 30 PRESTEA', '1234', 0, 'PROFESSIONAL', '', 'GOLDEN STAR GHANA', '', '', 'FOPPONGK@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(170, 'WILLIAMS', 'ODURO', '', '25/05/1988', '542768606', '', 'KUMASI', '', '', '0', 0, 'PROFESSIONAL', '', 'CHUCATEL COMPANY LIMITED', '', '', 'WILLIAMSODURO10@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(171, 'EMMANUEL', 'KISSI', 'SOMUAH', '25/12/1982', '244988252', '', 'GHANA POST : GD 224 -7722', '', 'P. O. BOX 3506, ACCRA', '1035', 0, 'LICENSED', '', 'ALLIANCE SURVEYING LIMITED', '', '', 'SOMUAHKISSI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(172, 'ERIC', 'HELOO', '', '08/11/1981', '244541754', '', 'MC02, MARK CUTIFANI ESTATE, MILE 1, TARKWA', '', 'P. O. BOX 284', '1611', 0, 'PROFESSIONAL', '', 'ANGLOGOLD ASHANTI IDUAPRIEM LTD', '', '', 'EHELOO@ANGLOGOLDASHANTI.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(173, 'GODFRED', 'ADDAI', '', '07/08/1990', '272118148', '', 'P. O. BOX 5399 ADUM KUMASI', '', '', '0', 0, 'PROBATIONER', '', 'HEILAND RESOURCES LIMITED', '', '', 'QUABENA007@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(174, 'ERNEST', 'EKUBAN', '', '30/04/2018', '243983924', '', '30 TESANO ROAD', '', '', '1723', 0, 'PROFESSIONAL', '', 'INTEL E-GEO LIMITED', '', '', 'ERNEKUBAN@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(175, 'PRINCE', 'AMOH', '', '26/06/1986', '245917177', '', 'BRENUAKYIM AMA SAAH STREET1', '', 'AGL PO BOX 208 TARKWA', '0', 0, 'PROFESSIONAL', '', 'GOLDFIELDS GHANA,DAMAG', '', '', 'AMOHP@ROCKETMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(176, 'CONFIDENCE', 'ANYORMI', '', '14/02/1988', '+233245155568', '', 'TARKWA', '', 'PMB, TARKWA', '0', 0, 'PROFESSIONAL', '', 'GOLDEN STAR WASSA LTD', '', '', 'CANYORMI@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(177, 'OBED', 'OWUSU-MENSAH', '', '25/07/1992', '501358762', '', 'AK/OT/087', '', 'P.O.BOX 17', '0', 0, 'PROFESSIONAL', '', 'GOLDEN STAR WASSA MINES', '', '', 'OBEDOWUSU801@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(178, 'ISAAC', 'ANSAH', '', '18/10/1975', '244768757', '', 'CAPE COAST', '', 'P O BOX CC 43 CAPE COAST', '1732', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'ANSTECHCONSULT@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(179, 'EBO', 'KOOMON', '', '17/06/1986', '276291282', '', 'TAKORADI', '', 'SK 516,SAKUMONO ESTATES, TEMA', '1311', 0, 'PROFESSIONAL', '', 'AYA ENGINEERING', '', '', 'EBOKOOMSON2003@YAHOO.CO.UKK', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(180, 'MICHAEL', 'DORDOR', 'ENAM', '09/05/1968', '244788230', '', 'GREDA ESTATES, TESHIE, ACCRA', '', 'BOX CT 1646, ACCRA', '664', 0, 'LICENSED', '', 'BASELINE SOLUTIONS LTD', '', '', 'MDORDOR@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(181, 'ALEXANDER', 'OWUSU ANSAH', '', '08/07/1989', '249343157', '', 'P.O.BOX KS 15416, ADUM - KUMASI,', '', '', '0', 0, 'TECHNICIAN', '', 'MR', '', '', 'AS.OWUSUANSAH@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(182, 'ABIGAIL', 'QUAYE', 'AYELEY', '05/05/1981', '244449925', '', 'MANCHIE', '', 'P.O.BOX CT 8544 ,CANTONMENTS  ACCRA', '1724', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SMD)', '', '', 'ABBY.QUAYE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64');
+(1, 'GUSTAV', 'ASAMOAH', 'KPLOM KOMLA', '04/04/1978', '244589339', '', 'BAATSONA SPINTEX ROAD- ACCRA', '', 'P. O. BOX ST517 KANESHIE ACCRA', '1147', 0, 'LICENSED', '', 'GEOSTATE SURVEY', '', '', 'GUSMOAH@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(2, 'ANGELA', 'BRIANDT', 'CHELSEA', '26/05/1986', '249953963', '', 'COMMUNITY 25, TEMA', '', 'P. O. BOX 46 TEMA', '1228', 0, 'PROFESSIONAL', '', 'TDC DEVELOPMENT COMPANY LIMITED', '', '', 'CHELSY265@YAHOO.CO.UK', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(3, 'JOSEPH', 'MENSAH-DEBRAH', 'N/A', '04/06/1990', '246345627', '', 'PATASI ESTATE - KUMASI', '', 'P.O. BOX 372, F.N.T. - KUMASI', '1633', 0, 'PROFESSIONAL', '', 'EMO GEOMATICS CONSULT', '', '', 'JOE2MENS08@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(4, 'FRANCIS', 'DONKOR', 'NONE', '09/03/1988', '207560840', '', 'KUMASI', '', 'C/O KWAME OBENG KNUST DEPT OF GEOMATIC ENGINEERING', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'FADDONKOR', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(5, 'WATSON', 'BEDZRAH', 'KOFI', '26/04/1991', '203155672', '', 'ADENTA, ACCRA', '', 'P. O. BOX AF 763, ADENTA FLATS, ACCRA', '0', 0, 'PROBATIONER', '', 'BASELINE SOLUTIONS', '', '', 'KOFIWATSON@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(6, 'ISAAC', 'ANAMAN', 'EKOW', '', '507766693', '', 'BUNGALOW 34A', '', 'BOX 2, NSUTA-WASSA', '1328', 0, 'PROFESSIONAL', '', 'GHANA MANGANESE COMPANY LIMITED', '', '', 'EKOWANAMAN2002@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(7, 'EDMUND', 'AMOAKO', 'AMANING', '06/02/1990', '+233 243 757 888 / +', '', 'Z1/G014, ASHAIMAN LEBANON.', '', 'BOX GP 2982, ACCRA.', '0', 0, 'PROBATIONER', '', 'A-M SURVEYS LIMITED', '', '', 'KOFIIAMOAKO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(9, 'NUTEPE', 'TUDZI', 'FUI KOFI', '19/06/1981', '244972260', '', 'LASHIBI, TEMA COMMUNITY 17,VIVIAN FARM. PLOT 108A', '', 'C/O ASSOCIATED CONSULTANTS LTD \r\nP. O.  BOX MB 259,  ACCRA', '1550', 0, 'PROFESSIONAL', '', 'ASSOCIATED CONSULTANTS LTD', '', '', 'KENTUDZI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(10, 'RHODEN', 'DOGBE', 'DZIFA', '10/02/1973', '244801926', '', 'TEMA', '', 'BOX CS 8544', '934', 0, 'LICENSED', '', 'TDC', '', '', 'RHODKING@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:38', '1', ''),
+(11, 'MICHAEL', 'NYOAGBE', 'WORLANYO', '16/04/1982', '244971602', '', 'C2/C8 REDCO FLATS MADINA', '', 'GP18306 ACCRA', '1030', 0, 'LICENSED', '', 'GWCL', '', '', 'MICHAEL.NYOAGBE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '[\"1\",\"1\",\"2\",\"3\"]', '2019-03-23 23:09:38', '1', ''),
+(12, 'GLADYS', 'APPIAH', 'IVY', '03/07/1993', '264716045', '', 'AMASAMAN', '', '', '0', 0, 'STUDENT', '', 'BIGDATA GHANA LTD', '', '', 'IVY.WARTEMBERG@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(13, 'BISMARK', 'TENKORANG', 'KWASI', '12/11/1989', '248664955', '', 'NO 38, AMLI STREET, ADENTA', '', 'BOX AP450, AKROPONG-AKUAPEM', '0', 0, 'OTHER', '', 'BEACON SURVEY LIMITED', '', '', 'TENBIS2008@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(14, 'DIANA', 'AHIAKU', 'MAWUENA', '06/08/2018', '0248142593/027446503', '', 'KANDA,  ADJASCENT NADMO', '', 'P.O.BOX 901 ACCRA -CANTONMENTS', '0', 0, 'TECHNICIAN', '', 'CSS PRECISE SYSTEMS LTD.', '', '', 'DYANGREATER@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(15, 'ISAAC', 'BLEBOO', 'ISAAC', '25/02/1974', '244745334', '', 'PR A1 030. ABIA - PRAMPRAM', '', 'BOX TN 1428 TECHIE NUNGUA ESTATE', '805', 0, 'LICENSED', '', 'BLEBS GEO-CONSULT', '', '', 'ISAACBLEBOO@YAHOO.CO.UK', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(16, 'CULBERT', 'ABAGULUM', 'KWAME', '11/08/1976', '244735842', '', 'SUNYANI BRONG AHAFO', '', 'BOX 830 SUNYANI', '0', 0, 'STUDENT', '', 'LANDS COMMISSION(SURVEY AND MAPPING DIVISION)', '', '', 'ABAGULUMCULBERTKWAME@YMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(17, 'ALEX', 'FUGOR', 'KWABENA', '10/18/0001', '243049832', '', 'LAPAZ', '', 'BOX 71 NSAWAM', '10', 0, 'TECHNICIAN', '', 'GHANA SCHOOL OF SURVEYING AND MAPPING', '', '', 'ALEXFUGOR@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(18, 'EMMANUEL', 'ARYEETEY', 'NII AYI', '14/08/1988', '0249920224/ 02649369', '', 'NUNGUA', '', 'P.O. BOX CO 2728 TEMA', '0', 0, 'PROFESSIONAL', '', 'BASELINE SOLUTIONS', '', '', 'EMMANUELARYEETEY442@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(19, 'ISAAC', 'AGYEI', 'NII OKAI KWEKU', '20/07/2018', '0209969656', '', 'PANTANG EAST 483', '', 'BOX ABK83 ABOKOBI- ACCRA', '11', 0, 'OTHER', 'FGhIS', '', '', '', 'ISAACADJEI83@GMAIL.COM', '', '', '', '10422', '[\"1\",\"2\",\"4\"]', '2019-03-23 23:09:39', '1', '104'),
+(20, 'AARON', 'FREMPAH', 'ADOM', '07/07/1989', '0241273751/055626866', '', 'ABRUKUTUASO,MAMPONG ASHANTI', '', 'COCOA HEALTH AND EXTENSION DIVISION&#13;&#10;P.O. BOX 32&#13;&#10;MAMPONG DISTRICT', '19', 0, 'PROFESSIONAL', 'FGhIS', '', '', '', 'ADOMAARONFREMPAH55@YAHOO.COM', '', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(21, 'RICHARD', 'OTCHERE', 'K', '12/04/1977', '244667171', '', 'OYARIFA', '', 'P.O.BOX. CO 1955 TEMA', '1051', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'OSOKITI@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(22, 'FELIX', 'BOTE-KWAME', 'B', '11/07/1977', '244607913', '', 'KPONE', '', 'P O BOX CE 11507, TEMA', '1322', 0, 'PROFESSIONAL', '', 'WILLIX CONSULT', '', '', 'FELIXXBK@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(23, 'KINGSLEY', 'SAM', 'YAW', '01/12/1988', '245989572', '', 'SEPE DOTE KUMASI', '', 'P. O. BOX 4083', '1635', 0, 'PROFESSIONAL', '', 'ASANTEHENE?S LANDS SECRETARIAT', '', '', 'SHIZUMEBACHI@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(24, 'TERAH', 'ANTWI', '', '24/02/1993', '240655554', '', 'P.O.BOX AK 109', '', '', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'SURVEYOR153@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(25, 'JOSEPH', 'ANTWI', '', '27/10/1981', '+233266775177', '', 'PLOT 19 BLOCK D KWAASOWA, KUMASI', '', 'P. O. BOX SN 272, KUMASI', '1641', 0, 'PROFESSIONAL', '', 'ASANTEHENES\' LAND SECRETARIAT', '', '', 'GOSPOJOEY@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(26, 'BENEDICTA', 'REINARH', 'DEDE BARKEY', '12/03/2018', '244972184', '', 'ASHIYIE', '', 'P. O. BOX CT 228, CANTONMENT,  ACCRA', '1029', 0, 'PROFESSIONAL', '', 'PETROLEUM COMMISSION', '', '', 'BENDEBAR1@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(27, 'ISAAC', 'ANSAH', '', '18/10/1975', '244768757', '', '63/13F ABOOM WELLS CAPE COAST', '', 'P O BOX CC 42 CAPE COAST', '1732', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'ANSTECHCONSULT@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(28, 'GODWIN', 'BOATENG', 'AKWASI', '25/06/1989', '0267857468/054891018', '', 'E 17 SOUTH SUNTRESO', '', 'SN 679 SANTASI - KUMASI', '0', 0, 'OTHER', '', 'GEOMATRIX ENGINEERING SERVICES', '', '', 'GAKWASIBOATENG@GMAIL', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(29, 'GILBERT', 'DJANETEY', 'ETIAKO', '25/03/2018', '244173313', '', 'AMASAMAN, ACCRA', '', 'P. O. BOX CT608, CANTONMENTS-ACCRA', '0', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'ETIAKOGILBERT@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(30, 'SAMUEL', 'LAMPTEY', '', '04/01/1992', '501370862', '', 'A662/4 LARTEBIOKORSHIE- NEAR RADIO GOLD', '', 'P. O. BOX MP 205', '0', 0, 'PROBATIONER', '', 'PRISMOIDAL COMPANY LIMITED', '', '', 'LAMPTEYSAMUEL92@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(31, 'DANIEL', 'AGBEMORDZIE', 'LIGHT', '26/12/1991', '244663093', '', 'MADINA', '', 'PMB CT489, CANTONMENTS. ACCRA', '0', 0, 'STUDENT', '', 'GHANA SCHOOL OF SURVEYING AND MAPPING', '', '', 'AGBEMORDZIEYAO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(32, 'FLORENCE', 'LAMPTEY', '', '03/10/1977', '244225980', '', 'GRADE ONE, BOGOSO', '', 'BOX AN 18629, ACCRA - NORTH', '1134', 0, 'LICENSED', '', 'ROCKSURE INTERNATIONAL', '', '', 'NINALAMPTEY@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(33, 'ASAA', 'ABUNKUDUGU', 'AKUNAI PETER', '15/04/1976', '+233202423079/246170', '', 'PLOT NUMBER 47 BLOCK B BEHIND YIKENE CHIEF PALACE', '', 'BOX 767', '1232', 0, 'PROFESSIONAL', '', 'BOLGATANGA POLYTECHNIC', '', '', 'NKUDUGAA@HOTMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(34, 'MERCY', 'ACHEAMPONG', 'OBENEWAH', '17/04/1971', '277482996', '', 'HO.NO. A41 BULEMI ,GBAWE , MALLAM', '', 'BOX  OD 435 ODORKOR ACCRA', '238', 0, 'LICENSED', '', 'C.T.K NETWORK AVIATION AND ROKMER', '', '', 'MERCYDECKER@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(35, 'GEORGE', 'FRIMPONG', 'OKWABI', '08/02/1958', '208135831', '', 'ACCRA', '', 'P.O. BOX CT 4697, CANTONMENTS -ACCRA', '555', 0, 'LICENSED', '', 'PRIVATE PRACTICE', '', '', 'OKWABIGFM@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(36, 'EVANS', 'MGBORLA', 'ACKAH', '27/06/1992', '247986671', '', 'TAKORADI', '', '0208, TAKORADI', '0', 0, 'PROFESSIONAL', '', 'DEPARTMENT OF URBAN ROADS', '', '', 'EVMGBOLA@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(37, 'EDEM', 'BEKOR', 'ERIC', '31/07/1982', '244419056', '', 'TESHIE', '', 'POST OFFICE BOX OS 834, OSU - ACCRA', '0', 0, 'OTHER', '', 'PRIVATE', '', '', 'EDEMBEKOR@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(38, 'PRINCE', 'ACQUAH', 'CHARLES', '23/11/1977', '0244971688 / 0260787', '', 'PLT 14 BLOCK K, KOTEI TWUMDUASE, KUMASI', '', 'CIVIL ENGINEERING DEPARTMENT, FACULTY OF ENGINEERING AND TECHNOLOGY, P.O.BOX 854, KUMASI', '1148', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'ACQUAHPRINCE@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(39, 'GILBERT', 'QUASHIE', 'KOBLA', '30/05/1972', '244266835', '', 'HNO. 1, MANGO LANE ASHONGMAN', '', 'POST OFFICE BOX GP3707, ACCRA', '1143', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SMD)', '', '', 'GILBERTKOBLAQUASHIE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(40, 'EDWARD', 'OSEI JNR', 'MATTHEW', '10/07/1960', '244487620', '', 'N. 26 NORTH SUNTRESO', '', 'P. O. BOX OS 84, OSU-ACCRA', '314', 0, 'LICENSED', '', 'KNUST', '', '', 'CHIEF_OSEI@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(41, 'SETH', 'OPOKU AKOMEAH', '', '23/03/1993', '501372732', '', 'GYINYASE - KUMASI', '', 'P. O. BOX KS 10780, ADUM - KUMASI', '0', 0, 'OTHER', '', 'FREELANCE', '', '', 'SOPOKUAKOMEAH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(42, 'DELALI', 'AHEDOR', '_', '28/09/1984', '249422575', '', 'HOHOE-BLAVE', '', 'BOX 181 HOHOE, CHED COCOBOD', '0', 0, 'OTHER', '', 'COCOBOD', '', '', 'DELAHEDOR@GMAIL.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(43, 'GHH', 'SAM', '', '01/01/2018', '5677', '', 'GHHJ', '', 'HHJJJ', '1234', 0, 'PROBATIONER', '', 'GHHHH', '', '', 'TYIJHH', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(44, 'SELIKEM', 'ABURU', 'KOFI', '30/12/2018', '246675252', '', 'ADENTA', '', 'BOX MD 2046, MADINA', '1722', 0, 'PROFESSIONAL', '', 'IMPACT HOMES LTD', '', '', 'SELIABURU@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(45, 'SELIKEM', 'ABURU', 'KOFI', '30/12/2018', '246675252', '', 'ADENTA', '', 'BOX MD 2046, MADINA', '1722', 0, 'PROFESSIONAL', '', 'IMPACT HOMES LTD', '', '', 'SELIABURU@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(46, 'MAWUENYEGA', 'FIAXE', 'DZIGBORDI KOFI', '20/05/1966', '0244093136/055367056', '', '#12 DODI ROAD, COMMUNITY ONE, AKOSOMBO.', '', 'P. O. BOX AK. 312, AKOSOMBO.', '1548', 0, 'PROFESSIONAL', '', 'VOLTA RIVER AUTHORITY', '', '', 'MEGAFIXE@YAHOO.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(47, 'KWAME', 'TENADU', '', '', '243241121', '', 'NEAR JUBILEE SCHOOL, NSADWIR, DUTCH KOMENDA', '', 'BOX CC 564', '815', 0, 'LICENSED', '', 'UDANET LIMITED', '', '', 'KWAMETENADU@GMAIL.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(48, 'KWESI', 'ADDEY- BLANKSON', '', '14/02/1960', '208118129', '', 'TAKORADI', '', 'BOX  MC 1330 TAKORADI', '1456', 0, 'PROFESSIONAL', '', 'SMD-LANDS COMMISSION', '', '', 'KADBLANKSON@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(49, 'KWASI', 'ASAMOAH-TWUM', '', '20/03/1983', '244634373', '', 'GYENYASE-RAMSEYER', '', '', '1743', 0, 'PROFESSIONAL', '', 'EUROGET DE-INVEST', '', '', 'KASAMOAHTWUM@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(50, 'ISAAC', 'SELBY', 'YAW ABIRI', '12/10/1963', '244255189', '', 'ASHIYIE', '', 'P.O.BOX 1912 MAMPROBI', '370', 0, 'TECHNICIAN', '', 'SURVEY DEPARTMENT', '', '', 'GYADAMCITY @HOTMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(51, 'ANTHONY', 'ARKO-ADJEI', '', '21/07/1970', '244232447', '', 'BLOCK E PLOT 18 AYIGYA, KUMASI', '', 'DEPARTMENT OF GEOMATIC ENGINEERING, KNUST, KUMASI', '837', 0, 'PROFESSIONAL', '', 'KWAME NKRUMAH UNIVERSITY OF SCIENCE AND TECH', '', '', 'ARKOADJEI@HOTMAIL.COM.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(52, 'VIVIAN', 'LUTTERODT', '', '21/06/2018', '272186581', '', 'ADENTA', '', '', '0', 0, 'OTHER', '', 'GEOMATRIX ENGINEERING SERVICES', '', '', 'LUTTERODTVIV.VL@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(53, 'CHRISCENCIA', 'NAAH', '', '28/11/1993', '247291679', '', 'KANDA NEAR NADMO HEADQUARTERS', '', 'P.O BOX 998,DARKUMAN, ACCRA WEST.', '0', 0, 'TECHNICIAN', '', 'GHANA WATER COMPANY LIMITED', '', '', 'CHRISTYNAAH20@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(54, 'CHRISCENCIA', 'NAAH', '', '28/11/1993', '247291679', '', 'KANDA NEAR NADMO HEADQUARTERS', '', 'P.O BOX 998,DARKUMAN, ACCRA WEST.', '0', 0, 'TECHNICIAN', '', 'GHANA WATER COMPANY LIMITED', '', '', 'CHRISTYNAAH20@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(55, 'JACK', 'NTI ASAMOAH', '', '14/10/1986', '242681607', '', 'PLOT 137 BLOCK EE DABAN NEW SITE KUMASI', '', 'P. O. BOX 854', '1429', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'JACCEPHAS@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(56, 'DANIEL', 'AMOAKO', 'ODURO', '10/05/2018', '275577965', '', 'RM7, BLOCK 59, ADENTA SSNIT FLATS.', '', 'LG 657, LEGON', '0', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT LTD.', '', '', 'DANNYKODURO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(57, 'WINIFRED', 'ACQUAH', '', '18/07/1992', '248025165', '', 'KANDAH(NADMO)', '', 'P.O.BOX 903 ACCRA(CANTOMENT)', '0', 0, 'STUDENT', '', 'INSTITUTION', '', '', 'ACQUAHWINIFRED92@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(58, 'WINIFRED', 'ACQUAH', '', '18/07/1992', '248025165', '', 'KANDAH(NADMO)', '', 'P.O.BOX 903 ACCRA(CANTOMENT)', '0', 0, 'STUDENT', '', 'INSTITUTION', '', '', 'ACQUAHWINIFRED92@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(59, 'FRED', 'ABOAGYE-LARBI', '', '01/01/1966', '244067365', '', 'PLOT C1/10 NAA AFII AVE.ATOMIC  HILLS ESTATE ASHON', '', 'P.O. BOX 1367 DANSOMAN ACCRA', '972', 0, 'LICENSED', '', 'BEACON SURVEY LIMITED', '', '', 'FABOAGYELARBI1966@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(60, 'DESMOND', 'APEDU', 'PRINCE', '05/07/1987', '244903249', '', 'BOGOSO', '', 'P.O. BOX 30. PRESTEA', '1638', 0, 'PROFESSIONAL', '', 'GOLDEN STAR RESOURCES LTD', '', '', 'APEDU2003@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(61, 'FELIX', 'TANOEH', '', '02/03/1988', '241789308', '', 'ADENTA', '', '', '0', 0, 'PROFESSIONAL', '', 'MICHELETTI AND CO GH. LTD', '', '', 'TANOEH.FELIX@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(62, 'ADWOA', 'AMOAH', 'SARPONG', '05/05/2018', '244842650', '', 'EE 44, KWADASO ESTATE, KUMASI', '', 'BOX 7603', '1227', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'LAWRENA80@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(63, 'PHILIP', 'OSEI BANAHENE', 'YAW', '24/05/1984', '0204441642, 02649752', '', '1948 MILITARY STREET, ALOGBOSHIE -ACHIMOTA', '', 'BOX R.Y 361', '1625', 0, 'PROFESSIONAL', '', 'SKEPIC SERVICES LIMITED', '', '', 'OKATAKYIEYAWBEE@GMAIL.COM BANAKING2000@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:40', '1', ''),
+(64, 'PATRICK', 'ANSU-GYEABOUR', '', '17/05/1992', '+233207707914', '', 'DOME PILLAR TWO', '', 'BOX 1059, SUNYANI-BA', '0', 0, 'OTHER', '', 'JOHN MURPHY CONSTRUCTION', '', '', 'PAGSNET@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(65, 'EMMANUEL', 'SEFA', '', '20/12/1986', '0276202049/024094431', '', 'TAIFA BURKINA, ACCRA', '', 'P. O. BOX GO 935, ACCRA', '1438', 0, 'PROFESSIONAL', '', 'DAOVTECH DESIGN GROUP LIMITED', '', '', 'SEFASES2005@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(66, 'GIDEON', 'VUNASE', '', '04/03/1989', '0243930806/050632085', '', 'JERUSALEM -TARKWA', '', 'C/O DR ISSAKA YAKUBU, UMAT, BOX 237, TARKWA', '0', 0, 'PROFESSIONAL', '', 'UNIVERSITY OF MINES AND TECHNOLOGY', '', '', 'VUNASEG@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(67, 'MICHAEL', 'DORKENU', 'MENSAH', '03/02/1986', '246231306', '', 'HOUSE NUMBER 21 NORTH LEGON', '', 'P. 0 BOX 257 HAATSO', '0', 0, 'STUDENT', '', 'GSSM', '', '', 'DORKENUMICHAEL@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(68, 'EMMANUEL', 'ADU-AFARI', '', '16/07/1993', '2247622803', '', 'GRADUATE STUDENTS HOSTEL', '', 'P.O.BOX AN 11685 ACCRA-NORTH', '12', 0, 'PROBATIONER', '', 'KWAME NKRUMAH UNIVERSITY OF SCIENCE AND TECHNOLOGY', '', '', 'SPYCHI99.EAA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(69, 'BEATRICE', 'KOM', 'AKPENE AHIAFOR', '15/08/1974', '244261001', '', 'H/NO CP 16 NEW GBAWE', '', 'BOX CT 5633 CANTOMENTS- ACCRA', '1445', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION/GSSM', '', '', 'BEAKOM@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(70, 'EMMANUEL', 'ACQUAH', '', '16/03/1968', '0244214071, 02058532', '', 'AFIAMAN, POKUASE', '', 'P.O. BOX M154 MINISTRIES-ACCRA', '1248', 0, 'PROFESSIONAL', '', 'GHANA IRRIGATION DEVELOPMENT AUTHORITY', '', '', 'EKACQUA@YAHOO.CO.UK,  EACQUAH68@GMAIL', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(71, 'OKYERE', 'ADUBOFUOR', '', '09/09/1989', '207130460', '', 'PLOT 4 BLOCK 4 SARFO STREET - KOTEI EXTENSION', '', 'P.O. BOX 17 BONWIRE-ASHANTI', '0', 0, 'OTHER', '', 'GEOMATRIX ENGINEERING SERVICES', '', '', 'OKSBERG89@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(72, 'GIDEON', 'OPOKU', '', '08/10/1988', '542630831', '', 'ACCRA', '', 'BOX LATER 12278,KUMASI', '0', 0, 'PROFESSIONAL', '', 'LOSAMILLS CONSULT', '', '', 'GID32132@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(73, 'ALEXANDER', 'AYETTEY', '', '17/10/2018', '245176148', '', 'ACCRA', '', '', '0', 0, 'PROBATIONER', '', 'LANDS COMMISSION', '', '', 'STLEXISAAA@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(74, 'REDUWAN', 'KASSIM', '', '', '0508956050/024804360', '', 'WA, MALLAM ISSA STREET, HSE NO. DL3', '', 'BOX 272, WA, UPPER WEST REGION', '1718', 0, 'PROFESSIONAL', '', 'P&W GHANEM MESSRS', '', '', 'KASSIMREDUWAN@GMAIL.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(75, 'DAVID', 'AMEKU', '', '22/07/1993', '507757781', '', 'DANSOMAN CONTROL', '', 'P. O BOX 45 , MADINA', '0', 0, 'PROBATIONER', '', 'GEOSTATE SURVEY', '', '', 'SELASIAMEKU09@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(76, 'PRINCE', 'ODEI', 'CHARLES', '12/06/1993', '248166944', '', 'ACCRA & TAKORADI', '', 'C/O MOTIVATE THE WORLD, P.O. BOX KN 4828, KANESHIE.', '0', 0, 'PROFESSIONAL', '', 'SELF EMPLOYED', '', '', 'ODEIKWAME5@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(77, 'CHRISTIAN', 'MENSAH', 'LOUIS', '10/11/1991', '240064659', '', 'PLT 61 BLK D', '', '2343 ASHTOWN', '0', 0, 'OTHER', '', 'PENT GEOCONSULT', '', '', 'CRYSTALGECS@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(78, 'CYRIL', 'GADEGBEKU', '', '09/05/1987', '240800901', '', 'NORTH LEGPN', '', 'P.O.BOX GP. 3707 ACCRA', '1142', 0, 'PROFESSIONAL', '', 'DECK ENGINEERING LIMITED', '', '', 'CYRILGADEGBEKU@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(79, 'GEORGE', 'KOOMSON', '', '04/04/1976', '244747484', '', 'HNO. A3 KWAMO FLAT', '', 'P. O. BOX 854 KUMASI', '0', 0, 'OTHER', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'POCOINI@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(80, 'AUGUSTINE', 'TETTEH', 'OPLEM', '15/08/2018', '246482405', '', 'H/25 HAATSO-ECOMOG', '', 'ABUSCO, PMB, KIBI-E/R', '0', 0, 'OTHER', '', 'FORTRESS GHANA', '', '', 'AUGUSTINETETTEH477@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(81, 'JACOB', 'BOATENG', 'KWAME', '22/08/1982', '207914472', '', 'AWOSHIE-NIC. OFF ABLEKUMA-POKUASI ROAD', '', '', '1236', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATIC CONSULT', '', '', 'KWAABOAT@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(82, 'EBENEZER', 'DOKU', 'TETTEH', '07/10/1990', '275440804', '', 'AMASAMAN-ACCRA', '', '', '32094', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'BYGONEDOKU90@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(83, 'KWEKU', 'BAFFOE', '', '30/08/1989', '208603458', '', 'SYCAMORE MEDICAL CENTER, TAKORADI', '', 'P.O.BOX 1330, TAKORADI', '1708', 0, 'PROFESSIONAL', '', 'FREELANDS', '', '', 'KWEKUB4@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(84, 'GABRIEL', 'OWIREDU', 'KOFI', '03/06/1981', '0209532776/054305092', '', 'SQ 56 AHINSAN ESTATE KUMASI', '', 'P.O.BOX 3280 ADUM KUMASI', '1745', 0, 'PROFESSIONAL', '', 'KUMASI TECHNICAL UNIVERSITY', '', '', 'OWUGAB@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(85, 'KENNETH', 'COFFIE', '', '12/11/1989', '242635051', '', 'TEMA', '', '', '1713', 0, 'PROFESSIONAL', '', 'TDC DEVELOPMENT COMPANY LTD.', '', '', 'KENNETHCOFFIE2@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(86, 'MAXWELL', 'APPIAH', '', '13/08/1986', '541296746', '', 'PLT28,ASARE BREMPONG STREET.AMOABEN', '', 'P O BOX KY2415,KWABENYA ACCRA', '1747', 0, 'PROFESSIONAL', '', 'EMO GEOMATIC CONSULT', '', '', 'MAXASEM@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(87, 'ISAAC', 'ADJEI', 'KOFI', '26/05/1989', '246893018', '', 'NY 38 D, NEW NYAMSO, OBUASI', '', 'BOX 118, OBUASI', '0', 0, 'PROBATIONER', '', 'BGP-BAY', '', '', 'QUOPHYADJEI@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(88, 'EUGENE', 'ANIPAH', 'KODZO', '09/09/1985', '246740929', '', 'POST CODE GM-251-5429', '', 'POST CODE GM-251-5429', '0', 0, 'PROBATIONER', '', 'LANDS COMMISSION-SMD', '', '', 'EKANIPAH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:41', '1', ''),
+(89, 'NANA', 'DUAH', 'KYERE', '28/07/1993', '546801696', '', 'KWADASO ESTATE', '', 'P. O. BOX 763, OBUASI', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'NANADUAHSA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(90, 'BERNARD', 'BOATENG', 'KOFI', '24/11/1983', '243866176', '', 'ANAJI_TAKORADI, SAVOY_CAPE COAST', '', 'BOX CC 42 CAPE COAST', '1737', 0, 'PROFESSIONAL', '', 'LANDS COMMIISSION - SMD', '', '', 'BENBOAT2G6@YAHOO.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(91, 'KINGSLEY', 'WIAFE-KWAKYE', 'KOJO', '', '201460744', '', 'J22 COMMUNITY 9 TEMA', '', 'P.O. BOX CT 175 CANTONMENTS', '1700', 0, 'PROFESSIONAL', '', 'GHANA PORTS AND HARBOURS AUTHORITY', '', '', 'KWAJIKWAKYE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(92, 'EMMANUEL', 'MOHENU', 'ADJEI', '11/05/1950', '242868201', '', 'ABLORADJEI NEAR OLD ASHONGMAN', '', 'C/O P.O.BOX CT903 CANTONMENTS ACCRA', '224', 0, 'LICENSED', '', 'NIL', '', '', 'EAM1950@HOTMAIL.CO.UK', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(93, 'RABIU', 'ABDUL SALAM TOURE', '', '03/07/1984', '262380830', '', 'SAWABA KINTAMPO', '', '', '1703', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'CAPTAINRABAH05@YAHOO.CO.UK', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(94, 'CHRISTIAN', 'GAISEY - OTOO', '', '22/08/2018', '207130898', '', 'MADINA, LIBYA QUARTERS', '', '', '1715', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SMD)', '', '', 'CGAISEYOTOO@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(95, 'FELIX', 'DARKWAH', 'MUSTAPHA', '06/10/2018', '208210928', '', 'PLT 19 BLK E, FANKYENEBRA - KUMASI', '', 'SN 927, SANTASI - KUMASI', '0', 0, 'OTHER', '', 'YOPAC LINK SOLUTIONS', '', '', 'FELIXDARKWAH5@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(96, 'BEATRICE', 'ACHEAMPONG', '', '19/01/2018', '273457384', '', 'BOADI', '', 'GEOMATIC ENGINEERING DEPARTMENT, KNUST.  PMB KUMASI', '1634', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'BEAYAACH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(97, 'PRISCILLA', 'ABASI', 'MBAMA', '13/04/1993', '205302691', '', 'NMAI DZORN', '', '', '2', 0, 'PROFESSIONAL', '', 'WALULEL LIMITED', '', '', 'TALAPRISY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(98, 'JEFFREY', 'AMLALO', 'DORNU', '30/08/1991', '265405972', '', 'WESTLANDS BLVD HN112 PAPAO LEGON', '', 'OS 3445', '0', 0, 'PROBATIONER', '', 'METRISYS GHANA LTD', '', '', 'JEFFREYAMLALO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(99, 'CYRIL', 'OWIAFE', 'SETUSA', '24/09/1992', '247680879', '', 'TESHIE', '', '', '0', 0, 'PROBATIONER', '', 'LOSAMILLS COMSULT LIMITED', '', '', 'SETUS249@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(100, 'ATO', 'ARHIN', 'KWAMENA', '18/07/1992', '209392184', '', 'TAKORADI', '', 'EF 45, EFFIA, TAKORADI', '0', 0, 'STUDENT', '', 'PRIVATE', '', '', 'ATOARHIN11@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(101, 'ESTHER', 'ANKAMU', 'SERWAA', '23/09/1991', '207063890', '', 'DANSOMAN-EBENEZER DOWN', '', '', '0', 0, 'PROBATIONER', '', 'AFCONS INFRASTRUCTURE LIMITED', '', '', 'ANKYSTAR2009@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(102, 'JOHN', 'OPPONG-TWUM', 'EAKIN', '29/06/1985', '0549074579 / 0263986', '', 'TEBIBIANO, NEAR THE MOSQUE', '', 'BOX AH 8157 AHINSAN KUMASI', '1742', 0, 'PROFESSIONAL', '', 'EAKJOP GEOINFO CONSULT', '', '', 'OPPONGTWUM@YAHOO.COM; EAKJOP@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(103, 'ERNEST', 'ASONGO', '', '12/01/1990', '246157909', '', 'NORTH KANESHIE', '', 'BOX 136,BOLGA.', '0', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'ERNESTASONGO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(104, 'SAMPSON', 'ACKAH', 'JNR', '02/04/1990', '266771611', '', 'KUMASI', '', '', '0', 0, 'PROFESSIONAL', '', 'PW MINING -GHANA', '', '', 'ACKAH79@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(105, 'JEFF', 'OSEI', 'DACOSTA', '24/02/1994', '240345610', '', 'AB 34/C OBUASI', '', 'SDA CHURCH BOX88', '0', 0, 'STUDENT', '', 'KNUST', '', '', '2230414@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(106, 'EPHRAIM', 'OWUSU', 'ATTA', '19/11/1990', '207040066', '', 'KOTEI.  P & G EXECUTIVE HOSTEL', '', 'P. O. BOX 407. \r\nAKIM ODA\r\nEASTERN REGION \r\nGHANA', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'EPHRAIMOWUSU273@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(107, 'YAKUBU', 'ALHASSAN', '', '04/08/1993', '248321130', '', 'HOUSE NUMBER 37 BLK K, ABOASO-ASHANTI', '', 'P.O.BOX KJ 29, KEJETIA-KUMASI', '130467', 0, 'PROBATIONER', '', 'LANDS COMMISSION-ACCRA', '', '', 'YALHASSANPRO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(108, 'DANIEL', 'SASU', 'EFFAH', '28/10/1981', '264828895', '', 'B 292 / 25', '', 'BOX AN 7369, ACCRA- NORTH', '1698', 0, 'PROFESSIONAL', '', 'COMPTRAN ENGINEERS & PLANNERS ASSOCIATION', '', '', 'ZAGA_BOTHA@HOTMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(109, 'ABDUL BASIR', 'ISSAH', '', '27/08/1988', '202808623', '', 'SSNIT FLAT BLOCK 27A,WA', '', 'GHANA HIGHWAY AUTHORITY, BOX 1641,HEAD OFFICE, ACCRA', '1725', 0, 'PROFESSIONAL', '', 'GHANA HIGHWAY AUTHORITY', '', '', 'ISSAHABDULBASIR@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(110, 'KAFUI', 'DADZOE', 'NOEL', '17/01/1960', '208195041', '', 'DANFA/MADINA', '', 'BOX  CO 315 , TEMA', '1240', 0, 'PROFESSIONAL', '', 'JGC', '', '', 'KAFUIDADZOE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(111, 'ROOSELER', 'GYIMAH', 'AKOSUA', '29/03/1998', '265732605', '', 'ATAFOA-TIKESE', '', '', '0', 0, 'STUDENT', '', 'STUDENT', '', '', 'CHICAGOTYCOON.CT@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(112, 'AUGUSTINE', 'OBENG-FORI', '', '27/11/1965', '242088468', '', 'ASOFAN, OFANKOR', '', 'P.O.BOX AJ 13, ALAJO ACCRA', '1644', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT LTD', '', '', 'AOBENGF@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(113, 'BABA ZAKARIA', 'SALIFU', '', '13/06/1971', '244375560', '', 'BOLGA', '', 'P.O..BOX CT 5937, CANTONMENTS-ACCRA', '1137', 0, 'PROFESSIONAL', '', 'SMD-LANDS COMMISSION', '', '', 'SBZAKARIA@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:42', '1', ''),
+(114, 'NESTA', 'KOMLADZEI', 'MAWUNYO', '23/10/1990', '201460236', '', 'ADENTA FRAFRAHA', '', '', '0', 0, 'PROFESSIONAL', '', 'DE SIMONE LTD', '', '', 'MARVESTA1@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(115, 'ISAAC', 'YIRENKYI', 'KORANTENG', '06/11/1971', '545761735', '', 'LC 15 DEVTRAVO ESTATE COMM 25 TEMA', '', 'P.0.BOX  CO \r\n3860', '1032', 0, 'LICENSED', '', 'GHANA PORTS  AND HABOURS AUTHORITY', '', '', 'IKEYIRENKYI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(116, 'JOHN', 'ANNAN', 'VICTOR', '10/10/1956', '0244276619/020295739', '', 'H/N:10A ROOM4,SITE B,C3 TEMA', '', 'P.O.BOXCO2401,TEMA.', '809', 0, 'LICENSED', '', 'JOVIAN SURVEY CONSULT', '', '', 'JOVIAN119@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(117, 'RANSFORD', 'TETTEH', '', '21/09/2018', '249086200', '', 'SSNIT FLAT KOFORIDUA', '', 'BOX KF 139 , KOFORIDUA', '19460', 0, 'PROFESSIONAL', '', 'HAMAXYS', '', '', 'RANSFORD.TTTH@GMAIL.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(118, 'NANA', 'KUSI-APPIAH', 'ADWOA', '02/10/2018', '242984264', '', 'DOME', '', 'AH78', '1552', 0, 'PROFESSIONAL', '', 'SELF EMPLOYED', '', '', 'MZNANADJ@GMAIL COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(119, 'BENONY', 'FIAH', 'AGBEWONU', '19/10/1937', '3244279235', '', 'ABLENKPE NO 11 TOTRO STREET', '', 'BOX AN 10227, ACCRA-NORTH', '171', 0, 'PROFESSIONAL', '', 'GEO ENGINEERING SERVICES', '', '', 'GEOENGINEERING@YAHOO.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(120, 'ABIGAIL', 'OPOKU AFRIYIE', '', '21/02/1985', '244676073', '', 'PLOT NO. 11, BLK A, NYANKYERENIASE', '', '7310, ADUM, KUMASI', '0', 0, 'PROFESSIONAL', '', 'PVLMD', '', '', 'OPOKUAFRIYIEA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(121, 'ERNEST', 'EKUBAN', '', '30/04/2018', '243983924', '', '30 TESANO STREET', '', 'P.O.BOX AF 3238', '1723', 0, 'PROFESSIONAL', '', 'GHANA HIGHWAY AUTHORITY', '', '', 'ERNEKUBAN@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(122, 'BENNET', 'AKPALU', '', '04/01/1993', '0203396392/054145926', '', 'HSE NO KS 257A/4 WINNEBA', '', 'BOX 227 KPANDO', '0', 0, 'TECHNICIAN', '', 'PAABADU CONSTRUCTIONS LIMITED', '', '', 'BENNETKAFUI@GMAIL.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(123, 'VICTOR', 'DODODZA', '', '26/11/1986', '244381106', '', 'C669 PROF. AKP KLUDZE ST. KOTOBABI NORTH', '', 'BOX GP3172, ACCRA - CENTRAL', '0', 0, 'OTHER', '', 'KNUST', '', '', 'VICHUG266@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(124, 'RICHARD', 'KPEKPENA', 'GAMELI', '28/03/1981', '244677905', '', 'MEDIE', '', 'BOX 1993 MADINA', '84212', 0, 'PROBATIONER', '', 'SELF EMPLOYED', '', '', 'RICHSTONNY@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(125, 'STEPHEN', 'KPALEGA', 'ONTOANEYIN', '16/08/2018', '246019638', '', 'CHOGGU YAPALSI HSE NO. 358 BLK C', '', 'C/O VRA/NEDCO BOX 77 TAMALE', '0', 0, 'PROFESSIONAL', '', 'VRA/NEDCO', '', '', 'KPALEGASTEPHEN@YAHOO.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(126, 'PROSPER', 'AKORTSU', 'MAWUSI', '23/03/1988', '207296295', '', 'NAVY WARDROOM TEMA', '', 'GHANA NAVY, PMB TEMA-ACCRA', '0', 0, 'OTHER', '', 'GHANA NAVY', '', '', 'M.AKORTSU@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(127, 'NICHOLAS', 'GBLORKPOR', 'KOMLA', '06/09/1988', '248759172', '', 'ADW/G93A', '', 'P.O.BOX KF 1427, KOFORIDUA', '0', 0, 'STUDENT', '', 'TOTAL LAND SOLUTION COMPANY LIMITED, KOFORIDUA', '', '', 'NICHOLASKOMLA@GMAIL.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(128, 'GEORGE', 'ETO', 'MUMUNI', '14/11/1952', '208140954', '', 'HOUSE NO. 19A BLK W. A?EDUASE  KUMASI. NEAR KNUST', '', 'P.?. B?X AK69.ANLOGA KUMASI.', '256', 0, 'LICENSED', '', 'GMT SURVEYS LIMITED', '', '', 'GMTSURVEYS60@GMA?L.COMGMT', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:43', '1', ''),
+(129, 'BRIGHT', 'ASIO', '', '28/07/1982', '507314828', '', 'TEMA', '', '', '6253002', 0, 'OTHER', '', 'PROMAPPERS ENGINEERING LTD', '', '', 'BRYTEASIO@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(130, 'LILY LISA', 'YEVUGAH', '', '30/12/1988', '201810116', '', 'ODUOM PLOT 11 BLKA', '', 'P. O. BOX UP1516 KNUST, KUMASI.', '1735', 0, 'PROFESSIONAL', '', 'GEOMATIC ENGINEERING DEPART.', '', '', 'LLYEVUGAH@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(131, 'AKUFFO', 'ADDO-GYAN', 'KWAO', '21/09/1984', '0242009651/ 02350096', '', 'AWUTU BREKU, CENTRAL REGION', '', 'BOX 19 AWUTU BREKU', '1734', 0, 'PROFESSIONAL', '', 'LANDS (SMD)', '', '', 'UNCLERICH1900@YAHOO.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(132, 'JOSHUA', 'AZORLIADE', 'KWASI', '19/07/1987', '244994859', '', 'B343/7 AWUDOME ESTATE', '', 'P. O. BOX KN5651 KANESHIE ACCRA', '0', 0, 'PROBATIONER', '', 'QUEST CONSOLIDATED LIMITED', '', '', 'JOSHAZOR@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(133, 'PAA_KWESI', 'AKUFFO OWUSU-ENSAW', 'EZANETOR', '17/07/1994', '501372166', '', 'HSE 20, DUNKONAH SSNIT FLATS, WEIJA', '', 'C/O DR EDWARD OSEI, DEPARTMENT OF GEOMATIC ENGINEERING, PMB KNUST.', '0', 0, 'PROBATIONER', '', 'KNUST', '', '', 'KWESIKUFFA@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(134, 'PADRAIC', 'FREEMAN', 'BIRCH', '15/10/2018', '244587015', '', '17 BATHUR STREET, SHIASHIE, EAST LEGON', '', 'P.O.BOX MP74, MAMPROBI, ACCRA', '1139', 0, 'LICENSED', '', 'ELECTRICITY COMPANY OF GHANA', '', '', 'SPADDYX@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(135, 'JERRY', 'ASAANA', 'ANAMZUI-YA', '11/06/1981', '206297736', '', 'BOLGATANGA', '', 'BOX 767, BOLGATANGA POLYTECHNIC', '1231', 0, 'PROFESSIONAL', '', 'BOLGATANGA POLYTECHNIC', '', '', 'NAMZUIYA@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(136, 'YAW', 'AMOAH', 'ACHEAMPONG', '24/07/1973', '244653386', '', 'HSE NO 5 RESIDENCY AREA NEAR ATEKYEM KOFORIDUA', '', 'P.O.BOX KF 983 KOFORIDUA', '916', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SURVEY & MAPPING  DIVISION)', '', '', 'AYAAKAY@YAHOO.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(137, 'JOHN', 'AYER', '', '17/02/1958', '208533925', '', 'H7B AHENSAN ESTATES', '', 'PMB', '580', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'JOHNNYAYER@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(138, 'ISAAC-MARCEL', 'AZORLIADE', '', '16/01/1990', '200154757', '', 'BLOCK 12, SANGO, 1ST JUNCTION, TESHIE-NUNGUA, ACCR', '', 'BOX CT 1311 CANTONMENTS, ACCRA', '0', 0, 'PROBATIONER', '', 'QUEST CONSOLIDATED LIMITED, GHANA', '', '', 'ISAACAZORLIADE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(139, 'EDWARD', 'ASANTE AWUAH', '', '12/04/1964', '243329372', '', 'BOX SC 502 TEMA', '', 'BOX 191 ACCRA', '1548', 0, 'PROFESSIONAL', '', 'SMD', '', '', 'ASANTEAWUAH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(140, 'PATRICIA', 'GRANAHAM', '', '', '243419443', '', 'H. NO. 35 HAATSO-ECOMOC ROAD, CLINIC ROAD ROAD', '', 'PIWC-ATOMIC, P. O. BOX WY 456, KWABENYA, ACCRA', '1730', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'PGRANAHAM@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(141, 'RICHARD', 'AGBANYO', 'MAWULI', '07/06/1965', '244625497', '', 'EAST OYARIFA', '', 'BOXC5633 CANTONMENT', '1720', 0, 'PROFESSIONAL', '', 'SURVEY AND MAPPING DIV.', '', '', 'RICHARDAGBANYO@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(142, 'BENJAMIN', 'ACQUAH', 'BENYI', '05/06/1966', '0262325005 / 0244325', '', '22 FRIMPOMAA REVENUE. BATSONAA', '', 'BX CT 4568. CANTS-ACCRA', '0', 0, 'LICENSED', '', 'NARPACK CONSULT', '', '', 'BBKIKO7@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(143, 'ILIASU', 'EWUNTOMAH', '', '25/11/1981', '208246012', '', 'PLOT 84 DABAN KUMASI', '', 'P.O.BOX KS16403', '1150', 0, 'PROFESSIONAL', '', 'DEPARTMENT OF URBAN ROADS', '', '', 'EILFAT@YAHOO.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(144, 'ILIASU', 'EWUNTOMAH', '', '25/11/1981', '208246012', '', 'PLOT 84 DABAN KUMASI', '', 'P.O.BOX K.S16403 ADUM KUMASI', '1153', 0, 'PROFESSIONAL', '', 'DEPARTMENT OF URBAN ROADS', '', '', 'EILFAT@YAHOO.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(145, 'KAFUI', 'DADZOE', 'NOEL', '17/01/1960', '208195041', '', 'DANFA/MADINA', '', 'BOX CO 315, TEMA', '1240', 0, 'PROFESSIONAL', '', 'JGC', '', '', 'KAFUIDADZOE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(146, 'SENKYIRE', 'ACQUAH', 'THOMAS', '19/06/1954', '0277770300/026340195', '', 'NO. 15A TOP KINGS ESTATE FETTEH NKWANTANAN', '', 'BOX CT4183 ACCRA', '614', 0, 'PROFESSIONAL', '', 'PRIVATE LICENSED SURVEYOR', '', '', 'SENKYIRE@GMAIL.COM0', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(147, 'FRANK', 'ANYAH', 'KWASI', '08/06/1986', '246498825', '', 'SRAHA ASHALEY BOTWE', '', 'DT 2530, ADENTA', '0', 0, 'PROBATIONER', '', 'XQUISITE ENGINEERING SERVICES LIMITED', '', '', 'FRANKANYAH@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(148, 'HERBERT', 'DJABA', 'KOMESOUR', '11/05/1972', '548717820', '', 'MARKET STREET, OKPOI GONNO, TESHIE', '', 'P . O . BOX TN 466, TESHIE NUNGUA ESTATES, ACCRA', '834', 0, 'PROFESSIONAL', '', 'HD CONSULT', '', '', 'HERBERT.DJABA@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(149, 'NUTEPE', 'TUDZI', 'FUI KOFI', '19/06/1981', '244972260', '', 'LASHIBI, VIVIAN FARM, TEMA COMMUNITY 17', '', 'C/O ASSOCIATED CONSULTANTS LIMITED, P. O. BOX M259 ACCRA', '1550', 0, 'PROFESSIONAL', '', 'ASSOCIATED CONSULTANTS LTD', '', '', 'KENTUDZI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(150, 'SAMUEL', 'OPPONG-ANTWI', '', '30/05/1958', '0209977876,  0244211', '', 'ASHALE BOTWE, ACCRA', '', 'P. O. BOX CT 4385, CANTONMENTS-ACCRA', '415', 0, 'PROFESSIONAL', '', 'SURVEY & MAPPING DIVISION, LANDS COMMISSION', '', '', 'SAMOPANT@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(151, 'ERIC', 'AMAKYI-BOATENG', '', '23/07/1980', '0208447283/027435877', '', 'NO. 14 KWASHIBU OPPOSITE PRINCE OF PEACE ROMAN CAT', '', 'P. O. BOX ML 121 MALLAM-ACCRA', '1710', 0, 'PROFESSIONAL', '', 'LAKESIDE ESTATE LTD', '', '', 'EAMAKYI@YAOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(152, 'SALIHU', 'MADAH', 'ISMAIL', '10/03/1982', '208909204', '', 'WA', '', 'BOX 329  WA UWR', '1312', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'MSISALIHU@YAHOO.COM', 'UPPER WEST', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(153, 'ERIC', 'MENSAH-OKANTEY', 'NII OKANTEY', '27/05/1967', '244637005', '', 'WEST END', '', 'BOX CT 7288 CANTONMENT', '842', 0, 'PROFESSIONAL', '', 'SURVEY & MAPPIND', '', '', 'EROKANTEY@GMAIL.COM', 'CENTRAL', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(154, 'IAN', 'AKOTO', 'CECIL MAWULI', '08/12/1993', '0501426384/054993119', '', 'PARADISE LODGE, KOTIE-KUMASI', '', 'P.O.BOX 186, OBUASI MUNICIPAL', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'IANCECILAKOTO@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(155, 'KOFI', 'ADJEI', 'ABABIO', '12/01/1988', '207057257', '', '210 UCOMS ROAD, NEW APLAKU, ACCRA', '', 'P. O. BOX 1809, KUMASI', '0', 0, 'PROFESSIONAL', '', 'BASELINE SOLUTIONS LIMITED', '', '', 'ABABIOK@YMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(156, 'DA-COSTA', 'ASARE', 'BOAKYE MENSAH', '19/07/1992', '543569211', '', 'PLT 11/E NKETIA, ATWIMA NWABIAGYA', '', 'DEPT. OF GEOMATIC ENG. PMB KNUST', '0', 0, 'STUDENT', '', 'KNUST', '', '', 'DACOSTAASARE73@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(157, 'IVY', 'SOSA', 'ASEYE', '', '208857449', '', 'ABEKA', '', 'P.O.  BOX 137, MADINA', '1613', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT', '', '', 'ASTRABABE30@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(158, 'CLEMENCE', 'ANYAH', 'RICHARD KOFI', '16/03/2018', '246969142', '', 'EAST LEGON ADJIRINGANOR', '', 'P.O.BOX DT 2530 ADENTA', '31', 0, 'LICENSED', '', 'PURE SURVEYING SERVICES', '', '', 'CRKANYAH@GMAIL.CON', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(159, 'MERCY', 'ACHEAMPONG', 'OBENEWAH', '17/04/1971', '283', '', 'MALLAM-GBAWE-BULEMIN', '', 'BOX OD 435 ODORKOR ACCRA', '705', 0, 'LICENSED', '', 'C.T.K NETWORK & ROKMER', '', '', 'MERCYDECKER@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:44', '1', ''),
+(160, 'BENEDICTA', 'REINARH', 'DEDE BARKEY', '', '244972184', '', 'ASHIYIE', '', 'P.  O. BOX CT 228, CANTONMENTS - ACCRA', '1029', 0, 'PROFESSIONAL', '', 'PETROLEUM COMMISSION', '', '', 'BTAMATEY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(161, 'SAMUEL', 'DARKO', 'LARBI', '20/05/1959', '202110138', '', '13 YASMINE PLACE TRASSACO', '', 'CT 262 CANTONMENTS ACCRA', '288', 0, 'LICENSED', '', 'LOSAMILLS CONSULT LTD', '', '', 'SLDARKO@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(162, 'JANET', 'BAFFOUR-AWUAH', '', '26/06/1985', '243855699', '', '#B156/14 OUTER RING ROAD', '', 'P O BOX KN5651, KANESHIE-ACCRA', '17', 0, 'PROFESSIONAL', '', 'QUEST CONSOLIDATED LIMITED', '', '', 'JANEBAWUAH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(163, 'WILLIE', 'AMADI', 'YEBOAH', '02/01/1987', '243154147', '', 'ABURI', '', 'BOX 15466 ACCRA NORTH', '1709', 0, 'PROFESSIONAL', '', 'DE-MAPPERS LTD', '', '', 'AMADIWILLY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(164, 'KWAME', 'ASANTE', 'NKANSAH', '01/02/2018', '241397217', '', 'ASHALEY BOTWE NO 6 SLATER ROAD', '', 'GP 17641, ACCRA', '0', 0, 'PROFESSIONAL', '', 'COMPTRAN ENGINEERING AND PLANNING ASSOCIATE', '', '', 'KANKWAME@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(165, 'EDNA', 'KURUGU', 'ANTHOINETTE AKIWELEI', '02/01/1993', '545580806', '', 'BOLGATANGA', '', '', '0', 0, 'PROFESSIONAL', '', 'MYTURN', '', '', 'EKURUGU@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(166, 'JEAN', 'DOTSE', '', '16/03/2018', '0244657987/020149257', '', 'HOUSE NO. 141HALLELUJA JUN?TION WEST ADENTA', '', 'BOX 10227,ACCRA NORTH', '172', 0, 'LICENSED', '', 'PENSIONER', '', '', 'JEANDOTSE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(167, 'AIDEN', 'BAYOR', '', '30/11/1989', '241728344', '', 'BAGABAGA LOWCOST, 30B, TAMALE.', '', 'P. O. BOX 4, TAMALE.', '0', 0, 'PROFESSIONAL', '', 'LOGISTICS SUPPORT SERVICES', '', '', 'JAITHEO7@GMAIL.COM', 'NORTHERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(168, 'CYRIL', 'OPPONG-YEBOAH', '', '29/06/1988', '208337363', '', 'V1/8 BERLIN-TOP, FIAPRE SUNYANI', '', 'BOX 1508, SUNYANI', '1699', 0, 'PROFESSIONAL', '', 'DESIMONE GHANA LTD.', '', '', 'COY.GOAL@GMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(169, 'FRANCIS', 'OPPONG', '', '19/08/1967', '244170300', '', 'PRESTEA', '', 'POST OFFICE BOX 30 PRESTEA', '1234', 0, 'PROFESSIONAL', '', 'GOLDEN STAR GHANA', '', '', 'FOPPONGK@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(170, 'WILLIAMS', 'ODURO', '', '25/05/1988', '542768606', '', 'KUMASI', '', '', '0', 0, 'PROFESSIONAL', '', 'CHUCATEL COMPANY LIMITED', '', '', 'WILLIAMSODURO10@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(171, 'EMMANUEL', 'KISSI', 'SOMUAH', '25/12/1982', '244988252', '', 'GHANA POST : GD 224 -7722', '', 'P. O. BOX 3506, ACCRA', '1035', 0, 'LICENSED', '', 'ALLIANCE SURVEYING LIMITED', '', '', 'SOMUAHKISSI@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(172, 'ERIC', 'HELOO', '', '08/11/1981', '244541754', '', 'MC02, MARK CUTIFANI ESTATE, MILE 1, TARKWA', '', 'P. O. BOX 284', '1611', 0, 'PROFESSIONAL', '', 'ANGLOGOLD ASHANTI IDUAPRIEM LTD', '', '', 'EHELOO@ANGLOGOLDASHANTI.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(173, 'GODFRED', 'ADDAI', '', '07/08/1990', '272118148', '', 'P. O. BOX 5399 ADUM KUMASI', '', '', '0', 0, 'PROBATIONER', '', 'HEILAND RESOURCES LIMITED', '', '', 'QUABENA007@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(174, 'ERNEST', 'EKUBAN', '', '30/04/2018', '243983924', '', '30 TESANO ROAD', '', '', '1723', 0, 'PROFESSIONAL', '', 'INTEL E-GEO LIMITED', '', '', 'ERNEKUBAN@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(175, 'PRINCE', 'AMOH', '', '26/06/1986', '245917177', '', 'BRENUAKYIM AMA SAAH STREET1', '', 'AGL PO BOX 208 TARKWA', '0', 0, 'PROFESSIONAL', '', 'GOLDFIELDS GHANA,DAMAG', '', '', 'AMOHP@ROCKETMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(176, 'CONFIDENCE', 'ANYORMI', '', '14/02/1988', '+233245155568', '', 'TARKWA', '', 'PMB, TARKWA', '0', 0, 'PROFESSIONAL', '', 'GOLDEN STAR WASSA LTD', '', '', 'CANYORMI@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(177, 'OBED', 'OWUSU-MENSAH', '', '25/07/1992', '501358762', '', 'AK/OT/087', '', 'P.O.BOX 17', '0', 0, 'PROFESSIONAL', '', 'GOLDEN STAR WASSA MINES', '', '', 'OBEDOWUSU801@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(178, 'ISAAC', 'ANSAH', '', '18/10/1975', '244768757', '', 'CAPE COAST', '', 'P O BOX CC 43 CAPE COAST', '1732', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'ANSTECHCONSULT@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(179, 'EBO', 'KOOMON', '', '17/06/1986', '276291282', '', 'TAKORADI', '', 'SK 516,SAKUMONO ESTATES, TEMA', '1311', 0, 'PROFESSIONAL', '', 'AYA ENGINEERING', '', '', 'EBOKOOMSON2003@YAHOO.CO.UKK', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(180, 'MICHAEL', 'DORDOR', 'ENAM', '09/05/1968', '244788230', '', 'GREDA ESTATES, TESHIE, ACCRA', '', 'BOX CT 1646, ACCRA', '664', 0, 'LICENSED', '', 'BASELINE SOLUTIONS LTD', '', '', 'MDORDOR@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(181, 'ALEXANDER', 'OWUSU ANSAH', '', '08/07/1989', '249343157', '', 'P.O.BOX KS 15416, ADUM - KUMASI,', '', '', '0', 0, 'TECHNICIAN', '', 'MR', '', '', 'AS.OWUSUANSAH@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(182, 'ABIGAIL', 'QUAYE', 'AYELEY', '05/05/1981', '244449925', '', 'MANCHIE', '', 'P.O.BOX CT 8544 ,CANTONMENTS  ACCRA', '1724', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SMD)', '', '', 'ABBY.QUAYE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(183, 'PRINCE', 'AMPONSAH', '', '04/09/1985', '+233246139520', '', 'AK-334-8789', '', 'P. O. BOX KJ 443, KUMASI', '1739', 0, 'PROFESSIONAL', '', 'CHIRANO GOLDMINE LIMITED', '', '', 'PRINCEKWABENAAMPONSAH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', '');
 INSERT INTO `members` (`members_id`, `first_name`, `last_name`, `other_name`, `dob`, `personal_contact`, `emergency_contact`, `house_number`, `house_location`, `postal_address`, `professional_number`, `year_elected`, `surveyor_type`, `designation`, `company_name`, `company_type`, `company_contact`, `corporate_email`, `region`, `office_location`, `company_address`, `current_balance`, `committes`, `date_done`, `division`, `user_id`) VALUES
-(183, 'PRINCE', 'AMPONSAH', '', '04/09/1985', '+233246139520', '', 'AK-334-8789', '', 'P. O. BOX KJ 443, KUMASI', '1739', 0, 'PROFESSIONAL', '', 'CHIRANO GOLDMINE LIMITED', '', '', 'PRINCEKWABENAAMPONSAH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(184, 'MICHAEL', 'ADUAH', 'S', '', '249447799', '', 'TARKWA', '', '', '1674', 0, 'PROFESSIONAL', '', 'GEOMATIC ENGINEERING DEPT, UMAT', '', '', 'MSADUAH@MAT.EDU.GH', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(185, 'JONATHAN', 'QUAYE-BALLARD', 'ARTHUR', '16/09/2018', '277474073', '', 'DEPARTMENT OF GEOMATIC ENG., KNUST', '', '13422, ADUM, KUMASI', '975', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'QUAYEBALLARD@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(186, 'FREDERICK', 'BEDIAKO-MENSAH', '', '19/09/1974', '+233244642294', '', 'CODE: GW-0299-7313; ADDRESS: KWABENYA-POKUASE ROAD', '', 'P. O. BOX CT5936, ACCRA', '919', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION/GSSM', '', '', 'FBEDMESH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(187, 'JOSEPH', 'OKAE', 'KWESI', '16/03/1943', '249459449', '', 'NO ONE  PAWPAW STREET, EASTLEGON ACCRA', '', 'P.O.BOX CT 39 CANTOMENTS, ACCRA', '94', 0, 'LICENSED', '', 'GHANA INSTITUTION OF SURVEYORS', '', '', 'JOSEPHKOKAEGMAIL.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(188, 'JOSEPH', 'OKAE', 'KWESI', '16/03/1943', '249459449', '', 'NO ONE PAWPAW STREET, EASTLEGON ACCRA', '', 'P.O.BOX CT 39 CANTOMENTS, ACCRA', '94', 0, 'LICENSED', '', 'GHANA INSTITUTION OF SURVEYORS', '', '', 'JOSEPHKOKAE@GMAIL.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(189, 'CHRISTIAN', 'OTU', 'TETTEH', '24/04/1957', '244012027', '', 'BLUE HOSTEL/MIOTSO', '', 'P. O. BOX  CE 11657, TEMA', '342', 0, 'LICENSED', '', 'HYDROLAND SURVEYS', '', '', 'CHRISOTUY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(190, 'FRANKLIN', 'LIGGIE-KUDONOO', '', '02/10/1971', '240259270', '', 'PLOT 25 NII ASOYI I ROAD MEMPEASEM', '', 'BOX MD 137 MADINA', '1323', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT LIMITED', '', '', 'FKLIGGIE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(191, 'JOSEPH', 'ESSAH', 'BAIDEN', '22/11/1977', '205165545', '', 'ADJIRINGANOR, ACCRA', '', 'KN 3677, KANESHIE-ACCRA', '1313', 0, 'PROFESSIONAL', '', 'SURVEYWORLD COMPANY LIMITED', '', '', 'EAJOBDD@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(192, 'BEN', 'CAIQUO', 'BRIGHT', '21/07/1985', '245804452', '', '18A GRADE ONE BOGOSO', '', 'P O BOX LS 836 SEKONDI', '0', 0, 'PROBATIONER', '', 'GOLDEN STAR RESOURCES', '', '', 'BCBENLOT@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(193, 'SAMUEL', 'DANSO', 'OFOSU', '29/09/2018', '202853550', '', 'TARKWA', '', 'POBOX 208, TARKWA', '0', 0, 'PROFESSIONAL', '', 'GOLDFIELDS GHANA LTD', '', '', 'SAMUELODANSO@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(194, 'ONESIMUS', 'GYAPONG', 'YEBOAH', '03/04/1993', '240158749', '', 'BOGOSO,B-LINE D10', '', 'BOX 77 BOGOSO', '0', 0, 'OTHER', '', 'GOLDEN STAR RESOURCES', '', '', 'GONISMOUS@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(195, 'NATHAN', 'SAGOE', 'WINFRED OBENG', '08/04/1989', '543024730', '', 'LAWSON PLAZA, ARENA, ACCRA CENTRAL', '', 'BOX 3355, OSU', '0', 0, 'PROFESSIONAL', '', 'MOB CONSULT', '', '', 'NATHANSAGOE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', '64'),
-(196, 'FRANKIE', 'BONYE-KANCHINEE', '', '01/09/1992', '541848902', '', 'WEIJA', '', '', '0', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'FRANKIEILOCC@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(197, 'GEORGE', 'DORDAH', 'ALEXANDER', '28/03/1980', '203767213', '', 'X2&3, CATERING BOLGATANGA', '', 'BOX 87, BOLGATANGA', '1314', 0, 'PROFESSIONAL', '', 'BOLGATANGA POLYTECHNIC', '', '', 'GADORDAH@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(198, 'PATRICK', 'APENKWAH', 'KORANKYE', '', '240738002', '', 'NO. 22 LABADI VILLAS, BURMA CAMP', '', 'P. O. BOX OS 2204, OSU, ACCRA.', '1038', 0, 'LICENSED', '', 'GHANA ARMED FORCES', '', '', 'PATRICKAPK@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(199, 'ANTHONY', 'NUVOR', 'YAOVI', '01/02/1968', '244640828', '', 'LAKESIDE ESTATES, ASHALEY BOTWE', '', 'BOX 71, ADOAGYIRI-NSAWAM', '1041', 0, 'LICENSED', '', 'RAY GLOBAL ASSOCIATES LTD', '', '', 'TONYNUVOR@GMAIL.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(200, 'SAMUEL', 'AHENKORAH', 'OFOSU', '02/05/1979', '244560294', '', 'PANTANG EAST, NEAR FOCUS HOSPITAL', '', 'P .O. BOX 830 SUNYANI, BRONG AHAFO REGION', '1706', 0, 'PROFESSIONAL', '', 'SURVEY & MAPPING DIVISION, LANDS COMMISSION', '', '', 'SAMMYFOSU@YMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(201, 'EMMANUEL', 'AKROFI', 'OFFEI', '16/09/1960', '244895832', '', 'PLOT 52 BLK C, EKYEM, KUMASI', '', 'P.O. BOX UP1442, KNUST, KUMASI', '987', 0, 'LICENSED', '', 'KNUST', '', '', 'EOFFEIAKROFI@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(202, 'JUSTICE', 'OFOSU', '', '', '242171686', '', 'HNO 51 NORTH AGRIC HILL, TARKWA', '', '', '0', 0, 'PROFESSIONAL', '', 'MAXMASS LTD', '', '', 'NHYIRABAOFOSU@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(203, 'DESMOND', 'YANKSON', 'EGYIRE', '16/11/1989', '0508212508/050247336', '', 'TEMA COMM 3', '', 'C/O DIANA EPHRAIM,GBC P.O BOX 1633, KANDA-ACCRA', '0', 0, 'PROBATIONER', '', 'TRASACCO ESTATE DEVELOPMENT COMPANY LTD', '', '', 'DESMONDYANKSON@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(204, 'KWADWO', 'AKOTO', 'OPPONG', '06/02/1989', '207935189', '', 'DANSOMAN, ACCRA', '', 'P. O. BOX DS 221, DANSOMAN ,ACCRA', '0', 0, 'PROBATIONER', '', 'HIGH BRAINS LIMITED', '', '', 'KWADWOAKOTO@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(205, 'RICHFIELD', 'OHEMENG', 'YAW', '12/06/1986', '207614443', '', 'TAKORADI', '', 'P. O. BOX TD 60', '0', 0, 'PROFESSIONAL', '', 'BRIGHT STAR SURVEYS', '', '', 'RYOHEMENG@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(206, 'EMMANUEL', 'NKEBI', 'KOFI', '09/10/1953', '209894978', '', 'HOUSE NO. 92T, ADIEMBRA. SEKONDI', '', 'BOX MC 2411, TAKORADI', '808', 0, 'LICENSED', '', 'BRIGHTSTAR SURVEYS LTD', '', '', 'EKNKEBI@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(207, 'DA-COSTA', 'ASARE', 'BOAKYE MENSAH', '19/07/1992', '543569211', '', 'PLT 11BLK E NKETIA', '', 'GEOMATIC ENGINEERING DEPARTMENT, KNUST - PMB', '0', 0, 'TRAINEE', '', 'KNUST', '', '', 'DACOSTAASARE73@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', '64'),
-(208, 'LINDA', 'ABOSI', 'ADWOA', '14/04/1980', '244528955', '', 'OSEI TUTU SHS, BUNGALOW 14B', '', 'C/O SAMUEL ABOSI, OSEI TUTU SHS, PMB, AKROPONG-ASHANTI', '1436', 0, 'PROFESSIONAL', '', 'SURVEY AND MAPPING DIVISION', '', '', 'LINDA.ABOSI@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', '64');
+(184, 'MICHAEL', 'ADUAH', 'S', '', '249447799', '', 'TARKWA', '', '', '1674', 0, 'PROFESSIONAL', '', 'GEOMATIC ENGINEERING DEPT, UMAT', '', '', 'MSADUAH@MAT.EDU.GH', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(185, 'JONATHAN', 'QUAYE-BALLARD', 'ARTHUR', '16/09/2018', '277474073', '', 'DEPARTMENT OF GEOMATIC ENG., KNUST', '', '13422, ADUM, KUMASI', '975', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'QUAYEBALLARD@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(186, 'FREDERICK', 'BEDIAKO-MENSAH', '', '19/09/1974', '+233244642294', '', 'CODE: GW-0299-7313; ADDRESS: KWABENYA-POKUASE ROAD', '', 'P. O. BOX CT5936, ACCRA', '919', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION/GSSM', '', '', 'FBEDMESH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(187, 'JOSEPH', 'OKAE', 'KWESI', '16/03/1943', '249459449', '', 'NO ONE  PAWPAW STREET, EASTLEGON ACCRA', '', 'P.O.BOX CT 39 CANTOMENTS, ACCRA', '94', 0, 'LICENSED', '', 'GHANA INSTITUTION OF SURVEYORS', '', '', 'JOSEPHKOKAEGMAIL.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(188, 'JOSEPH', 'OKAE', 'KWESI', '16/03/1943', '249459449', '', 'NO ONE PAWPAW STREET, EASTLEGON ACCRA', '', 'P.O.BOX CT 39 CANTOMENTS, ACCRA', '94', 0, 'LICENSED', '', 'GHANA INSTITUTION OF SURVEYORS', '', '', 'JOSEPHKOKAE@GMAIL.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(189, 'CHRISTIAN', 'OTU', 'TETTEH', '24/04/1957', '244012027', '', 'BLUE HOSTEL/MIOTSO', '', 'P. O. BOX  CE 11657, TEMA', '342', 0, 'LICENSED', '', 'HYDROLAND SURVEYS', '', '', 'CHRISOTUY@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(190, 'FRANKLIN', 'LIGGIE-KUDONOO', '', '02/10/1971', '240259270', '', 'PLOT 25 NII ASOYI I ROAD MEMPEASEM', '', 'BOX MD 137 MADINA', '1323', 0, 'PROFESSIONAL', '', 'JOEAMAH GEOMATICS CONSULT LIMITED', '', '', 'FKLIGGIE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(191, 'JOSEPH', 'ESSAH', 'BAIDEN', '22/11/1977', '205165545', '', 'ADJIRINGANOR, ACCRA', '', 'KN 3677, KANESHIE-ACCRA', '1313', 0, 'PROFESSIONAL', '', 'SURVEYWORLD COMPANY LIMITED', '', '', 'EAJOBDD@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(192, 'BEN', 'CAIQUO', 'BRIGHT', '21/07/1985', '245804452', '', '18A GRADE ONE BOGOSO', '', 'P O BOX LS 836 SEKONDI', '0', 0, 'PROBATIONER', '', 'GOLDEN STAR RESOURCES', '', '', 'BCBENLOT@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(193, 'SAMUEL', 'DANSO', 'OFOSU', '29/09/2018', '202853550', '', 'TARKWA', '', 'POBOX 208, TARKWA', '0', 0, 'PROFESSIONAL', '', 'GOLDFIELDS GHANA LTD', '', '', 'SAMUELODANSO@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(194, 'ONESIMUS', 'GYAPONG', 'YEBOAH', '03/04/1993', '240158749', '', 'BOGOSO,B-LINE D10', '', 'BOX 77 BOGOSO', '0', 0, 'OTHER', '', 'GOLDEN STAR RESOURCES', '', '', 'GONISMOUS@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(195, 'NATHAN', 'SAGOE', 'WINFRED OBENG', '08/04/1989', '543024730', '', 'LAWSON PLAZA, ARENA, ACCRA CENTRAL', '', 'BOX 3355, OSU', '0', 0, 'PROFESSIONAL', '', 'MOB CONSULT', '', '', 'NATHANSAGOE@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(196, 'FRANKIE', 'BONYE-KANCHINEE', '', '01/09/1992', '541848902', '', 'WEIJA', '', '', '0', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION', '', '', 'FRANKIEILOCC@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(197, 'GEORGE', 'DORDAH', 'ALEXANDER', '28/03/1980', '203767213', '', 'X2&3, CATERING BOLGATANGA', '', 'BOX 87, BOLGATANGA', '1314', 0, 'PROFESSIONAL', '', 'BOLGATANGA POLYTECHNIC', '', '', 'GADORDAH@GMAIL.COM', 'UPPER EAST', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(198, 'PATRICK', 'APENKWAH', 'KORANKYE', '', '240738002', '', 'NO. 22 LABADI VILLAS, BURMA CAMP', '', 'P. O. BOX OS 2204, OSU, ACCRA.', '1038', 0, 'LICENSED', '', 'GHANA ARMED FORCES', '', '', 'PATRICKAPK@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(199, 'ANTHONY', 'NUVOR', 'YAOVI', '01/02/1968', '244640828', '', 'LAKESIDE ESTATES, ASHALEY BOTWE', '', 'BOX 71, ADOAGYIRI-NSAWAM', '1041', 0, 'LICENSED', '', 'RAY GLOBAL ASSOCIATES LTD', '', '', 'TONYNUVOR@GMAIL.COM', 'EASTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(200, 'SAMUEL', 'AHENKORAH', 'OFOSU', '02/05/1979', '244560294', '', 'PANTANG EAST, NEAR FOCUS HOSPITAL', '', 'P .O. BOX 830 SUNYANI, BRONG AHAFO REGION', '1706', 0, 'PROFESSIONAL', '', 'SURVEY & MAPPING DIVISION, LANDS COMMISSION', '', '', 'SAMMYFOSU@YMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(201, 'EMMANUEL', 'AKROFI', 'OFFEI', '16/09/1960', '244895832', '', 'PLOT 52 BLK C, EKYEM, KUMASI', '', 'P.O. BOX UP1442, KNUST, KUMASI', '987', 0, 'LICENSED', '', 'KNUST', '', '', 'EOFFEIAKROFI@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(202, 'JUSTICE', 'OFOSU', '', '', '242171686', '', 'HNO 51 NORTH AGRIC HILL, TARKWA', '', '', '0', 0, 'PROFESSIONAL', '', 'MAXMASS LTD', '', '', 'NHYIRABAOFOSU@GMAIL.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(203, 'DESMOND', 'YANKSON', 'EGYIRE', '16/11/1989', '0508212508/050247336', '', 'TEMA COMM 3', '', 'C/O DIANA EPHRAIM,GBC P.O BOX 1633, KANDA-ACCRA', '0', 0, 'PROBATIONER', '', 'TRASACCO ESTATE DEVELOPMENT COMPANY LTD', '', '', 'DESMONDYANKSON@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(204, 'KWADWO', 'AKOTO', 'OPPONG', '06/02/1989', '207935189', '', 'DANSOMAN, ACCRA', '', 'P. O. BOX DS 221, DANSOMAN ,ACCRA', '0', 0, 'PROBATIONER', '', 'HIGH BRAINS LIMITED', '', '', 'KWADWOAKOTO@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(205, 'RICHFIELD', 'OHEMENG', 'YAW', '12/06/1986', '207614443', '', 'TAKORADI', '', 'P. O. BOX TD 60', '0', 0, 'PROFESSIONAL', '', 'BRIGHT STAR SURVEYS', '', '', 'RYOHEMENG@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(206, 'EMMANUEL', 'NKEBI', 'KOFI', '09/10/1953', '209894978', '', 'HOUSE NO. 92T, ADIEMBRA. SEKONDI', '', 'BOX MC 2411, TAKORADI', '808', 0, 'LICENSED', '', 'BRIGHTSTAR SURVEYS LTD', '', '', 'EKNKEBI@YAHOO.COM', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(207, 'DA-COSTA', 'ASARE', 'BOAKYE MENSAH', '19/07/1992', '543569211', '', 'PLT 11BLK E NKETIA', '', 'GEOMATIC ENGINEERING DEPARTMENT, KNUST - PMB', '0', 0, 'TRAINEE', '', 'KNUST', '', '', 'DACOSTAASARE73@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', ''),
+(208, 'LINDA', 'ABOSI', 'ADWOA', '14/04/1980', '244528955', '', 'OSEI TUTU SHS, BUNGALOW 14B', '', 'C/O SAMUEL ABOSI, OSEI TUTU SHS, PMB, AKROPONG-ASHANTI', '1436', 0, 'PROFESSIONAL', '', 'SURVEY AND MAPPING DIVISION', '', '', 'LINDA.ABOSI@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:46', '1', '');
 
 -- --------------------------------------------------------
 
@@ -847,7 +916,8 @@ INSERT INTO `messages` (`message_id`, `message_group`, `message_sender`, `messag
 (4, 'all', 57, '[\"56\",\"58\",\"44\"]', 'To general people', '<pre>This is the message content for obia</pre>', 'SENT', 'NEW', 'NO', '2019-03-22 04:52:23'),
 (5, 'group', 57, '[\"57\"]', 'This is another one', '<pre>Hello,\r\n         This is another one\r\n                                         bye!\r\n</pre>', 'SENT', 'NEW', 'NO', '2019-03-22 05:06:21'),
 (6, 'group', 56, '[\"56\"]', 'NO PRE', 'Hi THERE,\r\n                THERE is \r\n                                no pre\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nsincerely,\r\n\r\n', 'SENT', 'NEW', 'NO', '2019-03-23 23:45:57'),
-(7, 'all', 73, '[\"56\"]', '08-05-2019', 'This is the messages sent for testing on today', 'SENT', 'NEW', 'NO', '2019-05-08 23:34:05');
+(7, 'all', 73, '[\"56\"]', '08-05-2019', 'This is the messages sent for testing on today', 'SENT', 'NEW', 'NO', '2019-05-08 23:34:05'),
+(8, 'group', 73, '[\"73\"]', 'sd', 'ssasdfasdfasfdasdf\r\nasdfasdf\r\nasdfasd\r\nfasdfasdf\r\nasdfasdfasd\r\nfasdfasdfasdf', 'SENT', 'NEW', 'NO', '2019-08-23 10:04:38');
 
 -- --------------------------------------------------------
 
@@ -925,6 +995,13 @@ CREATE TABLE `new_application` (
   `record_hide` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `new_application`
+--
+
+INSERT INTO `new_application` (`new_application_id`, `application_division`, `application_code`, `application_stage`, `folder_name`, `files_subject`, `files_name`, `college_email`, `employer_email`, `application_startDate`, `col_instructor_title`, `col_instruct_fullname`, `col_name`, `col_stu_startDate`, `col_competence_div`, `col_principal_name`, `col_principal_profNum`, `col_declare_date`, `emp_com_name`, `emp_com_loc`, `emp_tel`, `emp_tec_division`, `emp_stu_branch`, `com_trianer_name`, `emp_trianer_profNum`, `emp_declare_date`, `member_declare_id`, `member_declare_note`, `member_declare_date`, `student_id`, `user_id`, `app_accept_status`, `app_assigned_profnum`, `app_accept_reason`, `app_accept_date`, `app_accept_user_id`, `record_hide`) VALUES
+(6, '1', '2019084086', 'START', '08-25-20193451-856', '[\"University of Cape Coast\",\"Diploma\"]', '[\"0321832183.pdf\",\"aaa.docx\"]', 'sorce100@gmail.com', 'sorce100@gmail.com', '25th-August-2019', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 11, 'Please approve this for me', '', 8, 56, '', '', '', '', 0, 'NO');
+
 -- --------------------------------------------------------
 
 --
@@ -961,9 +1038,9 @@ INSERT INTO `pages` (`pages_id`, `pages_name`, `pages_url`, `page_file_name`, `d
 (22, 'Event Setup', '<li><a href=\"admin_events.php\" class=\"waves-effect\"><i class=\"fa fa-calendar fa-fw\" aria-hidden=\"true\"></i>Event Setup</a></li>', 'admin_events.php', '1', '2018-11-28 00:16:01'),
 (24, 'Sms Broadcast', '<li><a href=\"admin_broadcast_sms.php\" class=\"waves-effect\"><i class=\"fa fa-comment fa-fw\" aria-hidden=\"true\"></i>Broadcast Sms</a></li>', 'admin_broadcast_sms.php', '3', '2018-12-10 20:11:44'),
 (25, 'New Registration', '<li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', 'applicant_registrationa.php', '3', '2019-02-04 19:24:55'),
-(26, 'Students Setup', '<li><a href=\"students_setup.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Student Setup</a></li>', 'students_setup.php', '3', '2019-02-24 12:58:57'),
+(26, 'Registered Applicants', '<li><a href=\"students_setup.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Applicants Setup</a></li>', 'students_setup.php', '3', '2019-02-24 12:58:57'),
 (27, 'Student Pages', '<li><a href=\"student_profile.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Applicant Profile </a></li>                     <li><a href=\"student_register.php\" class=\"waves-effect\"><i class=\"fa fa-list fa-fw\" aria-hidden=\"true\"></i>Register </a></li>                    <li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', 'applicant_registrationa.php', '1', '2019-02-24 21:22:59'),
-(28, 'Center Register', '<li><a href=\"examcenter_register.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Registered Students</a></li>', 'examcenter_register.php', '1', '2019-03-03 10:42:55'),
+(28, 'Admin Exams Register', '<li><a href=\"examcenter_register.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Exams Register</a></li>', 'examcenter_register.php', '1', '2019-03-03 10:42:55'),
 (31, 'Messages', '<li><a href=\"messages.php\" class=\"waves-effect\"><i class=\"fa fa-comments fa-fw\" aria-hidden=\"true\"></i>Messages</a></li>', 'messages.php', '3', '2019-03-23 23:50:52'),
 (32, 'Live Stream Setup', '<li><a href=\"admin_live_stream.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Live Stream Setup </a></li>', 'admin_live_stream.php', '3', '2019-03-23 23:53:12'),
 (33, 'Live Stream Dashboard', '<li><a href=\"videoStream_dashboard.php\" class=\"waves-effect\"><i class=\"fa fa-eye fa-fw\" aria-hidden=\"true\"></i>Live Stream</a></li>', 'videoStream_dashboard.php', '3', '2019-03-23 23:53:34'),
@@ -974,7 +1051,10 @@ INSERT INTO `pages` (`pages_id`, `pages_name`, `pages_url`, `page_file_name`, `d
 (38, 'New Applicants Administration', '<li><a href=\"admin_application_approval.php\" class=\"waves-effect\"><i class=\"fa fa-file fa-fw\" aria-hidden=\"true\"></i>New Applications</a></li>', 'admin_application_approval.php', '1', '2019-04-12 00:50:39'),
 (39, 'Committee Setup', '<li><a href=\"admin_committiee.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Committee Setup </a></li>', 'admin_committiee.php', '3', '2019-06-04 23:08:17'),
 (40, 'Exams Setup', '<li><a href=\"examcenter_setup.php\" class=\"waves-effect\"><i class=\"fa fa-globe fa-fw\" aria-hidden=\"true\"></i>Exam Center Setup</a></li>', 'examcenter_setup.php', '1', '2019-07-11 23:14:30'),
-(41, 'Member Committee', '<li><a href=\"committee.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Committee</a></li>', 'committee.php', '1', '2019-07-11 23:15:02');
+(41, 'Member Committee', '<li><a href=\"committee.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Committee</a></li>', 'committee.php', '1', '2019-07-11 23:15:02'),
+(42, 'Committee Administrator', '<li><a href=\"committee_admin.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Committee Admin</a></li>', 'committee_admin.php', '3', '2019-08-19 14:01:28'),
+(43, 'CPD SETUP', '<li><a href=\"cpd_setup.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>CPD Setup</a></li>', 'cpd_setup.php', '3', '2019-08-25 18:28:26'),
+(44, 'MEMBER CPD REGISTER', '<li><a href=\"cpd_register.php\" class=\"waves-effect\"><i class=\"fa fa-th-list fa-fw\" aria-hidden=\"true\"></i>CPD Register</a></li>', 'cpd_register.php', '1', '2019-08-25 18:29:06');
 
 -- --------------------------------------------------------
 
@@ -1010,7 +1090,8 @@ INSERT INTO `sms` (`sms_id`, `sms_code`, `sms_description`, `sms_reference`, `sm
 (8, '', '', '', '{\"code\":\"000\",\"desc\":\"Operation successful.\",\"data\":{\"new_record_id\":176892487}}', 0, '', 0, 0, '2019-04-03 15:25:18'),
 (9, '', '', '', '{\"code\":\"000\",\"desc\":\"Operation successful.\",\"data\":{\"new_record_id\":183116313}}', 209969656, '', 0, 64, '2019-05-09 12:07:17'),
 (10, '', '', '', '{\"code\":\"000\",\"desc\":\"Operation successful.\",\"data\":{\"new_record_id\":183116376}}', 209969656, '', 1, 64, '2019-05-09 12:09:24'),
-(11, '', '', '', '{\"code\":\"000\",\"desc\":\"Operation successful.\",\"data\":{\"new_record_id\":207579964}}', 209969656, '', 1, 64, '2019-07-15 06:34:16');
+(11, '', '', '', '{\"code\":\"000\",\"desc\":\"Operation successful.\",\"data\":{\"new_record_id\":207579964}}', 209969656, '', 1, 64, '2019-07-15 06:34:16'),
+(12, '', '', '', '{\"code\":\"000\",\"desc\":\"Operation successful.\",\"data\":{\"new_record_id\":235914227},\"configs\":{\"enableSenderIdRouting\":true,\"enableAdRiders\":false,\"enableAutomaticSurveys\":false,\"enableCountrySettings\":true,\"enableAlerts\":true,\"enableCostCenters\":false,\"enableTrustedOrgs\":false,\"enabledConfigs\":true,\"enableCampaigns\":false,\"copyright\":\"Meliora Technologies (K) Ltd.\",\"version\":\"Unified Communications Manager Version 1.4.7\"}}', 243049925, '', 1, 64, '2019-08-25 18:11:01');
 
 -- --------------------------------------------------------
 
@@ -1058,7 +1139,8 @@ INSERT INTO `students` (`student_id`, `student_title`, `student_first_name`, `st
 (16, 'Mr', 'HERBERT', 'ADJARE', '', 'ah@gmail.com', '0209969656', '', '', '', '', 3, 'NO', '1', '2019-04-12 00:11:06'),
 (20, 'Mr', 'merlin', 'merlin', '', 'merlin@gmail.com', '0209969656', '', '', '', '', 3, 'NO', '1', '2019-07-09 22:36:09'),
 (21, 'Mr', 'esther', 'darko', '', 'esther@gmail.com', '0209969656', '', '', '', '', 3, 'NO', '1', '2019-07-09 22:37:04'),
-(22, 'Dr', 'merlinww', 'sorceww', '', 'merlinSorce@gmail.comas', '02099696565', '', '', '', '', 3, 'NO', '3', '2019-07-15 06:34:15');
+(22, 'Dr', 'merlinww', 'sorceww', '', 'merlinSorce@gmail.comas', '02099696565', '', '', '', '', 3, 'NO', '3', '2019-07-15 06:34:15'),
+(23, 'Mr', 'sorce', 'kwarteng', '', 'a@gmail.com', '0209969656', '', '', '', '', 0, 'NO', '1', '2019-08-25 10:18:33');
 
 -- --------------------------------------------------------
 
@@ -1112,18 +1194,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `account_type`, `account_type_id`, `account_stage`, `member_id`, `user_password`, `reset_password`, `group_id`, `school_id`, `status`, `division`, `user_login_status`, `record_hide`, `date_done`) VALUES
-(44, 'school', 0, '', 'sms', '$2y$10$qVyLjNBfSGoCH2O..GGX9uwTS8chG.veMl1qOtqT9F7POI.vJPeAC', 'NO', '17', 0, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-02-20 13:03:59'),
-(54, 'member', 107, '', '1032', '$2y$10$.9ly/FdcAQPdsdkMm9qypOLy5sNPsW4SFRT94/pjOUPAec4X8GL/.', 'NO', '13', 0, 'ACTIVE', '1', '', 'NO', '2019-02-24 17:06:44'),
-(56, 'student', 8, 'NEW', 'p.pencil', '$2y$10$TsxUBtv7c2x4LrnI0QV/peA9VOcJ1ojhN.6A7qIEkcvDytDTVgFOW', 'NO', '14', 7, 'ACTIVE', '1', 'ONLINE', 'NO', '2019-02-24 17:19:02'),
-(64, 'administrator', 1, '', 'lsd', '$2y$10$Y0F6phqIvj7PQxXfneggMOE.cWIg1upOmMtFchxPVK.rdhTZ6BHRa', 'NO', '9', 0, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-03-20 10:00:30'),
+(56, 'student', 8, 'NEW', 'p.pencil', '$2y$10$TsxUBtv7c2x4LrnI0QV/peA9VOcJ1ojhN.6A7qIEkcvDytDTVgFOW', 'NO', '14', 7, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-02-24 17:19:02'),
+(64, 'administrator', 1, '', 'lsd', '$2y$10$Y0F6phqIvj7PQxXfneggMOE.cWIg1upOmMtFchxPVK.rdhTZ6BHRa', 'NO', '9', 0, 'ACTIVE', '1', 'ONLINE', 'NO', '2019-03-20 10:00:30'),
 (65, 'administrator', 4, '', 'ghis', '$2y$10$pdisgNSq0i6F2dbkk/azPeQdtUlHQ5lVhZUYIOfbdtSSPNAnYIXoi', 'NO', '13', 0, 'ACTIVE', '1', '', 'NO', '2019-03-20 11:47:52'),
-(73, 'member', 19, '', '11', '$2y$10$lYuPMDj1sKIFoofB5u5DXOtHASvOMVz1/9T2G9zhrCdLJtGy6c3Dm', 'NO', '13', 0, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-04-01 12:28:05'),
-(96, 'student', 16, 'OLD', 'H.ADJARE', '$2y$10$b3nPPMXcO0KvOuwtw4mVR.4zzvAIvOqOF.8QEbx3gtXapt/biOygG', 'NO', '14', 7, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-04-12 00:11:07'),
-(97, 'member', 19, '', '11', '$2y$10$LCInqIBHMHmkSpmCKRzXrOcVAUb0UIDffbNDoGPAFRH39sBdKKTk.', 'NO', '13', 0, 'DISABLE', '1', '', 'NO', '2019-05-09 12:07:17'),
-(98, 'member', 19, '', '11', '$2y$10$iuv25AZqnsqlQFJsXNvqEuHUJapzQpMSa/09JZJknxnPpCrqxp4su', 'NO', '13', 0, 'DISABLE', '1', '', 'NO', '2019-05-09 12:09:23'),
-(100, 'student', 20, 'NEW', 'm.merlin', '$2y$10$/buqRcaYEfrjMZTAFH2LCOyRCy.BucT69/KrhSk38upiPEzR6Di4y', 'NO', '', 0, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-07-09 22:36:09'),
-(101, 'student', 21, 'NEW', 'e.darko', '$2y$10$VSYEZEC849Lxi1N.DUISqOSBg12Uzn4j5wuUTd5uTwzltPyMYpdlO', 'NO', '', 0, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-07-09 22:37:04'),
-(102, 'student', 22, 'NEW', 'm.sorce', '$2y$10$HdcsOol59Q1Q6Gs/LvtP4.TO9eDorOMV0oZo/GNuz3h64cyfRRQlK', 'NO', '', 0, 'ACTIVE', '1', '', 'NO', '2019-07-15 06:34:15');
+(73, 'member', 19, 'OLD', '11', '$2y$10$s8AQDlTFJb7YmmfP9um/lOhCCo0vVgGtMoL8OkakVhZgfucBEOSde', 'NO', '13', 0, 'active', '1', 'OFFLINE', 'NO', '2019-04-01 12:28:05');
 
 -- --------------------------------------------------------
 
@@ -1428,7 +1502,52 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (282, 64, 'Thursday 15th of August 2019 / 10:13:55 AM', 'Thursday 15th of August 2019 / 10:15:11 AM', 1),
 (283, 73, 'Thursday 15th of August 2019 / 10:15:21 AM', 'Thursday 15th of August 2019 / 06:56:21 PM', 1),
 (284, 64, 'Thursday 15th of August 2019 / 06:56:28 PM', 'Friday 16th of August 2019 / 12:32:06 AM', 1),
-(285, 56, 'Friday 16th of August 2019 / 12:32:16 AM', '', 1);
+(285, 56, 'Friday 16th of August 2019 / 12:32:16 AM', '', 1),
+(286, 56, 'Saturday 17th of August 2019 / 09:05:58 PM', '', 1),
+(287, 56, 'Sunday 18th of August 2019 / 01:21:44 PM', 'Sunday 18th of August 2019 / 07:48:48 PM', 1),
+(288, 64, 'Sunday 18th of August 2019 / 02:05:04 PM', '', 1),
+(289, 56, 'Monday 19th of August 2019 / 06:09:26 AM', 'Monday 19th of August 2019 / 12:43:18 PM', 1),
+(290, 56, 'Monday 19th of August 2019 / 12:43:43 PM', 'Monday 19th of August 2019 / 01:25:31 PM', 1),
+(291, 64, 'Monday 19th of August 2019 / 01:25:36 PM', 'Monday 19th of August 2019 / 01:46:48 PM', 1),
+(292, 56, 'Monday 19th of August 2019 / 01:46:58 PM', 'Monday 19th of August 2019 / 01:47:23 PM', 1),
+(293, 64, 'Monday 19th of August 2019 / 01:47:29 PM', 'Monday 19th of August 2019 / 09:04:07 PM', 1),
+(294, 64, 'Monday 19th of August 2019 / 09:04:17 PM', 'Tuesday 20th of August 2019 / 07:13:54 AM', 1),
+(295, 73, 'Tuesday 20th of August 2019 / 07:14:17 AM', 'Tuesday 20th of August 2019 / 12:48:18 PM', 1),
+(296, 73, 'Tuesday 20th of August 2019 / 12:48:33 PM', 'Tuesday 20th of August 2019 / 04:35:24 PM', 1),
+(297, 73, 'Tuesday 20th of August 2019 / 04:35:31 PM', 'Tuesday 20th of August 2019 / 04:42:32 PM', 1),
+(298, 73, 'Tuesday 20th of August 2019 / 04:42:41 PM', 'Tuesday 20th of August 2019 / 04:42:52 PM', 1),
+(299, 64, 'Tuesday 20th of August 2019 / 04:42:58 PM', 'Tuesday 20th of August 2019 / 10:39:07 PM', 1),
+(300, 64, 'Tuesday 20th of August 2019 / 10:39:15 PM', '', 1),
+(301, 64, 'Wednesday 21st of August 2019 / 11:14:29 PM', '', 1),
+(302, 64, 'Thursday 22nd of August 2019 / 08:58:44 AM', 'Thursday 22nd of August 2019 / 12:31:45 PM', 1),
+(303, 73, 'Thursday 22nd of August 2019 / 01:28:16 PM', 'Thursday 22nd of August 2019 / 09:07:41 PM', 1),
+(304, 73, 'Friday 23rd of August 2019 / 07:13:55 AM', 'Friday 23rd of August 2019 / 10:06:13 AM', 1),
+(305, 64, 'Friday 23rd of August 2019 / 10:06:18 AM', 'Sunday 25th of August 2019 / 09:31:16 AM', 1),
+(306, 103, 'Sunday 25th of August 2019 / 10:19:11 AM', 'Sunday 25th of August 2019 / 10:19:24 AM', 1),
+(307, 73, 'Sunday 25th of August 2019 / 01:25:07 PM', '', 1),
+(308, 73, 'Sunday 25th of August 2019 / 05:46:37 PM', 'Sunday 25th of August 2019 / 05:46:37 PM', 1),
+(309, 64, 'Sunday 25th of August 2019 / 05:46:47 PM', 'Sunday 25th of August 2019 / 06:15:29 PM', 1),
+(310, 73, 'Sunday 25th of August 2019 / 06:27:23 PM', 'Sunday 25th of August 2019 / 06:29:40 PM', 1),
+(311, 73, 'Sunday 25th of August 2019 / 07:11:59 PM', 'Sunday 25th of August 2019 / 07:13:46 PM', 1),
+(312, 64, 'Sunday 25th of August 2019 / 08:18:38 PM', 'Sunday 25th of August 2019 / 08:54:27 PM', 1),
+(313, 73, 'Sunday 25th of August 2019 / 08:54:35 PM', 'Sunday 25th of August 2019 / 08:54:39 PM', 1),
+(314, 64, 'Sunday 25th of August 2019 / 08:54:45 PM', 'Sunday 25th of August 2019 / 08:55:28 PM', 1),
+(315, 73, 'Sunday 25th of August 2019 / 08:55:56 PM', 'Sunday 25th of August 2019 / 08:55:58 PM', 1),
+(316, 64, 'Sunday 25th of August 2019 / 08:56:07 PM', 'Sunday 25th of August 2019 / 08:57:31 PM', 1),
+(317, 73, 'Sunday 25th of August 2019 / 08:57:36 PM', 'Sunday 25th of August 2019 / 08:57:38 PM', 1),
+(318, 64, 'Sunday 25th of August 2019 / 08:57:43 PM', 'Sunday 25th of August 2019 / 09:00:19 PM', 1),
+(319, 64, 'Sunday 25th of August 2019 / 09:00:31 PM', 'Sunday 25th of August 2019 / 09:00:43 PM', 1),
+(320, 73, 'Sunday 25th of August 2019 / 09:00:49 PM', 'Sunday 25th of August 2019 / 09:00:59 PM', 1),
+(321, 56, 'Sunday 25th of August 2019 / 09:01:08 PM', 'Sunday 25th of August 2019 / 09:35:24 PM', 1),
+(322, 73, 'Sunday 25th of August 2019 / 09:35:30 PM', 'Sunday 25th of August 2019 / 09:35:37 PM', 1),
+(323, 64, 'Sunday 25th of August 2019 / 09:35:42 PM', 'Sunday 25th of August 2019 / 09:36:01 PM', 1),
+(324, 73, 'Sunday 25th of August 2019 / 09:36:06 PM', 'Sunday 25th of August 2019 / 09:38:01 PM', 1),
+(325, 73, 'Sunday 25th of August 2019 / 09:38:07 PM', 'Sunday 25th of August 2019 / 09:38:37 PM', 1),
+(326, 64, 'Sunday 25th of August 2019 / 09:38:43 PM', 'Sunday 25th of August 2019 / 11:02:44 PM', 1),
+(327, 56, 'Sunday 25th of August 2019 / 10:34:19 PM', '', 1),
+(328, 56, 'Sunday 25th of August 2019 / 11:03:15 PM', 'Sunday 25th of August 2019 / 11:14:58 PM', 1),
+(329, 73, 'Sunday 25th of August 2019 / 11:15:18 PM', 'Sunday 25th of August 2019 / 11:16:05 PM', 1),
+(330, 64, 'Sunday 25th of August 2019 / 11:16:11 PM', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1536,7 +1655,12 @@ INSERT INTO `wallet_history` (`wallet_history_id`, `member_id`, `type`, `purpose
 (54, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '14650', '', '2019-07-30 19:15:23'),
 (55, 11, 'DEBIT', 'DUES', 'SORCE MONEY', '3005', '11645', '1', '2019-08-12 18:21:20'),
 (56, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '11595', '1', '2019-08-12 18:21:31'),
-(57, 11, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '500', '11095', '1', '2019-08-15 10:09:32');
+(57, 11, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '500', '11095', '1', '2019-08-15 10:09:32'),
+(58, 11, 'DEBIT', 'CPD REGISTRATION', '', '51', '11044', '1', '2019-08-20 13:12:46'),
+(59, 11, 'DEBIT', 'CPD', 'CPD REGISTRATION', '51', '10993', '1', '2019-08-20 13:14:35'),
+(60, 11, 'DEBIT', 'CPD', 'CPD REGISTRATION', '51', '10942', '1', '2019-08-20 13:15:04'),
+(61, 11, 'DEBIT', 'EVENT', 'LAND SURVEYING AND MAPPING: THE CRITICAL FOUNDATION TO NATIONAL INFRASTRUCTURAL DEVELOPMENT IN GHANA', '500', '10442', '1', '2019-08-23 09:35:13'),
+(62, 11, 'DEBIT', 'CONTRIBUTION', 'MONEY FOR SORCE', '20', '10422', '1', '2019-08-23 10:05:41');
 
 -- --------------------------------------------------------
 
@@ -1662,6 +1786,24 @@ ALTER TABLE `contribution_register`
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`course_id`);
+
+--
+-- Indexes for table `cpd_records`
+--
+ALTER TABLE `cpd_records`
+  ADD PRIMARY KEY (`cpd_record_id`);
+
+--
+-- Indexes for table `cpd_register`
+--
+ALTER TABLE `cpd_register`
+  ADD PRIMARY KEY (`cpd_register_id`);
+
+--
+-- Indexes for table `cpd_setup`
+--
+ALTER TABLE `cpd_setup`
+  ADD PRIMARY KEY (`cpd_id`);
 
 --
 -- Indexes for table `division`
@@ -1857,13 +1999,31 @@ ALTER TABLE `contribution`
 -- AUTO_INCREMENT for table `contribution_register`
 --
 ALTER TABLE `contribution_register`
-  MODIFY `contributions_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `contributions_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
   MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `cpd_records`
+--
+ALTER TABLE `cpd_records`
+  MODIFY `cpd_record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `cpd_register`
+--
+ALTER TABLE `cpd_register`
+  MODIFY `cpd_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cpd_setup`
+--
+ALTER TABLE `cpd_setup`
+  MODIFY `cpd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `division`
@@ -1887,7 +2047,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `events_register`
 --
 ALTER TABLE `events_register`
-  MODIFY `events_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `events_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `exam_center_setup`
@@ -1899,13 +2059,13 @@ ALTER TABLE `exam_center_setup`
 -- AUTO_INCREMENT for table `exam_center_subjects`
 --
 ALTER TABLE `exam_center_subjects`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `exam_register`
 --
 ALTER TABLE `exam_register`
-  MODIFY `exam_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `exam_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -1929,7 +2089,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -1941,25 +2101,25 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `new_application`
 --
 ALTER TABLE `new_application`
-  MODIFY `new_application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `new_application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `pages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `pages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `sms`
 --
 ALTER TABLE `sms`
-  MODIFY `sms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `sms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `surveyor`
@@ -1971,13 +2131,13 @@ ALTER TABLE `surveyor`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `users_session_log`
 --
 ALTER TABLE `users_session_log`
-  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
+  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
 
 --
 -- AUTO_INCREMENT for table `user_payment`
@@ -1989,7 +2149,7 @@ ALTER TABLE `user_payment`
 -- AUTO_INCREMENT for table `wallet_history`
 --
 ALTER TABLE `wallet_history`
-  MODIFY `wallet_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `wallet_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `youtube_stream`

@@ -17,6 +17,7 @@
     <link href="pages/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="login.css">
     <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+
   </head>
   <body >
     <div class="row top_row">
@@ -178,6 +179,55 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+<!-- reset password -->
+<!-- for password change -->
+<div class="modal fade" id="passChModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog modal">
+    <div class="modal-content">
+      <div class="modal-header" id="bg">
+         <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" class="btn-default btnClose">&times; CLOSE</span></button>
+        <h4 class="modal-title"><b id="subject">RESET PASSWORD</b></h4>
+      </div>
+      <div class="modal-body" id="bg">
+        <form id="changePass_form" method="POST"> 
+          <input type="hidden" id="chPassUserName" name="chPassUserName">
+          <input type="hidden" id="chPassUserPassword" name="chPassUserPassword">
+           <div class="row">
+             <div class="col-md-12">
+                <div class="form-group">
+                     <form class="form-auth-small" id="insert_form" method="POST">
+                        <div class="form-group input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                          <label for="signin-password" class="control-label sr-only">Password</label>
+                          <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter Password &hellip;" minlength="4" required>
+                        </div>
+                        <br>
+                        <div class="form-group input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                          <label for="signin-password" class="control-label sr-only">Password</label>
+                          <input type="password" class="form-control" id="newRetypePassword" name="newRetypePassword" placeholder="Retype Password &hellip;" minlength="4" required>
+
+                        </div>
+                        <br>
+                        <input type="hidden" name="mode" value="changePass">
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="glyphicon glyphicon-remove"></i></button>
+                          <button type="submit" class="btn btn-primary" id="resetPass_btn">Reset Password <i class="glyphicon glyphicon-floppy-disk"></i></button>
+                       </div>
+                  </form>
+                </div>
+              </div>
+           </div>   
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!--  -->
 <script type="pages/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <script>
@@ -189,30 +239,71 @@
                 method:"POST",
                 data:$("#sigin_Form").serialize(),
                 beforeSend:function(){  
-                          $('#login').text("Loading ...").prop('disabled',true);  
-                     },
+                      $('#login').text("Loading ...").prop('disabled',true);  
+                 },
                 success:function(data){  
-                    // alert(data);
+                    console.log(data);
                      if (data == "success") {
                       window.location.replace("pages/dashboard.php");
                      }
                      else if(data == "error"){
                       location.reload();
                      }
-                     else if (data=="reset") {
-                       window.location.replace("reset_password.php");
+                     else if ((data !="success") || (data !="error")) {
+                      var fields = data.split('-');
+                      var username = fields[0];
+                      var passwd = fields[1];
+
+                      $('#chPassUserName').val(username);
+                      $('#chPassUserPassword').val(passwd);
+                      $('#signInModal').modal('hide');
+                      $('#passChModal').modal('show');
+                      $('#professional_number').val("");
+                      $('#userPassword').val("");
+                      $('#login').text("LOGIN").prop('disabled',false);
+
                      }
                 } 
 
                 });  
             });
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+// Change password 
+$("#changePass_form").on("submit",function(e){
+    e.preventDefault();
+    $.ajax({
+    url:"pages/Script/users.php",
+    method:"POST",
+    data:$("#changePass_form").serialize(),
+    beforeSend:function(){ 
+      $('#resetPass_btn').text("Loading ...").prop("disabled",true); 
+          
+    },
+    success:function(data){ 
+    console.log(data); 
+       if (data == "success") {
+        // $.bootstrapGrowl("Password Changed Successfully",{ type: 'success',align: 'center',allow_dismiss: false,width: 'auto' });
+          $("#passChModal").modal("hide");
+       }
+       else if(data == "error"){
+        // $.bootstrapGrowl("Sorry! Error Resetting password",{ type: 'danger',align: 'center',allow_dismiss: false,width: 'auto' });
+        $('#newPassword').val("");
+        $('#newRetypePassword').val("");
+        $('#resetPass_btn').text("Reset Password").prop("disabled",false);
 
-     // for reset modal when close
-      $('#signUpModal').on('hidden.bs.modal', function () {
-          $("#signUp_form")[0].reset();
-          $('#signUp').text("Sign Up").attr('disabled',false);
-        });
+       }
+    } 
+
+    });  
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+// for reset modal when close
+$('#signUpModal').on('hidden.bs.modal', function () {
+    $("#signUp_form")[0].reset();
+    $('#signUp').text("Sign Up").attr('disabled',false);
+  });
 
     // save student register details
   $("#signUp_form").on("submit",function(e){
@@ -226,12 +317,12 @@
                   $('#signUp').text("Please wait ...").attr('disabled',true);  
              },
         success:function(data){
-                $("#signUp_form")[0].reset();
-                $("#signUpModal").modal("hide");
+          $("#signUp_form")[0].reset();
+          $("#signUpModal").modal("hide");
 
-                if (data == "success") {alert("Thank you for registering, your username and password will be sent to you shortly");} 
-                else if(data == "error") { alert("Sorry, there was an error saving your profile please try again");}
-                else if(data == "email_exits") {alert("Sorry, Email ID already exits");}
+          if (data == "success") {alert("Thank you for registering, your username and password will be sent to you shortly");} 
+          else if(data == "error") { alert("Sorry, there was an error saving your profile please try again");}
+          else if(data == "email_exits") {alert("Sorry, Email ID already exits");}
                
         } 
 

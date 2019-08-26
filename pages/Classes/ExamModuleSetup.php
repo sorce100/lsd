@@ -116,6 +116,19 @@
 				die();
 				}
 		}
+		// get all exams modules based on center id
+		function get_all_modules_by_center(){
+			$sql="SELECT subject_id,center_exam_part,subject_name FROM $this->table WHERE center_id=:centerId";
+			$stmt = $this->dbConn->prepare($sql);
+			$stmt->bindParam(":centerId",$this->centerId);
+			if ($stmt->execute()) {
+				$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
+				return json_encode($results);
+			}
+			else{
+				die();
+				}
+			}
 
 }
 

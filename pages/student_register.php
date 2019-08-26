@@ -1,7 +1,7 @@
 <?php 
-// include("header.php");
-require_once("Classes/studentRegister.php");
-$objstudentRegister = new studentRegister;
+include("header.php");
+require_once("Classes/ExamsRegister.php");
+$objExamsRegister = new ExamsRegister;
 require_once("Classes/ExamCenterSetup.php");
 ?>
 <br>
@@ -9,9 +9,9 @@ require_once("Classes/ExamCenterSetup.php");
     <!-- <div class="col-sm-12"> -->
     <div class="panel panel-default">
         <div class="panel-heading">
-             <div class="panel-title pull-left">APPLICANT REGISTRATION PAGE </div>
+             <div class="panel-title pull-left">EXAM REGISTRATION PAGE </div>
             <div class="panel-title pull-right">
-              <?php if ($objstudentRegister->check_member_register()): ?>
+              <?php if ($objExamsRegister->check_member_register()): ?>
                 <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger pull-right">Register Exam <i class="fa fa-pencil"></i></button>
               <?php endif ?>
             </div>
@@ -26,26 +26,23 @@ require_once("Classes/ExamCenterSetup.php");
                     <thead>
                         <tr>
                             <th>Exams Center</th>
-                            <th>Registered Exam</th>
+                            <th>Registered Module</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                       <?php
-                          $registeredExams = $objstudentRegister->get_student_registered(); 
+                          $registeredExams = $objExamsRegister->get_student_registered(); 
                           foreach ($registeredExams as $exam) {
-                              $examSubDecode = json_decode($exam['exam_name']);
-                              for ($i=0; $i < sizeof($examSubDecode); $i++) { 
                               echo "
                                   <tr>
                                     <td>".$exam['center_name']."</td>
-                                    <td>".$examSubDecode[$i]."</td>
+                                    <td>".$exam['module_name']."</td>
                                     <td>
                                       <input type='button' name='view' value='Check Results' id='".trim($exam["exam_register_id"])."' class='btn btn-info btn-xs checkResults' />
                                     </td>
                                   </tr>
                                 ";
-                              }
                             }
                          ?>
                     </tbody>
@@ -68,57 +65,58 @@ require_once("Classes/ExamCenterSetup.php");
       </div>
       <div class="modal-body" id="bg">
      <form id="insert_form" method="POST">
-              <?php 
-                $objExamCenterSetup = new ExamCenterSetup;
-                $center = $objExamCenterSetup->student_exam_center($_SESSION['exam_center_id']);
-                $exam_center_id =  $center["exam_center_id"];
-                $centerName =  $center["exam_center_name"];
-                $centerSubjects  = json_decode($center["exam_subjects"]);
-               ?> 
               <div class="row">
                   <div class="col-md-3">
                     <div class="form-group">
-                        <label for="title">Exam Center</label>
+                        <label for="title">Select Center <span class="asterick">*</span></label>
                     </div>
                   </div>
                   <div class="col-md-9">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="examCenterName" name="examCenterName" readonly value="<?php if(isset($centerName)){echo $centerName;} ?>">
+                      <select class="form-control" id="centerId" name="centerId" required>
+                        <option value="" selected disabled>Select Exam Center</option>
+                        <?php
+                          $objExamCenterSetup = new ExamCenterSetup;
+                          $centers = $objExamCenterSetup->get_centers(); 
+                          foreach ($centers as $center) {
+                              echo "<option value='".trim($center["exam_center_id"])."'>".$center['exam_center_name']."</option>";
+                          }
+                         ?>
+                      </select>
                     </div>
                   </div>
-                  <!-- for center id -->
-                  <input type="hidden" name="centerId" value="<?php echo $exam_center_id;?>">
               </div>
-              <hr>
               <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-3">
                     <div class="form-group">
-                          <div class="table-responsive">
-                           <table class="table table-hover">
-                             <thead>
-                                <th>SELECT</th>
-                                <th>EXAM NAME</th>
-                             </thead>
-                             <tbody id="courses">
-                                <?php 
-                                  foreach ($centerSubjects as $subject) {
-                                   echo '<tr>
-                                    <td><input type="checkbox" id="subjectSelect" name="subjectSelect[]" value="'.$subject.'"></td>
-                                    <td>'.$subject.'</td>
-                                   </tr>';
-                                  }
-                                ?>
-                             </tbody> 
-                           </table>
-                         </div>
+                        <label for="title">Select Module <span class="asterick">*</span></label>
                     </div>
                   </div>
-             </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <select class="form-control" id="moduleId" name="moduleId" required>
+
+                      </select>
+                    </div>
+                  </div>
+              </div>
+ <!--              <hr>
+              <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="title">Module Content</label>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                      <ul id="moduleContentDiv"></ul>
+                  </div>
+             </div> -->
+             <br>
              <!-- for inserting the page id -->
               <input type="hidden" name="data_id" id="data_id" value="">
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="insert">
-            <div class="well modal-footer" id="bg">
+            <div class=" modal-footer" id="bg">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
               <button type="submit" class="btn btn-info" id="save_btn">Register Exams <i class="fa fa-save"></i></button>
             </div>        
@@ -133,12 +131,14 @@ require_once("Classes/ExamCenterSetup.php");
       $(document).ready(function(){
         // for reset modal when close
         $('#myModal').on('hidden.bs.modal', function () {
+            $('#moduleId').html('');
+            $('#moduleContentDiv').html('');
             $("#insert_form")[0].reset();
           })
 
         // for search
         $("#searchInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
+            let value = $(this).val().toLowerCase();
             $("#resultsDisplay tr").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
@@ -150,19 +150,19 @@ require_once("Classes/ExamCenterSetup.php");
           e.preventDefault();
           if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
                   $.ajax({
-                  url:"Script/studentRegister.php",
+                  url:"Script/examsRegister.php",
                   method:"POST",
                   data:$("#insert_form").serialize(),
                   beforeSend:function(){  
-                            $('#save_btn').text("Please wait ...").attr('disabled',true);  
-                       },
+                      $('#save_btn').text("Please wait ...").attr('disabled',true);  
+                 },
                   success:function(data){  
                     alert("Exams registered successfully!!!");
 
                        $("#myModal").modal("hide");
                        $("#insert_form")[0].reset();
                        if (data == "success") {
-                        window.location.replace("student_register.php");
+                        window.reload();
                        }
                        else if(data == "error"){
                         
@@ -176,15 +176,15 @@ require_once("Classes/ExamCenterSetup.php");
             });
 
         // for update
-        $('.update_data').click(function(){ 
-           var mode= "updateModal"; 
-           var data_id = $(this).attr("id");  
+        $('table').on('click', '.update_data', function(){
+           let mode= "updateModal"; 
+           let data_id = $(this).attr("id");  
            $.ajax({  
-                url:"Script/studentRegister.php",  
+                url:"Script/examsRegister.php",  
                 method:"POST",  
                 data:{data_id:data_id,mode:mode},  
                 success:function(data){
-                     var jsonObj = JSON.parse(data);  
+                     let jsonObj = JSON.parse(data);  
                      // changing modal title
                     $("#subject").html("UPDATE COURSE");
                     $("#courseCode").val(jsonObj[0].course_code);
@@ -202,17 +202,16 @@ require_once("Classes/ExamCenterSetup.php");
 
       
 // for delete
-        $('.del_data').click(function(){
+        $('table').on('click', '.del_data', function(){
            if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
-               
-                 var mode= "delete"; 
-                 var data_id = $(this).attr("id");  
+                 let mode= "delete"; 
+                 let data_id = $(this).attr("id");  
                  $.ajax({  
-                      url:"Script/studentRegister.php",  
+                      url:"Script/examsRegister.php",  
                       method:"POST",  
                       data:{data_id:data_id,mode:mode},  
                       success:function(data){
-                          window.location.replace("school_course.php");
+                          window.reload();
                       }  
                      }); 
 
@@ -220,5 +219,43 @@ require_once("Classes/ExamCenterSetup.php");
                 return false;
               }  
           });
- });  
- </script>
+
+  // get module details on select of exam center
+  
+  $("#centerId").change(function(){
+       $('#moduleId').html('');
+       let centerId = $('option:selected', this).val();
+       let mode= "getExamCenterModules";  
+       $.ajax({  
+            url:"Script/examModuleSetup.php",  
+            method:"POST",  
+            data:{centerId:centerId,mode:mode},  
+            success:function(data){
+                let jsonObj = JSON.parse(data);  
+                 // changing modal title
+                 for (var i = 0; i < jsonObj.length; i++) {
+                   
+                   $('#moduleId').append('<option id="'+jsonObj[i].subject_name+'" class="moduleSubjectList" value="'+jsonObj[i].subject_id+'">'+jsonObj[i].center_exam_part+'</option>');
+                 }
+                 
+              }  
+           });  
+
+    }); 
+    // click to view content of module subjects
+    // $(".moduleSubjectList").change(function(){
+    //    $('.moduleContentDiv').html('');
+    //     let subjectList = $(this).prop('id');
+    //     console.log(subjectList);
+    //     let jsonObj = JSON.parse(subjectList);  
+    //      // changing modal title
+    //      for (var i = 0; i < jsonObj.length; i++) {
+    //        $('#moduleContentDiv').append('<li>'+jsonObj[i]+'</li>');
+    //      }
+
+    // }); 
+
+
+
+});  
+</script>

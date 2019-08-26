@@ -24,7 +24,7 @@
 								if (password_verify ($objUsers->CleanData($_POST["userPassword"]) ,  $this->userpassword)) {
 										// check if password change is required
 										if ($this->resetpassword == "YES") {
-											echo "reset";
+											echo ($_POST["professional_number"]."-".$_POST["userPassword"]);
 											
 										}elseif ($this->resetpassword == "NO") {
 											$_SESSION['user_id'] = $objUsers->CleanData($user['user_id']); // Initializing Session
@@ -97,6 +97,11 @@
 									if (!empty($_POST["userPassword"])) {
 										$this->userpassword = $objUsers->CleanData($_POST["userPassword"]);
 										$objUsers->set_userPassword($objUsers->CleanData(password_hash($this->userpassword, PASSWORD_DEFAULT)));
+
+										// // for sms class
+										// $objSms = new Sms();
+										// // send sms account user
+										// $objSms->send_sms("$username_accId[2]","Dear $username_accId[3], your GhIS account has being created successfully. Please log on http://ghislsd.com with credentials, username: $username_accId[0] and password : $this->userpassword");
 									}
 									elseif (empty($_POST["userPassword"])) {
 										$objUsers->set_userPassword($objUsers->get_password());
@@ -114,6 +119,46 @@
 										}
 
 								
+						break;
+
+						case 'changePass':
+							$passwdReset="NO";
+							$chPassUserName = $_POST["chPassUserName"];
+							$chPassUserPassword = $_POST["chPassUserPassword"];
+							$newPassword = $_POST["newPassword"];
+							$newRetypePassword = $_POST["newRetypePassword"];
+
+							if((!empty($chPassUserName)) || (!empty($chPassUserPassword)) || (!empty($newPassword)) || (!empty($newRetypePassword))){
+								// check if passwords typed is the same
+									if (($newPassword === $newRetypePassword) && ($chPassUserPassword != $newPassword)) {
+										// check for string length, password should not be less than four characters
+										if (strlen($newPassword) >= 4) {
+											$objUsers = new Users();
+											$this->userpassword = strtolower($objUsers->CleanData($_POST["newRetypePassword"]));
+											$objUsers->set_userPassword(password_hash($this->userpassword, PASSWORD_DEFAULT));
+											$objUsers->set_passwordReset($passwdReset);
+											$objUsers->set_memberId($objUsers->CleanData($_POST["chPassUserName"]));
+											if ($objUsers->change_password()) {
+												echo "success";
+											}
+											else{
+												echo "error";
+											}
+										}
+										else{
+											// if password is less than 4 characters
+											echo "error";
+										}
+									}
+									else{
+										// if passwords not the same and the old password is same as new password
+										echo "error";
+									}
+							 }else{
+							 	// if its empty
+							 	echo "error";
+							 }
+
 						break;
 						// for delete
 						case 'delete':

@@ -9,6 +9,7 @@
 		private $accountTypeId;
 		private $groupId;
 		private $division;
+		private $accStatus="NEVER";
 		private $dbConn;
 		private $table= "users";
 		private $passwordReset ="NO";
@@ -66,7 +67,7 @@
 
 		// insert users
 			function insert(){
-				$sql = "INSERT INTO $this->table (account_type,account_type_id,member_id,user_password,group_id,reset_password,status,division,record_hide) VALUES (:accountType,:accountTypeId,:memberId,:userPassword,:groupId,:resetPassword,:status,:division,:recordHide)";
+				$sql = "INSERT INTO $this->table (account_type,account_type_id,member_id,user_password,group_id,reset_password,status,division,	user_login_status,record_hide) VALUES (:accountType,:accountTypeId,:memberId,:userPassword,:groupId,:resetPassword,:status,:division,	userLoginStatus,:recordHide)";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":accountType",$this->accountType);
 				$stmt->bindParam(":accountTypeId",$this->accountTypeId);
@@ -76,6 +77,7 @@
 				$stmt->bindParam(":resetPassword",$this->passwordReset);
 				$stmt->bindParam(":status",$this->status);
 				$stmt->bindParam(":division",$this->division);
+				$stmt->bindParam(":userLoginStatus",$this->accStatus);
 				$stmt->bindParam(":recordHide",$this->recordHide);
 				if ($stmt->execute()) {
 					if ($this->accountType == 'member') {
@@ -113,6 +115,23 @@
 					return true;
 				}
 			}
+
+			// change password
+			function change_password(){
+				$sql="UPDATE $this->table SET user_password = :userPassword,reset_password = :passwordReset WHERE member_id=:userName";
+				$stmt = $this->dbConn->prepare($sql);
+				$stmt->bindParam(":userPassword",$this->userPassword);
+				$stmt->bindParam(":passwordReset",$this->passwordReset);
+				$stmt->bindParam(":userName",$this->memberId);
+				if ($stmt->execute()) {
+					return true;
+				}
+				else{
+					return false;
+					}
+			}
+
+
 			// for delete
 			function delete(){
 				$sql="UPDATE $this->table SET record_hide=:recordHide WHERE user_id=:userId";
@@ -131,57 +150,6 @@
 		// get users for members
 			function get_member_users(){
 				$accountType = 'member';
-				$sql="SELECT * FROM $this->table WHERE account_type=:accountType AND division=:division AND record_hide=:recordHide ORDER BY user_id DESC";
-				$stmt = $this->dbConn->prepare($sql);
-				$stmt->bindParam(":accountType",$accountType);
-				$stmt->bindParam(":division",$_SESSION['division']);
-				$stmt->bindParam(":recordHide",$this->recordHide);
-				if ($stmt->execute()) {
-					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
-					return $results;
-				}
-				else{
-					die();
-					}
-
-			}
-			// get users for members
-			function get_school_users(){
-				$accountType = 'school';
-				$sql="SELECT * FROM $this->table WHERE account_type=:accountType AND division=:division AND record_hide=:recordHide ORDER BY user_id DESC";
-				$stmt = $this->dbConn->prepare($sql);
-				$stmt->bindParam(":accountType",$accountType);
-				$stmt->bindParam(":division",$_SESSION['division']);
-				$stmt->bindParam(":recordHide",$this->recordHide);
-				if ($stmt->execute()) {
-					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
-					return $results;
-				}
-				else{
-					die();
-					}
-
-			}
-			// get users for members
-			function get_lecturer_users(){
-				$accountType = 'lecturer';
-				$sql="SELECT * FROM $this->table WHERE account_type=:accountType AND division=:division AND record_hide=:recordHide ORDER BY user_id DESC";
-				$stmt = $this->dbConn->prepare($sql);
-				$stmt->bindParam(":accountType",$accountType);
-				$stmt->bindParam(":division",$_SESSION['division']);
-				$stmt->bindParam(":recordHide",$this->recordHide);
-				if ($stmt->execute()) {
-					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
-					return $results;
-				}
-				else{
-					die();
-					}
-
-			}
-			// get users for members
-			function get_student_users(){
-				$accountType = 'student';
 				$sql="SELECT * FROM $this->table WHERE account_type=:accountType AND division=:division AND record_hide=:recordHide ORDER BY user_id DESC";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":accountType",$accountType);
@@ -227,6 +195,24 @@
 					}
 				}
 
+		// get users for members
+			function get_student_users(){
+				$accountType = 'student';
+				$sql="SELECT * FROM $this->table WHERE account_type=:accountType AND division=:division AND record_hide=:recordHide ORDER BY user_id DESC";
+				$stmt = $this->dbConn->prepare($sql);
+				$stmt->bindParam(":accountType",$accountType);
+				$stmt->bindParam(":division",$_SESSION['division']);
+				$stmt->bindParam(":recordHide",$this->recordHide);
+				if ($stmt->execute()) {
+					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
+					return $results;
+				}
+				else{
+					die();
+					}
+
+			}
+			
 		// get password of the user
 			function get_password(){
 				$sql="SELECT user_password FROM $this->table WHERE user_id=:user_id";
@@ -255,22 +241,6 @@
 						}
 						
 					}
-				}
-
-
-		// get school id for session
-				function get_school_id($data){
-					$sql="SELECT school_id FROM school WHERE record_hide=:recordHide AND school_alias=:schoolAlias";
-					$stmt = $this->dbConn->prepare($sql);
-					$stmt->bindParam(":recordHide",$this->recordHide);
-					$stmt->bindParam(":schoolAlias",$data);
-					if ($stmt->execute()) {
-						$results= $stmt->fetch(PDO::FETCH_ASSOC);
-						return $results['school_id'];
-					}
-					else{
-						die();
-						}
 				}
 		// get student id,level and school beloging to
 				function get_student_details($data){

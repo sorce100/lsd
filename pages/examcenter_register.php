@@ -1,6 +1,7 @@
 <?php 
   require_once("header.php");
-  require_once("Classes/StudentRegister.php");
+  require_once("Classes/ExamsRegister.php");
+  require_once("Classes/ExamCenterSetup.php");
   $displayArray="";
 ?>
 <br>
@@ -25,38 +26,27 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Exam Center</th>
-                                <th>Student</th>
-                                <th>Exam Score</th>
-                                <th>Lat Updated</th>
+                                <th>Center Name</th>
+                                <th>Region</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody id="resultsDisplay">
                           <?php
-                              $objStudentRegister = new StudentRegister;
-                              $students = $objStudentRegister->get_all(); 
-                              foreach ($students as $student) {
-                                      echo "
-                                          <tr >
-                                            <td>".$student["exam_center_id"]."</td>
-                                            <td>".$student["student_id"]."</td>";
-                                            $jsonDecodeScore = json_decode($student["exam_score"]);
-                                            $jsonDecodeName = json_decode($student["exam_score_name"]);
-                                            if (!empty($jsonDecodeName)) {
-                                              for ($i=0; $i < sizeof($jsonDecodeName); $i++) { 
-                                                $displayArray .="<b>".$jsonDecodeName[$i] ." => ". $jsonDecodeScore[$i]." % </b><br>";
-                                              }
-                                            }
-                                            echo "<td>".$displayArray."</td>
-                                            <td>".$student["date_done"]."</td>
-                                            <td>
-                                              <button type='button' id='".trim($student["exam_name"]).'|'.trim($student["exam_register_id"])."' class='btn btn-info btn-xs input_score' alt='".trim($student["exam_name"])."'>Input Results <i class='fa fa-pencil'></i> </button> 
-                                            </td>
-                                          </tr>
-                                        ";
-                                  }
-                             ?>
+                            $objExamCenterSetup = new ExamCenterSetup;
+                            $centers = $objExamCenterSetup->get_centers(); 
+                            foreach ($centers as $center) {
+                                echo "
+                                    <tr >
+                                      <td>".$center["exam_center_name"]."</td>
+                                      <td>".$center["exam_center_region"]."</td>
+                                      <td>
+                                        <button type='button' id='".trim($center["exam_center_id"])."' class='btn btn-info btn-xs viewCenterApplicants'>View Registered Applicants <i class='fa fa-eye'></i></button>
+                                      </td>
+                                    </tr>
+                                  ";
+                            }
+                           ?>
                         </tbody> 
                     </table>
                 </div> 
@@ -67,8 +57,8 @@
 
 
 <!-- registed_students -->
- <div class="modal fade" id="examNamesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+ <div class="modal fade" id="examsRegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
@@ -79,11 +69,12 @@
         <table class="table table-hover table-bordered">
             <thead>
                 <tr style="background-color:#f4f4f5;color:black!important;">
-                    <th>Exam Name</th>
-                    <th></th>
+                    <th>Applicant Name</th>
+                    <th>Exams Module</th>
+                    <th>Date Registered</th>
                 </tr>
             </thead>
-            <tbody id="examNames"></tbody>
+            <tbody id="applicantsListDiv"></tbody>
          </table>
       </div>
     </div><!-- /.modal-content -->
@@ -159,21 +150,41 @@
            $('#examRegid').val(examNameRegIdSplit[1]);
            $('#examNamesModal').modal('show');
         });
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    // view register for applicants
+        $('.table').on('click', '.viewCenterApplicants', function () {
+          var mode= "getExamsRegisteredMembers";
+          var examcenterId = $(this).prop("id");
+          $.ajax({
+            url:"Script/examRegister.php",
+            method:"POST",
+            data:{examcenterId:examcenterId,mode:mode},
+            beforeSend:function(){  
+                  $('#saveExamScoreValueBtn').val("Please wait ...").prop('disabled',true);  
+             },
+            success:function(data){ 
+                 $("#studentScoreSubmit")[0].reset();
+                 $("#studentRecordsModal").modal("hide");
+                 if (data == "success") {
+                  $('#saveExamScoreValueBtn').val("Add Score").prop('disabled',false);
+                  alert("Added Successfully");
+                 }
+                 else if(data == "error"){
+                  alert("There was an error");
+                 }
+            } 
 
-    // enter exams score
-        $('.table').on('click', '.addExamScore', function () {
-          let examSubName = $(this).prop('id');
-          // insert exam name in hidden filed
-          $('#examName').val(examSubName);
-          $('#studentRecordsModal').modal('show');
+            });  
 
+          $('#applicantsListDiv').append();
+          $('#examsRegisterModal').modal('show');
         });
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
     // save exam score value
         $("#studentScoreSubmit").on("submit",function(e){
             e.preventDefault();
             $.ajax({
-            url:"Script/studentRegister.php",
+            url:"Script/examRegister.php",
             method:"POST",
             data:$("#studentScoreSubmit").serialize(),
             beforeSend:function(){  

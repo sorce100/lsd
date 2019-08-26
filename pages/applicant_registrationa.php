@@ -64,7 +64,7 @@ require_once("Classes/Members.php");
                       $objNewApplication = new NewApplication;
                       $startStatus = $objNewApplication->check_application_start();
                       if (empty($startStatus)) {
-                          echo '<button id="startBtn" class="btn btn-danger btn-lg">Start Application</button>';
+                          echo '<button id="startBtn" class="btn btn-danger btn-lg">Start Application <i class="glyphicon glyphicon-thumbs-up"></i></button>';
                       }
                       else if(!empty($startStatus)){
                           echo '<h3>APPLICATION STARTED, PENDING DECLARATIONS <span class="glyphicon glyphicon-ok" style="color:green;"></span></h3>';
@@ -140,7 +140,7 @@ require_once("Classes/Members.php");
 
 <!-- Modal to show when page loads up -->
   <div class="modal fade" id="onloadModal" role="dialog">
-   <div class="modal-dialog modal-xl">
+   <div class="modal-dialog modal-lg">
      <div class="modal-content">
        <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -205,7 +205,8 @@ require_once("Classes/Members.php");
                     </div>
                     <br>
                       <!-- buttons -->
-                     <input type="button" class="next btn-info btn-block" value="UPLOAD DOCUMENTS" />
+                     <!-- <input type="button" class="next btn-info btn-block" value="Upload Documents" /> -->
+                     <button type="button" class="next btn btn-block btn-info">Upload Documents <i class="glyphicon glyphicon-arrow-right"></i></button>
                   </fieldset>
 
                     <fieldset>
@@ -230,27 +231,39 @@ require_once("Classes/Members.php");
                       </div>  
                       <br>
                       <!-- buttons -->
-                      <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br>
-                      <input type="button" name="previous" class="next btn-info btn-block" value="NEXT" /><br>
+                      <button type="button" name="previous" class="previous btn-danger btn-block">Select Division <i class="glyphicon glyphicon-arrow-left"></i></button>
+                      <!-- <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br> -->
+                      <button type="button" name="previous" class="next btn-info btn-block">Declaration Requests <i class="glyphicon glyphicon-arrow-right"></i></button>
+                      <!-- <input type="button" name="previous" class="next btn-info btn-block" value="NEXT" /><br> -->
                     </fieldset>
 
                     <fieldset>
                       <center><h2><u>SECTION A (DECLARATIONS REQUESTS)</u></h2></center>
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                           <div class="form-group">
                              <label for="trainerEmail"><span style="color: red;">*</span> ENTER COLLEGE EMAIL ADRESS</label>
                             <input type="email" class="form-control" id="collegeEmail" placeholder="eg: schoolemail@gmail.com &hellip;" name="collegeEmail" autocomplete="off">
                                
                           </div>
                         </div>
-                        <div class="col-md-6">
+                      </div>
+
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-md-12">
                           <div class="form-group">
                              <label for="employerEmail"><span style="color: red;">*</span> ENTER EMPLOYER/TRAINER EMAIL ADRESS</label>
                             <input type="email" class="form-control" id="employerEmail" placeholder="eg: employeremail@gmail.com &hellip;" name="employerEmail" autocomplete="off">
                                
                           </div>
                         </div>
+                      </div>
+
+                      <hr>
+                      
+                      <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                             <label><span style="color: red;">*</span> SELECT PROPOSER (FELLOW)</label>
@@ -274,9 +287,13 @@ require_once("Classes/Members.php");
                           </div>
                         </div>
                       </div>
-                      <input type="hidden" name="mode" value="insertA">
-                      <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br>
-                      <input type="submit" name="submit" id="save_btn" class="submit btn-success btn-block" value="START APPLICATION" />
+                      <input type="hidden" name="mode" value="insertA"> 
+                      <!-- <input type="button" name="previous" class="previous btn-danger btn-block" value="PREVIOUS" /><br> -->
+                      <button type="button" name="previous" class="previous btn-danger btn-block">Upload Documents <i class="glyphicon glyphicon-arrow-left"></i></button>
+
+                      <button type="submit" name="submit" id="save_btn" class="submit btn-info btn-block"> Start Application <i class="glyphicon glyphicon-send"></i></button>
+
+                      <!-- <input type="submit" name="submit" id="save_btn" class="submit btn-success btn-block" value="START APPLICATION" /> -->
                     </fieldset>
                   </form>
 
@@ -309,7 +326,6 @@ require_once("Classes/Members.php");
                 <div class="col-md-12">
                   <div class="table-responsive">
                     <table class="table table-hover">
-                      
                         <tr>
                           <td width="30%"><b>APPLICANT START DATE</b></td>
                           <td width="30%" id="startDate"></td>
@@ -343,7 +359,83 @@ require_once("Classes/Members.php");
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
     <!-- /.row -->
-<?php include("footer.php");?>
+<div class="clearfix"></div>
+<footer>
+  <div class="container-fluid">
+    <p class="copyright pull-right">POWERED BY <a href="http://theprismoid.com/" target="_blank">PRISMOIDAL COMPANY LIMITED</a> &copy; <?php echo date('Y'); ?>  All Rights Reserved.</p>
+  </div>
+</footer>
+<!-- multistep modal -->
+<script>
+$(document).ready(function(){
+
+  var current = 1,current_step,next_step,steps;
+  fixStepIndicator(current);
+  steps = $("fieldset").length;
+  $(".next").click(function(){
+    current_step = $(this).parent();
+    next_step = $(this).parent().next();
+    next_step.show();
+    current_step.hide();
+    fixStepIndicator(++current);
+  });
+  $(".previous").click(function(){
+    current_step = $(this).parent();
+    next_step = $(this).parent().prev();
+    next_step.show();
+    current_step.hide();
+    fixStepIndicator(--current);
+  });
+  fixStepIndicator(current);
+  
+  function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  $('step').css('color','red');
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+});
+  </script>
+           
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- for datetime picker Javascript -->
+    <script src="../plugins/bower_components\datepicker\datepicker.min.js"></script>
+    <!-- select2 -->
+    <script src="../plugins/bower_components\select2\select2.min.js"></script>
+    <!-- parsely -->
+    <script src="../plugins/bower_components\parsley\parsley.min.js"></script>
+    <!-- mcafee antivirus script -->
+    <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+
+    <!-- <script type="text/javascript" src="js/dataTables.jqueryui.js"></script> -->
+    <script type="text/javascript" src="js/datatables.js"></script>
+    <!-- button  toggle -->
+    <script src="../plugins/bower_components\bootstrap-toggle\bootstrap2-toggle.min.js"></script>
+
+
+</body>
+
+</html>
+
  <script>  
       $(document).ready(function(){
         // $('.table').DataTable().destroy();
@@ -376,7 +468,7 @@ require_once("Classes/Members.php");
                       contentType:false,  
                       processData:false,
                       beforeSend:function(){  
-                        $('#save_btn').val("Please wait.......").attr('disabled',true);  
+                        $('#save_btn').text("Please wait.......").attr('disabled',true);  
                       },
                       success:function(data){
                         alert(data);  

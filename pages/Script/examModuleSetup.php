@@ -54,8 +54,8 @@
 							if(isset($_POST["data_id"])){
 								 $objExamModuleSetup = new ExamModuleSetup;  
 							      $objExamModuleSetup->set_id($objExamModuleSetup->CleanData($_POST["data_id"]));
-							      $group_details = $objExamModuleSetup->get_center_module_by_id();
-							      print_r($group_details);  
+							      $details = $objExamModuleSetup->get_center_module_by_id();
+							      print_r($details);  
 							 }else{die();}
 						break;
 						// get all notes
@@ -63,6 +63,15 @@
 							$objExamModuleSetup = new ExamModuleSetup;
 							$objExamModuleSetup->set_id($objExamModuleSetup->CleanData($_POST["data_id"]));
 							print_r(json_encode($objExamModuleSetup->get_centers(),true));
+						break;
+						// get exam modules per center
+						case 'getExamCenterModules':
+						if(isset($_POST["centerId"])){
+								 $objExamModuleSetup = new ExamModuleSetup;  
+							      $objExamModuleSetup->set_centerId($objExamModuleSetup->CleanData($_POST["centerId"]));
+							      $details = $objExamModuleSetup->get_all_modules_by_center();
+							      print_r($details);  
+							 }else{die();}
 						break;
 						default:
 							echo "error";

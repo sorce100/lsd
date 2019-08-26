@@ -229,7 +229,7 @@
                 <div class="col-md-12">
                   <div class="row">
                         <div class="col-md-2">
-                            <label for="title" class="col-form-label">Select Account</label>
+                            <label for="title" class="col-form-label">Select Account <span class="asterick">*</span></label>
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
@@ -240,9 +240,9 @@
                         </div>
                     </div>
                     <!-- 1 -->
-                    <div class="row">
+                    <div class="row memberIdDiv">
                         <div class="col-md-2">
-                            <label for="title" class="col-form-label">Select Member</label>
+                            <label for="title" class="col-form-label">Select Member <span class="asterick">*</span></label>
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
@@ -252,8 +252,9 @@
                                       $objMembers = new Members;
                                       $members = $objMembers->get_members(); 
                                       foreach ($members as $member) {
+                                        if (empty($member['user_id'])) {
                                           echo '<option value='.$member["professional_number"].'|'.$member["members_id"].'|'.$member["personal_contact"].'|'.$member["first_name"].'_'.$member["last_name"].'>('.$member["professional_number"].') - '.$member["first_name"].' '.$member["last_name"] .'</option>';
-
+                                        }
                                       }
                                   ?>
                                 </select>
@@ -263,7 +264,7 @@
                     <!-- 2 -->
                     <div class="row">
                         <div class="col-md-2">
-                            <label for="title" class="col-form-label">Username</label>
+                            <label for="title" class="col-form-label">Username <span class="asterick">*</span></label>
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
@@ -274,17 +275,17 @@
                     <!-- 3 -->
                     <div class="row">
                         <div class="col-md-2">
-                            <label for="title" class="col-form-label">Password</label>
+                            <label for="title" class="col-form-label">Password <span class="asterick">*</span></label>
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                               <input type="Password" name="userPassword" id="userPassword" class="form-control" placeholder="User Account Password" pattern="(?=.*[a-z]).{6}" title="Must be 6 characters or more and 
-contain at least 1 lower case letter" required>
+                               <input type="Password" name="userPassword" id="userPassword" class="form-control" title="Must be 4 characters or more and contain at least 1 lower case letter" required="true">
+                               <!-- <input type="Password" name="userPassword" id="userPassword" class="form-control" placeholder="User Account Password" pattern="(?=.*[a-z]).{4}" title="Must be 4 characters or more and contain at least 1 lower case letter" required> -->
                             </div>
                         </div>
                         <!-- for password reset -->
                         <div class="col-md-3">
-                          <input type="checkbox" id="accPasswdReset" data-width="100"/>
+                          <input type="checkbox" id="accPasswdReset" data-width="150"/>
                           <input type="hidden" name="accPasswdReset_log" id="accPasswdReset_log" value="reset" />
 
                         </div>
@@ -292,7 +293,7 @@ contain at least 1 lower case letter" required>
                     <!-- 4 -->
                     <div class="row">
                       <div class="col-md-2">
-                        <label for="title" class="col-form-label">Group</label>
+                        <label for="title" class="col-form-label">Group <span class="asterick">*</span></label>
                       </div>
                       <div class="col-md-7">
                         <div class="form-group">
@@ -354,11 +355,11 @@ contain at least 1 lower case letter" required>
           offstyle: 'danger'
         });
        $('#accPasswdReset').change(function(){
-        if($(this).prop('checked')){
-         $('#accPasswdReset_log').val('login');
-        }else {
-         $('#accPasswdReset_log').val('reset');
-        }
+          if($(this).prop('checked')){
+           $('#accPasswdReset_log').val('NO');
+          }else {
+           $('#accPasswdReset_log').val('YES');
+          }
        });
        // end of password reset
 
@@ -371,6 +372,7 @@ contain at least 1 lower case letter" required>
       });
 
       // triggring the check
+      $('#accPasswdReset').bootstrapToggle('on');
       $('#accStatus').bootstrapToggle('on');
 
        $('#accStatus').change(function(){
@@ -395,8 +397,10 @@ contain at least 1 lower case letter" required>
         $('#myModal').on('hidden.bs.modal', function () {
             $("#memberId").hide();
             $("#subject").html("ADD NEW MEMBER");
-            $("#insert_form")[0].reset();
-          })
+            $("#users_form")[0].reset();
+
+            $('.memberIdDiv').show();
+          });
 
         // for member search
         $("#membersearchInput").on("keyup", function() {
@@ -420,97 +424,31 @@ contain at least 1 lower case letter" required>
             });
           });
 
-        // $('#insert_form').parsley();
-        // $('#insert_form').parsley().reset();
-
-        
-///////////////////////////////////////////////////////////////////////////////////////////////////
-      // check for account type selected and load the necessary list options
-      // $("#accountType").change(function(){
-      //       var account = $(this).val();
-      //       switch (account){
-      //         case 'member':
-      //             var mode = "get_members";
-      //             $.ajax({
-      //             url:"Script/members.php",
-      //             method:"POST",
-      //             data:{mode:mode},
-      //             beforeSend:function(){  
-      //                   // disable the form select to wait for list
-      //                   $('#memberId').attr('disabled',true);
-      //                   $('#memberId').html('');   
-      //                  },
-      //             success:function(data){
-      //                   $('#memberId').attr('disabled',false);
-      //                   // display the list now
-      //                   var jsonObj = JSON.parse(data);
-      //                   for (var i = 0; i < jsonObj.length; ++i) {
-      //                     $('#memberId').append('<option value='+jsonObj[i].professional_number+'|'+jsonObj[i].members_id+'|'+jsonObj[i].personal_contact+'|'+jsonObj[i].first_name+'_'+jsonObj[i].last_name+'>('+jsonObj[i].professional_number+') - '+jsonObj[i].first_name+' '+jsonObj[i].last_name +'</option>');
-      //                   }
-                        
-      //             } 
-
-      //           });  
-      //         break;
-      //         case 'school':
-      //             var mode = "get_schools";
-      //             $.ajax({
-      //             url:"Script/school.php",
-      //             method:"POST",
-      //             data:{mode:mode},
-      //             beforeSend:function(){  
-      //                     $('#memberId').attr('disabled',true);
-      //                  },
-      //             success:function(data){
-      //                   // empty content before 
-      //                  $('#memberId').attr('disabled',false);
-      //                  $('#memberId').html('');
-
-      //                  var jsonObj = JSON.parse(data);
-      //                  // do the school abbreviation then  use that as the display select for the schools
-      //                     for (var i = 0; i < jsonObj.length; ++i) {
-      //                     $('#memberId').append('<option value='+jsonObj[i].school_alias+'|'+jsonObj[i].school_id+'|'+jsonObj[i].school_tel+'>'+jsonObj[i].school_alias+'</option>');
-      //                   }
-      //                 } 
-
-      //             });  
-      //         break;
-      //         case '':
-      //             $('#memberId').attr('disabled',true);
-      //             $('#memberId').find('option').remove();
-      //         break;
-             
-      //       }
-      // });
+        // $('#users_form').parsley();
+        // $('#users_form').parsley().reset();
 
 
 
         //for inserting 
-          $("#insert_form").on("submit",function(e){
-          e.preventDefault();
+          $("#users_form").on("submit",function(e){
+                e.preventDefault();
                 $.ajax({
                 url:"Script/users.php",
                 method:"POST",
-                data:$("#insert_form").serialize(),
+                data:$("#users_form").serialize(),
                 beforeSend:function(){  
-                          $('#save_btn').text("Please wait ...");  
-                     },
+                    $('#save_btn').text("Please wait ...");  
+                 },
                 success:function(data){  
-                  if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
-                      $("#myModal").modal("hide");
-                       $("#insert_form")[0].reset();
-                       if (data == "success") {
-                        window.location.replace("admin_users.php");
-                       }
-                       else if(data == "error"){
-                        
-                       }
-                  }
-                  else{
-
-                    return false;
-                  }
-                     
+                  console.log(data);
+                  $("#myModal").modal("hide");
+                   $("#users_form")[0].reset();
+                   if (data == "success") {
+                    location.reload();
+                   }
+                   else if(data == "error"){
+                    
+                   }
                 } 
 
                 });  
@@ -526,15 +464,27 @@ contain at least 1 lower case letter" required>
                 method:"POST",  
                 data:{data_id:data_id,mode:mode},  
                 success:function(data){
-                     var jsonObj = JSON.parse(data);  
+                    var jsonObj = JSON.parse(data);  
                      // changing modal title
                     $("#subject").html("UPDATE USER DETAILS");
                     $("#accountType").html('<option value="'+jsonObj[0].account_type+'">'+jsonObj[0].account_type+'</option>').attr('readonly',true);
-                    $('#memberId').html('<option value="'+jsonObj[0].member_id+'">'+jsonObj[0].member_id+'</option>').attr('readonly',true);
+                    // $('#memberId').html('<option value="'+jsonObj[0].member_id+'">'+jsonObj[0].member_id+'</option>').attr('readonly',true);
+                    $('.memberIdDiv').hide();
                     $('#userName').val(jsonObj[0].member_id);
                     $('#groupId').val(jsonObj[0].group_id);
                     $("#status").val(jsonObj[0].status);
-                    // $("#userName").val(jsonObj[0].user_name);
+                    $("#userPassword").prop("required",false);
+                    ////////////////////////////////////////////////////////////////////////////////////////////
+                    // disable account password reset
+                    if(jsonObj[0].reset_password == "OFF"){
+                      $('#accPasswdReset').prop('checked', false).change();
+                    }
+                    ///////////////////////////////////////////////////////////////////////////////////////////
+                    // if account status is off
+                    if(jsonObj[0].status == "DISABLE"){
+                      $('#accStatus').prop('checked', false).change();
+                    }
+                    //////////////////////////////////////////////////////////////////////////////////////////
                     $("#save_btn").text("update User");
                     $("#mode").val("update");
                     $("#data_id").val(data_id);
@@ -555,7 +505,7 @@ contain at least 1 lower case letter" required>
                       method:"POST",  
                       data:{data_id:data_id,mode:mode},  
                       success:function(data){
-                          window.location.replace("admin_users.php");
+                        location.reload();
                       }  
                      }); 
 
