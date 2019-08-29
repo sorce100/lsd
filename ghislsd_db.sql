@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2019 at 01:40 AM
+-- Generation Time: Aug 29, 2019 at 02:59 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -521,6 +521,31 @@ INSERT INTO `events_register` (`events_reg_id`, `event_id`, `member_id`, `event_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `exam_center_modules`
+--
+
+CREATE TABLE `exam_center_modules` (
+  `module_id` int(11) NOT NULL,
+  `center_exam_part` varchar(200) NOT NULL,
+  `subject_name` text NOT NULL,
+  `center_id` int(11) NOT NULL,
+  `record_hide` varchar(5) NOT NULL,
+  `date_done` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `exam_center_modules`
+--
+
+INSERT INTO `exam_center_modules` (`module_id`, `center_exam_part`, `subject_name`, `center_id`, `record_hide`, `date_done`) VALUES
+(1, 'Part A', '[\"Merlin Exams\",\"Merlin 101\"]', 3, 'NO', '2019-07-15 11:40:13'),
+(2, 'Part C', '[\"First Exams\",\"Resit Exams\"]', 4, 'NO', '2019-07-15 13:06:08'),
+(3, 'Part C', '[\"First Exams 123\",\"Resit Exams nerlin\",\"hello\"]', 5, 'NO', '2019-07-15 13:06:44'),
+(4, 'Part A', '[\"Survey 101\",\"ENG 101\",\"GEO 201\"]', 5, 'NO', '2019-08-18 14:06:01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `exam_center_setup`
 --
 
@@ -546,31 +571,6 @@ INSERT INTO `exam_center_setup` (`exam_center_id`, `exam_center_name`, `exam_cen
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exam_center_subjects`
---
-
-CREATE TABLE `exam_center_subjects` (
-  `subject_id` int(11) NOT NULL,
-  `center_exam_part` varchar(200) NOT NULL,
-  `subject_name` text NOT NULL,
-  `center_id` int(11) NOT NULL,
-  `record_hide` varchar(5) NOT NULL,
-  `date_done` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `exam_center_subjects`
---
-
-INSERT INTO `exam_center_subjects` (`subject_id`, `center_exam_part`, `subject_name`, `center_id`, `record_hide`, `date_done`) VALUES
-(1, 'Part A', '[\"Merlin Exams\",\"Merlin 101\"]', 3, 'NO', '2019-07-15 11:40:13'),
-(2, 'Part C', '[\"First Exams\",\"Resit Exams\"]', 4, 'NO', '2019-07-15 13:06:08'),
-(3, 'Part C', '[\"First Exams 123\",\"Resit Exams nerlin\",\"hello\"]', 5, 'NO', '2019-07-15 13:06:44'),
-(4, 'Part A', '[\"Survey 101\",\"ENG 101\",\"GEO 201\"]', 5, 'NO', '2019-08-18 14:06:01');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `exam_register`
 --
 
@@ -582,11 +582,19 @@ CREATE TABLE `exam_register` (
   `date_registered` varchar(50) NOT NULL,
   `status` varchar(20) NOT NULL,
   `exam_score` text NOT NULL,
-  `exam_score_name` text NOT NULL,
+  `exam_name_index` text NOT NULL,
   `user_id` int(11) NOT NULL,
   `record_hide` varchar(5) NOT NULL,
   `date_done` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `exam_register`
+--
+
+INSERT INTO `exam_register` (`exam_register_id`, `exam_center_id`, `exam_center_module_id`, `student_id`, `date_registered`, `status`, `exam_score`, `exam_name_index`, `user_id`, `record_hide`, `date_done`) VALUES
+(10, 4, 2, 8, '28-08-2019', 'OLD', '{\"2\":\"500\",\"1\":\"11\"}', '[\"2\",\"1\"]', 56, 'NO', '2019-08-28 22:08:51'),
+(13, 3, 1, 8, '29-08-2019', 'NEW', '', '', 56, 'NO', '2019-08-29 00:25:11');
 
 -- --------------------------------------------------------
 
@@ -1039,7 +1047,7 @@ INSERT INTO `pages` (`pages_id`, `pages_name`, `pages_url`, `page_file_name`, `d
 (24, 'Sms Broadcast', '<li><a href=\"admin_broadcast_sms.php\" class=\"waves-effect\"><i class=\"fa fa-comment fa-fw\" aria-hidden=\"true\"></i>Broadcast Sms</a></li>', 'admin_broadcast_sms.php', '3', '2018-12-10 20:11:44'),
 (25, 'New Registration', '<li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', 'applicant_registrationa.php', '3', '2019-02-04 19:24:55'),
 (26, 'Registered Applicants', '<li><a href=\"students_setup.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Applicants Setup</a></li>', 'students_setup.php', '3', '2019-02-24 12:58:57'),
-(27, 'Student Pages', '<li><a href=\"student_profile.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Applicant Profile </a></li>                     <li><a href=\"student_register.php\" class=\"waves-effect\"><i class=\"fa fa-list fa-fw\" aria-hidden=\"true\"></i>Register </a></li>                    <li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', 'applicant_registrationa.php', '1', '2019-02-24 21:22:59'),
+(27, 'Applicant Pages', '<li><a href=\"student_profile.php\" class=\"waves-effect\"><i class=\"fa fa-user fa-fw\" aria-hidden=\"true\"></i>Applicant Profile </a></li>                     <li><a href=\"exams_registration.php\" class=\"waves-effect\"><i class=\"fa fa-list fa-fw\" aria-hidden=\"true\"></i>Exams Register </a></li>                    <li><a href=\"applicant_registrationa.php\" class=\"waves-effect\"><i class=\"fa fa-check-square-o fa-fw\" aria-hidden=\"true\"></i>New Registration</a></li>', 'applicant_registrationa.php', '1', '2019-02-24 21:22:59'),
 (28, 'Admin Exams Register', '<li><a href=\"examcenter_register.php\" class=\"waves-effect\"><i class=\"fa fa-users fa-fw\" aria-hidden=\"true\"></i>Exams Register</a></li>', 'examcenter_register.php', '1', '2019-03-03 10:42:55'),
 (31, 'Messages', '<li><a href=\"messages.php\" class=\"waves-effect\"><i class=\"fa fa-comments fa-fw\" aria-hidden=\"true\"></i>Messages</a></li>', 'messages.php', '3', '2019-03-23 23:50:52'),
 (32, 'Live Stream Setup', '<li><a href=\"admin_live_stream.php\" class=\"waves-effect\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i>Live Stream Setup </a></li>', 'admin_live_stream.php', '3', '2019-03-23 23:53:12'),
@@ -1129,7 +1137,7 @@ INSERT INTO `students` (`student_id`, `student_title`, `student_first_name`, `st
 (5, 'Mr', 'account', 'testing', '', 'account@gmail.com', '020996567', '', '', '', '', 3, 'NO', '1', '2019-02-22 15:58:04'),
 (6, 'Miss', 'work', 'working', '', 'wordking@gmail.com', '234234', '', '', '', '', 3, 'NO', '1', '2019-02-22 16:00:12'),
 (7, 'Mrs', 'esther', 'darko', '', 'esthd@gmail.co', '234234', '', '', '', '', 3, 'NO', '1', '2019-02-24 09:40:50'),
-(8, 'Mr', 'pen', 'pencil', '12-04-1993', 'pen@gmail.com', '234234', '', 'asdf', 'adsf', 'asdfasd', 3, 'NO', '1', '2019-02-24 17:19:01'),
+(8, '', 'pen', 'pencil', '12-04-1993', 'pen@gmail.com', '234234', '', 'asdf', 'adsf', 'asdfasd', 3, 'NO', '1', '2019-02-24 17:19:01'),
 (9, 'Mrs', 'belinda', 'ama', '', 'ama@gmail.com', '24543565434', '', '', '', '', 3, 'NO', '1', '2019-02-26 15:18:14'),
 (10, 'Mrs', 'trainees', 'trainees', '', 'trainees@gmail.com', '92349238948', '', '', '', '', 3, 'NO', '1', '2019-03-03 17:15:13'),
 (11, 'Mr', 'herb', 'herd', '', 'herd@gmail.com', '0202002', '', '', '', '', 3, 'NO', '1', '2019-04-03 00:25:26'),
@@ -1140,7 +1148,8 @@ INSERT INTO `students` (`student_id`, `student_title`, `student_first_name`, `st
 (20, 'Mr', 'merlin', 'merlin', '', 'merlin@gmail.com', '0209969656', '', '', '', '', 3, 'NO', '1', '2019-07-09 22:36:09'),
 (21, 'Mr', 'esther', 'darko', '', 'esther@gmail.com', '0209969656', '', '', '', '', 3, 'NO', '1', '2019-07-09 22:37:04'),
 (22, 'Dr', 'merlinww', 'sorceww', '', 'merlinSorce@gmail.comas', '02099696565', '', '', '', '', 3, 'NO', '3', '2019-07-15 06:34:15'),
-(23, 'Mr', 'sorce', 'kwarteng', '', 'a@gmail.com', '0209969656', '', '', '', '', 0, 'NO', '1', '2019-08-25 10:18:33');
+(23, 'Mr', 'sorce', 'kwarteng', '', 'a@gmail.com', '0209969656', '', '', '', '', 0, 'NO', '1', '2019-08-25 10:18:33'),
+(24, 'Mr', 'trying', 'hard', '', 'trying@gmail.com', '0209969656', '', '', '', '', 0, 'NO', '1', '2019-08-28 12:56:45');
 
 -- --------------------------------------------------------
 
@@ -1194,10 +1203,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `account_type`, `account_type_id`, `account_stage`, `member_id`, `user_password`, `reset_password`, `group_id`, `school_id`, `status`, `division`, `user_login_status`, `record_hide`, `date_done`) VALUES
-(56, 'student', 8, 'NEW', 'p.pencil', '$2y$10$TsxUBtv7c2x4LrnI0QV/peA9VOcJ1ojhN.6A7qIEkcvDytDTVgFOW', 'NO', '14', 7, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-02-24 17:19:02'),
-(64, 'administrator', 1, '', 'lsd', '$2y$10$Y0F6phqIvj7PQxXfneggMOE.cWIg1upOmMtFchxPVK.rdhTZ6BHRa', 'NO', '9', 0, 'ACTIVE', '1', 'ONLINE', 'NO', '2019-03-20 10:00:30'),
+(56, 'student', 8, 'OLD', 'p.pencil', '$2y$10$TsxUBtv7c2x4LrnI0QV/peA9VOcJ1ojhN.6A7qIEkcvDytDTVgFOW', 'NO', '14', 7, 'active', '1', 'ONLINE', 'NO', '2019-02-24 17:19:02'),
+(64, 'administrator', 1, '', 'lsd', '$2y$10$Y0F6phqIvj7PQxXfneggMOE.cWIg1upOmMtFchxPVK.rdhTZ6BHRa', 'NO', '9', 0, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-03-20 10:00:30'),
 (65, 'administrator', 4, '', 'ghis', '$2y$10$pdisgNSq0i6F2dbkk/azPeQdtUlHQ5lVhZUYIOfbdtSSPNAnYIXoi', 'NO', '13', 0, 'ACTIVE', '1', '', 'NO', '2019-03-20 11:47:52'),
-(73, 'member', 19, 'OLD', '11', '$2y$10$s8AQDlTFJb7YmmfP9um/lOhCCo0vVgGtMoL8OkakVhZgfucBEOSde', 'NO', '13', 0, 'active', '1', 'OFFLINE', 'NO', '2019-04-01 12:28:05');
+(73, 'member', 19, 'OLD', '11', '$2y$10$s8AQDlTFJb7YmmfP9um/lOhCCo0vVgGtMoL8OkakVhZgfucBEOSde', 'NO', '13', 0, 'active', '1', 'OFFLINE', 'NO', '2019-04-01 12:28:05'),
+(105, 'student', 24, 'NEW', 't.hard', '$2y$10$owgYmTzp5yAkuPKyL3NlauqMVj7PMPUHnYkTMJomOsH2o8xrhKnGC', 'NO', '', 0, 'ACTIVE', '1', '', 'NO', '2019-08-28 12:56:45');
 
 -- --------------------------------------------------------
 
@@ -1547,7 +1557,34 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (327, 56, 'Sunday 25th of August 2019 / 10:34:19 PM', '', 1),
 (328, 56, 'Sunday 25th of August 2019 / 11:03:15 PM', 'Sunday 25th of August 2019 / 11:14:58 PM', 1),
 (329, 73, 'Sunday 25th of August 2019 / 11:15:18 PM', 'Sunday 25th of August 2019 / 11:16:05 PM', 1),
-(330, 64, 'Sunday 25th of August 2019 / 11:16:11 PM', '', 1);
+(330, 64, 'Sunday 25th of August 2019 / 11:16:11 PM', 'Monday 26th of August 2019 / 06:50:20 AM', 1),
+(331, 73, 'Monday 26th of August 2019 / 09:35:07 AM', 'Monday 26th of August 2019 / 09:50:24 AM', 1),
+(332, 64, 'Monday 26th of August 2019 / 09:50:34 AM', 'Monday 26th of August 2019 / 09:59:32 AM', 1),
+(333, 56, 'Monday 26th of August 2019 / 09:59:40 AM', 'Monday 26th of August 2019 / 10:26:44 AM', 1),
+(334, 64, 'Monday 26th of August 2019 / 10:00:59 AM', 'Monday 26th of August 2019 / 12:40:18 PM', 1),
+(335, 64, 'Monday 26th of August 2019 / 10:26:50 AM', '', 1),
+(336, 64, 'Monday 26th of August 2019 / 12:40:25 PM', '', 1),
+(337, 64, 'Tuesday 27th of August 2019 / 06:22:02 PM', 'Tuesday 27th of August 2019 / 09:50:55 PM', 1),
+(338, 73, 'Tuesday 27th of August 2019 / 07:36:39 PM', '', 1),
+(339, 73, 'Tuesday 27th of August 2019 / 07:37:38 PM', '', 1),
+(340, 64, 'Tuesday 27th of August 2019 / 09:53:08 PM', 'Tuesday 27th of August 2019 / 11:36:46 PM', 1),
+(341, 64, 'Tuesday 27th of August 2019 / 11:40:05 PM', '', 1),
+(342, 64, 'Tuesday 27th of August 2019 / 11:56:50 PM', '', 1),
+(343, 64, 'Wednesday 28th of August 2019 / 01:37:19 PM', 'Wednesday 28th of August 2019 / 01:37:40 PM', 1),
+(344, 64, 'Wednesday 28th of August 2019 / 01:39:17 PM', 'Wednesday 28th of August 2019 / 01:41:20 PM', 1),
+(345, 64, 'Wednesday 28th of August 2019 / 01:43:13 PM', 'Wednesday 28th of August 2019 / 01:43:45 PM', 1),
+(346, 64, 'Wednesday 28th of August 2019 / 01:44:48 PM', 'Wednesday 28th of August 2019 / 02:03:31 PM', 1),
+(347, 64, 'Wednesday 28th of August 2019 / 02:03:39 PM', 'Wednesday 28th of August 2019 / 02:13:28 PM', 1),
+(348, 56, 'Wednesday 28th of August 2019 / 02:13:34 PM', 'Wednesday 28th of August 2019 / 03:13:03 PM', 1),
+(349, 64, 'Wednesday 28th of August 2019 / 03:13:18 PM', 'Wednesday 28th of August 2019 / 06:47:09 PM', 1),
+(350, 64, 'Wednesday 28th of August 2019 / 06:47:18 PM', 'Wednesday 28th of August 2019 / 10:18:36 PM', 1),
+(351, 73, 'Wednesday 28th of August 2019 / 10:18:43 PM', 'Wednesday 28th of August 2019 / 10:21:22 PM', 1),
+(352, 64, 'Wednesday 28th of August 2019 / 10:21:26 PM', 'Wednesday 28th of August 2019 / 10:27:13 PM', 1),
+(353, 56, 'Wednesday 28th of August 2019 / 10:27:21 PM', 'Wednesday 28th of August 2019 / 10:35:02 PM', 1),
+(354, 64, 'Wednesday 28th of August 2019 / 10:35:07 PM', 'Wednesday 28th of August 2019 / 10:36:44 PM', 1),
+(355, 73, 'Wednesday 28th of August 2019 / 10:36:51 PM', 'Wednesday 28th of August 2019 / 10:37:05 PM', 1),
+(356, 56, 'Wednesday 28th of August 2019 / 10:37:12 PM', 'Wednesday 28th of August 2019 / 10:58:39 PM', 1),
+(357, 56, 'Wednesday 28th of August 2019 / 10:58:46 PM', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1721,7 +1758,8 @@ INSERT INTO `youtube_stream_register` (`youtube_stream_reg_id`, `youtube_stream_
 (8, 5, 73, 'FREE', 0, 'FREE', 'NO', '2019-04-01 22:44:25'),
 (9, 5, 64, 'FREE', 0, 'FREE', 'NO', '2019-05-09 02:20:07'),
 (10, 6, 73, 'FREE', 0, 'FREE', 'NO', '2019-06-05 22:30:13'),
-(11, 6, 64, 'FREE', 0, 'FREE', 'NO', '2019-07-16 12:25:55');
+(11, 6, 64, 'FREE', 0, 'FREE', 'NO', '2019-07-16 12:25:55'),
+(12, 6, 56, 'FREE', 0, 'FREE', 'NO', '2019-08-29 00:57:37');
 
 --
 -- Indexes for dumped tables
@@ -1830,16 +1868,16 @@ ALTER TABLE `events_register`
   ADD PRIMARY KEY (`events_reg_id`);
 
 --
+-- Indexes for table `exam_center_modules`
+--
+ALTER TABLE `exam_center_modules`
+  ADD PRIMARY KEY (`module_id`);
+
+--
 -- Indexes for table `exam_center_setup`
 --
 ALTER TABLE `exam_center_setup`
   ADD PRIMARY KEY (`exam_center_id`);
-
---
--- Indexes for table `exam_center_subjects`
---
-ALTER TABLE `exam_center_subjects`
-  ADD PRIMARY KEY (`subject_id`);
 
 --
 -- Indexes for table `exam_register`
@@ -2050,22 +2088,22 @@ ALTER TABLE `events_register`
   MODIFY `events_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `exam_center_modules`
+--
+ALTER TABLE `exam_center_modules`
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `exam_center_setup`
 --
 ALTER TABLE `exam_center_setup`
   MODIFY `exam_center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `exam_center_subjects`
---
-ALTER TABLE `exam_center_subjects`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `exam_register`
 --
 ALTER TABLE `exam_register`
-  MODIFY `exam_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `exam_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -2119,7 +2157,7 @@ ALTER TABLE `sms`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `surveyor`
@@ -2131,13 +2169,13 @@ ALTER TABLE `surveyor`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `users_session_log`
 --
 ALTER TABLE `users_session_log`
-  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
+  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=358;
 
 --
 -- AUTO_INCREMENT for table `user_payment`
@@ -2161,7 +2199,7 @@ ALTER TABLE `youtube_stream`
 -- AUTO_INCREMENT for table `youtube_stream_register`
 --
 ALTER TABLE `youtube_stream_register`
-  MODIFY `youtube_stream_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `youtube_stream_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

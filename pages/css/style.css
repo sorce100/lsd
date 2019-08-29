@@ -8765,7 +8765,7 @@ ul.pro-amenities li span i {
 }
 
 }@media (min-width:768px) {
-    #page-wrapper {
+#page-wrapper {
     position: inherit;
     margin: 0 0 0 240px;
 }
@@ -8810,7 +8810,7 @@ ul.pro-amenities li span i {
 /*change side menu position when in mobile view*/
 /*left was -240*/
 @media (max-width:1170px) {
-    .content-wrapper .sidebar {
+.content-wrapper .sidebar {
     left: -14px;
 }
 .content-wrapper #page-wrapper {
@@ -8880,6 +8880,8 @@ ul.pro-amenities li span i {
     width: 240px;
     display: block;
 }
+/*check*/
+/*side bar navigation for  mobile view*/
 .sidebar {
     z-index: 1;
     position: relative;
@@ -8889,6 +8891,7 @@ ul.pro-amenities li span i {
     height: 50%;
     display: table;
 }
+    
 .slimscrollsidebar{
     display: inline;
 

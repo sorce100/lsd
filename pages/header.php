@@ -30,6 +30,8 @@
     <link rel="stylesheet" type="text/css" href="../plugins/bower_components\select2\select2.min.css">
     <!-- parsley -->
     <link rel="stylesheet" type="text/css" href="../plugins/bower_components\parsley\parsley.css">
+    <!-- toastr -->
+    <link href="../plugins/bower_components/toastr/toastr.min.css" rel="stylesheet">
     <!-- datatables -->
     <link rel="stylesheet" type="text/css" href="css/datatables.css">
     <!-- fot button toggle -->
@@ -67,9 +69,12 @@
                 </div>
                 <!-- Name -->
                 <ul class="nav navbar-top-links navbar-left pull-left">
-                    <button type="button" class="navbar-toggle collapsed" style="color: #F33155;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <br>
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" aria-expanded="false" style="color:white;">
                     <span class="sr-only">Toggle navigation</span>
-                    Hide / Show Menu
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                   </button>
                 </ul>
                 <!-- /Logo -->

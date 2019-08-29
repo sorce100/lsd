@@ -16,19 +16,23 @@
     <!-- Bootstrap -->
     <link href="pages/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="login.css">
-    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
 
+    <link href="plugins/bower_components/parsley/parsley.css" rel="stylesheet">
+    <link href="plugins/bower_components/toastr/toastr.min.css" rel="stylesheet">
+
+    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="pages/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
   <body >
     <div class="row top_row">
         <div class="col-md-1 col-sm-3 col-xs-3">
-          <a href="index.php"><img src="plugins/images/logo.jpg" class="img-responsive img-circle" width="100%" height="100%"></a>
+          <a href="index.php"><img src="plugins/images/logo.jpg" class="img" width="100%" height="100%"></a>
         </div>
         <div class="col-md-9 col-sm-6 col-xs-6">
             <div id="headerTitle">Ghana Institution Of Surveyors ( LSD )</div>
         </div>
         <div class="col-md-2 col-sm-3 col-xs-3 logSignBtn">
-          <button data-toggle="modal" data-target="#signInModal" class="btn btn-primary"><b>Login <i class="glyphicon glyphicon-user"></i></b></button>
+          <button data-toggle="modal" data-target="#signInModal" class="btn btn-primary logSignBtnB1"><b>Login <i class="glyphicon glyphicon-user"></i></b></button>
           <button style="border: 1px solid red;" data-toggle="modal" data-target="#signUpModal" class="btn btn-default"><b>Register <i class="glyphicon glyphicon-hourglass"></i></b></button>
         </div>
     </div><br>
@@ -41,7 +45,7 @@
             <h4 class="modal-title">APPLICANT SIGN UP</h4>
           </div>
           <div class="modal-body" id="bg">
-          <form id="signUp_form">
+          <form id="signUp_form" data-parsley-validate>
             <!--  -->
             <div class="row">
                 <div class="col-md-2">
@@ -150,11 +154,11 @@
         <h4 class="modal-title"><b id="subject">Sign In</b></h4>
       </div>
       <div class="modal-body" id="bg">
-        <form id="sigin_Form" method="POST"> 
+        <form id="sigin_Form" method="POST" > 
            <div class="row">
              <div class="col-md-12">
                 <div class="form-group">
-                     <form class="form-auth-small" id="insert_form" method="POST">
+                     <!-- <form class="form-auth-small" id="insert_form" method="POST"> -->
                         <div class="form-group input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                           <label for="signin-username" class="control-label sr-only">Username</label>
@@ -170,7 +174,7 @@
                         <input type="hidden" name="mode" id="signInmode" value="login">
                         <button type="submit" name="submit" id="login" class="btn btn-primary btn-block waves-effect waves-light">LOGIN <i class="glyphicon glyphicon-log-in"></i></button> 
                         <br>
-                  </form>
+                  <!-- </form> -->
                 </div>
               </div>
            </div>   
@@ -191,7 +195,7 @@
         <h4 class="modal-title"><b id="subject">RESET PASSWORD</b></h4>
       </div>
       <div class="modal-body" id="bg">
-        <form id="changePass_form" method="POST"> 
+        <form id="changePass_form" method="POST" data-parsley-validate> 
           <input type="hidden" id="chPassUserName" name="chPassUserName">
           <input type="hidden" id="chPassUserPassword" name="chPassUserPassword">
            <div class="row">
@@ -228,10 +232,15 @@
 
 
 <!--  -->
+<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="pages/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="plugins/bower_components/parsley/parsley.min.js"></script>
+<script src="plugins/bower_components/toastr/toastr.min.js"></script>
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <script>
   $(document).ready(function(){
+   
+
     $("#sigin_Form").on("submit",function(e){
           e.preventDefault();
                 $.ajax({
@@ -244,10 +253,13 @@
                 success:function(data){  
                     console.log(data);
                      if (data == "success") {
+                      toastr.success('Login Successfully');
                       window.location.replace("pages/dashboard.php");
                      }
                      else if(data == "error"){
-                      location.reload();
+                      toastr.error('There was an error');
+                      $('#sigin_Form')[0].reset();
+                      $('#signInModal').modal('hide');
                      }
                      else if ((data !="success") || (data !="error")) {
                       var fields = data.split('-');
@@ -280,13 +292,13 @@ $("#changePass_form").on("submit",function(e){
           
     },
     success:function(data){ 
-    console.log(data); 
+    // console.log(data); 
        if (data == "success") {
-        // $.bootstrapGrowl("Password Changed Successfully",{ type: 'success',align: 'center',allow_dismiss: false,width: 'auto' });
+           toastr.success('Successfully');
           $("#passChModal").modal("hide");
        }
        else if(data == "error"){
-        // $.bootstrapGrowl("Sorry! Error Resetting password",{ type: 'danger',align: 'center',allow_dismiss: false,width: 'auto' });
+       toastr.error('There was an error');
         $('#newPassword').val("");
         $('#newRetypePassword').val("");
         $('#resetPass_btn').text("Reset Password").prop("disabled",false);
@@ -317,12 +329,13 @@ $('#signUpModal').on('hidden.bs.modal', function () {
                   $('#signUp').text("Please wait ...").attr('disabled',true);  
              },
         success:function(data){
+           
           $("#signUp_form")[0].reset();
           $("#signUpModal").modal("hide");
 
-          if (data == "success") {alert("Thank you for registering, your username and password will be sent to you shortly");} 
-          else if(data == "error") { alert("Sorry, there was an error saving your profile please try again");}
-          else if(data == "email_exits") {alert("Sorry, Email ID already exits");}
+          if (data == "success") {toastr.success('Successfully'); alert("Thank you for registering, your username and password will be sent to you shortly");} 
+          else if(data == "error") {toastr.error('There was an error'); alert("Sorry, there was an error saving your profile please try again");}
+          else if(data == "email_exits") {toastr.error('There was an error'); alert("Sorry, Email ID already exits");}
                
         } 
 
@@ -331,3 +344,5 @@ $('#signUpModal').on('hidden.bs.modal', function () {
 });
 
 </script>
+
+

@@ -1,8 +1,6 @@
 <div class="clearfix"></div>
-<footer>
-  <div class="container-fluid">
-    <p class="copyright pull-right">POWERED BY <a href="http://theprismoid.com/" target="_blank">PRISMOIDAL COMPANY LIMITED</a> &copy; <?php echo date('Y'); ?>  All Rights Reserved.</p>
-  </div>
+<footer class="footer text-center">
+  POWERED BY <a href="http://theprismoid.com/" target="_blank">PRISMOIDAL COMPANY LIMITED</a> &copy; <?php echo date('Y'); ?>  All Rights Reserved.
 </footer>
 <!-- multistep modal -->
 <script>
@@ -71,6 +69,10 @@ $(document).ready(function(){
     <script src="../plugins/bower_components\select2\select2.min.js"></script>
     <!-- parsely -->
     <script src="../plugins/bower_components\parsley\parsley.min.js"></script>
+    <!-- tostr -->
+    <script src="../plugins/bower_components/toastr/toastr.min.js"></script>
+
+
     <!-- mcafee antivirus script -->
     <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 

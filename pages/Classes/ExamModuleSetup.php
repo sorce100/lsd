@@ -7,7 +7,7 @@
 		private $centerExamSubject;
 		private $dbConn;
 		private $recordHide = "NO";
-		private $table= "exam_center_subjects";
+		private $table= "exam_center_modules";
 
 		function set_id($id) { $this->id = $id; }
 		function set_recordHide($recordHide) { $this->recordHide = $recordHide; }
@@ -46,7 +46,7 @@
 		}
 		// for update
 		function update(){
-			$sql="UPDATE $this->table SET subject_name=:subjectName,center_exam_part=:centerExamPart WHERE subject_id=:Id";
+			$sql="UPDATE $this->table SET subject_name=:subjectName,center_exam_part=:centerExamPart WHERE module_id=:Id";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":subjectName",$this->centerExamSubject);
 				$stmt->bindParam(":centerExamPart",$this->centerExamPart);
@@ -61,7 +61,7 @@
 		}
 		// for delete
 		function delete(){
-			$sql="UPDATE $this->table SET record_hide=:recordHide WHERE subject_id=:Id";
+			$sql="UPDATE $this->table SET record_hide=:recordHide WHERE module_id=:Id";
 			$stmt = $this->dbConn->prepare($sql);
 			$stmt->bindParam(":recordHide",$this->recordHide);
 			$stmt->bindParam(":Id",$this->id);
@@ -76,7 +76,7 @@
 
 	// get users
 		function get_center_modules(){
-			$sql="SELECT * FROM $this->table WHERE record_hide=:recordHide ORDER BY subject_id DESC";
+			$sql="SELECT * FROM $this->table WHERE record_hide=:recordHide ORDER BY module_id DESC";
 			$stmt = $this->dbConn->prepare($sql);
 			$stmt->bindParam(":recordHide",$this->recordHide);
 			if ($stmt->execute()) {
@@ -91,7 +91,7 @@
 
 	// get user
 		function get_center_module_by_id(){
-			$sql="SELECT * FROM $this->table WHERE subject_id=:Id";
+			$sql="SELECT * FROM $this->table WHERE module_id=:Id";
 			$stmt = $this->dbConn->prepare($sql);
 			$stmt->bindParam(":Id",$this->id);
 			if ($stmt->execute()) {
@@ -118,7 +118,7 @@
 		}
 		// get all exams modules based on center id
 		function get_all_modules_by_center(){
-			$sql="SELECT subject_id,center_exam_part,subject_name FROM $this->table WHERE center_id=:centerId";
+			$sql="SELECT module_id,center_exam_part,subject_name FROM $this->table WHERE center_id=:centerId";
 			$stmt = $this->dbConn->prepare($sql);
 			$stmt->bindParam(":centerId",$this->centerId);
 			if ($stmt->execute()) {

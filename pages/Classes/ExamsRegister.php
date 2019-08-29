@@ -7,7 +7,7 @@
 		private $studentId;
 		private $status= "NEW";
 		private $examScore;
-		private $examScoreName;
+		private $examNameIndex;
 		private $recordHide= "NO";
 		private $dbConn;
 		private $table= "exam_register";
@@ -18,7 +18,7 @@
 		function set_studentId($studentId) { $this->studentId = $studentId; }
 		function set_status($status) { $this->status = $status; }
 		function set_examScore($examScore) { $this->examScore = $examScore; }
-		function set_examScoreName($examScoreName) { $this->examScoreName = $examScoreName; }
+		function set_examNameIndex($examNameIndex) { $this->examNameIndex = $examNameIndex; }
 		function set_recordHide($recordHide) { $this->recordHide = $recordHide; }
 
 		public function __construct(){
@@ -57,41 +57,39 @@
 			}
 		// insert exams score
 			function insert_exam_score(){
+				$examsScoreAssocArrayDeclare=[];
+				$examNameIndexArrayDeclare=[];
 				// pull the exam score and the name of the exams,decode and add to the array before encoding to allow multiple  scores for the same exam center
-				$returnSql="SELECT exam_score,exam_score_name FROM $this->table WHERE exam_register_id =:Id";
+				$returnSql="SELECT exam_score,exam_name_index FROM $this->table WHERE exam_register_id =:Id";
 				$returnStmt = $this->dbConn->prepare($returnSql);
 				$returnStmt->bindParam(":Id",$this->id);
 				if ($returnStmt->execute()) {
 					$result= $returnStmt->fetch(PDO::FETCH_ASSOC);
 					$examScoreArray = json_decode($result['exam_score']);
-					$examScoreNameArray = json_decode($result['exam_score_name']);
-					// now add new values to array and save but dont allow the same value twice rather change the value
-					for ($i=0; $i < sizeof($examScoreNameArray); $i++) { 
-						// check if exam name is in the array
-						if (in_array($this->examScoreName, $examScoreNameArray)) {
-							// search for the key for the exam then use that to change value for score
-							$arrayKey = array_search ($this->examScoreName, $examScoreNameArray);
-							// change score value with the key given
-							$examScoreArray[$arrayKey]=$this->examScore;
-						}
-						else{
-							// if exam name is not in the array then add then save
-							$examScoreNameArray[]=$this->examScoreName;
-							$examScoreArray[]=$this->examScore;
-						}
-					}
-					// now json_encode arrays back
-					$examScoreNameEncode = json_encode($examScoreNameArray);
-					$examScoreEncode = json_encode($examScoreArray);
-				
+					// if exams score associative arrary is not empty then get the vrious arrays then store them in various ids
+						if (!empty($examScoreArray)) {
+							foreach ($examScoreArray as $key => $examScore) {
+								$examsScoreAssocArrayDeclare[$key]=$examScore;
+							}
 
-					$status="OLD";
-					$sql = "UPDATE $this->table SET exam_score=:examScore,exam_score_name=:examScoreName,status=:status,user_id=:userId WHERE exam_register_id=:Id";
+							$examNameIndexArray = json_decode($result['exam_name_index']);
+							foreach ($examNameIndexArray as $examNameIndex) {
+								$examNameIndexArrayDeclare[]=$examNameIndex;
+							}
+						}
+				
+					// for exams score associative array
+					$examsScoreAssocArrayDeclare[$this->examNameIndex] = $this->examScore;
+					// for exams subjects array index
+					if (!in_array($this->examNameIndex, $examNameIndexArrayDeclare)) {
+						$examNameIndexArrayDeclare[]=$this->examNameIndex;
+					}
+					$this->status="OLD";
+					$sql = "UPDATE $this->table SET exam_score=:examScore,exam_name_index=:examNameIndex,status=:status WHERE exam_register_id=:Id";
 					$stmt = $this->dbConn->prepare($sql);
-					$stmt->bindParam(":examScore",$examScoreEncode);
-					$stmt->bindParam(":examScoreName",$examScoreNameEncode);
-					$stmt->bindParam(":status",$status);
-					$stmt->bindParam(":userId",$_SESSION['user_id']);
+					$stmt->bindValue(":examScore",json_encode($examsScoreAssocArrayDeclare));
+					$stmt->bindValue(":examNameIndex",json_encode($examNameIndexArrayDeclare));
+					$stmt->bindParam(":status",$this->status);
 					$stmt->bindParam(":Id",$this->id);
 
 					if ($stmt->execute()) {
@@ -107,69 +105,46 @@
 			}
 
 		// get all details
-			function get_student_registered(){
-				$returnData =[];
-				$sql="SELECT * FROM $this->table WHERE student_id=:studentId AND status=:status ORDER BY exam_register_id DESC";
+			function get_applicants_registered(){
+				$sql="SELECT rg.exam_center_id,rg.exam_center_module_id,rg.date_registered,rg.exam_score,rg.exam_name_index,
+				c.exam_center_id,c.exam_center_name,c.exam_center_region,
+				md.module_id,md.center_exam_part,md.subject_name 
+				FROM $this->table AS rg 
+				LEFT JOIN exam_center_setup AS c 
+				ON rg.exam_center_id = c.exam_center_id
+				LEFT JOIN exam_center_modules AS md
+				ON rg.exam_center_module_id = md.module_id
+				WHERE rg.student_id=:studentId ORDER BY exam_register_id DESC";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":studentId",$_SESSION['student_id']);
-				$stmt->bindParam(":status",$this->status);
 				if ($stmt->execute()) {
 					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
-					foreach ($results as $result) {
-						$result['center_name']=$this->get_exam_center_name($result['exam_center_id']);
-						$result['module_name']=$this->get_exam_module_name($result['exam_center_module_id']);
-						$returnData[] = $result;
-					}
-					return $returnData;
+					return $results;
 				}
 				else{
 					die();
 				}
 
 			}
-		// get exam center name
-			function get_exam_center_name($centerId){
-				$sql="SELECT exam_center_name FROM exam_center_setup WHERE exam_center_id =:centerId";
-				$stmt = $this->dbConn->prepare($sql);
-				$stmt->bindParam(":centerId",$centerId);
-				if ($stmt->execute()) {
-					$result= $stmt->fetch(PDO::FETCH_ASSOC);
-					return $result['exam_center_name'];
-				}
-				else{
-					die();
-				}
 
-			}
-		// get exam center name
-			function get_exam_module_name($subjectId){
-				$sql="SELECT center_exam_part FROM exam_center_subjects WHERE subject_id =:subjectId";
-				$stmt = $this->dbConn->prepare($sql);
-				$stmt->bindParam(":subjectId",$subjectId);
-				if ($stmt->execute()) {
-					$result= $stmt->fetch(PDO::FETCH_ASSOC);
-					return $result['center_exam_part'];
-				}
-				else{
-					die();
-				}
-
-			}
 		// get all registered students
-
-			function get_all(){
-				$returnData = [];
-				$sql="SELECT * FROM $this->table WHERE record_hide=:recordHide ORDER BY exam_register_id DESC";
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			function get_all_reg_applicants(){
+				$sql="SELECT er.exam_register_id,er.exam_center_id,er.exam_center_module_id,er.student_id,er.date_registered ,er.exam_score,st.student_id,st.student_first_name,st.student_last_name ,md.module_id,md.center_exam_part, md.subject_name	
+				FROM exam_register AS er  
+				INNER JOIN students AS st
+				ON er.student_id = st.student_id
+				INNER JOIN exam_center_modules AS md
+				ON er.exam_center_module_id = md.module_id
+				WHERE er.exam_center_id = :centerId
+				AND er.record_hide=:recordHide
+				ORDER BY exam_register_id DESC";
 				$stmt = $this->dbConn->prepare($sql);
+				$stmt->bindParam(":centerId",$this->examCenterId);
 				$stmt->bindParam(":recordHide",$this->recordHide);
 				if ($stmt->execute()) {
 					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
-					foreach ($results as $result) {
-						$result["exam_center_id"]=$this->get_center_name($result["exam_center_id"]);
-						$result["student_id"]=$this->get_student_name($result["student_id"]);
-						$returnData[]=$result;
-					}
-					return $returnData;
+					return json_encode($results);
 				}
 				else{
 					die();
@@ -259,7 +234,7 @@
 
 // get all applicant full details and exams detials
 			 function get_exams_registered_applicants(){
-			 	$sql="SELECT c.exam_center_id,c.exam_center_name,c.exam_center_region,s.student_id,s.student_title,s.student_first_name,s.student_last_name,m.subject_id,m.center_exam_part, 
+			 	$sql="SELECT c.exam_center_id,c.exam_center_name,c.exam_center_region,s.student_id,s.student_title,s.student_first_name,s.student_last_name,m.module_id,m.center_exam_part, 
 			 	FROM students AS s
 			 	INNER JOIN exam_center_subjects AS m
 			 	ON m.center_id = c.exam_center_id

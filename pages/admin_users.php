@@ -268,7 +268,7 @@
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
-                               <input type="text" name="userName" id="userName" value="" class="form-control" readonly required>
+                               <input type="text" name="userName" id="userName" value="" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -344,6 +344,8 @@
 
  <script>  
       $(document).ready(function(){
+         $('#users_form').parsley();
+//////////////////////////////////////////////////////////////////////////////////////////////
         $(".memberIDSelect2").select2({
           dropdownParent: $("#myModal")
         });
@@ -397,6 +399,7 @@
         $('#myModal').on('hidden.bs.modal', function () {
             $("#memberId").hide();
             $("#subject").html("ADD NEW MEMBER");
+            $('#users_form').parsley().reset();
             $("#users_form")[0].reset();
 
             $('.memberIdDiv').show();
@@ -474,6 +477,7 @@
                     $('#groupId').val(jsonObj[0].group_id);
                     $("#status").val(jsonObj[0].status);
                     $("#userPassword").prop("required",false);
+                    $('#users_form').parsley().destroy();
                     ////////////////////////////////////////////////////////////////////////////////////////////
                     // disable account password reset
                     if(jsonObj[0].reset_password == "OFF"){

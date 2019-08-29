@@ -107,8 +107,11 @@ body{
   color: #6497b1;
 }
 .logSignBtn{
-  padding-top: 30px;
+  padding-top: 2%;
 }
+.logSignBtnB1{
+  margin-bottom: 20px;
+} 
 #signUpModal {
     position: absolute;
     top: 10%;

@@ -27,7 +27,7 @@ include("header.php");
         <div class="panel-body">
             <!-- content -->
             <div class="col-md-12">
-              <form id="insert_form" action="scripts/admin_members_save.php"  method="POST">
+              <form id="insert_form" >
                         <center><h2><u>Applicant Personal Details</u></h2></center>
                           <div class="row">
                             <!-- student title -->
@@ -48,14 +48,14 @@ include("header.php");
                             <div class="col-md-5">
                                   <div class="form-group">
                                     <label for="studentFirstName">FIRST NAME</label>
-                                    <input type="text" class="form-control tcal" id="studentFirstName" name="studentFirstName" autocomplete="off" value="<?php if(isset($studentFirstName)){echo $studentFirstName;}?>">
+                                    <input type="text" class="form-control tcal" id="studentFirstName" name="studentFirstName" autocomplete="off" value="<?php if(isset($studentFirstName)){echo $studentFirstName;}?>" required>
                                   </div>
                             </div>
                             <!-- lastname -->
                             <div class="col-md-5">
                                   <div class="form-group">
                                     <label for="studentLastName">LAST NAME</label>
-                                    <input type="text" class="form-control tcal" id="studentLastName" name="studentLastName" autocomplete="off" value="<?php if(isset($studentLastName)){echo $studentLastName;}?>">
+                                    <input type="text" class="form-control tcal" id="studentLastName" name="studentLastName" autocomplete="off" value="<?php if(isset($studentLastName)){echo $studentLastName;}?>" required>
                                   </div>
                             </div>
                           </div>
@@ -63,13 +63,13 @@ include("header.php");
                             <div class="col-md-5">
                               <div class="form-group">
                                     <label for="studentDob">DATE OF BIRTH</label>
-                                    <input type="text" class="form-control" id="studentDob" name="studentDob" data-toggle="datepicker" value="<?php if(isset($studentDob)){echo $studentDob;}?>" readonly>
+                                    <input type="text" class="form-control" id="studentDob" name="studentDob" data-toggle="datepicker" value="<?php if(isset($studentDob)){echo $studentDob;}?>" required readonly>
                                   </div>
                             </div>
                             <div class="col-md-7">
                               <div class="form-group">
                                     <label for="studentEmail">EMAIL</label>
-                                    <input type="text" class="form-control tcal" id="studentEmail" name="studentEmail" autocomplete="off" value="<?php if(isset($studentEmail)){echo $studentEmail;}?>">
+                                    <input type="text" class="form-control tcal" id="studentEmail" name="studentEmail" autocomplete="off" value="<?php if(isset($studentEmail)){echo $studentEmail;}?>" required>
                                   </div>
                             </div>
                           </div>
@@ -77,13 +77,13 @@ include("header.php");
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="studentTel">PHONE NUMBER</label>
-                                <input type="text" class="form-control" id="studentTel" name="studentTel" autocomplete="off" value="<?php if(isset($studentTel)){echo $studentTel;}?>"> 
+                                <input type="text" class="form-control" id="studentTel" name="studentTel" autocomplete="off" value="<?php if(isset($studentTel)){echo $studentTel;}?>" required> 
                               </div>
                           </div>
                           <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="studentEmergencyTel">CONTACT INCASE OF EMERGENCY</label>
-                                      <input type="text" class="form-control" id="studentEmergencyTel" name="studentEmergencyTel"  autocomplete="off" value="<?php if(isset($studentEmergencyTel)){echo $studentEmergencyTel;}?>">
+                                      <input type="text" class="form-control" id="studentEmergencyTel" name="studentEmergencyTel"  autocomplete="off" value="<?php if(isset($studentEmergencyTel)){echo $studentEmergencyTel;}?>" required>
                                     </div>
                               </div>
                         </div>
@@ -91,13 +91,13 @@ include("header.php");
                           <div class="col-sm-6">
                                 <div class="form-group">
                                 <label for="studentPostalAddress">POSTAL ADDRESS</label>
-                                <input type="text" class="form-control" id="studentPostalAddress" name="studentPostalAddress" autocomplete="off" value="<?php if(isset($studentPostalAddress)){echo $studentPostalAddress;}?>">
+                                <input type="text" class="form-control" id="studentPostalAddress" name="studentPostalAddress" autocomplete="off" value="<?php if(isset($studentPostalAddress)){echo $studentPostalAddress;}?>" required>
                               </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                 <label for="studentHouseNum">HOUSE NUMBER</label>
-                                <input type="text" class="form-control" id="studentHouseNum" name="studentHouseNum" autocomplete="off" value="<?php if(isset($studentHouseNum)){echo $studentHouseNum;}?>">
+                                <input type="text" class="form-control" id="studentHouseNum" name="studentHouseNum" autocomplete="off" value="<?php if(isset($studentHouseNum)){echo $studentHouseNum;}?>" required>
                               </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ include("header.php");
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="StudentHouseLoc">LOCATION OF HOUSE</label>
-                                 <textarea rows="4" class="form-control" id="StudentHouseLoc" name="StudentHouseLoc"><?php if(isset($StudentHouseLoc)){echo $StudentHouseLoc;}?></textarea>
+                                 <textarea rows="4" class="form-control" id="StudentHouseLoc" name="StudentHouseLoc" required><?php if(isset($StudentHouseLoc)){echo $StudentHouseLoc;}?></textarea>
                               </div>
                             </div>
                           </div><br>
@@ -124,6 +124,7 @@ include("header.php");
 <?php include("footer.php");?>
  <script>  
       $(document).ready(function(){
+        $('#insert_form').parsley();
         // for date time picker
         $(function() {
             $('[data-toggle="datepicker"]').datepicker({

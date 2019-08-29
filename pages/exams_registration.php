@@ -26,23 +26,46 @@ require_once("Classes/ExamCenterSetup.php");
                     <thead>
                         <tr>
                             <th>Exams Center</th>
+                            <th>Exams Center Region</th>
+                            <th>Date Registered</th>
                             <th>Registered Module</th>
-                            <th></th>
+                            <th>Subject </th>
+                            <th>Scores</th>
                         </tr>
                     </thead>
                     <tbody>
                       <?php
-                          $registeredExams = $objExamsRegister->get_student_registered(); 
-                          foreach ($registeredExams as $exam) {
-                              echo "
-                                  <tr>
-                                    <td>".$exam['center_name']."</td>
-                                    <td>".$exam['module_name']."</td>
-                                    <td>
-                                      <input type='button' name='view' value='Check Results' id='".trim($exam["exam_register_id"])."' class='btn btn-info btn-xs checkResults' />
-                                    </td>
-                                  </tr>
-                                ";
+                          
+                          $registeredExams = $objExamsRegister->get_applicants_registered(); 
+                          foreach ($registeredExams as $examDetails) {
+                            // variable for subject score array filter
+                            $subjectScoreHolder='';
+                            $subjectOnlyHolder='';
+                            // print_r($examDetails);
+                            $decodeSubject = json_decode($examDetails['subject_name'],true);
+                            $decodeScores = json_decode($examDetails['exam_score'],true);
+                            for ($i=0; $i < sizeof($decodeSubject) ; $i++) { 
+                              $subjectOnlyHolder .= "<strong>".$decodeSubject[$i]."</strong><hr>";
+                              
+                              if (!empty($decodeScores[$i+1])) {
+                                $subjectScoreHolder .="<strong style='color:#F33155'>". $decodeScores[$i+1]." % </strong><hr>";
+                              }
+                              else{
+                                 $subjectScoreHolder .="<strong style='color:#F33155'>0 %<hr>";
+                              }
+                              
+                            }
+                            echo "
+                                <tr>
+                                  <td>".$examDetails['exam_center_name']."</td>
+                                  <td>".$examDetails['exam_center_region']."</td>
+                                  <td>".$examDetails['date_registered']."</td>
+                                  <td>".$examDetails['center_exam_part']."</td>
+                                  <td>".$subjectOnlyHolder."</td>
+                                  <td>".$subjectScoreHolder."</td>
+
+                                </tr>
+                              ";
                             }
                          ?>
                     </tbody>
@@ -57,7 +80,7 @@ require_once("Classes/ExamCenterSetup.php");
 <!-- /.row -->
 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
@@ -150,23 +173,24 @@ require_once("Classes/ExamCenterSetup.php");
           e.preventDefault();
           if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
                   $.ajax({
-                  url:"Script/examsRegister.php",
+                  url:"Script/examRegister.php",
                   method:"POST",
                   data:$("#insert_form").serialize(),
                   beforeSend:function(){  
                       $('#save_btn').text("Please wait ...").attr('disabled',true);  
                  },
-                  success:function(data){  
-                    alert("Exams registered successfully!!!");
-
-                       $("#myModal").modal("hide");
-                       $("#insert_form")[0].reset();
-                       if (data == "success") {
-                        window.reload();
-                       }
-                       else if(data == "error"){
-                        
-                       }
+                  success:function(data){ 
+                    
+                     $("#myModal").modal("hide");
+                     $("#insert_form")[0].reset();
+                     if (data == "success") {
+                      alert("Exams registered successfully!!!");
+                      toastr.success(' Successfull');
+                      window.reload();
+                     }
+                     else if(data == "error"){
+                      toastr.error('There was an error');
+                     }
                   } 
 
                   });
@@ -180,10 +204,11 @@ require_once("Classes/ExamCenterSetup.php");
            let mode= "updateModal"; 
            let data_id = $(this).attr("id");  
            $.ajax({  
-                url:"Script/examsRegister.php",  
+                url:"Script/examRegister.php",  
                 method:"POST",  
                 data:{data_id:data_id,mode:mode},  
                 success:function(data){
+                    toastr.success(' Successfull');
                      let jsonObj = JSON.parse(data);  
                      // changing modal title
                     $("#subject").html("UPDATE COURSE");
@@ -201,25 +226,6 @@ require_once("Classes/ExamCenterSetup.php");
           });
 
       
-// for delete
-        $('table').on('click', '.del_data', function(){
-           if (confirm("ARE YOU SURE YOU WANT TO PROCEED?")) {
-                 let mode= "delete"; 
-                 let data_id = $(this).attr("id");  
-                 $.ajax({  
-                      url:"Script/examsRegister.php",  
-                      method:"POST",  
-                      data:{data_id:data_id,mode:mode},  
-                      success:function(data){
-                          window.reload();
-                      }  
-                     }); 
-
-               }else{
-                return false;
-              }  
-          });
-
   // get module details on select of exam center
   
   $("#centerId").change(function(){
@@ -231,11 +237,12 @@ require_once("Classes/ExamCenterSetup.php");
             method:"POST",  
             data:{centerId:centerId,mode:mode},  
             success:function(data){
+                // toastr.success(' Successfull');
                 let jsonObj = JSON.parse(data);  
                  // changing modal title
                  for (var i = 0; i < jsonObj.length; i++) {
                    
-                   $('#moduleId').append('<option id="'+jsonObj[i].subject_name+'" class="moduleSubjectList" value="'+jsonObj[i].subject_id+'">'+jsonObj[i].center_exam_part+'</option>');
+                   $('#moduleId').append('<option id="'+jsonObj[i].subject_name+'" class="moduleSubjectList" value="'+jsonObj[i].module_id+'">'+jsonObj[i].center_exam_part+'</option>');
                  }
                  
               }  

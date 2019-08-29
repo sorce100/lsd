@@ -82,12 +82,8 @@
 </html>
 <br><br>
 <div class="clearfix"></div>
-<footer>
-  <div class="container-fluid">
-    <center>
-      <p class="copyright">POWERED BY <a href="http://theprismoid.com/" target="_blank">THE PRISMOIDAL COMPANY LIMITED</a> &copy; <?php echo date('Y'); ?>  All Rights Reserved.</p>
-    </center>
-  </div>
+<footer class="footer text-center">
+  POWERED BY <a href="http://theprismoid.com/" target="_blank">PRISMOIDAL COMPANY LIMITED</a> &copy; <?php echo date('Y'); ?>  All Rights Reserved.
 </footer>
  <?php include("footer.php"); ?>
 <script>

@@ -43,23 +43,14 @@
 								     
 								 }else{die();}
 						break;
-						// geting details of a member with id
-						case 'updateModal':
-							if(isset($_POST["data_id"])){
-								 $objExamsRegister = new ExamsRegister;  
-							      $objExamsRegister->set_id($objExamsRegister->CleanData($_POST["data_id"]));
-							      $pages_details = $objExamsRegister->get_pages_by_id();
-							      print_r($pages_details);  
-							 }else{die();}
-						break;
 						// get all details of applicant exams names and event register
-
-						case 'getExamsRegisteredMembers':
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+						case 'getExamsRegisteredApplicants':
 							if(isset($_POST["examcenterId"])){
-								 $objExamsRegister = new ExamsRegister;  
-							      $objExamsRegister->set_id($objExamsRegister->CleanData($_POST["data_id"]));
-							      $pages_details = $objExamsRegister->get_pages_by_id();
-							      print_r($pages_details);  
+								  $objExamsRegister = new ExamsRegister;  
+							      $objExamsRegister->set_examCenterId($objExamsRegister->CleanData($_POST["examcenterId"]));
+							      $details = $objExamsRegister->get_all_reg_applicants();
+							      print_r($details);  
 							 }else{die();}
 						break;
 						case 'insertScore':
@@ -67,7 +58,7 @@
 							//make an associative array for exam name and score percentage
 
 							$objExamsRegister->set_examScore($objExamsRegister->CleanData($_POST["examScoreValue"]));
-							$objExamsRegister->set_examScoreName($objExamsRegister->CleanData($_POST["examName"]));
+							$objExamsRegister->set_examNameIndex($objExamsRegister->CleanData($_POST["examNameIndex"]));
 							$objExamsRegister->set_id($objExamsRegister->CleanData($_POST["examRegid"]));
 
 							if ($objExamsRegister->insert_exam_score()) {
