@@ -257,8 +257,9 @@
                       window.location.replace("pages/dashboard.php");
                      }
                      else if(data == "error"){
-                      toastr.error('There was an error');
+                      toastr.error('Username or Password Incorrect !');
                       $('#sigin_Form')[0].reset();
+                      $('#login').text("LOGIN").prop('disabled',false);
                       $('#signInModal').modal('hide');
                      }
                      else if ((data !="success") || (data !="error")) {

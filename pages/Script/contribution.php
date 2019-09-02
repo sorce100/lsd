@@ -70,6 +70,7 @@
 									 		$objUserBalance->set_pay_amount($objUserBalance->CleanData($_POST["contributionAmount"]));
 									 		$objUserBalance->set_balance(trim($getBalance["current_balance"]) - trim($_POST["contributionAmount"]));
 											$objUserBalance->set_member_id($_SESSION['member_id']);
+											$objUserBalance->set_paymentContributionId($objUserBalance->CleanData($_POST["contribution_id"]));
 
 									  		if ($objUserBalance->wallet_save()) {
 									  			// now send to the contribution register table

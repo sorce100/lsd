@@ -9,6 +9,7 @@
 		private $recordHide = "NO";
 		private $table = 'user_payment';
 		private $userId;
+		
 
 		function set_id($id) { $this->id = $id; }
 		function get_id() { return $this->id; }
@@ -22,6 +23,7 @@
 		function set_userId($userId) { $this->userId = $userId; }
 		function get_userId() { return $this->userId; }
 		function set_recordHide($recordHide) { $this->recordHide = $recordHide; }
+		
 		// construct for constuct and initializing the database object
 		public function __construct(){
 			require_once("db/db.php");
@@ -91,7 +93,12 @@
 
 		// get all records
 			function get_user_payments(){
-				$sql="SELECT * FROM $this->table WHERE division=:division AND record_hide=:recordHide ORDER BY user_payment_id DESC";
+				$sql="SELECT up.user_payment_id,up.surveyor_type,up.payment_purpose,up.payment_amount,up.division,up.record_hide,wh.purpose 
+				FROM $this->table AS up
+				LEFT JOIN wallet_history as wh
+				ON  up.user_payment_id= wh.payment_contribution_id
+				WHERE up.division=:division AND up.record_hide=:recordHide 
+				ORDER BY up.user_payment_id DESC";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":division",$_SESSION['division']);
 				$stmt->bindParam(":recordHide",$this->recordHide);

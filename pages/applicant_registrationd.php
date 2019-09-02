@@ -41,7 +41,7 @@
                                       $appId = trim($applicant['new_application_id']);
                                       // $fullName = $objEmailSend->recordHide;
                                       echo "<td>".$objEmailSend->get_student_fullName($student_id)."</td>";
-                                      echo "<td><input type='button' name='".$student_id."' value='VIEW DETAILS' id='".$appId."' class='btn btn-info btn-xs view_app_details' /></td>";
+                                      echo "<td><button type='button' name='".$student_id."' value='VIEW DETAILS' id='".$appId."' class='btn btn-info btn-xs view_app_details'>MAKE DECLARATION <i class='fa fa-check-square-o'></i></button></td>";
                                   }
                                 }
                              ?>
@@ -66,39 +66,58 @@
       </div>
       <div class="modal-body" id="bg">
         <form id="insert_form"> 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="table-responsive">
-                    <table class="table table-hover">
-                      <tbody>
-                        <tr>
-                          <td width="30%"><b>APPLICANT START DATE</b></td>
-                          <td width="30%" id="startDate"></td>
-                        </tr>
-                        <tr>
-                          <td><b>COLLEGE DECLARATION DATE</b></td>
-                          <td id="colDeclareDate"></td>
-                        </tr>
-                        <tr>
-                          <td><b>EMPLOYER DECLARATION DATE</b></td>
-                          <td id="empDeclareDate"></td>
-                        </tr>
-                        <tr>
-                          <td><b>APPLICANT NOTE</b></td>
-                          <td><textarea class="form-control" rows="8" id="memberNote" readonly></textarea></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+            <div class="row">
+              <div class="col-md-4">
+                  <label for="title">APPLICANT START DATE</label>
               </div>
+              <div class="col-md-8">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="startDate" val="" readonly>
+                  </div>
+               </div>
+            </div>
+            <!--  -->
+            <div class="row">
+              <div class="col-md-4">
+                  <label for="title">COLLEGE DECLARATION DATE</label>
+              </div>
+              <div class="col-md-8">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="colDeclareDate" val="" readonly>
+                  </div>
+               </div>
+            </div>
+            <!--  -->
+            <div class="row">
+              <div class="col-md-4">
+                  <label for="title">EMPLOYER DECLARATION DATE</label>
+              </div>
+              <div class="col-md-8">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="empDeclareDate" val="" readonly>
+                  </div>
+               </div>
+            </div>
+            <!--  -->
+            <div class="row">
+              <div class="col-md-4">
+                  <label for="title">APPLICANT NOTE</label>
+              </div>
+              <div class="col-md-8">
+                  <div class="form-group">
+                     <textarea class="form-control" rows="8" id="memberNote" readonly></textarea>
+                  </div>
+               </div>
+            </div>
+
+
              <!-- for inserting the page id -->
               <input type="hidden" name="data_id" id="data_id" value="">
               <input type="hidden" name="student_id" id="student_id" value="">
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="proposerDeclare">
             <div class="well modal-footer" id="bg">
-                <input type="submit" id="save_btn" class="btn btn-success btn-block" name="submit" value="CONFIRM APPLICANT" />
+                <button type="submit" id="save_btn" class="btn btn-info btn-block" name="submit" >DECLARE APPLICANT <i class="fa fa-save"></i></button>
             </div>        
         </form>
       </div>
@@ -134,9 +153,10 @@
                 method:"POST",
                 data:$("#insert_form").serialize(),
                 beforeSend:function(){  
-                          $('#save_btn').val("Please wait ...");  
+                          $('#save_btn').text("Please wait ...").prop('disabled',true);  
                      },
                 success:function(data){
+                      toastr.success(' Successfull');
                       alert(data);  
                      $("#myModal").modal("hide");
                      $("#insert_form")[0].reset();
@@ -161,9 +181,9 @@
                 data:{student_id:studentId,data_id:data_id,mode:mode},  
                 success:function(data){
                     var jsonObj = JSON.parse(data);  
-                    $("#startDate").html(jsonObj["application_startDate"]);
-                    $("#colDeclareDate").html(jsonObj["col_declare_date"]);
-                    $("#empDeclareDate").html(jsonObj["emp_declare_date"]);
+                    $("#startDate").val(jsonObj["application_startDate"]);
+                    $("#colDeclareDate").val(jsonObj["col_declare_date"]);
+                    $("#empDeclareDate").val(jsonObj["emp_declare_date"]);
                     $("#memberNote").val(jsonObj["member_declare_note"]);
                     $("#data_id").val(data_id);
                     $("#student_id").val(studentId);

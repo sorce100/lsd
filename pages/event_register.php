@@ -261,7 +261,7 @@
                 data:{data_id:data_id,mode:mode},  
                 success:function(data){
                   if (data != null) {
-                      window.location.replace("ticket_generator.php");
+                    window.open("ticket_generator.php", '_blank');
                   }
                 }
 

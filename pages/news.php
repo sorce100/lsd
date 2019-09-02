@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <?php 
                     $objNews = new News;
-                    $allNews = $objNews->get_news_limit();
+                    $allNews = $objNews->get_news_list();
 
                     foreach ($allNews as $news) {
                           $newsId=trim($news['news_id']);

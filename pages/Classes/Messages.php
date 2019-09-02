@@ -126,7 +126,11 @@
 
 		// get user
 			function get_messages_by_id(){
-				$sql="SELECT * FROM $this->table WHERE message_id=:messageId";
+				$sql="SELECT m.message_sender,m.message_subject,m.message_content,m.date_done,u.user_id,u.member_id 
+				FROM $this->table AS m
+				LEFT JOIN users AS u
+				ON u.user_id = m.message_sender
+				WHERE m.message_id=:messageId";
 				$stmt = $this->dbConn->prepare($sql);
 				$stmt->bindParam(":messageId",$this->id);
 				if ($stmt->execute()) {

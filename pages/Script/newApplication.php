@@ -101,18 +101,30 @@
 										if ($objNewApplication->insert_A()) {
 											// send emails to the college and empoyer emails given
 											$objEmailSend = new EmailSend;
+											// grab applicant sending email name
+											$applicantName = $objEmailSend->get_student_fullName($_SESSION['student_id']);
 											// send to college
-											$objEmailSend->send_application_mail("ghislsd.com/pages/applicant_registrationb.php?data=$application_code",
-																					"NEW GhIS MEMBER REGISTRATION DECLARATION",
-																					$_POST["collegeEmail"],
-																					$_SESSION['student_id']
-																				);
+											// 1 receiveremail,2 emailsubject, 3 email body
+											$objEmailSend->send_email(
+												$_POST["collegeEmail"],
+												"NEW GhIS LSD APPLICANT DECLARATION",
+												"Hello,<br><br>
+												Please Accept and Make declartion for New Ghis LSD applicant : 
+												<strong>$applicantName</strong> in order for the applicant to be accepted to be a member.<br><br> 
+												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationb.php?data=$application_code</strong><br><br>
+												Thank you for your cooperation."
+											);
+
 											// send to trainer of employer
-											$objEmailSend->send_application_mail("ghislsd.com/pages/applicant_registrationc.php?data=$application_code",
-																					"NEW GhIS MEMBER REGISTRATION DECLARATION",
-																					$_POST["employerEmail"],
-																					$_SESSION['student_id']
-																				);
+											$objEmailSend->send_email(
+												$_POST["employerEmail"],
+												"NEW GhIS LSD APPLICANT DECLARATION",
+												"Hello,<br><br>
+												Please Accept and Make declartion for New Ghis LSD applicant : 
+												<strong>$applicantName</strong> in order for the applicant to be accepted to be a member.<br><br> 
+												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationc.php?data=$application_code</strong><br><br>
+												Thank you for your cooperation."
+											);
 
 											echo "Application saved successfully.";
 										}

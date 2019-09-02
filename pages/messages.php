@@ -45,7 +45,6 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th></th>
                                             <th>SUBJECT</th>
                                             <th>DATETIME RECEIVED</th>
                                             <th>STATUS</th>
@@ -66,7 +65,7 @@
                                                   // compare with session id
                                                   if ($decodedReceivers[$i] == $_SESSION['user_id']) {
                                                       echo "
-                                                          <tr class='row'>
+                                                          <tr>
                                                             <td>".$sentMessage["message_subject"]."</td>
                                                             <td>".$sentMessage["date_done"]."</td>
                                                             <td>".$sentMessage["message_status"]."</td>
@@ -101,7 +100,6 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th></th>
                                             <th>SUBJECT</th>
                                             <th>DATETIME SENT</th>
                                             <th></th>
@@ -113,7 +111,7 @@
                                             $sentMessages = $objSchoolMessages->get_sent_messages(); 
                                             foreach ($sentMessages as $sentMessage) {                                
                                                     echo "
-                                                        <tr class='row'>
+                                                        <tr>
                                                           <td>".$sentMessage["message_subject"]."</td>
                                                           <td>".$sentMessage["date_done"]."</td>
                                                           <td>
@@ -183,7 +181,7 @@
              </div>
            </div>
            <!-- second part -->
-           <div class="col-md-7">
+           <div class="col-md-7" style="border-left: 1px solid #2F323E;">
              <div class="row">
               <div class="col-md-12">
                   <div class="form-group">
@@ -212,124 +210,195 @@
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+
+
+<!-- Messagge Reader modal -->
+<div class="modal fade" id="msgReaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" id="bg">
+         <button type="button" class="close" data-dismiss="modal"  aria-label="Close" onclick="myFunction()"><span aria-hidden="true" class="btn-default btnClose">&times; CLOSE</span></button>
+        <h4 class="modal-title"><b id="subject">Message Reader</b></h4>
+      </div>
+      <div class="modal-body" id="bg">
+        <form id="insert_form" method="POST"> 
+            <div class="row">
+                <div class="col-md-2">
+                  <label for="title">SENDER</label>
+                </div>
+              <div class="col-md-7">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="messageReaderSender" readonly>
+                </div>
+               </div>
+               <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="messageReaderDate" readonly>
+                </div>
+               </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-2">
+                  <label for="title">SUBJECT</label>
+              </div>
+              <div class="col-md-10">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="messageReaderSubject" readonly>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                  <label for="title">CONTENT</label>
+              </div>
+               <div class="col-md-10">
+                  <div class="form-group">
+                      
+                      <textarea class="form-control" id="messageReaderContent" rows="16" readonly></textarea>
+                  </div>
+               </div>
+             </div>
+
+           <!-- for insert query -->
+          <input type="hidden" name="mode" id="mode" value="insert">
+          <div class=" modal-footer" id="bg">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+          </div>        
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <?php include("footer.php");?>
 
 <script>
-   // checkboxes select all
-    $('#select_all').change(function() {
-        var checkboxes = $(this).closest('form').find(':checkbox');
-        checkboxes.prop('checked', $(this).is(':checked'));
-    });
+  $(document).ready(function(){
 
-// for reset modal when close
-    $('#myModal').on('hidden.bs.modal', function () {
-        $("#subject").html("ADD NEW PAGE");
+      $('#insert_form').parsley();
+
+
+      $('#myModal').on('hidden.bs.modal', function () {
         $("#insert_form")[0].reset();
-      })
-
-    // for search
-    $("#searchInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#resultsDisplay tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+        $('#insert_form').parsley().reset();
       });
 
-// query using the group id from the users table
-$("#messageGroup").change(function(){
-    var group = $(this).val();
-    switch (group){
-      case 'all':
-        var mode = "get_all_members";
-            $.ajax({
-            url:"Script/users.php",
-            method:"POST",
-            data:{mode:mode},
-            beforeSend:function(){  
-                  $('#memberList').html('');
-                 },
-            success:function(data){
-                  // display the list now
-                  var jsonObj = JSON.parse(data);
-                  for (var i = 0; i < jsonObj.length; ++i) {
-                    $('#memberList').append('<tr><td></td><td><input type="checkbox" class="input-md" name="memberList[]" id="memberList[]" value="'+jsonObj[i].user_id+'"></td><td>'+jsonObj[i].member_id+'</td><td>'+jsonObj[i].account_type+'</td></tr>');
-                  }
-            } 
+      // checkboxes select all
+      $('#select_all').change(function() {
+          var checkboxes = $(this).closest('form').find(':checkbox');
+          checkboxes.prop('checked', $(this).is(':checked'));
+      });
 
+      // for reset modal when close
+      $('#myModal').on('hidden.bs.modal', function () {
+          $("#subject").html("ADD NEW PAGE");
+          $("#insert_form")[0].reset();
+        })
+
+      // for search
+      $("#searchInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#resultsDisplay tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
           });
-      break;
-      case 'group':
-          var mode = "get_group_members";
-            $.ajax({
-            url:"Script/users.php",
-            method:"POST",
-            data:{mode:mode},
-            beforeSend:function(){  
-                  $('#memberList').html('');
-                 },
-            success:function(data){
-                  // display the list now
-                  var jsonObj = JSON.parse(data);
-                  for (var i = 0; i < jsonObj.length; ++i) {
-                    $('#memberList').append('<tr><td></td><td><input type="checkbox" class="input-md" name="memberList[]" id="memberList" value="'+jsonObj[i].user_id+'"></td><td>'+jsonObj[i].member_id+'</td><td>'+jsonObj[i].account_type+'</td></tr>');
-                  }
-            } 
+        });
 
-          });
-      break;
-    }
+      // query using the group id from the users table
+      $("#messageGroup").change(function(){
+          var group = $(this).val();
+          switch (group){
+            case 'all':
+              var mode = "get_all_members";
+                  $.ajax({
+                  url:"Script/users.php",
+                  method:"POST",
+                  data:{mode:mode},
+                  beforeSend:function(){  
+                        $('#memberList').html('');
+                       },
+                  success:function(data){
+                        // display the list now
+                        var jsonObj = JSON.parse(data);
+                        for (var i = 0; i < jsonObj.length; ++i) {
+                          $('#memberList').append('<tr><td></td><td><input type="checkbox" class="input-md" name="memberList[]" id="memberList[]" value="'+jsonObj[i].user_id+'"></td><td>'+jsonObj[i].member_id+'</td><td>'+jsonObj[i].account_type+'</td></tr>');
+                        }
+                  } 
 
-  });
+                });
+            break;
+            case 'group':
+                var mode = "get_group_members";
+                  $.ajax({
+                  url:"Script/users.php",
+                  method:"POST",
+                  data:{mode:mode},
+                  beforeSend:function(){  
+                        $('#memberList').html('');
+                       },
+                  success:function(data){
+                        // display the list now
+                        var jsonObj = JSON.parse(data);
+                        for (var i = 0; i < jsonObj.length; ++i) {
+                          $('#memberList').append('<tr><td></td><td><input type="checkbox" class="input-md" name="memberList[]" id="memberList" value="'+jsonObj[i].user_id+'"></td><td>'+jsonObj[i].member_id+'</td><td>'+jsonObj[i].account_type+'</td></tr>');
+                        }
+                  } 
 
-// for inserting the messages into database
-$("#insert_form").on("submit",function(e){
-    e.preventDefault();
-          $.ajax({
-          url:"Script/message.php",
-          method:"POST",
-          data:$("#insert_form").serialize(),
-          beforeSend:function(){  
-                    $('#save_btn').text("Please wait ...");  
-               },
-          success:function(data){  
-               $("#myModal").modal("hide");
-               $("#insert_form")[0].reset();
-               if (data == "success") {
+                });
+            break;
+          }
 
-                window.location.replace("messages.php");
-               }
-               else if(data == "error"){
-                
-               }
-          } 
+        });
 
-          });  
-  });
+      // for inserting the messages into database
+      $("#insert_form").on("submit",function(e){
+          e.preventDefault();
+                $.ajax({
+                url:"Script/message.php",
+                method:"POST",
+                data:$("#insert_form").serialize(),
+                beforeSend:function(){  
+                          $('#save_btn').text("Please wait ...");  
+                     },
+                success:function(data){  
+                     $("#myModal").modal("hide");
+                     $("#insert_form")[0].reset();
+                     if (data == "success") {
+                        toastr.success(' Successfull');
+                        location.reload();
+                     }
+                     else if(data == "error"){
+                      
+                     }
+                } 
 
-// read messages
-$('.read_message').click(function(){ 
-   var mode= "readMessage"; 
-   var data_id = $(this).attr("id");  
-   $.ajax({  
-        url:"Script/message.php",  
-        method:"POST",  
-        data:{data_id:data_id,mode:mode},  
-        success:function(data){
-            // alert(data);
-            var jsonObj = JSON.parse(data);  
-             // changing modal title
-            $("#subject").html("READ MESSAGES");
-            $("#messageGroup").val(jsonObj.message_group).attr('disabled', 'true');
-            $("#messageSubject").val(jsonObj.message_subject).attr('readonly', 'true');
-            $("#messageContent").val(jsonObj.message_content).attr('readonly', 'true');
-            $("#data_id").val(jsonObj.message_id);
-            $("#save_btn").val("CLOSE");
-            $("#mode").val("update");
-            $("#myModal").modal("show");
+                });  
+        });
 
-          }  
-       });
+      // read messages
+      $('.read_message').click(function(){ 
+         var mode= "readMessage"; 
+         var data_id = $(this).attr("id");  
+         $.ajax({  
+              url:"Script/message.php",  
+              method:"POST",  
+              data:{data_id:data_id,mode:mode},  
+              success:function(data){
+                  // console.log(data);
+                  var jsonObj = JSON.parse(data);  
+                   // changing modal title
+                  $("#subject").html("READ MESSAGES");
+                  $("#messageReaderSender").val(jsonObj.member_id);
+                  $("#messageReaderSubject").val(jsonObj.message_subject);
+                  $("#messageReaderContent").val(jsonObj.message_content);
+                  $("#messageReaderDate").val(jsonObj.date_done);
+                  $("#msgReaderModal").modal("show");
 
-});  
+                }  
+             });
 
+      });  
+});
 </script>

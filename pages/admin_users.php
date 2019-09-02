@@ -252,7 +252,7 @@
                                       $objMembers = new Members;
                                       $members = $objMembers->get_members(); 
                                       foreach ($members as $member) {
-                                        if (empty($member['user_id'])) {
+                                        if (empty($member['user_id']) && !empty($member['professional_number'])) {
                                           echo '<option value='.$member["professional_number"].'|'.$member["members_id"].'|'.$member["personal_contact"].'|'.$member["first_name"].'_'.$member["last_name"].'>('.$member["professional_number"].') - '.$member["first_name"].' '.$member["last_name"] .'</option>';
                                         }
                                       }
@@ -443,7 +443,7 @@
                     $('#save_btn').text("Please wait ...");  
                  },
                 success:function(data){  
-                  console.log(data);
+                  // console.log(data);
                   $("#myModal").modal("hide");
                    $("#users_form")[0].reset();
                    if (data == "success") {

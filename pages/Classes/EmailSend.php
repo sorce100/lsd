@@ -1,16 +1,10 @@
-<?php 
-	class EmailSend{
-		// setting and getting variables
+<?php
+	Class EmailSend{
 		private $id;
 		private $dbConn;
-		private $recordHide = "NO";
+		private $responseStatus;
 		private $table = "email_sent";
 
-		function set_id($id) { $this->id = $id; }
-		function get_id() { return $this->id; }
-		function set_divisionFullname($divisionFullname) { $this->divisionFullname = $divisionFullname; }
-		function get_madeby() { return $this->madeby; }
-		function set_recordHide($recordHide) { $this->recordHide = $recordHide; }
 
 		public function __construct(){
 			require_once("db/db.php");
@@ -18,46 +12,60 @@
 			$this->dbConn = $db->connect();
 		}
 
-		// clean data for data input
-		public function CleanData($data){
-			$data = trim($data);
-			$data=htmlentities($data,ENT_QUOTES, 'UTF-8');
-			$data = filter_var($data,FILTER_SANITIZE_SPECIAL_CHARS);
-			return $data;
-			}
 
-		function send_application_mail($url,$subject,$toEmail,$fullname){
+		// $mail->SMTPDebug = 1;                               // Enable verbose debug output
+
+		public function send_email($receiverEmail,$emailSubject,$emailBody){
+
 			try{
-				// send email to client
-				$toEmail = trim($toEmail);
-				$subject = trim(strtoupper($subject));
-				$body = '<h2>Hello Sir/Madam,</h2>
-						<h4>Please visit '.$url.' to access and make declaration for<b>'.$this->get_student_fullName($fullname).'</b> <br>
-						for application completion of new membership of Ghana Institute of Surveyors</h2>';
-				// email header
-						$headers = "MIME-Version:1.0"."\r\n";
-						$headers .= "Content-Type:text/html;charset=UTF-8"."\r\n";
-						$headers .= "X-Priority: 1\r\n";
-						$headers .= "X-Mailer: PHP/" . phpversion() ."\r\n";
-				// Additional headers
-						$headers .= "From: ghislsd.com <support@ghislsd.com>"."\r\n";	
-						// sending the mail
-						$response = mail($toEmail,$subject,$body,$headers);
+				require_once 'phpmailer/PHPMailerAutoload.php';
+				require_once 'phpmailer/credential.php';
+				$mail = new PHPMailer;
 
-						if ($response) {
-							$sql = "INSERT INTO $this->table (receiver_email,delivery_response,user_id) VALUES (:receiverEmail,:deliveryResponse,:userId)";
-							$stmt = $this->dbConn->prepare($sql);
-							$stmt->bindParam(":receiverEmail",$toEmail);
-							$stmt->bindParam(":deliveryResponse",$response);
-							$stmt->bindParam(":userId",$_SESSION['user_id']);
-							$stmt->execute();
-						}else{
-							die();
-						}
+				$mail->isSMTP();                                      // Set mailer to use SMTP
+				$mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+				$mail->SMTPAuth = true;                               // Enable SMTP authentication
+				$mail->Username = EMAIL;                 // SMTP username
+				$mail->Password = PASSWD;                           // SMTP password
+				$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+				$mail->Port = 465;                                    // TCP port to connect to
+				// the name of the AccountName<Accountemail.com>
+				$mail->setFrom(EMAIL, 'GhiS LSD');
+				$mail->addAddress($receiverEmail);     // Add a recipient
+				$mail->addReplyTo(EMAIL);
+				$mail->isHTML(true);                                  // Set email format to HTML
+
+				$mail->Subject = $emailSubject;
+
+				$mail->Body    = $emailBody;
+				// alternative body when user does not read html like when example google skips loding for minimal loading time
+				// $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+				if(!$mail->send()) {
+					$this->responseStatus = $mail->ErrorInfo;
+				    
+				    $this->saveDetails($receiverEmail,$emailSubject,$emailBody,$this->responseStatus);
+				} else {
+					$this->responseStatus = 'success';
+				    $this->saveDetails($receiverEmail,$emailSubject,$emailBody,$this->responseStatus);
+				}
 
 			}catch(PDOException $e){
-				echo '{"error":{"text": '.$e->getMessage().'}';
+				$this->responseStatus = $e->getMessage();
+				$this->saveDetails($receiverEmail,$emailSubject,$emailBody,$this->responseStatus);
 			}
+		}
+
+
+		// save email details
+		private function saveDetails($receiverEmail,$emailSubject,$emailBody,$response){
+			$sql = "INSERT INTO $this->table (receiver_email,email_subject,email_body,delivery_response,user_id) VALUES (:receiverEmail,:emailSubject,:emailBody,:deliveryResponse,:userId)";
+			$stmt = $this->dbConn->prepare($sql);
+			$stmt->bindParam(":receiverEmail",$receiverEmail);
+			$stmt->bindParam(":emailSubject",$emailSubject);
+			$stmt->bindParam(":emailBody",$emailBody);
+			$stmt->bindParam(":deliveryResponse",$response);
+			$stmt->bindParam(":userId",$_SESSION['user_id']);
+			$stmt->execute();
 		}
 
 
@@ -74,6 +82,7 @@
 			}
 		}
 
+
 	}
 
- ?>
+?>

@@ -82,7 +82,7 @@
 				return false;
 				}
 
-			}
+		}
 
 		// for update
 			function update(){
@@ -145,8 +145,8 @@
 				}
 
 			// get news but limit
-				function get_news_limit(){
-				$sql="SELECT * FROM $this->table ORDER BY news_id DESC LIMIT 5";
+				function get_news_list(){
+				$sql="SELECT * FROM $this->table ORDER BY news_id DESC";
 				$stmt = $this->dbConn->prepare($sql);
 				if ($stmt->execute()) {
 					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -158,8 +158,8 @@
 
 				}
 			// get news but limit by 3
-				function get_news_limit_by3(){
-				$sql="SELECT * FROM $this->table ORDER BY news_id DESC LIMIT 3";
+				function get_news_limit_5(){
+				$sql="SELECT * FROM $this->table ORDER BY news_id DESC LIMIT 5";
 				$stmt = $this->dbConn->prepare($sql);
 				if ($stmt->execute()) {
 					$results= $stmt->fetchAll(PDO::FETCH_ASSOC);

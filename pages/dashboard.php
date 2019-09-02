@@ -88,7 +88,7 @@ include("Classes/Events.php");
           <div class="col-md-12">
               <?php require_once("Classes/News.php");
                   $objNews = new News;
-                  $allNews = $objNews->get_news_limit();
+                  $allNews = $objNews->get_news_limit_5();
 
                   foreach ($allNews as $news) {
                         $newsId=trim($news['news_id']);

@@ -198,6 +198,7 @@ require_once("Classes/Division.php");
         <h4 class="modal-title"><b id="subject">LIBRARY CONTENT</b></h4>
       </div>
       <div class="modal-body" id="bg">
+        <h5 class="asterick">Click on File to Read</h5>
         <div id="doc_display"></div>
       </div>
     </div><!-- /.modal-content -->
@@ -206,7 +207,7 @@ require_once("Classes/Division.php");
 
 <!-- modal for reading pdfs -->
 <div class="modal fade" id="pdfReaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" id="bg">
          <button type="button" class="close readerClose" aria-label="Close"><span aria-hidden="true" style="color: red;font-size: 25px;" class="btn-default">&times; CLOSE</span></button>
@@ -267,35 +268,35 @@ require_once("Classes/Division.php");
                       switch(jsonObj[i].library_category) {
                       case 'CPD':
                           var count = i+1;
-                          $('#cpdDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#cpdDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
                       case 'Monthy Meetings':
                           var count = i+1;
-                          $('#monthmeetingDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#monthmeetingDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
                         case 'Seminar':
                           var count = i+1;
-                          $('#seminarDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#seminarDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
                         case 'Young Surveyors Network':
                           var count = i+1;
-                          $('#ysnDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#ysnDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
                         case 'Libray':
                           var count = i+1;
-                          $('#libraryDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#libraryDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
                         case 'Publications':
                           var count = i+1;
-                          $('#publicationDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#publicationDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
                         case 'Conferences':
                           var count = i+1;
-                          $('#conferenceDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#conferenceDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
                         case 'Committee':
                           var count = i+1;
-                          $('#committeeDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-info btn-xs viewContent'/></td></tr>");
+                          $('#committeeDisplay').append("<tr><td>"+count+"</td><td>"+jsonObj[i].library_subject+"</td><td><input type ='button' name='view' value='View Content' id='"+jsonObj[i].folder_name+"' class='btn btn-danger btn-xs viewContent'/></td></tr>");
                         break;
 
                       default:
@@ -355,8 +356,8 @@ require_once("Classes/Division.php");
         pageNumIsPending = null;
 
     const scale = 1.3,
-          canvas = document.querySelector('#pdf_render'),
-          ctx = canvas.getContext('2d');
+    canvas = document.querySelector('#pdf_render'),
+    ctx = canvas.getContext('2d');
 
     // Render the page
     const renderPage = num =>{

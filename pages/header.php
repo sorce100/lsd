@@ -1,7 +1,9 @@
 <?php include_once("Classes/Check.php");
+      $objCheck = new Check;
       require_once("Classes/UserBalance.php");
       require_once("Classes/Users.php");
-      $objCheck = new Check;
+      $objUsers = new Users;
+      
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,10 +91,16 @@
                             }
                          ?>
                     </li>
-                    <li>
-                        <a class="profile-pic" href="#"> <img src="../plugins/images/avatar.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs "><?php
-                            $objUsers = new Users;
-                         echo strtoupper($objUsers->get_header_fullname($_SESSION["member_id"])); ?></b></a>
+
+                    <li class="dropdown">
+                        <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> <img src="../plugins/images/avatar.png" alt="user-img" width="36" class="img-circle"><?php echo strtoupper($objUsers->get_header_fullname($_SESSION["member_id"])); ?> <i class="fa fa-chevron-circle-down"></i> </a>
+
+                        <ul class="dropdown-menu">
+                            <!-- <li><a href="../../"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li> -->
+                            <li><a href="#" data-toggle="modal" data-target="#changePassModal" ><i  class="fa fa-exchange"></i> <span> CHANGE PASSWORD</span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="Script/log_out.php"><i class="fa fa-power-off fa-fw" style="color: red;" aria-hidden="true"> </i> LOGOUT</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -156,27 +164,107 @@
             <div class="container-fluid"><br>
                
                 <!-- /row -->
-<?php 
-    function get_times( $default = '8:00', $interval = '+30 minutes' ) {
+        <?php 
+            function get_times( $default = '8:00', $interval = '+30 minutes' ) {
 
-    $output = '';
+                $output = '';
 
-    $current = strtotime( '00:00' );
-    $end = strtotime( '23:59' );
+                $current = strtotime( '00:00' );
+                $end = strtotime( '23:59' );
 
-    while( $current <= $end ) {
-        $time = date( 'H:i', $current );
-        $sel = ( $time == $default ) ? ' selected' : '';
+                while( $current <= $end ) {
+                    $time = date( 'H:i', $current );
+                    $sel = ( $time == $default ) ? ' selected' : '';
 
-        $output .= "<option value=\"{$time}\"{$sel}>" . date( 'h : i A', $current ) .'</option>';
-        $current = strtotime( $interval, $current );
-    }
+                    $output .= "<option value=\"{$time}\"{$sel}>" . date( 'h : i A', $current ) .'</option>';
+                    $current = strtotime( $interval, $current );
+                }
 
-    return $output;
-}
-?>
-<script type="text/javascript">
-       $(document).ready(function(){
-        $('#datatable').DataTable();
-    });
-</script>
+                return $output;
+            }
+        ?>
+
+<!-- modal for changing password -->
+     <div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog ">
+            <div class="modal-content">
+              <div class="modal-header" id="bg">
+                 <button type="button" class="close" data-dismiss="modal"  aria-label="Close" onclick="myFunction()"><span aria-hidden="true" class="btn-default btnClose">&times; CLOSE</span></button>
+                <h4 class="modal-title"><b id="subject">Change Password</b></h4>
+              </div>
+              <div class="modal-body" id="bg">
+                <form id="change_password_form" method="POST"> 
+                    <!--  -->
+                  <div class="row">
+                    <div class="col-md-4"><label>New Password <span class="asterick"> *</span></label></div>
+                    <div class="col-md-8">
+                      <input type="password" class="form-control" id="newPasswd" name="newPasswd" minlength="4" autocomplete="off" placeholder="Enter New Password &hellip;" required>
+                    </div>
+                  </div>
+
+                  <br>
+                  <!--  -->
+                  <div class="row">
+                    <div class="col-md-4"><label>Retype Password <span class="asterick"> *</span></label></div>
+                    <div class="col-md-8">
+                      <input type="password" class="form-control" id="retypeNewPasswd" name="retypeNewPasswd" minlength="4" autocomplete="off" placeholder="Retype Password &hellip;" required>
+                    </div>
+                  </div>
+
+                    <br>
+                    <input type="hidden" name="mode" value="userChangePassword">
+
+                    <div class=" modal-footer" id="bg">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                      <button type="submit" class="btn btn-info" id="changePass_btn">Change Password <i class="fa fa-exchange"></i></button>
+                    </div>        
+                </form>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+    <script>
+        $(document).ready(function(){
+            $('#change_password_form').parsley();
+            // for reset modal when close
+            $('#changePassModal').on('hidden.bs.modal', function () {
+                $('#change_password_form').parsley().reset();
+                $("#change_password_form")[0].reset();
+
+                $('#changePass_btn').text("Change Password").prop('disabled',false);  
+            });
+
+            // changing password
+            $("#change_password_form").on("submit",function(e){
+                e.preventDefault();
+                $.ajax({
+                url:"Script/users.php",
+                method:"POST",
+                data:$("#change_password_form").serialize(),
+                beforeSend:function(){  
+                    $('#changePass_btn').text("Please wait ...").prop('disabled',true);  
+                 },
+                success:function(data){  
+                  // console.log(data);
+                  $("#changePassModal").modal("hide");
+                   $("#change_password_form")[0].reset();
+                   if (data == "success") {
+                    toastr.success('Password Changed Successfully');
+                    // $.ajax({
+                    //     url:"Script/log_out.php",
+                    // });
+                   window.location.href = "Script/log_out.php";
+                   }
+                   else if(data == "error"){
+                    toastr.error('Sorry, There was a problem changing your password!');
+                   }
+                } 
+
+                });  
+            });
+
+
+
+        });
+    </script>

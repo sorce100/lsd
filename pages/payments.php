@@ -27,7 +27,7 @@
               <div class="panel-heading">
                    <div class="panel-title pull-left">SUBSCRIPTIONS</div>
                   <div class="panel-title pull-right">
-                     <button id="historybtn" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span> HISTORY</button>
+                     <button id="historybtn" class="btn btn-info"><span class="fa fa-list-ol"></span> HISTORY</button>
                   </div>
                   <div class="clearfix"></div>
               </div>
@@ -53,7 +53,8 @@
                             <tbody id="resultsDisplay">
                                 <?php
                                   $objUserPayment = new UserPayment;
-                                  $payments_details = $objUserPayment->get_user_payments(); 
+                                  $payments_details = $objUserPayment->get_user_payments();
+
                                   foreach ($payments_details as $payments_detail) {
                                         // comparing to the surveyor type to display the necessary dues
                                     if (($surveyor_type["surveyor_type"]) == ($payments_detail["surveyor_type"])) {
@@ -61,13 +62,18 @@
                                               <tr>
                                                 <td>".$payments_detail["payment_purpose"]."</td>
                                                 <td>".$payments_detail["payment_amount"]."</td>
-                                                <td>
-                                                  <button type='button' id='".trim($payments_detail["user_payment_id"])."' class='btn btn-info btn-xs update_data'>MAKE PAYMENT <i class='fa fa-money'></i></button>
-                                                </td>
-                                              </tr>
-                                            ";
-                                          }
-                                      }
+                                                <td>";
+                                                if ($payments_detail['purpose'] != "DUES") {
+                                                 echo " <button type='button' id='".trim($payments_detail["user_payment_id"])."' class='btn btn-info btn-xs update_data'>MAKE SUBSCRIPTION <i class='fa fa-money'></i></button>";
+                                                }
+                                                else{
+                                                  echo "<button class='btn btn-success btn-xs' >Subscribed <i class='fa fa-check-square-o'></i></button>";
+                                                }
+
+                                                  echo "</td></tr>";
+                                                }
+                                          
+                                  }
                                  ?>
                             </tbody>
                         </table>
@@ -87,7 +93,7 @@
               <div class="panel-heading">
                    <div class="panel-title pull-left">CONTRIBUTIONS </div>
                   <div class="panel-title pull-right">
-                     <button id="contHistorybtn" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span> HISTORY</button>
+                     <button id="contHistorybtn" class="btn btn-info"><span class="fa fa-list-ol"></span> HISTORY</button>
                   </div>
                   <div class="clearfix"></div>
               </div>
@@ -166,7 +172,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                        <label for="title">AMOUNT TO PAY (₵)</label>
+                        <label for="title">AMOUNT TO PAY (GH ₵)</label>
                     </div>
                   </div>
                   <div class="col-md-8">
@@ -177,7 +183,7 @@
                  
              </div>
              <!-- for inserting the page id -->
-              <input type="hidden" name="data_id" id="data_id" value="">
+              <input type="hidden" name="paymentId" id="paymentId" value="">
              <!-- for insert query -->
             <input type="hidden" name="mode" id="mode" value="make_payment">
             <div class="well modal-footer" id="bg">
@@ -333,7 +339,7 @@ $(document).ready(function(){
                       $('#save_btn').text("Please wait ...");  
                  },
             success:function(data){  
-                 alert(data);
+                 toastr.success(' Successfully');
                  $("#myModal").modal("hide");
                  $("#insert_form")[0].reset();
                   location.reload();
@@ -360,7 +366,8 @@ $(document).ready(function(){
                   $("#subject").html("MAKE PAYMENT");
                   $("#paymentReason").val(jsonObj[0].payment_purpose);
                   $("#paymentAmount").val(jsonObj[0].payment_amount);
-                  $("#save_btn").text("MAKE CONTRIBUTION");
+                  $("#paymentId").val(data_id);
+                  $("#save_btn").text("Subscribe");
                   $("#duesModal").modal("show");
               }  
              });  
@@ -419,15 +426,18 @@ $(document).ready(function(){
                           $('#contributions_save_btn').val("Please wait ...");  
                      },
                 success:function(data){  
-                      if (data == "success") {
-                          $("#contributionModal").modal("hide");
-                          $("#contributions_form")[0].reset();
-                          location.reload();
-                         }else if(data == "insufficient_Balance"){
-                          alert("Sorry, you do not have enough credit in your wallet. Please top up");
-                          $("#contributionModal").modal("hide");
-                          $("#contributions_form")[0].reset();
-                         }
+                if (data == "success") {
+                    toastr.success(' Successfully');
+                    $("#contributionModal").modal("hide");
+                    $("#contributions_form")[0].reset();
+                    alert("Contribution Made Successfully, Thank You !!!");
+                    location.reload();
+                   }else if(data == "insufficient_Balance"){
+                    toastr.error('There was an error');
+                    alert("Sorry, you do not have enough credit in your wallet. Please top up");
+                    $("#contributionModal").modal("hide");
+                    $("#contributions_form")[0].reset();
+                   }
                 } 
 
                 });

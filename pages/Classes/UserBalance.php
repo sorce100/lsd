@@ -10,6 +10,7 @@
 		private $type;
 		private $pay_amount;
 		private $balance;
+		private $paymentContributionId;
 
 		function set_purpose($purpose) { $this->purpose = $purpose; }
 		function get_purpose() { return $this->purpose; }
@@ -24,6 +25,7 @@
 		function set_pay_amount($pay_amount) { $this->pay_amount = $pay_amount; }
 		function get_pay_amount() { return $this->pay_amount; }
 		function set_balance($balance) { $this->balance = $balance; }
+		function set_paymentContributionId($paymentContributionId) { $this->paymentContributionId = $paymentContributionId; }
 		// function get_balance() { return $this->balance; }
 
 
@@ -58,7 +60,7 @@
 
 		// saving into the wallet
 			function wallet_save(){
-					$sql="INSERT INTO $this->table (member_id,type,purpose,reason,amount_payed,balance,division) VALUES (:memberId,:type,:purpose,:reason,:amountPayed,:balance,:division)";
+					$sql="INSERT INTO $this->table (member_id,type,purpose,reason,amount_payed,balance,division,payment_contribution_id) VALUES (:memberId,:type,:purpose,:reason,:amountPayed,:balance,:division,:paymentContributionId)";
 						$stmt = $this->dbConn->prepare($sql);
 						$stmt->bindParam(":memberId",$this->member_id);
 						$stmt->bindParam(":type",$this->type);
@@ -67,6 +69,8 @@
 						$stmt->bindParam(":amountPayed",$this->pay_amount);
 						$stmt->bindParam(":balance",$this->balance);
 						$stmt->bindParam(":division",$_SESSION['division']);
+						$stmt->bindParam(":paymentContributionId",$this->paymentContributionId);
+
 						if ($stmt->execute()) {
 							$balancesql = "UPDATE members SET current_balance=:balance WHERE professional_number=:memberId";
 							$stmt = $this->dbConn->prepare($balancesql);

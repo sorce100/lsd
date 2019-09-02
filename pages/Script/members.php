@@ -26,7 +26,7 @@
 							$objMembers->set_corporateEmail($objMembers->CleanData($_POST["corporateEmail"]));
 							$objMembers->set_region($objMembers->CleanData($_POST["region"]));
 							$objMembers->set_officeLocation($objMembers->CleanData($_POST["officeLocation"]));
-							$objMembers->set_comapanyAddress($objMembers->CleanData($_POST["comapanyAddress"]));
+							$objMembers->set_comapanyAddress($objMembers->CleanData($_POST["companyAddress"]));
 							if ($objMembers->insert()) {
 									echo "success";
 
@@ -56,7 +56,7 @@
 							$objMembers->set_corporateEmail($objMembers->CleanData($_POST["corporateEmail"]));
 							$objMembers->set_region($objMembers->CleanData($_POST["region"]));
 							$objMembers->set_officeLocation($objMembers->CleanData($_POST["officeLocation"]));
-							$objMembers->set_comapanyAddress($objMembers->CleanData($_POST["comapanyAddress"]));
+							$objMembers->set_comapanyAddress($objMembers->CleanData($_POST["companyAddress"]));
 							if ($objMembers->update()) {
 									echo "success";
 
@@ -104,7 +104,7 @@
 							$objMembers->set_corporateEmail($objMembers->CleanData($_POST["corporateEmail"]));
 							$objMembers->set_region($objMembers->CleanData($_POST["region"]));
 							$objMembers->set_officeLocation($objMembers->CleanData($_POST["officeLocation"]));
-							$objMembers->set_comapanyAddress($objMembers->CleanData($_POST["comapanyAddress"]));
+							$objMembers->set_comapanyAddress($objMembers->CleanData($_POST["companyAddress"]));
 							if ($objMembers->update_profile()) {
 									echo "success";
 

@@ -9141,3 +9141,17 @@ input[type=checkbox]{
 thead{
     background: #f0f0f5;
 }
+/*new application tabs*/
+.newapptab{
+    background-color: #f4f4f3;
+    border-right: 1px solid black;
+}
+/*mulitstep */
+.form-section {
+    padding-left: 15px;
+    /*border-left: 2px solid #FF851B;*/
+    display: none;
+}
+.form-section.current {
+    display: inherit;
+}

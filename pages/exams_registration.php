@@ -51,7 +51,7 @@ require_once("Classes/ExamCenterSetup.php");
                                 $subjectScoreHolder .="<strong style='color:#F33155'>". $decodeScores[$i+1]." % </strong><hr>";
                               }
                               else{
-                                 $subjectScoreHolder .="<strong style='color:#F33155'>0 %<hr>";
+                                 $subjectScoreHolder .="<strong style='color:#F33155'>PENDING<hr>";
                               }
                               
                             }

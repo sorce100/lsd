@@ -2,7 +2,7 @@
   include("header.php"); 
 ?>
     <div class="row">
-      <div class="col-md-9 well">
+      <div class="col-md-8 well">
             <div class="page-header"><h3>GhIS LSD GENERAL NEWS</h3></div>
            <div id="newsPic_carousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -19,17 +19,17 @@
           </div>
       </div>
       <!-- <div class="col-md-1"></div> -->
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="page-header"><h3>UPCOMING EVENTS</h3></div>
         <?php
             $objEvents = new Events;
             $events = $objEvents->get_events_limit5(); 
             foreach ($events as $event) {
                 if ($event["event_type"] == "Event") {
-                  echo "<div class='row well'><a id='viewEvent' href='generealRegister.php?data=".$event["events_id"]."'>"." ".$event["events_theme"]."</a><span class='badge'> Event</span></div><br />";
+                  echo "<div class='row well'><a id='viewEvent' href='generealRegister.php?data=".$event["events_id"]."'>"." ".$event["events_theme"]."</a><br><span class='badge'> Event</span></div><br />";
                 }
                 elseif ($event["event_type"] == "Meeting") {
-                   echo "<div class='row well'><a id='viewMeeting' name=".$event["events_id"].">"." ".$event["events_theme"]."</a><span class='badge'> Meeting</span></div><br />";
+                   echo "<div class='row well'><a id='viewMeeting' name=".$event["events_id"].">"." ".$event["events_theme"]."</a><br><span class='badge'> Meeting</span></div><br />";
                 }
                     
             }

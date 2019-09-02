@@ -1,0 +1,9 @@
+1.update php.ini file with these, first search then update
+openssl.cafile="C:\xampp\htdocs\cacert.pem"
+curl.cainfo="C:\xampp\htdocs\cacert.pem"
+
+2. Remember to uncomment  this line in your php.ini file: extension=php_openssl.dll
+
+3.rember to allow turn on less secure apps access for the gmail account being used else it will be blocking it
+
+https://myaccount.google.com/lesssecureapps

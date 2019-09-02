@@ -64,7 +64,7 @@
 
 						// for making payment of dues Set for 
 						case 'make_payment':
-							if(isset($_POST["paymentAmount"])){
+							if(isset($_POST["paymentAmount"]) ){
 									// checking balance if there is enough to make payment
 									 $objUserBalance = new UserBalance;
 									 $getBalance = $objUserBalance->get_balance();
@@ -76,7 +76,8 @@
 									 		$objUserBalance->set_pay_amount($objUserBalance->CleanData($_POST["paymentAmount"]));
 									 		$objUserBalance->set_balance(trim($getBalance["current_balance"]) - trim($_POST["paymentAmount"]));
 											$objUserBalance->set_member_id($_SESSION['member_id']);
-
+											$objUserBalance->set_paymentContributionId($objUserBalance->CleanData($_POST["paymentId"]));
+											
 									  		if ($objUserBalance->wallet_save()) {
 									  			echo "Succcessful, Payment done successfully";
 									  		}else{return false;}

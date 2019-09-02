@@ -40,80 +40,81 @@ include("header.php");
           </div>
 
           <div class="col-md-9">
-          <form id="insert_form" method="POST">
-            <fieldset>
-              <center><h2><u>Personal Details</u></h2></center>
+            <form id="insert_form" method="POST">
+              <!-- step 1 -->
+              <div class="form-section">
                   <div class="row">
-                      <!-- firstname -->
-                    <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="firstName">FIRST NAME</label>
-                            <input type="text" class="form-control tcal" id="firstName" name="firstName" autocomplete="off" value="<?php if(isset($firstName)){echo $firstName;}?>">
-                          </div>
+                    <center><h2><u>Personal Details</u></h2></center>
+                        <!-- firstname -->
+                      <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="firstName">FIRST NAME</label>
+                              <input type="text" class="form-control tcal" id="firstName" name="firstName" autocomplete="off" value="<?php if(isset($firstName)){echo $firstName;}?>" required>
+                            </div>
+                      </div>
+                      <!-- lastname -->
+                      <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="lastName">LAST NAME</label>
+                              <input type="text" class="form-control tcal" id="lastName" name="lastName" autocomplete="off" value="<?php if(isset($lastName)){echo $lastName;}?>">
+                            </div>
+                      </div>
+                      <!-- othername -->
+                      <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="otherName">OTHER NAME</label>
+                              <input type="text" class="form-control tcal" id="otherName" name="otherName" autocomplete="off" value="<?php if(isset($otherName)){echo $otherName;}?>" required> 
+                            </div>
+                      </div>
                     </div>
-                    <!-- lastname -->
-                    <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="lastName">LAST NAME</label>
-                            <input type="text" class="form-control tcal" id="lastName" name="lastName" autocomplete="off" value="<?php if(isset($lastName)){echo $lastName;}?>">
-                          </div>
-                    </div>
-                    <!-- othername -->
-                    <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="otherName">OTHER NAME</label>
-                            <input type="text" class="form-control tcal" id="otherName" name="otherName" autocomplete="off" value="<?php if(isset($otherName)){echo $otherName;}?>"> 
-                          </div>
-                    </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="personalContact">PHONE NUMBER</label>
+                        <input type="text" class="form-control" id="personalContact" name="personalContact" autocomplete="off" value="<?php if(isset($personalContact)){echo $personalContact;}?>" required> 
+                      </div>
                   </div>
-                
-                <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="personalContact">PHONE NUMBER</label>
-                      <input type="text" class="form-control" id="personalContact" name="personalContact" autocomplete="off" value="<?php if(isset($personalContact)){echo $personalContact;}?>"> 
+                            <div class="form-group">
+                              <label for="emergencyContact">CONTACT INCASE OF EMERGENCY</label>
+                              <input type="text" class="form-control" id="emergencyContact" name="emergencyContact"  autocomplete="off" value="<?php if(isset($emergencyContact)){echo $emergencyContact;}?>">
+                            </div>
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                        <label for="houseNumber">HOUSE NUMBER</label>
+                        <input type="text" class="form-control" id="houseNumber" name="houseNumber" autocomplete="off" value="<?php if(isset($houseNumber)){echo $houseNumber;}?>">
+                      </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="emergencyContact">CONTACT INCASE OF EMERGENCY</label>
-                            <input type="text" class="form-control" id="emergencyContact" name="emergencyContact"  autocomplete="off" value="<?php if(isset($emergencyContact)){echo $emergencyContact;}?>">
-                          </div>
-                    </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-6">
                       <div class="form-group">
-                      <label for="houseNumber">HOUSE NUMBER</label>
-                      <input type="text" class="form-control" id="houseNumber" name="houseNumber" autocomplete="off" value="<?php if(isset($houseNumber)){echo $houseNumber;}?>">
+                        <label for="houseLocation">LOCATION OF HOUSE</label>
+                         <textarea rows="6" class="form-control" id="houseLocation" name="houseLocation"><?php if(isset($houseLocation)){echo $houseLocation;}?></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="postalAddress">POSTAL ADDRESS</label>
+                        <textarea rows="6" class="form-control" id="postalAddress" name="postalAddress"><?php if(isset($postalAddress)){echo $postalAddress;}?></textarea>
+                      </div>
                     </div>
                   </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="houseLocation">LOCATION OF HOUSE</label>
-                       <textarea rows="6" class="form-control" id="houseLocation" name="houseLocation"><?php if(isset($houseLocation)){echo $houseLocation;}?></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="postalAddress">POSTAL ADDRESS</label>
-                      <textarea rows="6" class="form-control" id="postalAddress" name="postalAddress"><?php if(isset($postalAddress)){echo $postalAddress;}?></textarea>
-                    </div>
-                  </div>
-                </div><br>
-                <!-- buttons -->
-               <input type="button" class="next btn-info btn-block" value="Next" />
-            </fieldset>
 
-              <fieldset>
-              <center><h2><u>GhIS LSD DETAILS</u></h2></center>
+
+              </div>
+              <!-- step 2 -->
+              <div class="form-section">
+                <center><h2><u>GhIS LSD DETAILS</u></h2></center>
                   <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                           <label for="professionalNumber">PROFESSIONAL NUMBER</label>
-                            <input type="text" class="form-control" id="professionalNumber" name="professionalNumber" autocomplete="off" value="<?php if(isset($professionalNumber)){echo $professionalNumber;}?>" readonly>
+                            <input type="text" class="form-control" id="professionalNumber" name="professionalNumber" autocomplete="off" value="<?php if(isset($professionalNumber)){echo $professionalNumber;}?>" readonly required>
                         </div>
                       </div>  
                   </div>
@@ -121,7 +122,7 @@ include("header.php");
                       <div class="col-md-6">
                           <div class="form-group">
                               <label for="surveyorType">TYPE OF SURVEYOR</label>
-                              <select name="surveyorType" id="surveyorType" class="form-control" readonly>
+                              <select name="surveyorType" id="surveyorType" class="form-control" readonly required>
                                 <?php   
                                       if (isset($surveyorType )) {
                                              echo '<option value="'.$surveyorType.'">'.$surveyorType.'</option>';
@@ -133,7 +134,7 @@ include("header.php");
                       <div class="col-md-6">
                          <div class="form-group">
                               <label for="designation">DESIGNATION</label>
-                              <select name="designation" id="designation" class="form-control" readonly>
+                              <select name="designation" id="designation" class="form-control" readonly required>
                                 <?php   
                                       if (isset($designation )) {
                                              echo '<option value="'.$designation.'">'.$designation.'</option>';
@@ -142,13 +143,10 @@ include("header.php");
                               </select>
                           </div> 
                       </div>
-                  </div><br>
-                <!-- buttons -->
-                <input type="button" name="previous" class="previous btn-info btn-block" value="Previous" /><br>
-                <input type="button" name="next" class="next btn-danger btn-block" value="Next" />
-              </fieldset>
-
-              <fieldset>
+                  </div>
+              </div>
+              <!-- step 3 -->
+              <div class="form-section">
                 <center><h2><u>COMPANY DETIALS</u></h2></center>
                   <div class="row">
                     <div class="col-md-7">
@@ -228,20 +226,24 @@ include("header.php");
                           <textarea rows="6" class="form-control" name="companyAddress" id="companyAddress" placeholder="Enter postal address of company"><?php if(isset($companyAddress)){echo $companyAddress;}?></textarea>
                         </div>
                       </div>
-                </div><br>
-                    <input type="hidden" name="mode" id="mode" value="profileUpdate">
-                  <!-- buttons -->
-                   <input type="button" name="previous" class="previous btn-info btn-block" value="Previous" /><br>
-                   <input type="submit" name="submit" id="save_btn" class="submit btn-success btn-block" value="Submit" />
-              </fieldset>
+                </div>
+              </div>
+
+                <input type="hidden" name="mode" id="mode" value="profileUpdate">
+
+                <span class="clearfix"></span>
+                <br>
+                  <div class="panel-footer">
+                    <div class="form-navigation">
+                        <button type="button" class="previous btn btn-danger pull-left"><i class="fa fa-arrow-left"></i> Previous</button>
+                        <button type="button" class="next btn btn-info pull-right">Next <i class="fa fa-arrow-right"></i></button>
+                        <!-- <input type="submit" class="btn btn-default pull-right"> -->
+                        <button type="submit" class="btn btn-info pull-right">Update Profile <i class="fa fa-save"></i></button>
+                        <span class="clearfix"></span>
+                      </div>
+                  </div>
+
             </form>
-            <!-- Circles which indicates the steps of the form: -->
-            <div style="text-align:center;margin-top:40px;">
-              <span class="step active"></span>
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step"></span>
-            </div>
           </div>
           <!-- end of content -->
         </div>
@@ -253,6 +255,49 @@ include("header.php");
 <?php include("footer.php");?>
  <script>  
       $(document).ready(function(){
+         $(function () {
+            var $sections = $('.form-section');
+
+            function navigateTo(index) {
+              // Mark the current section with the class 'current'
+              $sections
+                .removeClass('current')
+                .eq(index)
+                  .addClass('current');
+              // Show only the navigation buttons that make sense for the current section:
+              $('.form-navigation .previous').toggle(index > 0);
+              var atTheEnd = index >= $sections.length - 1;
+              $('.form-navigation .next').toggle(!atTheEnd);
+              $('.form-navigation [type=submit]').toggle(atTheEnd);
+            }
+
+            function curIndex() {
+              // Return the current index by looking at which section has the class 'current'
+              return $sections.index($sections.filter('.current'));
+            }
+
+            // Previous button is easy, just go back
+            $('.form-navigation .previous').click(function() {
+              navigateTo(curIndex() - 1);
+            });
+
+            // Next button goes forward iff current block validates
+            $('.form-navigation .next').click(function() {
+              $('#insert_form').parsley().whenValidate({
+                group: 'block-' + curIndex()
+              }).done(function() {
+                navigateTo(curIndex() + 1);
+              });
+            });
+
+            // Prepare sections by setting the `data-parsley-group` attribute to 'block-0', 'block-1', etc.
+            $sections.each(function(index, section) {
+              $(section).find(':input').attr('data-parsley-group', 'block-' + index);
+            });
+            navigateTo(0); // Start at the beginning
+          });
+
+         
         $("#insert_form").on("submit",function(e){
           e.preventDefault();
            if (confirm("ARE YOU SURE YOU WANT TO UPDATE YOUR PROFILE?")) {
@@ -263,8 +308,15 @@ include("header.php");
                 beforeSend:function(){  
                   $('#save_btn').val("Updating records ...");  
                 },
-                success:function(data){  
-                  location.reload();
+                success:function(data){
+                  if (data == "success") {
+                    toastr.success(' Successfull'); 
+                    // location.reload(); 
+                  }
+                  else if(data == "error"){
+                    toastr.error('There was an error');
+                  }
+                  
                 } 
 
                 });

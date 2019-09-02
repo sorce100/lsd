@@ -6,6 +6,7 @@
 		private $table = "wallet_history";
 		private $member_id;
 		private $purpose;
+		private $paymentContributionId;
 
 		function set_id($id) { $this->id = $id; }
 		function get_id() { return $this->id; }
@@ -13,8 +14,8 @@
 		function get_member_id() { return $this->member_id; }
 		function set_purpose($purpose) { $this->purpose = $purpose; }
 		function get_purpose() { return $this->purpose; }
-
-
+		function set_paymentContributionId($paymentContributionId) { $this->paymentContributionId = $paymentContributionId; }
+		
 		public function __construct(){
 			require_once("db/db.php");
 			$db = new DbConnect();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2019 at 02:59 AM
+-- Generation Time: Sep 02, 2019 at 04:14 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -304,7 +304,9 @@ INSERT INTO `contribution_register` (`contributions_reg_id`, `contribution_id`, 
 (4, 2, 102, '600', '', '2018-12-02 15:20:21'),
 (5, 3, 102, '500', '', '2018-12-02 15:20:27'),
 (6, 2, 11, '500', '', '2019-08-15 10:09:32'),
-(7, 5, 11, '20', '', '2019-08-23 10:05:41');
+(7, 5, 11, '20', '', '2019-08-23 10:05:41'),
+(8, 3, 11, '60', '', '2019-09-01 22:27:32'),
+(9, 3, 11, '89', '', '2019-09-01 22:30:48');
 
 -- --------------------------------------------------------
 
@@ -444,6 +446,8 @@ INSERT INTO `division` (`division_id`, `division_fullname`, `division_alias`, `d
 CREATE TABLE `email_sent` (
   `email_sent_id` int(11) NOT NULL,
   `receiver_email` varchar(200) NOT NULL,
+  `email_subject` varchar(240) NOT NULL,
+  `email_body` text NOT NULL,
   `delivery_response` text NOT NULL,
   `user_id` int(11) NOT NULL,
   `date_done` timestamp NOT NULL DEFAULT current_timestamp()
@@ -453,9 +457,13 @@ CREATE TABLE `email_sent` (
 -- Dumping data for table `email_sent`
 --
 
-INSERT INTO `email_sent` (`email_sent_id`, `receiver_email`, `delivery_response`, `user_id`, `date_done`) VALUES
-(1, '', '1', 96, '2019-04-12 00:28:13'),
-(2, '', '1', 96, '2019-04-12 00:28:14');
+INSERT INTO `email_sent` (`email_sent_id`, `receiver_email`, `email_subject`, `email_body`, `delivery_response`, `user_id`, `date_done`) VALUES
+(3, 'sorce100@gmail.com', 'NEW GhIS LSD APPLICANT DECLARATION', 'Hello,<br>\r\n												Please Accept and Make declartion for New Ghis LSD applicant : \r\n												<strong> pen pencil</strong> in order to be accepted to be a member.<br><br> \r\n												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationb.php?data=2019089005</strong><br><br>\r\n												Thank you for your cooperation.', 'success', 56, '2019-08-31 22:18:31'),
+(4, 'sorce100@gmail.com', 'NEW GhIS LSD APPLICANT DECLARATION', 'Hello,<br><br>\r\n												Please Accept and Make declartion for New Ghis LSD applicant : \r\n												<strong> pen pencil</strong> in order for the applicant to be accepted to be a member.<br><br> \r\n												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationb.php?data=2019084174</strong><br><br>\r\n												Thank you for your cooperation.', 'success', 56, '2019-08-31 22:24:48'),
+(5, 'sorce100@gmail.com', 'NEW GhIS LSD APPLICANT DECLARATION', 'Hello,<br><br>\r\n												Please Accept and Make declartion for New Ghis LSD applicant : \r\n												<strong> pen pencil</strong> in order for the applicant to be accepted to be a member.<br><br> \r\n												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationb.php?data=2019089081</strong><br><br>\r\n												Thank you for your cooperation.', 'success', 56, '2019-08-31 22:27:49'),
+(6, 'ferd.kwarteng@gmail.com', 'NEW GhIS LSD APPLICANT DECLARATION', 'Hello,<br><br>\r\n												Please Accept and Make declartion for New Ghis LSD applicant : \r\n												<strong> pen pencil</strong> in order for the applicant to be accepted to be a member.<br><br> \r\n												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationc.php?data=2019089081</strong><br><br>\r\n												Thank you for your cooperation.', 'success', 56, '2019-08-31 22:27:52'),
+(7, 'ferd.kwarteng@gmail.com', 'NEW GhIS LSD APPLICANT DECLARATION', 'Hello,<br><br>\r\n												Please Accept and Make declartion for New Ghis LSD applicant : \r\n												<strong> pen pencil</strong> in order for the applicant to be accepted to be a member.<br><br> \r\n												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationb.php?data=2019087592</strong><br><br>\r\n												Thank you for your cooperation.', 'success', 56, '2019-08-31 22:34:51'),
+(8, 'sorce100@gmail.com', 'NEW GhIS LSD APPLICANT DECLARATION', 'Hello,<br><br>\r\n												Please Accept and Make declartion for New Ghis LSD applicant : \r\n												<strong> pen pencil</strong> in order for the applicant to be accepted to be a member.<br><br> \r\n												Please use this link to make declaration <strong>ghislsd.com/pages/applicant_registrationc.php?data=2019087592</strong><br><br>\r\n												Thank you for your cooperation.', 'success', 56, '2019-08-31 22:34:55');
 
 -- --------------------------------------------------------
 
@@ -593,7 +601,7 @@ CREATE TABLE `exam_register` (
 --
 
 INSERT INTO `exam_register` (`exam_register_id`, `exam_center_id`, `exam_center_module_id`, `student_id`, `date_registered`, `status`, `exam_score`, `exam_name_index`, `user_id`, `record_hide`, `date_done`) VALUES
-(10, 4, 2, 8, '28-08-2019', 'OLD', '{\"2\":\"500\",\"1\":\"11\"}', '[\"2\",\"1\"]', 56, 'NO', '2019-08-28 22:08:51'),
+(10, 4, 2, 8, '28-08-2019', 'OLD', '{\"2\":\"32\",\"1\":\"50\"}', '[\"2\",\"1\"]', 56, 'NO', '2019-08-30 09:56:45'),
 (13, 3, 1, 8, '29-08-2019', 'NEW', '', '', 56, 'NO', '2019-08-29 00:25:11');
 
 -- --------------------------------------------------------
@@ -703,8 +711,8 @@ INSERT INTO `members` (`members_id`, `first_name`, `last_name`, `other_name`, `d
 (16, 'CULBERT', 'ABAGULUM', 'KWAME', '11/08/1976', '244735842', '', 'SUNYANI BRONG AHAFO', '', 'BOX 830 SUNYANI', '0', 0, 'STUDENT', '', 'LANDS COMMISSION(SURVEY AND MAPPING DIVISION)', '', '', 'ABAGULUMCULBERTKWAME@YMAIL.COM', 'BRONG AHAFO', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
 (17, 'ALEX', 'FUGOR', 'KWABENA', '10/18/0001', '243049832', '', 'LAPAZ', '', 'BOX 71 NSAWAM', '10', 0, 'TECHNICIAN', '', 'GHANA SCHOOL OF SURVEYING AND MAPPING', '', '', 'ALEXFUGOR@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
 (18, 'EMMANUEL', 'ARYEETEY', 'NII AYI', '14/08/1988', '0249920224/ 02649369', '', 'NUNGUA', '', 'P.O. BOX CO 2728 TEMA', '0', 0, 'PROFESSIONAL', '', 'BASELINE SOLUTIONS', '', '', 'EMMANUELARYEETEY442@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
-(19, 'ISAAC', 'AGYEI', 'NII OKAI KWEKU', '20/07/2018', '0209969656', '', 'PANTANG EAST 483', '', 'BOX ABK83 ABOKOBI- ACCRA', '11', 0, 'OTHER', 'FGhIS', '', '', '', 'ISAACADJEI83@GMAIL.COM', '', '', '', '10422', '[\"1\",\"2\",\"4\"]', '2019-03-23 23:09:39', '1', '104'),
-(20, 'AARON', 'FREMPAH', 'ADOM', '07/07/1989', '0241273751/055626866', '', 'ABRUKUTUASO,MAMPONG ASHANTI', '', 'COCOA HEALTH AND EXTENSION DIVISION&#13;&#10;P.O. BOX 32&#13;&#10;MAMPONG DISTRICT', '19', 0, 'PROFESSIONAL', 'FGhIS', '', '', '', 'ADOMAARONFREMPAH55@YAHOO.COM', '', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
+(19, 'ISAAC', 'AGYEI', 'NII OKAI KWEKU', '20/07/2018', '0209969656', '', 'PANTANG EAST 483', '', 'BOX ABK83 ABOKOBI- ACCRA', '11', 0, 'OTHER', 'FGhIS', '', '', '', 'ISAACADJEI83@GMAIL.COM', '', '1234456', 'sdfgsdfg', '7218', '[\"1\",\"2\",\"4\"]', '2019-03-23 23:09:39', '1', '104'),
+(20, 'AARON', 'FREMPAH', 'ADOM', '07/07/1989', '0241273751/055626866', '', '', '', '', '19', 0, 'PROFESSIONAL', 'FGhIS', '', 'PUBLIC SERVICE', '', 'ADOMAARONFREMPAH55@YAHOO.COM', 'Greater Accra', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
 (21, 'RICHARD', 'OTCHERE', 'K', '12/04/1977', '244667171', '', 'OYARIFA', '', 'P.O.BOX. CO 1955 TEMA', '1051', 0, 'PROFESSIONAL', '', 'FREELANCE', '', '', 'OSOKITI@GMAIL.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
 (22, 'FELIX', 'BOTE-KWAME', 'B', '11/07/1977', '244607913', '', 'KPONE', '', 'P O BOX CE 11507, TEMA', '1322', 0, 'PROFESSIONAL', '', 'WILLIX CONSULT', '', '', 'FELIXXBK@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
 (23, 'KINGSLEY', 'SAM', 'YAW', '01/12/1988', '245989572', '', 'SEPE DOTE KUMASI', '', 'P. O. BOX 4083', '1635', 0, 'PROFESSIONAL', '', 'ASANTEHENE?S LANDS SECRETARIAT', '', '', 'SHIZUMEBACHI@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:39', '1', ''),
@@ -867,9 +875,9 @@ INSERT INTO `members` (`members_id`, `first_name`, `last_name`, `other_name`, `d
 (180, 'MICHAEL', 'DORDOR', 'ENAM', '09/05/1968', '244788230', '', 'GREDA ESTATES, TESHIE, ACCRA', '', 'BOX CT 1646, ACCRA', '664', 0, 'LICENSED', '', 'BASELINE SOLUTIONS LTD', '', '', 'MDORDOR@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
 (181, 'ALEXANDER', 'OWUSU ANSAH', '', '08/07/1989', '249343157', '', 'P.O.BOX KS 15416, ADUM - KUMASI,', '', '', '0', 0, 'TECHNICIAN', '', 'MR', '', '', 'AS.OWUSUANSAH@GMAIL.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
 (182, 'ABIGAIL', 'QUAYE', 'AYELEY', '05/05/1981', '244449925', '', 'MANCHIE', '', 'P.O.BOX CT 8544 ,CANTONMENTS  ACCRA', '1724', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION (SMD)', '', '', 'ABBY.QUAYE@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
-(183, 'PRINCE', 'AMPONSAH', '', '04/09/1985', '+233246139520', '', 'AK-334-8789', '', 'P. O. BOX KJ 443, KUMASI', '1739', 0, 'PROFESSIONAL', '', 'CHIRANO GOLDMINE LIMITED', '', '', 'PRINCEKWABENAAMPONSAH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', '');
+(183, 'PRINCE', 'AMPONSAH', '', '04/09/1985', '+233246139520', '', 'AK-334-8789', '', 'P. O. BOX KJ 443, KUMASI', '1739', 0, 'PROFESSIONAL', '', 'CHIRANO GOLDMINE LIMITED', '', '', 'PRINCEKWABENAAMPONSAH@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
+(184, 'MICHAEL', 'ADUAH', 'S', '', '249447799', '', 'TARKWA', '', '', '1674', 0, 'PROFESSIONAL', '', 'GEOMATIC ENGINEERING DEPT, UMAT', '', '', 'MSADUAH@MAT.EDU.GH', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', '');
 INSERT INTO `members` (`members_id`, `first_name`, `last_name`, `other_name`, `dob`, `personal_contact`, `emergency_contact`, `house_number`, `house_location`, `postal_address`, `professional_number`, `year_elected`, `surveyor_type`, `designation`, `company_name`, `company_type`, `company_contact`, `corporate_email`, `region`, `office_location`, `company_address`, `current_balance`, `committes`, `date_done`, `division`, `user_id`) VALUES
-(184, 'MICHAEL', 'ADUAH', 'S', '', '249447799', '', 'TARKWA', '', '', '1674', 0, 'PROFESSIONAL', '', 'GEOMATIC ENGINEERING DEPT, UMAT', '', '', 'MSADUAH@MAT.EDU.GH', 'WESTERN', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
 (185, 'JONATHAN', 'QUAYE-BALLARD', 'ARTHUR', '16/09/2018', '277474073', '', 'DEPARTMENT OF GEOMATIC ENG., KNUST', '', '13422, ADUM, KUMASI', '975', 0, 'PROFESSIONAL', '', 'KNUST', '', '', 'QUAYEBALLARD@YAHOO.COM', 'ASHANTI', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
 (186, 'FREDERICK', 'BEDIAKO-MENSAH', '', '19/09/1974', '+233244642294', '', 'CODE: GW-0299-7313; ADDRESS: KWABENYA-POKUASE ROAD', '', 'P. O. BOX CT5936, ACCRA', '919', 0, 'PROFESSIONAL', '', 'LANDS COMMISSION/GSSM', '', '', 'FBEDMESH@YAHOO.COM', 'GREATER ACCRA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
 (187, 'JOSEPH', 'OKAE', 'KWESI', '16/03/1943', '249459449', '', 'NO ONE  PAWPAW STREET, EASTLEGON ACCRA', '', 'P.O.BOX CT 39 CANTOMENTS, ACCRA', '94', 0, 'LICENSED', '', 'GHANA INSTITUTION OF SURVEYORS', '', '', 'JOSEPHKOKAEGMAIL.COM', 'VOLTA', '', '', '500', '', '2019-03-23 23:09:45', '1', ''),
@@ -1008,7 +1016,7 @@ CREATE TABLE `new_application` (
 --
 
 INSERT INTO `new_application` (`new_application_id`, `application_division`, `application_code`, `application_stage`, `folder_name`, `files_subject`, `files_name`, `college_email`, `employer_email`, `application_startDate`, `col_instructor_title`, `col_instruct_fullname`, `col_name`, `col_stu_startDate`, `col_competence_div`, `col_principal_name`, `col_principal_profNum`, `col_declare_date`, `emp_com_name`, `emp_com_loc`, `emp_tel`, `emp_tec_division`, `emp_stu_branch`, `com_trianer_name`, `emp_trianer_profNum`, `emp_declare_date`, `member_declare_id`, `member_declare_note`, `member_declare_date`, `student_id`, `user_id`, `app_accept_status`, `app_assigned_profnum`, `app_accept_reason`, `app_accept_date`, `app_accept_user_id`, `record_hide`) VALUES
-(6, '1', '2019084086', 'START', '08-25-20193451-856', '[\"University of Cape Coast\",\"Diploma\"]', '[\"0321832183.pdf\",\"aaa.docx\"]', 'sorce100@gmail.com', 'sorce100@gmail.com', '25th-August-2019', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 11, 'Please approve this for me', '', 8, 56, '', '', '', '', 0, 'NO');
+(14, '1', '2019087592', 'START', '08-31-20193446-856', '[\"New Test\",\"Dare to be great\"]', '[\"Dare_ The New Way to End Anxiety .pdf\",\"latitude-14-7480-laptop_owners-manual_en-us.pdf\"]', 'ferd.kwarteng@gmail.com', 'sorce100@gmail.com', '31st-August-2019', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 11, 'Please Make declarations for me', '', 8, 56, '', '', '', '', 0, 'NO');
 
 -- --------------------------------------------------------
 
@@ -1203,10 +1211,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `account_type`, `account_type_id`, `account_stage`, `member_id`, `user_password`, `reset_password`, `group_id`, `school_id`, `status`, `division`, `user_login_status`, `record_hide`, `date_done`) VALUES
-(56, 'student', 8, 'OLD', 'p.pencil', '$2y$10$TsxUBtv7c2x4LrnI0QV/peA9VOcJ1ojhN.6A7qIEkcvDytDTVgFOW', 'NO', '14', 7, 'active', '1', 'ONLINE', 'NO', '2019-02-24 17:19:02'),
-(64, 'administrator', 1, '', 'lsd', '$2y$10$Y0F6phqIvj7PQxXfneggMOE.cWIg1upOmMtFchxPVK.rdhTZ6BHRa', 'NO', '9', 0, 'ACTIVE', '1', 'OFFLINE', 'NO', '2019-03-20 10:00:30'),
+(56, 'student', 8, 'OLD', 'p.pencil', '$2y$10$TsxUBtv7c2x4LrnI0QV/peA9VOcJ1ojhN.6A7qIEkcvDytDTVgFOW', 'NO', '14', 7, 'active', '1', 'OFFLINE', 'NO', '2019-02-24 17:19:02'),
+(64, 'administrator', 1, '', 'lsd', '$2y$10$Y0F6phqIvj7PQxXfneggMOE.cWIg1upOmMtFchxPVK.rdhTZ6BHRa', 'NO', '9', 0, 'ACTIVE', '1', 'ONLINE', 'NO', '2019-03-20 10:00:30'),
 (65, 'administrator', 4, '', 'ghis', '$2y$10$pdisgNSq0i6F2dbkk/azPeQdtUlHQ5lVhZUYIOfbdtSSPNAnYIXoi', 'NO', '13', 0, 'ACTIVE', '1', '', 'NO', '2019-03-20 11:47:52'),
-(73, 'member', 19, 'OLD', '11', '$2y$10$s8AQDlTFJb7YmmfP9um/lOhCCo0vVgGtMoL8OkakVhZgfucBEOSde', 'NO', '13', 0, 'active', '1', 'OFFLINE', 'NO', '2019-04-01 12:28:05'),
+(73, 'member', 19, 'OLD', '11', '$2y$10$E8E1eYuR/Bwy4SvES7uLWuyReRKfWgYz9RCUxVprMGod2Dqj/axZK', 'NO', '13', 0, 'active', '1', 'OFFLINE', 'NO', '2019-04-01 12:28:05'),
 (105, 'student', 24, 'NEW', 't.hard', '$2y$10$owgYmTzp5yAkuPKyL3NlauqMVj7PMPUHnYkTMJomOsH2o8xrhKnGC', 'NO', '', 0, 'ACTIVE', '1', '', 'NO', '2019-08-28 12:56:45');
 
 -- --------------------------------------------------------
@@ -1387,7 +1395,7 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (157, 73, 'Thursday 13th of June 2019 / 04:52:07 PM', '', 1),
 (158, 64, 'Thursday 13th of June 2019 / 05:07:56 PM', 'Saturday 10th of August 2019 / 04:59:00 PM', 1),
 (159, 64, 'Thursday 20th of June 2019 / 04:48:39 PM', '', 1),
-(160, 64, 'Friday 21st of June 2019 / 09:42:31 AM', 'Friday 21st of June 2019 / 09:43:11 AM', 1),
+(160, 64, 'Friday 21st of June 2019 / 09:42:31 AM', 'Sunday 1st of September 2019 / 10:52:05 PM', 1),
 (161, 73, 'Friday 21st of June 2019 / 09:43:18 AM', '', 1),
 (162, 73, 'Friday 21st of June 2019 / 10:49:24 AM', '', 1),
 (163, 73, 'Wednesday 26th of June 2019 / 02:38:53 PM', 'Wednesday 26th of June 2019 / 02:39:06 PM', 1),
@@ -1498,7 +1506,7 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (268, 73, 'Monday 12th of August 2019 / 04:23:15 PM', 'Monday 12th of August 2019 / 10:53:32 PM', 1),
 (269, 73, 'Monday 12th of August 2019 / 10:53:38 PM', 'Monday 12th of August 2019 / 11:12:46 PM', 1),
 (270, 56, 'Monday 12th of August 2019 / 11:12:56 PM', 'Tuesday 13th of August 2019 / 12:48:29 AM', 1),
-(271, 64, 'Tuesday 13th of August 2019 / 12:54:40 AM', '', 1),
+(271, 64, 'Tuesday 13th of August 2019 / 12:54:40 AM', 'Sunday 1st of September 2019 / 09:33:22 PM', 1),
 (272, 64, 'Tuesday 13th of August 2019 / 07:17:31 AM', 'Tuesday 13th of August 2019 / 09:26:46 PM', 1),
 (273, 73, 'Tuesday 13th of August 2019 / 09:26:52 PM', 'Tuesday 13th of August 2019 / 09:28:19 PM', 1),
 (274, 64, 'Tuesday 13th of August 2019 / 09:28:27 PM', 'Wednesday 14th of August 2019 / 09:32:41 AM', 1),
@@ -1584,7 +1592,32 @@ INSERT INTO `users_session_log` (`users_session_log_id`, `user_id`, `session_sta
 (354, 64, 'Wednesday 28th of August 2019 / 10:35:07 PM', 'Wednesday 28th of August 2019 / 10:36:44 PM', 1),
 (355, 73, 'Wednesday 28th of August 2019 / 10:36:51 PM', 'Wednesday 28th of August 2019 / 10:37:05 PM', 1),
 (356, 56, 'Wednesday 28th of August 2019 / 10:37:12 PM', 'Wednesday 28th of August 2019 / 10:58:39 PM', 1),
-(357, 56, 'Wednesday 28th of August 2019 / 10:58:46 PM', '', 1);
+(357, 56, 'Wednesday 28th of August 2019 / 10:58:46 PM', 'Thursday 29th of August 2019 / 11:17:57 AM', 1),
+(358, 56, 'Thursday 29th of August 2019 / 11:18:18 AM', 'Thursday 29th of August 2019 / 09:14:44 PM', 1),
+(359, 73, 'Thursday 29th of August 2019 / 09:15:22 PM', 'Thursday 29th of August 2019 / 11:57:49 PM', 1),
+(360, 73, 'Thursday 29th of August 2019 / 11:58:03 PM', '', 1),
+(361, 64, 'Friday 30th of August 2019 / 09:56:14 AM', 'Friday 30th of August 2019 / 12:46:08 PM', 1),
+(362, 56, 'Friday 30th of August 2019 / 12:46:17 PM', 'Friday 30th of August 2019 / 01:16:17 PM', 1),
+(363, 73, 'Friday 30th of August 2019 / 02:26:19 PM', 'Friday 30th of August 2019 / 02:32:13 PM', 1),
+(364, 64, 'Friday 30th of August 2019 / 02:34:31 PM', 'Friday 30th of August 2019 / 02:44:38 PM', 1),
+(365, 73, 'Friday 30th of August 2019 / 02:44:45 PM', '', 1),
+(366, 73, 'Friday 30th of August 2019 / 11:34:08 PM', 'Friday 30th of August 2019 / 11:34:08 PM', 1),
+(367, 73, 'Friday 30th of August 2019 / 11:34:15 PM', 'Saturday 31st of August 2019 / 12:11:34 AM', 1),
+(368, 73, 'Saturday 31st of August 2019 / 12:16:15 AM', '', 1),
+(369, 73, 'Saturday 31st of August 2019 / 04:06:02 PM', 'Saturday 31st of August 2019 / 04:06:02 PM', 1),
+(370, 73, 'Saturday 31st of August 2019 / 04:06:10 PM', 'Saturday 31st of August 2019 / 05:06:37 PM', 1),
+(371, 56, 'Saturday 31st of August 2019 / 05:08:24 PM', 'Saturday 31st of August 2019 / 10:53:11 PM', 1),
+(372, 73, 'Saturday 31st of August 2019 / 10:56:26 PM', 'Saturday 31st of August 2019 / 10:57:29 PM', 1),
+(373, 73, 'Saturday 31st of August 2019 / 11:28:32 PM', 'Saturday 31st of August 2019 / 11:28:51 PM', 1),
+(374, 73, 'Saturday 31st of August 2019 / 11:44:50 PM', 'Sunday 1st of September 2019 / 12:17:42 AM', 1),
+(375, 73, 'Sunday 1st of September 2019 / 09:33:34 PM', '', 1),
+(376, 73, 'Sunday 1st of September 2019 / 10:52:48 PM', 'Monday 2nd of September 2019 / 01:10:05 AM', 1),
+(377, 73, 'Monday 2nd of September 2019 / 01:10:11 AM', 'Monday 2nd of September 2019 / 01:51:22 AM', 1),
+(378, 73, 'Monday 2nd of September 2019 / 01:51:39 AM', 'Monday 2nd of September 2019 / 01:56:58 AM', 1),
+(379, 73, 'Monday 2nd of September 2019 / 01:58:49 AM', 'Monday 2nd of September 2019 / 02:01:15 AM', 1),
+(380, 73, 'Monday 2nd of September 2019 / 02:01:33 AM', 'Monday 2nd of September 2019 / 02:01:41 AM', 1),
+(381, 73, 'Monday 2nd of September 2019 / 02:01:48 AM', 'Monday 2nd of September 2019 / 02:08:54 AM', 1),
+(382, 64, 'Monday 2nd of September 2019 / 02:09:00 AM', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1628,76 +1661,80 @@ CREATE TABLE `wallet_history` (
   `amount_payed` varchar(100) NOT NULL,
   `balance` varchar(100) NOT NULL,
   `division` varchar(20) NOT NULL,
-  `date_done` timestamp NOT NULL DEFAULT current_timestamp()
+  `date_done` timestamp NOT NULL DEFAULT current_timestamp(),
+  `payment_contribution_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `wallet_history`
 --
 
-INSERT INTO `wallet_history` (`wallet_history_id`, `member_id`, `type`, `purpose`, `reason`, `amount_payed`, `balance`, `division`, `date_done`) VALUES
-(1, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '20', '4800', '1', '2018-11-27 00:56:44'),
-(2, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '70', '4730', '1', '2018-11-27 01:20:01'),
-(3, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '30', '4700', '1', '2018-11-27 01:20:08'),
-(4, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '500', '4200', '1', '2018-11-27 08:45:24'),
-(5, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '1', '4199', '1', '2018-11-27 09:18:48'),
-(6, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '8', '4191', '1', '2018-11-27 09:19:36'),
-(7, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '10', '4181', '1', '2018-11-27 09:19:51'),
-(8, 102, 'DEBIT', 'DUES', 'MONTHLY DUES', '81', '4100', '1', '2018-11-27 13:58:47'),
-(9, 102, 'DEBIT', 'EVENT', 'LAND SURVEYING AND MAPPING: THE CRITICAL FOUNDATION TO NATIONAL INFRASTRUCTURAL DEVELOPMENT IN GHANA', '500', '3600', '1', '2018-11-29 10:46:12'),
-(10, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '50', '3550', '1', '2018-11-30 07:53:42'),
-(11, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '50', '3500', '1', '2018-12-02 15:04:42'),
-(12, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '50', '3450', '1', '2018-12-02 15:06:22'),
-(13, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '100', '3350', '1', '2018-12-02 15:07:16'),
-(14, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '600', '2750', '1', '2018-12-02 15:20:08'),
-(15, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '600', '2150', '1', '2018-12-02 15:20:21'),
-(16, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '500', '1650', '1', '2018-12-02 15:20:27'),
-(17, 11, 'DEBIT', 'YOUTUBE', 'YOUTUBE LIVE STREAMING PAYMENT', '500', '0', '1', '2019-04-01 21:13:52'),
-(18, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '450', '1', '2019-04-04 13:41:30'),
-(19, 11, 'DEBIT', 'DUES', 'SORCE MONEY', '300', '150', '1', '2019-04-04 13:50:46'),
-(20, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '100', '1', '2019-04-04 13:54:02'),
-(21, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '50', '1', '2019-04-04 13:54:50'),
-(22, 11, 'DEBIT', 'DEBIT', 'DEBIT', '300', '-250', '', '2019-06-27 01:09:14'),
-(23, 11, 'CREDIT', 'CREDIT', 'CREDIT', '900', '650', '', '2019-06-27 01:11:05'),
-(24, 11, 'CREDIT', 'CREDIT', 'CREDIT', '900', '1550', '', '2019-06-27 01:13:51'),
-(25, 11, 'DEBIT', 'DEBIT', 'DEBIT', '900', '650', '', '2019-06-27 01:14:28'),
-(26, 11, 'CREDIT', 'CREDIT', 'CREDIT', '500', '1150', '', '2019-06-27 12:38:52'),
-(27, 11, 'CREDIT', 'CREDIT', 'CREDIT', '500', '1650', '', '2019-06-27 12:43:04'),
-(28, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '1150', '', '2019-06-27 12:43:45'),
-(29, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '650', '', '2019-06-27 12:44:27'),
-(30, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '150', '', '2019-06-27 12:46:01'),
-(31, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-350', '', '2019-06-27 13:09:24'),
-(32, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-850', '', '2019-06-27 13:09:34'),
-(33, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-1350', '', '2019-06-27 13:10:50'),
-(34, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-1850', '', '2019-06-27 13:11:54'),
-(35, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-2350', '', '2019-06-27 13:17:43'),
-(36, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-1350', '', '2019-06-27 13:19:53'),
-(37, 11, 'DEBIT', 'DEBIT', 'DEBIT', '1000', '-2350', '', '2019-06-27 13:21:53'),
-(38, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-1350', '', '2019-06-27 13:22:22'),
-(39, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-350', '', '2019-07-30 18:56:17'),
-(40, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '650', '', '2019-07-30 18:58:05'),
-(41, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '1650', '', '2019-07-30 18:58:09'),
-(42, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '2650', '', '2019-07-30 18:59:20'),
-(43, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '3650', '', '2019-07-30 19:02:04'),
-(44, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '4650', '', '2019-07-30 19:02:37'),
-(45, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '5650', '', '2019-07-30 19:02:38'),
-(46, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '6650', '', '2019-07-30 19:02:39'),
-(47, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '7650', '', '2019-07-30 19:02:40'),
-(48, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '8650', '', '2019-07-30 19:02:55'),
-(49, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '9650', '', '2019-07-30 19:02:56'),
-(50, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '10650', '', '2019-07-30 19:02:57'),
-(51, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '11650', '', '2019-07-30 19:02:58'),
-(52, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '12650', '', '2019-07-30 19:10:33'),
-(53, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '13650', '', '2019-07-30 19:10:35'),
-(54, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '14650', '', '2019-07-30 19:15:23'),
-(55, 11, 'DEBIT', 'DUES', 'SORCE MONEY', '3005', '11645', '1', '2019-08-12 18:21:20'),
-(56, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '11595', '1', '2019-08-12 18:21:31'),
-(57, 11, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '500', '11095', '1', '2019-08-15 10:09:32'),
-(58, 11, 'DEBIT', 'CPD REGISTRATION', '', '51', '11044', '1', '2019-08-20 13:12:46'),
-(59, 11, 'DEBIT', 'CPD', 'CPD REGISTRATION', '51', '10993', '1', '2019-08-20 13:14:35'),
-(60, 11, 'DEBIT', 'CPD', 'CPD REGISTRATION', '51', '10942', '1', '2019-08-20 13:15:04'),
-(61, 11, 'DEBIT', 'EVENT', 'LAND SURVEYING AND MAPPING: THE CRITICAL FOUNDATION TO NATIONAL INFRASTRUCTURAL DEVELOPMENT IN GHANA', '500', '10442', '1', '2019-08-23 09:35:13'),
-(62, 11, 'DEBIT', 'CONTRIBUTION', 'MONEY FOR SORCE', '20', '10422', '1', '2019-08-23 10:05:41');
+INSERT INTO `wallet_history` (`wallet_history_id`, `member_id`, `type`, `purpose`, `reason`, `amount_payed`, `balance`, `division`, `date_done`, `payment_contribution_id`) VALUES
+(1, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '20', '4800', '1', '2018-11-27 00:56:44', 0),
+(2, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '70', '4730', '1', '2018-11-27 01:20:01', 0),
+(3, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '30', '4700', '1', '2018-11-27 01:20:08', 0),
+(4, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '500', '4200', '1', '2018-11-27 08:45:24', 0),
+(5, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '1', '4199', '1', '2018-11-27 09:18:48', 0),
+(6, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '8', '4191', '1', '2018-11-27 09:19:36', 0),
+(7, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '10', '4181', '1', '2018-11-27 09:19:51', 0),
+(8, 102, 'DEBIT', 'DUES', 'MONTHLY DUES', '81', '4100', '1', '2018-11-27 13:58:47', 0),
+(9, 102, 'DEBIT', 'EVENT', 'LAND SURVEYING AND MAPPING: THE CRITICAL FOUNDATION TO NATIONAL INFRASTRUCTURAL DEVELOPMENT IN GHANA', '500', '3600', '1', '2018-11-29 10:46:12', 0),
+(10, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '50', '3550', '1', '2018-11-30 07:53:42', 0),
+(11, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '50', '3500', '1', '2018-12-02 15:04:42', 0),
+(12, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '50', '3450', '1', '2018-12-02 15:06:22', 0),
+(13, 102, 'DEBIT', 'CONTRIBUTION', 'GENERAL CONTRIBUTION', '100', '3350', '1', '2018-12-02 15:07:16', 0),
+(14, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '600', '2750', '1', '2018-12-02 15:20:08', 0),
+(15, 102, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '600', '2150', '1', '2018-12-02 15:20:21', 0),
+(16, 102, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '500', '1650', '1', '2018-12-02 15:20:27', 0),
+(17, 11, 'DEBIT', 'YOUTUBE', 'YOUTUBE LIVE STREAMING PAYMENT', '500', '0', '1', '2019-04-01 21:13:52', 0),
+(18, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '450', '1', '2019-04-04 13:41:30', 0),
+(19, 11, 'DEBIT', 'DUES', 'SORCE MONEY', '300', '150', '1', '2019-04-04 13:50:46', 0),
+(20, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '100', '1', '2019-04-04 13:54:02', 0),
+(21, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '50', '1', '2019-04-04 13:54:50', 0),
+(22, 11, 'DEBIT', 'DEBIT', 'DEBIT', '300', '-250', '', '2019-06-27 01:09:14', 0),
+(23, 11, 'CREDIT', 'CREDIT', 'CREDIT', '900', '650', '', '2019-06-27 01:11:05', 0),
+(24, 11, 'CREDIT', 'CREDIT', 'CREDIT', '900', '1550', '', '2019-06-27 01:13:51', 0),
+(25, 11, 'DEBIT', 'DEBIT', 'DEBIT', '900', '650', '', '2019-06-27 01:14:28', 0),
+(26, 11, 'CREDIT', 'CREDIT', 'CREDIT', '500', '1150', '', '2019-06-27 12:38:52', 0),
+(27, 11, 'CREDIT', 'CREDIT', 'CREDIT', '500', '1650', '', '2019-06-27 12:43:04', 0),
+(28, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '1150', '', '2019-06-27 12:43:45', 0),
+(29, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '650', '', '2019-06-27 12:44:27', 0),
+(30, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '150', '', '2019-06-27 12:46:01', 0),
+(31, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-350', '', '2019-06-27 13:09:24', 0),
+(32, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-850', '', '2019-06-27 13:09:34', 0),
+(33, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-1350', '', '2019-06-27 13:10:50', 0),
+(34, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-1850', '', '2019-06-27 13:11:54', 0),
+(35, 11, 'DEBIT', 'DEBIT', 'DEBIT', '500', '-2350', '', '2019-06-27 13:17:43', 0),
+(36, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-1350', '', '2019-06-27 13:19:53', 0),
+(37, 11, 'DEBIT', 'DEBIT', 'DEBIT', '1000', '-2350', '', '2019-06-27 13:21:53', 0),
+(38, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-1350', '', '2019-06-27 13:22:22', 0),
+(39, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '-350', '', '2019-07-30 18:56:17', 0),
+(40, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '650', '', '2019-07-30 18:58:05', 0),
+(41, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '1650', '', '2019-07-30 18:58:09', 0),
+(42, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '2650', '', '2019-07-30 18:59:20', 0),
+(43, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '3650', '', '2019-07-30 19:02:04', 0),
+(44, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '4650', '', '2019-07-30 19:02:37', 0),
+(45, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '5650', '', '2019-07-30 19:02:38', 0),
+(46, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '6650', '', '2019-07-30 19:02:39', 0),
+(47, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '7650', '', '2019-07-30 19:02:40', 0),
+(48, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '8650', '', '2019-07-30 19:02:55', 0),
+(49, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '9650', '', '2019-07-30 19:02:56', 0),
+(50, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '10650', '', '2019-07-30 19:02:57', 0),
+(51, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '11650', '', '2019-07-30 19:02:58', 0),
+(52, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '12650', '', '2019-07-30 19:10:33', 0),
+(53, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '13650', '', '2019-07-30 19:10:35', 0),
+(54, 11, 'CREDIT', 'CREDIT', 'CREDIT', '1000', '14650', '', '2019-07-30 19:15:23', 0),
+(55, 11, 'DEBIT', 'DUES', 'SORCE MONEY', '3005', '11645', '1', '2019-08-12 18:21:20', 0),
+(56, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '11595', '1', '2019-08-12 18:21:31', 0),
+(57, 11, 'DEBIT', 'CONTRIBUTION', 'FUNERAL OF MR', '500', '11095', '1', '2019-08-15 10:09:32', 0),
+(58, 11, 'DEBIT', 'CPD REGISTRATION', '', '51', '11044', '1', '2019-08-20 13:12:46', 0),
+(59, 11, 'DEBIT', 'CPD', 'CPD REGISTRATION', '51', '10993', '1', '2019-08-20 13:14:35', 0),
+(60, 11, 'DEBIT', 'CPD', 'CPD REGISTRATION', '51', '10942', '1', '2019-08-20 13:15:04', 0),
+(61, 11, 'DEBIT', 'EVENT', 'LAND SURVEYING AND MAPPING: THE CRITICAL FOUNDATION TO NATIONAL INFRASTRUCTURAL DEVELOPMENT IN GHANA', '500', '10442', '1', '2019-08-23 09:35:13', 0),
+(62, 11, 'DEBIT', 'CONTRIBUTION', 'MONEY FOR SORCE', '20', '10422', '1', '2019-08-23 10:05:41', 0),
+(63, 11, 'DEBIT', 'DUES', 'WELFARE', '50', '10372', '1', '2019-09-01 22:16:06', 4),
+(64, 11, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '60', '10312', '1', '2019-09-01 22:27:32', 3),
+(65, 11, 'DEBIT', 'CONTRIBUTION', 'NAMING CEREMONY OF MRS AMOAKO', '89', '10223', '1', '2019-09-01 22:30:48', 3);
 
 -- --------------------------------------------------------
 
@@ -2037,7 +2074,7 @@ ALTER TABLE `contribution`
 -- AUTO_INCREMENT for table `contribution_register`
 --
 ALTER TABLE `contribution_register`
-  MODIFY `contributions_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `contributions_reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -2073,7 +2110,7 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT for table `email_sent`
 --
 ALTER TABLE `email_sent`
-  MODIFY `email_sent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `email_sent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -2139,7 +2176,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `new_application`
 --
 ALTER TABLE `new_application`
-  MODIFY `new_application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `new_application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -2163,7 +2200,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `surveyor`
 --
 ALTER TABLE `surveyor`
-  MODIFY `surveyor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `surveyor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -2175,7 +2212,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_session_log`
 --
 ALTER TABLE `users_session_log`
-  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=358;
+  MODIFY `users_session_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
 
 --
 -- AUTO_INCREMENT for table `user_payment`
@@ -2187,7 +2224,7 @@ ALTER TABLE `user_payment`
 -- AUTO_INCREMENT for table `wallet_history`
 --
 ALTER TABLE `wallet_history`
-  MODIFY `wallet_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `wallet_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `youtube_stream`

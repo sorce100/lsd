@@ -307,7 +307,10 @@
 							            foreach($files as $file){
 							                if(is_file("$folder/$file")){
 							                    // Display filename
-							                   $fileListArray[] = "<ul><li><b><span>".$file."</span> <span id='".$file."' name='".$parentFolder."' class='btn btn-info btn-xs glyphicon glyphicon-file readFile'> READ FILE</span> </b></li></ul>";
+							                   $fileListArray[] = "<ul>
+								                   						<li><b><a id='".$file."' name='".$parentFolder."' class='readFile'>".$file."</a> </b></li>
+								                   						<hr>
+							                   						</ul>";
 							                } 
 							            }
 							            // return array of files

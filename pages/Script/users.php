@@ -120,7 +120,7 @@
 
 								
 						break;
-
+						// login change password
 						case 'changePass':
 							$passwdReset="NO";
 							$chPassUserName = $_POST["chPassUserName"];
@@ -138,6 +138,44 @@
 											$objUsers->set_userPassword(password_hash($this->userpassword, PASSWORD_DEFAULT));
 											$objUsers->set_passwordReset($passwdReset);
 											$objUsers->set_memberId($objUsers->CleanData($_POST["chPassUserName"]));
+											if ($objUsers->change_password()) {
+												echo "success";
+											}
+											else{
+												echo "error";
+											}
+										}
+										else{
+											// if password is less than 4 characters
+											echo "error";
+										}
+									}
+									else{
+										// if passwords not the same and the old password is same as new password
+										echo "error";
+									}
+							 }else{
+							 	// if its empty
+							 	echo "error";
+							 }
+
+						break;
+						// user change password
+						case 'userChangePassword':
+							$passwdReset="NO";
+							$newPasswd = $_POST["newPasswd"];
+							$retypeNewPasswd = $_POST["retypeNewPasswd"];
+
+							if( (!empty($newPasswd)) || (!empty($retypeNewPasswd)) ){
+								// check if passwords typed is the same
+									if ($newPasswd === $retypeNewPasswd) {
+										// check for string length, password should not be less than four characters
+										if (strlen($newPasswd) >= 4) {
+											$objUsers = new Users();
+											$this->userpassword = strtolower($objUsers->CleanData($_POST["newPasswd"]));
+											$objUsers->set_userPassword(password_hash($this->userpassword, PASSWORD_DEFAULT));
+											$objUsers->set_passwordReset($passwdReset);
+											$objUsers->set_memberId($_SESSION['member_id']);
 											if ($objUsers->change_password()) {
 												echo "success";
 											}

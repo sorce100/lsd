@@ -6,7 +6,7 @@
 <script>
 $(document).ready(function(){
   // adding datatable class to all
-  $('.table').dataTable({destroy: true,ordering:false,searching: false,info: false});
+  let datatable = $('.table').dataTable({destroy: true,ordering:false,searching: false,info: false});
   // checkboxes select all
   $('#select_all').change(function() {
       var checkboxes = $(this).closest('form').find(':checkbox');
@@ -15,35 +15,35 @@ $(document).ready(function(){
 
   
 
-  var current = 1,current_step,next_step,steps;
-  fixStepIndicator(current);
-  steps = $("fieldset").length;
-  $(".next").click(function(){
-    current_step = $(this).parent();
-    next_step = $(this).parent().next();
-    next_step.show();
-    current_step.hide();
-    fixStepIndicator(++current);
-  });
-  $(".previous").click(function(){
-    current_step = $(this).parent();
-    next_step = $(this).parent().prev();
-    next_step.show();
-    current_step.hide();
-    fixStepIndicator(--current);
-  });
-  fixStepIndicator(current);
+//   var current = 1,current_step,next_step,steps;
+//   fixStepIndicator(current);
+//   steps = $("fieldset").length;
+//   $(".next").click(function(){
+//     current_step = $(this).parent();
+//     next_step = $(this).parent().next();
+//     next_step.show();
+//     current_step.hide();
+//     fixStepIndicator(++current);
+//   });
+//   $(".previous").click(function(){
+//     current_step = $(this).parent();
+//     next_step = $(this).parent().prev();
+//     next_step.show();
+//     current_step.hide();
+//     fixStepIndicator(--current);
+//   });
+//   fixStepIndicator(current);
   
-  function fixStepIndicator(n) {
-  // This function removes the "active" class of all steps...
-  var i, x = document.getElementsByClassName("step");
-  $('step').css('color','red');
-  for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
-  }
-  //... and adds the "active" class on the current step:
-  x[n].className += " active";
-}
+//   function fixStepIndicator(n) {
+//   // This function removes the "active" class of all steps...
+//   var i, x = document.getElementsByClassName("step");
+//   $('step').css('color','red');
+//   for (i = 0; i < x.length; i++) {
+//     x[i].className = x[i].className.replace(" active", "");
+//   }
+//   //... and adds the "active" class on the current step:
+//   x[n].className += " active";
+// }
 });
   </script>
            
